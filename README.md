@@ -11,6 +11,10 @@ Cours d'électricité interactif pour le gymnase (secondaire II), en français, 
 
 Chaque chapitre contient des schémas SVG, des exemples pratiques, des exercices avec solutions détaillées et un résumé.
 
+## Fiche d'exercices (Word)
+
+[`cours-electricite/fiche-exercices-electricite.docx`](cours-electricite/fiche-exercices-electricite.docx) accompagne le cours : pour chaque chapitre, des questions théoriques avec lignes de réponse et des exercices progressifs (niveaux 1 à 3), dont deux sur schéma. Le corrigé détaillé commence à la page 13, dans une section séparée qu'on peut retirer avant de distribuer. Mise en page pour la photocopie : noir et blanc, Arial 12, interligne 1,5, format A4.
+
 ## Utilisation
 
 Ouvrir `cours-electricite/index.html` dans un navigateur. Aucune installation ni serveur n'est nécessaire : tout est en HTML, CSS et JavaScript sans dépendance. Les polices viennent de Google Fonts ; hors ligne, le navigateur utilise des polices de remplacement.
