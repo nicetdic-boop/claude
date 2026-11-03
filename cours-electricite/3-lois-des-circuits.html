@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3 · Lois des circuits — Électricité au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+    <marker id="ah-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--accent)"/></marker>
+    <marker id="ah-plus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--plus)"/></marker>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__wires" aria-hidden="true"><span></span><span></span><span></span></span>Électricité au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-electrostatique.html"><span class="n">1</span><span class="t">Électrostatique</span></a>
+      <a href="2-electrodynamique.html"><span class="n">2</span><span class="t">Électrodynamique</span></a>
+      <a href="3-lois-des-circuits.html" aria-current="page"><span class="n">3</span><span class="t">Lois des circuits</span></a>
+      <a href="4-production-suisse.html"><span class="n">4</span><span class="t">Production en Suisse</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 3</span>
+      <h1>Les lois des circuits</h1>
+      <p class="lead">Une guirlande qui s'éteint en entier pour une seule ampoule grillée, des prises qui fonctionnent toutes en même temps, des phares qui baissent quand on démarre la voiture. Deux lois de conservation suffisent à tout expliquer.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>lire et dessiner un schéma électrique normalisé ;</li>
+          <li>appliquer la loi des nœuds et la loi des mailles ;</li>
+          <li>calculer la résistance équivalente d'un montage série, parallèle ou mixte ;</li>
+          <li>tenir compte de la résistance interne d'un générateur.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">Ω<small>l'ohm</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#schemas"><span class="n">3.1</span>Schémas et mesures</a></li>
+      <li><a href="#kirchhoff"><span class="n">3.2</span>Les lois de Kirchhoff</a></li>
+      <li><a href="#serie"><span class="n">3.3</span>Montage en série</a></li>
+      <li><a href="#parallele"><span class="n">3.4</span>Montage en parallèle</a></li>
+      <li><a href="#simulateur"><span class="n">3.5</span>Simulateur de circuit</a></li>
+      <li><a href="#generateur"><span class="n">3.6</span>Le générateur réel</a></li>
+      <li><a href="#exercices"><span class="n">3.7</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">3.8</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 3.1 -->
+    <section class="section" id="schemas">
+      <div class="section-head"><span class="label">3.1</span><h2>Schémas et mesures</h2></div>
+      <p>Un schéma électrique ne dessine pas l'aspect des composants mais leur <strong>rôle</strong> et leurs connexions. Les fils sont des traits droits ; un point plein marque un raccordement (un <strong>nœud</strong>), deux traits qui se croisent sans point ne sont pas reliés.</p>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 680 250" role="img" aria-label="Symboles normalisés : générateur, pile, résistance, lampe, interrupteur, diode, ampèremètre, voltmètre, condensateur, fusible, terre, nœud.">
+            <g transform="translate(20 30)">
+              <line x1="0" y1="30" x2="40" y2="30" class="stroke"/><line x1="40" y1="12" x2="40" y2="48" class="stroke"/><line x1="52" y1="20" x2="52" y2="40" style="stroke:var(--ink);stroke-width:5"/><line x1="52" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="34" y="8" class="t-small t-plus">+</text><text x="58" y="18" class="t-small t-minus">−</text>
+              <text x="46" y="78" text-anchor="middle" class="t-small">pile / générateur</text>
+            </g>
+            <g transform="translate(190 30)">
+              <line x1="0" y1="30" x2="25" y2="30" class="stroke"/><rect x="25" y="20" width="42" height="20" class="stroke"/><line x1="67" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="46" y="78" text-anchor="middle" class="t-small">résistance</text>
+            </g>
+            <g transform="translate(360 30)">
+              <line x1="0" y1="30" x2="28" y2="30" class="stroke"/><circle cx="46" cy="30" r="18" class="stroke"/><path d="M33 17 L 59 43 M59 17 L 33 43" class="stroke"/><line x1="64" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="46" y="78" text-anchor="middle" class="t-small">lampe</text>
+            </g>
+            <g transform="translate(530 30)">
+              <line x1="0" y1="30" x2="28" y2="30" class="stroke"/><circle cx="28" cy="30" r="3" class="fill-ink"/><line x1="30" y1="29" x2="62" y2="12" class="stroke"/><circle cx="64" cy="30" r="3" class="fill-ink"/><line x1="64" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="46" y="78" text-anchor="middle" class="t-small">interrupteur ouvert</text>
+            </g>
+            <g transform="translate(20 140)">
+              <line x1="0" y1="30" x2="30" y2="30" class="stroke"/><path d="M30 14 L 58 30 L 30 46 Z" class="fill-ink"/><line x1="60" y1="14" x2="60" y2="46" class="stroke"/><line x1="60" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="46" y="78" text-anchor="middle" class="t-small">diode</text>
+            </g>
+            <g transform="translate(190 140)">
+              <line x1="0" y1="30" x2="28" y2="30" class="stroke"/><circle cx="46" cy="30" r="18" class="stroke"/><text x="46" y="36" text-anchor="middle" class="t-strong">A</text><line x1="64" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="46" y="78" text-anchor="middle" class="t-small">ampèremètre</text>
+            </g>
+            <g transform="translate(360 140)">
+              <line x1="0" y1="30" x2="28" y2="30" class="stroke"/><circle cx="46" cy="30" r="18" class="stroke"/><text x="46" y="36" text-anchor="middle" class="t-strong">V</text><line x1="64" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="46" y="78" text-anchor="middle" class="t-small">voltmètre</text>
+            </g>
+            <g transform="translate(530 140)">
+              <line x1="0" y1="30" x2="40" y2="30" class="stroke"/><line x1="40" y1="12" x2="40" y2="48" class="stroke"/><line x1="52" y1="12" x2="52" y2="48" class="stroke"/><line x1="52" y1="30" x2="92" y2="30" class="stroke"/>
+              <text x="46" y="78" text-anchor="middle" class="t-small">condensateur</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 3.1</b> Symboles normalisés (norme européenne). Le grand trait de la pile est la borne +. La résistance est un rectangle ; le zigzag que l'on voit dans des manuels américains désigne la même chose.</figcaption>
+      </figure>
+
+      <h3>Brancher les appareils de mesure</h3>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 560 230" role="img" aria-label="Circuit avec pile, lampe, ampèremètre en série et voltmètre en parallèle sur la lampe.">
+            <path d="M80 70 V 40 H 220 M268 40 H 400 V 85 M400 155 V 190 H 80 V 120" class="stroke"/>
+            <line x1="62" y1="72" x2="98" y2="72" class="stroke"/><line x1="70" y1="118" x2="90" y2="118" style="stroke:var(--ink);stroke-width:6"/>
+            <text x="104" y="76" class="t-plus t-strong">+</text><text x="104" y="124" class="t-minus t-strong">−</text>
+            <circle cx="244" cy="40" r="22" class="stroke fill-card"/><text x="244" y="46" text-anchor="middle" class="t-strong">A</text>
+            <circle cx="400" cy="120" r="22" class="stroke fill-card"/><path d="M384 104 L 416 136 M416 104 L 384 136" class="stroke"/>
+            <circle cx="400" cy="70" r="4" class="fill-ink"/><circle cx="400" cy="170" r="4" class="fill-ink"/>
+            <path d="M400 70 H 490 V 98 M490 142 V 170 H 400" class="stroke-accent"/>
+            <circle cx="490" cy="120" r="22" class="stroke-accent fill-card"/><text x="490" y="126" text-anchor="middle" class="t-strong t-accent">V</text>
+            <path d="M150 28 H 190" class="stroke-2" marker-end="url(#ah-ink)"/><text x="150" y="20" class="t-small">I</text>
+            <text x="244" y="90" text-anchor="middle" class="t-small">en série</text>
+            <text x="490" y="210" text-anchor="middle" class="t-small t-accent">en parallèle</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 3.2</b> L'ampèremètre doit être traversé par le courant à mesurer : il se branche en <strong>série</strong> et sa résistance est presque nulle. Le voltmètre compare le potentiel de deux points : il se branche en <strong>parallèle</strong> et sa résistance est très grande. Brancher un ampèremètre en parallèle sur une pile, c'est un court-circuit (et souvent un fusible grillé).</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3.2 -->
+    <section class="section" id="kirchhoff">
+      <div class="section-head"><span class="label">3.2</span><h2>Les lois de Kirchhoff</h2></div>
+      <p>En 1845, Gustav Kirchhoff, alors étudiant de 21 ans, résume le comportement de n'importe quel circuit en deux lois. Ce ne sont que deux principes de conservation déguisés.</p>
+      <div class="box box--loi">
+        <span class="label">Loi des nœuds (conservation de la charge)</span>
+        <div class="formula"><span class="eq">Σ <i>I</i><sub>entrants</sub> = Σ <i>I</i><sub>sortants</sub></span></div>
+        <p>Les charges ne s'accumulent pas dans un nœud et ne disparaissent pas : tout ce qui entre ressort. Comme l'eau à un embranchement de tuyaux.</p>
+      </div>
+      <div class="box box--loi">
+        <span class="label">Loi des mailles (conservation de l'énergie)</span>
+        <div class="formula"><span class="eq">Σ <i>U</i><sub>générateurs</sub> = Σ <i>U</i><sub>récepteurs</sub></span><span class="eq" style="font-size:1rem;color:var(--ink-2)">le long de toute boucle fermée</span></div>
+        <p>Une charge qui fait le tour d'une boucle revient au même potentiel. L'énergie que lui donnent les générateurs est entièrement dépensée dans les récepteurs. Comme un randonneur qui revient à son point de départ : la somme des montées égale la somme des descentes.</p>
+      </div>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 620 230" role="img" aria-label="Nœud où arrivent 5 A et d'où partent 3 A et 2 A ; maille avec une pile de 12 V et deux résistances de 4 V et 8 V.">
+            <text x="20" y="22" class="t-strong">Loi des nœuds</text>
+            <path d="M40 120 H 150" class="stroke" marker-end="url(#ah-ink)"/>
+            <path d="M160 120 L 250 70" class="stroke" marker-end="url(#ah-ink)"/>
+            <path d="M160 120 L 250 170" class="stroke" marker-end="url(#ah-ink)"/>
+            <circle cx="160" cy="120" r="6" class="fill-ink"/>
+            <text x="80" y="110" class="t-mono">5 A</text>
+            <text x="225" y="62" class="t-mono">3 A</text>
+            <text x="225" y="194" class="t-mono">2 A</text>
+            <text x="40" y="214" class="t-small">5 = 3 + 2</text>
+            <line x1="300" y1="20" x2="300" y2="220" class="thin dash"/>
+            <text x="330" y="22" class="t-strong">Loi des mailles</text>
+            <path d="M360 110 V 60 H 440 M480 60 H 560 V 100 M560 140 V 190 H 360 V 140" class="stroke"/>
+            <line x1="344" y1="112" x2="376" y2="112" class="stroke"/><line x1="350" y1="138" x2="370" y2="138" style="stroke:var(--ink);stroke-width:6"/>
+            <rect x="440" y="50" width="40" height="20" class="stroke fill-card"/>
+            <rect x="550" y="100" width="20" height="40" class="stroke fill-card"/>
+            <text x="330" y="130" class="t-mono" text-anchor="end">12 V</text>
+            <text x="460" y="40" class="t-mono" text-anchor="middle">4 V</text>
+            <text x="580" y="125" class="t-mono">8 V</text>
+            <path d="M420 150 A 40 30 0 1 1 500 150" class="stroke-accent" marker-end="url(#ah-accent)"/>
+            <text x="400" y="214" class="t-small">12 V = 4 V + 8 V</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 3.3</b> À gauche, le courant se partage au nœud. À droite, la tension du générateur se partage entre les récepteurs de la maille.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3.3 -->
+    <section class="section" id="serie">
+      <div class="section-head"><span class="label">3.3</span><h2>Montage en série</h2></div>
+      <p>Des composants sont <strong>en série</strong> quand ils se suivent sur un même fil, sans embranchement. Le courant n'a qu'un seul chemin.</p>
+      <div class="box box--loi">
+        <span class="label">Résistances en série</span>
+        <div class="formula">
+          <span class="eq"><i>I</i> identique partout</span>
+          <span class="eq"><i>U</i> = <i>U</i><sub>1</sub> + <i>U</i><sub>2</sub> + …</span>
+          <span class="eq"><i>R</i><sub>éq</sub> = <i>R</i><sub>1</sub> + <i>R</i><sub>2</sub> + …</span>
+        </div>
+        <p>La résistance équivalente est toujours <strong>plus grande</strong> que la plus grande des résistances. Chaque résistance reçoit une part de la tension proportionnelle à sa valeur : <i>U</i><sub>1</sub>/<i>U</i><sub>2</sub> = <i>R</i><sub>1</sub>/<i>R</i><sub>2</sub>.</p>
+      </div>
+      <h3>Le diviseur de tension</h3>
+      <p>Deux résistances en série sur une tension <i>U</i> donnent une tension plus petite au point milieu :</p>
+      <div class="formula"><span class="eq"><i>U</i><sub>2</sub> = <i>U</i> · <span class="frac"><span><i>R</i><sub>2</sub></span><span><i>R</i><sub>1</sub> + <i>R</i><sub>2</sub></span></span></span></div>
+      <p>C'est le principe du potentiomètre (le bouton de volume d'une vieille radio) et de nombreux capteurs : une thermistance dont la résistance change avec la température, placée dans un diviseur, transforme la température en tension mesurable.</p>
+      <div class="box box--ex">
+        <span class="label">Dans la vraie vie : la guirlande</span>
+        <p>Les vieilles guirlandes de Noël montaient 20 petites ampoules de 11,5 V en série sur 230 V (20 × 11,5 = 230). Une ampoule grillée ouvre le circuit : toute la guirlande s'éteint, et il faut tester les ampoules une à une. Un grand classique des soirées de décembre, qu'on peut revivre dans l'animation 3.1.</p>
+      </div>
+    </section>
+
+    <!-- 3.4 -->
+    <section class="section" id="parallele">
+      <div class="section-head"><span class="label">3.4</span><h2>Montage en parallèle</h2></div>
+      <p>Des composants sont <strong>en parallèle</strong> (ou en dérivation) quand ils sont branchés entre les deux mêmes nœuds. Le courant se partage entre plusieurs chemins.</p>
+      <div class="box box--loi">
+        <span class="label">Résistances en parallèle</span>
+        <div class="formula">
+          <span class="eq"><i>U</i> identique pour toutes</span>
+          <span class="eq"><i>I</i> = <i>I</i><sub>1</sub> + <i>I</i><sub>2</sub> + …</span>
+          <span class="eq"><span class="frac"><span>1</span><span><i>R</i><sub>éq</sub></span></span> = <span class="frac"><span>1</span><span><i>R</i><sub>1</sub></span></span> + <span class="frac"><span>1</span><span><i>R</i><sub>2</sub></span></span> + …</span>
+        </div>
+        <p>La résistance équivalente est toujours <strong>plus petite</strong> que la plus petite des résistances : ajouter un chemin facilite le passage. Le courant choisit de préférence le chemin le moins résistant, mais il passe partout. Pour deux résistances : <i>R</i><sub>éq</sub> = <i>R</i><sub>1</sub><i>R</i><sub>2</sub>/(<i>R</i><sub>1</sub> + <i>R</i><sub>2</sub>).</p>
+      </div>
+      <p>Toutes les prises et toutes les lampes d'un appartement sont branchées <strong>en parallèle</strong> sur le réseau : chacune reçoit 230 V, on peut les allumer indépendamment, et une lampe grillée n'éteint pas les autres. Revers de la médaille : chaque appareil ajouté augmente le courant total dans le câble d'alimentation. D'où les disjoncteurs.</p>
+
+      <figure class="anim wide" id="anim-guirlande">
+        <div class="anim__head"><h4>Série ou parallèle : la guirlande</h4><span class="label">Animation 3.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-guirlande" style="--ar: 2 / 1; --ar-m: 1 / 1" aria-label="Deux guirlandes de 6 lampes, l'une en série, l'autre en parallèle ; on peut griller une lampe en cliquant dessus."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><span class="ctrl__name">Actions</span><div class="btns"><button class="btn" type="button" id="gu-repair">Remplacer les lampes grillées</button></div></div>
+        </div>
+        <div class="readouts" id="gu-read"></div>
+        <figcaption><b>Mode d'emploi</b> Clique sur une lampe pour la griller (son filament se coupe). En série, plus aucun courant ne passe. En parallèle, les autres restent allumées, et le courant total diminue.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3.5 -->
+    <section class="section" id="simulateur">
+      <div class="section-head"><span class="label">3.5</span><h2>Simulateur de circuit</h2></div>
+      <p>Le simulateur ci-dessous résout le circuit avec les lois de Kirchhoff et la loi d'Ohm. Les points qui circulent représentent le courant (sens conventionnel) : leur vitesse est proportionnelle à l'intensité. La luminosité des lampes est proportionnelle à la puissance reçue.</p>
+      <figure class="anim wide" id="anim-circuit">
+        <div class="anim__head"><h4>Série, parallèle, mixte</h4><span class="label">Animation 3.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-circuit" style="--ar: 16 / 10; --ar-m: 4 / 5" aria-label="Circuit avec un générateur et trois résistances ; courants, tensions et puissances affichés."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis:100%">
+            <span class="ctrl__name">Montage</span>
+            <div class="btns" id="sim-mode">
+              <button class="btn" type="button" data-value="serie">Série (R₁, R₂, R₃)</button>
+              <button class="btn" type="button" data-value="para">Parallèle (R₁ ∥ R₂ ∥ R₃)</button>
+              <button class="btn" type="button" data-value="mixte" aria-pressed="true">Mixte : R₁ + (R₂ ∥ R₃)</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="sim-u"><span>Générateur <i>U</i></span><output for="sim-u"></output></label><input type="range" id="sim-u" min="1" max="24" step="0.5" value="12"></div>
+          <div class="ctrl"><label for="sim-r1"><span><i>R</i>₁</span><output for="sim-r1"></output></label><input type="range" id="sim-r1" min="1" max="100" value="10"></div>
+          <div class="ctrl"><label for="sim-r2"><span><i>R</i>₂</span><output for="sim-r2"></output></label><input type="range" id="sim-r2" min="1" max="100" value="20"></div>
+          <div class="ctrl"><label for="sim-r3"><span><i>R</i>₃</span><output for="sim-r3"></output></label><input type="range" id="sim-r3" min="1" max="100" value="30"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="sim-play"></button></div></div>
+        </div>
+        <div class="readouts" id="sim-read"></div>
+        <figcaption><b>Défis</b> 1) En série, rends <i>R</i>₃ très grande : que deviennent les autres lampes ? 2) En parallèle, que se passe-t-il pour <i>I</i>₁ quand tu changes <i>R</i>₂ ? 3) En mixte, vérifie la loi des nœuds au point où le courant se sépare.</figcaption>
+      </figure>
+
+      <div class="box box--ex">
+        <span class="label">Exemple résolu : le montage mixte</span>
+        <p><i>U</i> = 12 V, <i>R</i><sub>1</sub> = 10 Ω, <i>R</i><sub>2</sub> = 20 Ω, <i>R</i><sub>3</sub> = 30 Ω, avec <i>R</i><sub>2</sub> et <i>R</i><sub>3</sub> en parallèle, le tout en série avec <i>R</i><sub>1</sub>.</p>
+        <ol>
+          <li><i>R</i><sub>23</sub> = 20 · 30 / (20 + 30) = 12 Ω, puis <i>R</i><sub>éq</sub> = 10 + 12 = 22 Ω.</li>
+          <li><i>I</i> = <i>U</i>/<i>R</i><sub>éq</sub> = 12/22 ≈ 0,545 A : c'est le courant dans <i>R</i><sub>1</sub>.</li>
+          <li><i>U</i><sub>1</sub> = <i>R</i><sub>1</sub><i>I</i> ≈ 5,45 V ; loi des mailles : <i>U</i><sub>23</sub> = 12 − 5,45 ≈ 6,55 V.</li>
+          <li><i>I</i><sub>2</sub> = 6,55/20 ≈ 0,327 A ; <i>I</i><sub>3</sub> = 6,55/30 ≈ 0,218 A. Vérification par la loi des nœuds : 0,327 + 0,218 = 0,545 A. ✓</li>
+        </ol>
+        <p>Ce sont les valeurs de départ du simulateur : compare.</p>
+      </div>
+    </section>
+
+    <!-- 3.6 -->
+    <section class="section" id="generateur">
+      <div class="section-head"><span class="label">3.6</span><h2>Le générateur réel</h2></div>
+      <p>Une vraie pile n'est pas une source de tension parfaite. Le courant doit aussi traverser la pile elle-même (électrolyte, électrodes), qui a sa propre <strong>résistance interne</strong> <i>r</i>. Plus le courant demandé est grand, plus la tension aux bornes baisse.</p>
+      <div class="box box--loi">
+        <span class="label">Générateur réel</span>
+        <div class="formula">
+          <span class="eq"><i>U</i><sub>bornes</sub> = <i>U</i><sub>0</sub> − <i>r</i> · <i>I</i></span>
+          <span class="eq"><i>I</i><sub>cc</sub> = <span class="frac"><span><i>U</i><sub>0</sub></span><span><i>r</i></span></span></span>
+        </div>
+        <p><i>U</i><sub>0</sub> est la tension à vide (aucun courant), <i>I</i><sub>cc</sub> le courant de court-circuit. La puissance transmise à une résistance de charge <i>R</i> est maximale quand <i>R</i> = <i>r</i>.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-generateur">
+        <div class="anim__head"><h4>Batterie de voiture et démarreur</h4><span class="label">Animation 3.3</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-gen" style="--ar: 16 / 9; --ar-m: 1 / 1" aria-label="Tension aux bornes d'une batterie en fonction du courant débité, et puissance transmise à la charge."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="gen-r"><span>Résistance de charge <i>R</i></span><output for="gen-r"></output></label><input type="range" id="gen-r" min="0" max="100" step="0.01" value="70"></div>
+          <div class="ctrl"><label for="gen-ri"><span>Résistance interne <i>r</i></span><output for="gen-ri"></output></label><input type="range" id="gen-ri" min="5" max="60" value="20"></div>
+          <div class="ctrl"><span class="ctrl__name">Situations</span><div class="btns" id="gen-preset">
+            <button class="btn" type="button" data-value="phares">Phares (110 W)</button>
+            <button class="btn" type="button" data-value="demarreur">Démarreur</button>
+            <button class="btn" type="button" data-value="adapte">R = r</button>
+          </div></div>
+        </div>
+        <div class="readouts" id="gen-read"></div>
+        <figcaption><b>À observer</b> Batterie de 12,6 V à vide. Quand le démarreur tire environ 200 A, la tension aux bornes chute vers 9 V : les phares, branchés sur la même batterie, baissent pendant le démarrage. La courbe de droite montre la puissance reçue par la charge, maximale pour <i>R</i> = <i>r</i>.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3.7 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">3.7</span><h2>Exercices</h2></div>
+      <ol class="exos">
+        <li>
+          <p><strong>Équivalences</strong> <span class="niveau">facile</span></p>
+          <p>Calcule la résistance équivalente de : a) 100 Ω, 220 Ω et 330 Ω en série ; b) les mêmes en parallèle ; c) deux résistances identiques <i>R</i> en parallèle ; d) <i>n</i> résistances identiques <i>R</i> en parallèle.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) 650 Ω. b) 1/<i>R</i> = 1/100 + 1/220 + 1/330 = 0,01758 Ω<sup>−1</sup>, <i>R</i> ≈ 56,9 Ω (plus petite que 100 Ω ✓). c) <i>R</i>/2. d) <i>R</i>/<i>n</i>.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Lampes de 6 V</strong> <span class="niveau">facile</span></p>
+          <p>On dispose de lampes « 6 V, 3 W » et d'une alimentation de 24 V. Comment les brancher pour qu'elles fonctionnent normalement ? Quel courant fournit l'alimentation ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Quatre lampes en série : chacune reçoit 24/4 = 6 V. Courant : <i>I</i> = <i>P</i>/<i>U</i> = 3/6 = 0,5 A, le même pour toutes. Puissance totale 12 W.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Lampes de puissances différentes en série</strong> <span class="niveau">moyen</span></p>
+          <p>Une lampe « 230 V, 100 W » et une lampe « 230 V, 25 W » (supposées ohmiques) sont branchées en série sur 230 V. Laquelle brille le plus ? Surprise garantie.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>R</i> = <i>U</i>²/<i>P</i> : <i>R</i><sub>100</sub> = 529 Ω, <i>R</i><sub>25</sub> = 2116 Ω. En série : <i>I</i> = 230/2645 ≈ 0,087 A.</p>
+            <p><i>P</i> = <i>RI</i>² : lampe « 100 W » : 4,0 W ; lampe « 25 W » : 16 W. C'est la lampe de 25 W qui brille le plus ! En série, le même courant traverse les deux, et c'est la plus grande résistance qui dissipe le plus.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Kirchhoff à deux générateurs</strong> <span class="niveau">défi</span></p>
+          <p>Deux générateurs, <i>U</i><sub>1</sub> = 12 V et <i>U</i><sub>2</sub> = 6 V, alimentent en parallèle une résistance <i>R</i> = 4 Ω. Le générateur 1 est relié à <i>R</i> par une résistance <i>R</i><sub>1</sub> = 2 Ω, le générateur 2 par <i>R</i><sub>2</sub> = 2 Ω (bornes + du même côté). Calcule les trois courants.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Soit <i>V</i> la tension aux bornes de <i>R</i>. Loi des nœuds : (12 − <i>V</i>)/2 + (6 − <i>V</i>)/2 = <i>V</i>/4.</p>
+            <p>Multiplions par 4 : 24 − 2<i>V</i> + 12 − 2<i>V</i> = <i>V</i>, donc <i>V</i> = 7,2 V.</p>
+            <p><i>I</i><sub>1</sub> = 2,4 A (sort du générateur 1), <i>I</i><sub>2</sub> = −0,6 A (le courant <em>entre</em> dans le générateur 2 par sa borne + : il est en train d'être rechargé), <i>I</i><sub>R</sub> = 1,8 A. Vérification : 2,4 − 0,6 = 1,8 ✓.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La pile fatiguée</strong> <span class="niveau">moyen</span></p>
+          <p>Une pile de 9 V à vide n'affiche plus que 7,5 V quand elle alimente une résistance de 50 Ω. Calcule sa résistance interne et son courant de court-circuit.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>I</i> = 7,5/50 = 0,15 A. <i>r</i> = (9 − 7,5)/0,15 = 10 Ω. <i>I</i><sub>cc</sub> = 9/10 = 0,9 A. Une pile neuve aurait <i>r</i> de l'ordre de 1 à 2 Ω : avec l'usure, la résistance interne augmente.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le pont de Wheatstone</strong> <span class="niveau">défi</span></p>
+          <p>Quatre résistances forment un losange : <i>R</i><sub>1</sub> et <i>R</i><sub>2</sub> en série sur une branche, <i>R</i><sub>3</sub> et <i>R</i><sub>x</sub> en série sur l'autre, les deux branches en parallèle sur une pile. Un voltmètre relie les deux points milieux. Montre qu'il indique 0 V si <i>R</i><sub>x</sub> = <i>R</i><sub>2</sub><i>R</i><sub>3</sub>/<i>R</i><sub>1</sub>. À quoi cela peut-il servir ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Diviseur de tension sur chaque branche : <i>U</i><sub>milieu,1</sub> = <i>U</i>·<i>R</i><sub>2</sub>/(<i>R</i><sub>1</sub> + <i>R</i><sub>2</sub>), <i>U</i><sub>milieu,2</sub> = <i>U</i>·<i>R</i><sub>x</sub>/(<i>R</i><sub>3</sub> + <i>R</i><sub>x</sub>).</p>
+            <p>Égalité ⇔ <i>R</i><sub>2</sub>(<i>R</i><sub>3</sub> + <i>R</i><sub>x</sub>) = <i>R</i><sub>x</sub>(<i>R</i><sub>1</sub> + <i>R</i><sub>2</sub>) ⇔ <i>R</i><sub>2</sub><i>R</i><sub>3</sub> = <i>R</i><sub>x</sub><i>R</i><sub>1</sub>.</p>
+            <p>On mesure ainsi une résistance inconnue avec une grande précision, sans dépendre de la tension de la pile. Les balances électroniques et de nombreux capteurs de pression utilisent ce montage avec des jauges de contrainte.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 3.8 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>Ampèremètre en série, voltmètre en parallèle.</li>
+          <li>Loi des nœuds : ce qui entre ressort. Loi des mailles : sur une boucle, la somme des tensions des générateurs égale celle des récepteurs.</li>
+          <li>Série : même courant, tensions qui s'additionnent, <i>R</i><sub>éq</sub> = Σ<i>R</i><sub>i</sub>.</li>
+          <li>Parallèle : même tension, courants qui s'additionnent, 1/<i>R</i><sub>éq</sub> = Σ1/<i>R</i><sub>i</sub>.</li>
+          <li>Générateur réel : <i>U</i> = <i>U</i><sub>0</sub> − <i>rI</i>. La tension baisse quand on tire beaucoup de courant.</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a href="2-electrodynamique.html"><span class="label">Chapitre 2</span><span class="t">← Électrodynamique</span></a>
+      <a class="next" href="4-production-suisse.html"><span class="label">Chapitre 4</span><span class="t">Production en Suisse →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Électricité au gymnase · Chapitre 3 · Lois des circuits</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch3.js"></script>
+</body>
+</html>

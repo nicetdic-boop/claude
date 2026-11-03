@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Électricité au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+<style>
+  .home-hero { background: var(--card); border-bottom: 1px solid var(--rule); }
+  .home-hero__inner {
+    max-width: 76rem; margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 3rem 2.5rem;
+    display: grid; gap: 1.2rem;
+  }
+  .home-hero h1 { font-size: clamp(3rem, 9vw, 6.5rem); line-height: 0.92; letter-spacing: -0.01em; max-width: 14ch; }
+  .home-hero .lead { font-size: 1.25rem; color: var(--ink-2); max-width: 44rem; }
+  .wires { display: grid; gap: 5px; max-width: 26rem; margin-top: 0.5rem; }
+  .wires span { height: 6px; border-radius: 3px; display: block; }
+  .wires span:nth-child(1) { background: var(--wire-phase); }
+  .wires span:nth-child(2) { background: var(--wire-neutral); width: 86%; }
+  .wires span:nth-child(3) { background: repeating-linear-gradient(90deg, var(--wire-earth) 0 14px, var(--wire-earth-2) 14px 22px); width: 72%; }
+  .home { max-width: 76rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 2.5rem 4rem; display: grid; gap: 3.5rem; }
+  .chapters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  @media (max-width: 760px) { .chapters { grid-template-columns: minmax(0, 1fr); } }
+  .chap {
+    position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.6rem;
+    padding: 1.3rem 1.4rem 1.2rem; background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius);
+    color: var(--ink); text-decoration: none; overflow: hidden; min-height: 16rem;
+  }
+  .chap:hover { border-color: var(--ink); }
+  .chap:hover .chap__go { color: var(--accent); }
+  .chap__num { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+  .chap h2 { font-size: 2.1rem; position: relative; z-index: 1; max-width: 80%; }
+  .chap p { color: var(--ink-2); font-size: 1rem; position: relative; z-index: 1; max-width: 34rem; }
+  .chap__meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-family: var(--f-ui); font-size: 0.85rem; color: var(--ink-3); align-items: center; position: relative; z-index: 1; }
+  .chap__go { margin-left: auto; font-weight: 600; color: var(--ink); }
+  .chap__unit {
+    position: absolute; right: 1rem; top: 0.6rem;
+    font-family: var(--f-display); font-weight: 800; font-size: 6.5rem; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1.5px var(--rule); user-select: none; pointer-events: none;
+  }
+  .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; }
+  @media (max-width: 760px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
+  .two-col > * { min-width: 0; }
+  .block { display: grid; gap: 1rem; }
+  .block > p { max-width: var(--measure); }
+  .howto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  @media (max-width: 860px) { .howto { grid-template-columns: minmax(0, 1fr); } }
+  .howto div { border-top: 2px solid var(--ink); padding-top: 0.7rem; display: grid; gap: 0.35rem; }
+  .howto h3 { font-size: 1.3rem; }
+  .howto p { color: var(--ink-2); font-size: 0.98rem; }
+  .formulaire td:first-child { font-family: var(--f-ui); color: var(--ink-2); font-size: 0.88rem; }
+  .formulaire td:nth-child(2) { font-size: 1.05rem; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__wires" aria-hidden="true"><span></span><span></span><span></span></span>Électricité au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-electrostatique.html"><span class="n">1</span><span class="t">Électrostatique</span></a>
+      <a href="2-electrodynamique.html"><span class="n">2</span><span class="t">Électrodynamique</span></a>
+      <a href="3-lois-des-circuits.html"><span class="n">3</span><span class="t">Lois des circuits</span></a>
+      <a href="4-production-suisse.html"><span class="n">4</span><span class="t">Production en Suisse</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="home-hero">
+  <div class="home-hero__inner">
+    <span class="eyebrow">Cours de physique · Gymnase</span>
+    <h1>Électricité au gymnase</h1>
+    <p class="lead">Des charges immobiles aux barrages valaisans : un cours complet en quatre chapitres, avec des schémas, des exemples tirés du quotidien suisse, quinze animations interactives et une trentaine d'exercices corrigés.</p>
+    <div class="wires" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+</section>
+
+<main class="home">
+
+  <section class="block" aria-labelledby="chapitres">
+    <div class="section-head"><span class="label">Sommaire</span><h2 id="chapitres">Quatre chapitres, dans l'ordre</h2></div>
+    <div class="chapters">
+      <a class="chap" href="1-electrostatique.html">
+        <span class="chap__unit" aria-hidden="true">C</span>
+        <span class="chap__num">Chapitre 1</span>
+        <h2>Électrostatique</h2>
+        <p>Charge électrique, électrisation, loi de Coulomb, champ électrique, tension et condensateur. Avec l'éclair, la cage de Faraday et l'imprimante laser.</p>
+        <span class="chap__meta"><span>4 animations</span><span>7 exercices</span><span class="chap__go">Commencer →</span></span>
+      </a>
+      <a class="chap" href="2-electrodynamique.html">
+        <span class="chap__unit" aria-hidden="true">A</span>
+        <span class="chap__num">Chapitre 2</span>
+        <h2>Électrodynamique</h2>
+        <p>Courant, tension, résistance et loi d'Ohm, puissance, énergie et facture d'électricité, effets du courant sur le corps et protections d'une installation suisse.</p>
+        <span class="chap__meta"><span>3 animations</span><span>7 exercices</span><span class="chap__go">Ouvrir →</span></span>
+      </a>
+      <a class="chap" href="3-lois-des-circuits.html">
+        <span class="chap__unit" aria-hidden="true">Ω</span>
+        <span class="chap__num">Chapitre 3</span>
+        <h2>Lois des circuits</h2>
+        <p>Schémas et mesures, lois de Kirchhoff, montages en série, en parallèle et mixtes, diviseur de tension, générateur réel et résistance interne.</p>
+        <span class="chap__meta"><span>3 animations</span><span>6 exercices</span><span class="chap__go">Ouvrir →</span></span>
+      </a>
+      <a class="chap" href="4-production-suisse.html">
+        <span class="chap__unit" aria-hidden="true">TWh</span>
+        <span class="chap__num">Chapitre 4</span>
+        <h2>Production en Suisse</h2>
+        <p>Le mix électrique 2025, induction et alternateur, hydraulique, nucléaire, solaire et éolien, équilibre du réseau, transport à très haute tension, défi de l'hiver.</p>
+        <span class="chap__meta"><span>5 animations</span><span>8 exercices</span><span class="chap__go">Ouvrir →</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="mode">
+    <div class="section-head"><span class="label">Mode d'emploi</span><h2 id="mode">Comment utiliser ce cours</h2></div>
+    <div class="howto">
+      <div><h3>Lire</h3><p>Chaque chapitre commence par ses objectifs et se termine par « L'essentiel ». Les cadres à trait épais contiennent les lois à connaître, les encadrés teintés des exemples de la vie réelle, et les bandes jaunes et noires des consignes de sécurité.</p></div>
+      <div><h3>Manipuler</h3><p>Les animations se pilotent avec les curseurs et les boutons, et souvent directement à la souris ou au doigt. Elles se mettent en pause quand elles sortent de l'écran. Fais des prédictions avant de toucher : c'est là qu'on apprend.</p></div>
+      <div><h3>S'exercer</h3><p>Chaque exercice a sa solution détaillée, cachée sous « Solution ». Essaie d'abord pour de vrai. Les niveaux (facile, moyen, défi) t'aident à choisir.</p></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="memo">
+    <div class="section-head"><span class="label">Aide-mémoire</span><h2 id="memo">Constantes, unités et formules</h2></div>
+    <div class="two-col">
+      <div class="block">
+        <h3>Constantes</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <tbody>
+              <tr><td>Charge élémentaire</td><td class="r"><i>e</i> = 1,602·10<sup>−19</sup> C</td></tr>
+              <tr><td>Constante de Coulomb</td><td class="r"><i>k</i> = 8,99·10<sup>9</sup> N·m²/C²</td></tr>
+              <tr><td>Permittivité du vide</td><td class="r"><i>ε</i><sub>0</sub> = 8,85·10<sup>−12</sup> F/m</td></tr>
+              <tr><td>Masse de l'électron</td><td class="r"><i>m</i><sub>e</sub> = 9,11·10<sup>−31</sup> kg</td></tr>
+              <tr><td>Masse du proton</td><td class="r"><i>m</i><sub>p</sub> = 1,673·10<sup>−27</sup> kg</td></tr>
+              <tr><td>Accélération de la pesanteur</td><td class="r"><i>g</i> = 9,81 m/s²</td></tr>
+              <tr><td>Réseau suisse</td><td class="r">230 V · 50 Hz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Préfixes</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <tbody>
+              <tr><td>T (téra) 10<sup>12</sup></td><td>G (giga) 10<sup>9</sup></td><td>M (méga) 10<sup>6</sup></td><td>k (kilo) 10<sup>3</sup></td></tr>
+              <tr><td>m (milli) 10<sup>−3</sup></td><td>µ (micro) 10<sup>−6</sup></td><td>n (nano) 10<sup>−9</sup></td><td>p (pico) 10<sup>−12</sup></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Grandeurs et unités</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Grandeur</th><th>Symbole</th><th>Unité</th></tr></thead>
+            <tbody>
+              <tr><td>Charge</td><td><i>q</i>, <i>Q</i></td><td>coulomb (C) = A·s</td></tr>
+              <tr><td>Intensité du courant</td><td><i>I</i></td><td>ampère (A)</td></tr>
+              <tr><td>Tension</td><td><i>U</i></td><td>volt (V) = J/C</td></tr>
+              <tr><td>Résistance</td><td><i>R</i></td><td>ohm (Ω) = V/A</td></tr>
+              <tr><td>Champ électrique</td><td><i>E</i></td><td>N/C = V/m</td></tr>
+              <tr><td>Capacité</td><td><i>C</i></td><td>farad (F) = C/V</td></tr>
+              <tr><td>Puissance</td><td><i>P</i></td><td>watt (W) = J/s</td></tr>
+              <tr><td>Énergie</td><td><i>E</i>, <i>W</i></td><td>joule (J) ; 1 kWh = 3,6 MJ</td></tr>
+              <tr><td>Flux magnétique</td><td><i>Φ</i></td><td>weber (Wb) = T·m²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="block">
+        <h3>Formulaire</h3>
+        <div class="table-wrap">
+          <table class="data-table formulaire">
+            <tbody>
+              <tr><td>Quantification</td><td><i>q</i> = <i>n e</i></td></tr>
+              <tr><td>Loi de Coulomb</td><td><i>F</i> = <i>k</i>|<i>q</i><sub>1</sub><i>q</i><sub>2</sub>|/<i>r</i>²</td></tr>
+              <tr><td>Champ électrique</td><td><i>E</i> = <i>F</i>/<i>q</i> ; <i>E</i> = <i>k</i>|<i>Q</i>|/<i>r</i>²</td></tr>
+              <tr><td>Tension et travail</td><td><i>W</i> = <i>qU</i> ; <i>U</i> = <i>E d</i></td></tr>
+              <tr><td>Condensateur</td><td><i>C</i> = <i>Q</i>/<i>U</i> = <i>ε</i><sub>0</sub><i>ε</i><sub>r</sub><i>A</i>/<i>d</i> ; ½<i>CU</i>²</td></tr>
+              <tr><td>Courant</td><td><i>I</i> = Δ<i>Q</i>/Δ<i>t</i> ; <i>I</i> = <i>neAv</i></td></tr>
+              <tr><td>Loi d'Ohm</td><td><i>U</i> = <i>R I</i></td></tr>
+              <tr><td>Résistance d'un fil</td><td><i>R</i> = <i>ρ L</i>/<i>A</i></td></tr>
+              <tr><td>Puissance</td><td><i>P</i> = <i>UI</i> = <i>RI</i>² = <i>U</i>²/<i>R</i></td></tr>
+              <tr><td>Énergie</td><td><i>E</i> = <i>P t</i></td></tr>
+              <tr><td>Série</td><td><i>R</i><sub>éq</sub> = <i>R</i><sub>1</sub> + <i>R</i><sub>2</sub> + …</td></tr>
+              <tr><td>Parallèle</td><td>1/<i>R</i><sub>éq</sub> = 1/<i>R</i><sub>1</sub> + 1/<i>R</i><sub>2</sub> + …</td></tr>
+              <tr><td>Diviseur de tension</td><td><i>U</i><sub>2</sub> = <i>U R</i><sub>2</sub>/(<i>R</i><sub>1</sub> + <i>R</i><sub>2</sub>)</td></tr>
+              <tr><td>Générateur réel</td><td><i>U</i> = <i>U</i><sub>0</sub> − <i>r I</i></td></tr>
+              <tr><td>Induction</td><td><i>U</i><sub>ind</sub> = −<i>N</i> Δ<i>Φ</i>/Δ<i>t</i></td></tr>
+              <tr><td>Alternateur</td><td><i>f</i> = <i>p n</i></td></tr>
+              <tr><td>Transformateur</td><td><i>U</i><sub>2</sub>/<i>U</i><sub>1</sub> = <i>N</i><sub>2</sub>/<i>N</i><sub>1</sub></td></tr>
+              <tr><td>Centrale hydraulique</td><td><i>P</i> = <i>η ρ g Q h</i></td></tr>
+              <tr><td>Éolienne</td><td><i>P</i> = ½ <i>ρ A v</i>³ <i>C</i><sub>p</sub></td></tr>
+              <tr><td>Pertes en ligne</td><td><i>P</i><sub>pertes</sub> = <i>R</i>(<i>P</i>/<i>U</i>)²</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Électricité au gymnase · cours en quatre chapitres pour le secondaire II.</span>
+  <span>Chiffres suisses : OFEN, Statistique suisse de l'électricité 2025 ; Swissolar ; exploitants des centrales. Données arrondies, état automne 2026.</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+</body>
+</html>

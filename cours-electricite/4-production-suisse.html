@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>4 · Production en Suisse — Électricité au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+    <marker id="ah-water" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--water)"/></marker>
+    <marker id="ah-plus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--plus)"/></marker>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" style="fill:var(--card)"/><line x1="0" y1="0" x2="0" y2="6" style="stroke:var(--ink-3);stroke-width:2"/></pattern>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__wires" aria-hidden="true"><span></span><span></span><span></span></span>Électricité au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-electrostatique.html"><span class="n">1</span><span class="t">Électrostatique</span></a>
+      <a href="2-electrodynamique.html"><span class="n">2</span><span class="t">Électrodynamique</span></a>
+      <a href="3-lois-des-circuits.html"><span class="n">3</span><span class="t">Lois des circuits</span></a>
+      <a href="4-production-suisse.html" aria-current="page"><span class="n">4</span><span class="t">Production en Suisse</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 4</span>
+      <h1>Produire l'électricité en Suisse</h1>
+      <p class="lead">Des barrages valaisans aux toits solaires du Plateau en passant par les centrales nucléaires argoviennes : d'où vient le courant de ta prise, comment on le fabrique, et pourquoi l'hiver est le vrai casse-tête du réseau suisse.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>décrire le mix électrique suisse et ses variations entre été et hiver ;</li>
+          <li>expliquer l'induction et le fonctionnement d'un alternateur ;</li>
+          <li>calculer la puissance d'une centrale hydraulique, solaire ou éolienne ;</li>
+          <li>justifier l'usage de la très haute tension pour le transport.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">TWh<small>le térawattheure</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#mix"><span class="n">4.1</span>Le mix électrique suisse</a></li>
+      <li><a href="#induction"><span class="n">4.2</span>L'induction</a></li>
+      <li><a href="#alternateur"><span class="n">4.3</span>L'alternateur</a></li>
+      <li><a href="#hydraulique"><span class="n">4.4</span>L'hydraulique</a></li>
+      <li><a href="#nucleaire"><span class="n">4.5</span>Le nucléaire</a></li>
+      <li><a href="#solaire"><span class="n">4.6</span>Solaire, éolien et autres</a></li>
+      <li><a href="#journee"><span class="n">4.7</span>Une journée sur le réseau</a></li>
+      <li><a href="#transport"><span class="n">4.8</span>Transport et transformateurs</a></li>
+      <li><a href="#avenir"><span class="n">4.9</span>L'hiver et l'avenir</a></li>
+      <li><a href="#exercices"><span class="n">4.10</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">4.11</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 4.1 -->
+    <section class="section" id="mix">
+      <div class="section-head"><span class="label">4.1</span><h2>Le mix électrique suisse</h2></div>
+      <p>En 2025, les centrales suisses ont produit <strong>67,5 TWh</strong> (milliards de kWh), pour une consommation finale de <strong>58,0 TWh</strong>. La différence sert surtout à alimenter les pompes des centrales de pompage-turbinage et couvre les pertes du réseau. Sur l'année, importations et exportations se sont presque compensées.</p>
+
+      <figure class="fig wide" id="mix-fig">
+        <div class="legend" id="mix-legend"></div>
+        <div class="fig__body" style="position:relative" id="mix-chart"></div>
+        <figcaption><b>Fig. 4.1</b> Production brute d'électricité en Suisse en 2025, par technologie (en TWh). Survole un segment pour le détail. Source : Office fédéral de l'énergie (OFEN), Statistique suisse de l'électricité 2025.</figcaption>
+      </figure>
+      <div class="table-wrap wide">
+        <table class="data-table">
+          <thead><tr><th>Technologie (2025)</th><th class="r">TWh</th><th class="r">Part</th></tr></thead>
+          <tbody>
+            <tr><td>Hydraulique à accumulation (barrages)</td><td class="r">21,1</td><td class="r">31,3 %</td></tr>
+            <tr><td>Hydraulique au fil de l'eau</td><td class="r">16,3</td><td class="r">24,2 %</td></tr>
+            <tr><td>Nucléaire</td><td class="r">18,4</td><td class="r">27,2 %</td></tr>
+            <tr><td>Thermique et autres renouvelables (biomasse, déchets, biogaz, éolien…)</td><td class="r">3,7</td><td class="r">5,5 %</td></tr>
+            <tr><td>Photovoltaïque</td><td class="r">8,0</td><td class="r">11,8 %</td></tr>
+            <tr><td><strong>Total</strong></td><td class="r"><strong>67,5</strong></td><td class="r"><strong>100 %</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Trois constats. L'<strong>hydraulique</strong> reste la colonne vertébrale (plus de la moitié). Le <strong>nucléaire</strong> fournit environ un quart, avec de fortes variations : en 2025, la centrale de Gösgen est restée à l'arrêt de mai 2025 jusqu'au printemps 2026. Le <strong>solaire</strong> explose : environ 8 TWh en 2025, soit 14 % de la consommation, contre moins de 1 TWh en 2014. Pour comparaison, 2024 avait été une année record avec 81,1 TWh produits, grâce à une hydraulique exceptionnelle (48,3 TWh).</p>
+
+      <div class="box box--def">
+        <span class="label">Rappel d'unités</span>
+        <p>1 kWh = 3,6·10<sup>6</sup> J. 1 GWh = 10<sup>6</sup> kWh. 1 TWh = 10<sup>9</sup> kWh. Un ménage suisse de quatre personnes consomme environ 4500 kWh par an (sans chauffage électrique) ; 58 TWh, c'est donc l'équivalent d'environ 13 millions de ménages de ce type, ou 6,5 MWh par habitant (industrie et services compris).</p>
+      </div>
+
+      <h3>Toutes les centrales font (presque) la même chose</h3>
+      <p>À part le photovoltaïque, toutes les centrales électriques fonctionnent sur le même principe : une source d'énergie fait tourner une <strong>turbine</strong>, qui entraîne un <strong>alternateur</strong>. Seule la manière de faire tourner la turbine change : eau qui tombe, vapeur chauffée par la fission, vent, vapeur d'une usine d'incinération. Pour comprendre la production, il faut donc d'abord comprendre l'alternateur, et pour ça l'induction.</p>
+    </section>
+
+    <!-- 4.2 -->
+    <section class="section" id="induction">
+      <div class="section-head"><span class="label">4.2</span><h2>L'induction électromagnétique</h2></div>
+      <p>En 1831, Michael Faraday découvre qu'un aimant qu'on déplace près d'une bobine fait apparaître une tension dans la bobine. Le phénomène ne dépend pas de la présence de l'aimant, mais de son <strong>mouvement</strong> : un aimant immobile, même très puissant, ne produit rien.</p>
+      <div class="box box--loi">
+        <span class="label">Loi de Faraday-Lenz</span>
+        <div class="formula">
+          <span class="eq"><i>U</i><sub>ind</sub> = −<i>N</i> · <span class="frac"><span>Δ<i>Φ</i></span><span>Δ<i>t</i></span></span></span>
+          <span class="eq"><i>Φ</i> = <i>B</i> · <i>A</i> · cos <i>α</i></span>
+        </div>
+        <p>Une tension est induite dans une bobine de <i>N</i> spires quand le <strong>flux magnétique</strong> <i>Φ</i> qui la traverse varie (en webers, Wb ; <i>B</i> est le champ magnétique en teslas, <i>A</i> l'aire d'une spire). Plus la variation est rapide, plus la tension est grande. Le signe moins traduit la <strong>loi de Lenz</strong> : le courant induit s'oppose à la cause qui lui donne naissance. Quand on approche le pôle nord d'un aimant, la bobine se transforme en aimant qui le repousse. Il faut donc forcer, et c'est ce travail qui devient de l'énergie électrique.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-induction">
+        <div class="anim__head"><h4>Aimant et bobine</h4><span class="label">Animation 4.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-induction" style="--ar: 2 / 1; --ar-m: 4 / 3" aria-label="Un aimant se déplace près d'une bobine reliée à un galvanomètre dont l'aiguille dévie."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="ind-n"><span>Nombre de spires <i>N</i></span><output for="ind-n"></output></label><input type="range" id="ind-n" min="1" max="10" value="5"></div>
+          <div class="ctrl"><label for="ind-v"><span>Vitesse du va-et-vient</span><output for="ind-v"></output></label><input type="range" id="ind-v" min="0" max="10" value="4"></div>
+          <div class="ctrl"><span class="ctrl__name">Aimant</span><div class="btns"><button class="btn" type="button" id="ind-flip">Retourner l'aimant</button><button class="btn" type="button" id="ind-play"></button></div></div>
+        </div>
+        <div class="readouts" id="ind-read"></div>
+        <figcaption><b>Essaie</b> Mets la vitesse à zéro et fais glisser l'aimant toi-même. Aimant immobile : aiguille au zéro. Aimant qui approche ou qui s'éloigne : l'aiguille dévie, dans un sens ou dans l'autre. Les flèches montrent le sens du courant induit et les lettres le pôle créé par la bobine (loi de Lenz).</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.3 -->
+    <section class="section" id="alternateur">
+      <div class="section-head"><span class="label">4.3</span><h2>L'alternateur</h2></div>
+      <p>Plutôt que de faire faire des allers-retours à un aimant, on le fait <strong>tourner</strong> au centre de bobines fixes. Le flux dans chaque bobine varie alors de façon sinusoïdale, et la tension induite aussi : c'est une <strong>tension alternative</strong>. Dans les grosses centrales, l'aimant tournant (le <em>rotor</em>) est un électroaimant de plusieurs centaines de tonnes, et les bobines fixes (le <em>stator</em>) l'entourent.</p>
+      <div class="box box--loi">
+        <span class="label">Fréquence d'un alternateur</span>
+        <div class="formula"><span class="eq"><i>f</i> = <i>p</i> · <i>n</i></span><span class="eq" style="font-size:1rem;color:var(--ink-2)"><i>p</i> : paires de pôles du rotor, <i>n</i> : tours par seconde</span></div>
+        <p>Le réseau européen fonctionne à <strong>50 Hz</strong>. Un turbo-alternateur de centrale nucléaire à une paire de pôles tourne donc à 50 tr/s, soit 3000 tr/min. Une turbine hydraulique plus lente doit compenser avec davantage de pôles : à 500 tr/min, il faut 6 paires. Les trains CFF, eux, roulent sur un réseau à part, en 16,7 Hz.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-alternateur">
+        <div class="anim__head"><h4>Alternateur et oscilloscope</h4><span class="label">Animation 4.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-alt" style="--ar: 2 / 1; --ar-m: 3 / 4" aria-label="Rotor aimanté qui tourne dans un stator ; à droite, la tension induite en fonction du temps."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="alt-n"><span>Vitesse de rotation</span><output for="alt-n"></output></label><input type="range" id="alt-n" min="0" max="3600" step="50" value="3000"></div>
+          <div class="ctrl"><span class="ctrl__name">Paires de pôles <i>p</i></span><div class="btns" id="alt-p"><button class="btn" type="button" data-value="1" aria-pressed="true">1</button><button class="btn" type="button" data-value="2">2</button><button class="btn" type="button" data-value="6">6</button></div></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="alt-play"></button></div></div>
+        </div>
+        <div class="readouts" id="alt-read"></div>
+        <figcaption><b>Ralenti</b> Le rotor est montré 50 fois plus lentement qu'en réalité ; l'oscilloscope affiche les 60 dernières millisecondes en temps réel. Quand la vitesse augmente, la fréquence <em>et</em> l'amplitude augmentent : la variation du flux est plus rapide.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.4 -->
+    <section class="section" id="hydraulique">
+      <div class="section-head"><span class="label">4.4</span><h2>L'hydraulique : l'or bleu des Alpes</h2></div>
+      <p>La Suisse compte plus de 700 centrales hydrauliques d'au moins 300 kW. Leur principe : transformer l'énergie potentielle de l'eau (<i>E</i> = <i>mgh</i>) en énergie cinétique, puis en rotation de la turbine, puis en électricité.</p>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 700 320" role="img" aria-label="Centrale à accumulation : lac de barrage en altitude, conduite forcée, centrale avec turbine et alternateur dans la vallée, transformateur et ligne.">
+            <path d="M0 120 L 90 40 L 150 80 L 190 30 L 250 110 L 250 320 L 0 320 Z" style="fill:var(--rule-2)"/>
+            <path d="M250 110 L 640 300 L 700 300 L 700 320 L 250 320 Z" style="fill:var(--rule-2)"/>
+            <path d="M120 105 L 238 105 L 238 150 C 200 150, 150 140, 120 105 Z" style="fill:var(--water);opacity:0.55"/>
+            <path d="M232 70 L 252 70 L 266 160 L 232 160 Z" class="fill-metal" style="stroke:var(--ink);stroke-width:1.5"/>
+            <text x="150" y="98" class="t-small">lac de retenue</text>
+            <text x="258" y="64" class="t-small">barrage</text>
+            <path d="M238 150 L 270 170 L 520 286" style="stroke:var(--ink);stroke-width:9;fill:none;stroke-linecap:round"/>
+            <path d="M238 150 L 270 170 L 520 286" class="flow" style="stroke:var(--water);stroke-width:5;fill:none"/>
+            <text x="380" y="214" class="t-small" transform="rotate(25 380 214)">conduite forcée</text>
+            <rect x="500" y="248" width="110" height="60" rx="4" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <circle cx="530" cy="286" r="15" class="fill-card" style="stroke:var(--accent);stroke-width:2.5"/>
+            <path d="M530 271 V 301 M515 286 H 545" class="stroke-accent"/>
+            <rect x="560" y="268" width="36" height="30" rx="3" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/>
+            <text x="578" y="288" text-anchor="middle" class="t-mono" style="font-size:10px">G</text>
+            <line x1="545" y1="286" x2="560" y2="286" class="stroke"/>
+            <text x="555" y="242" class="t-small" text-anchor="middle">turbine · alternateur</text>
+            <path d="M620 260 h 22 m -11 0 v -60 M 610 210 h 42 M 616 200 h 30" class="stroke"/>
+            <path d="M645 205 C 670 190, 690 190, 700 185" class="stroke-2"/>
+            <text x="640" y="180" class="t-small" text-anchor="middle">ligne</text>
+            <path d="M610 300 L 680 300" class="flow-slow" style="stroke:var(--water);stroke-width:4"/>
+            <text x="640" y="316" class="t-small" text-anchor="middle">rivière</text>
+            <line x1="60" y1="105" x2="60" y2="286" class="thin"/>
+            <path d="M60 110 V 106 M55 112 L 60 105 L 65 112 M55 279 L 60 286 L 65 279" class="thin"/>
+            <text x="68" y="200" class="t-mono">h</text>
+            <line x1="56" y1="286" x2="500" y2="286" class="thin dash"/>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 4.2</b> Centrale à accumulation. L'eau stockée en altitude descend dans une conduite forcée et fait tourner la turbine dans la vallée. La hauteur de chute <i>h</i> peut dépasser 1800 m en Valais.</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Type</th><th>Principe</th><th>Exemple</th></tr></thead>
+          <tbody>
+            <tr><td>Au fil de l'eau</td><td>Grand débit, faible chute ; produit en continu selon le débit de la rivière (fort en été avec la fonte des neiges).</td><td>Rheinfelden sur le Rhin, Verbois sur le Rhône</td></tr>
+            <tr><td>À accumulation</td><td>Lac de barrage rempli en été ; on turbine quand on veut, surtout en hiver et aux heures de pointe.</td><td>Grande Dixence (VS) : barrage-poids de 285 m, le plus haut du monde</td></tr>
+            <tr><td>Pompage-turbinage</td><td>Deux lacs : on pompe l'eau vers le haut quand l'électricité abonde, on turbine quand elle manque. Une batterie géante.</td><td>Nant de Drance (VS), 900 MW ; Linth-Limmern (GL), 1000 MW</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="box box--loi">
+        <span class="label">Puissance d'une centrale hydraulique</span>
+        <div class="formula"><span class="eq"><i>P</i> = <i>η</i> · <i>ρ</i> · <i>g</i> · <i>Q</i> · <i>h</i></span></div>
+        <p><i>ρ</i> = 1000 kg/m³ (eau), <i>g</i> = 9,81 m/s², <i>Q</i> le débit en m³/s, <i>h</i> la hauteur de chute en m, <i>η</i> le rendement global (environ 0,85 à 0,92). Chaque seconde, une masse <i>ρQ</i> d'eau descend de <i>h</i> : la puissance est l'énergie potentielle perdue par seconde.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-hydro">
+        <div class="anim__head"><h4>Dimensionner une centrale</h4><span class="label">Animation 4.3</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-hydro" style="--ar: 2 / 1; --ar-m: 1 / 1" aria-label="Centrale hydraulique dont on règle la hauteur de chute et le débit ; affichage de la puissance et du type de turbine."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="hy-h"><span>Hauteur de chute <i>h</i></span><output for="hy-h"></output></label><input type="range" id="hy-h" min="0" max="100" step="0.1" value="50"></div>
+          <div class="ctrl"><label for="hy-q"><span>Débit <i>Q</i></span><output for="hy-q"></output></label><input type="range" id="hy-q" min="0" max="100" step="0.1" value="50"></div>
+          <div class="ctrl" style="flex-basis:100%"><span class="ctrl__name">Centrales réelles</span><div class="btns" id="hy-preset">
+            <button class="btn" type="button" data-h="6.5" data-q="1500">Rheinfelden (Rhin)</button>
+            <button class="btn" type="button" data-h="300" data-q="360">Nant de Drance</button>
+            <button class="btn" type="button" data-h="1883" data-q="75">Bieudron (Grande Dixence)</button>
+          </div></div>
+        </div>
+        <div class="readouts" id="hy-read"></div>
+        <figcaption><b>À retenir</b> Une petite chute avec un énorme débit (Kaplan, fil de l'eau) peut produire autant qu'un filet d'eau tombant de très haut (Pelton). Bieudron détient le record mondial de hauteur de chute : 1883 m, pour 1269 MW. Rendement supposé : 90 %.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.5 -->
+    <section class="section" id="nucleaire">
+      <div class="section-head"><span class="label">4.5</span><h2>Le nucléaire</h2></div>
+      <p>Une centrale nucléaire est une <strong>centrale thermique</strong> : elle chauffe de l'eau pour produire de la vapeur qui fait tourner une turbine. La chaleur vient de la <strong>fission</strong> de noyaux d'uranium 235. Un neutron lent casse un noyau en deux fragments, en libérant environ 200 MeV et deux ou trois nouveaux neutrons, qui peuvent provoquer d'autres fissions : c'est la <strong>réaction en chaîne</strong>, maintenue sous contrôle par des barres absorbantes.</p>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 700 280" role="img" aria-label="Schéma d'une centrale nucléaire à eau pressurisée : réacteur, générateur de vapeur, turbine, alternateur, condenseur, tour de refroidissement.">
+            <rect x="20" y="40" width="190" height="210" rx="90" class="fill-card" style="stroke:var(--ink-3);stroke-width:2;stroke-dasharray:6 4"/>
+            <text x="115" y="30" text-anchor="middle" class="t-small">enceinte de confinement</text>
+            <rect x="45" y="110" width="60" height="110" rx="12" style="fill:var(--plus-soft);stroke:var(--ink);stroke-width:2"/>
+            <rect x="58" y="140" width="8" height="60" style="fill:var(--plus)"/><rect x="72" y="140" width="8" height="60" style="fill:var(--plus)"/><rect x="86" y="140" width="8" height="60" style="fill:var(--plus)"/>
+            <text x="75" y="236" text-anchor="middle" class="t-small">réacteur</text>
+            <rect x="140" y="80" width="50" height="140" rx="20" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <text x="165" y="236" text-anchor="middle" class="t-small">générateur</text>
+            <text x="165" y="250" text-anchor="middle" class="t-small">de vapeur</text>
+            <path d="M105 130 H 140 M140 200 H 105" style="stroke:var(--plus);stroke-width:4;fill:none"/>
+            <path d="M105 130 H 140" class="flow" style="stroke:var(--card);stroke-width:1.5;fill:none"/>
+            <text x="122" y="122" text-anchor="middle" class="t-small" style="font-size:10px">320 °C</text>
+            <path d="M190 100 H 300" style="stroke:var(--ink-3);stroke-width:5;fill:none"/>
+            <path d="M190 100 H 300" class="flow" style="stroke:var(--card);stroke-width:2;fill:none"/>
+            <text x="245" y="92" text-anchor="middle" class="t-small">vapeur</text>
+            <path d="M300 80 L 380 60 L 380 140 L 300 120 Z" style="fill:var(--rule-2);stroke:var(--ink);stroke-width:2"/>
+            <text x="340" y="50" text-anchor="middle" class="t-small">turbine</text>
+            <line x1="380" y1="100" x2="410" y2="100" class="stroke"/>
+            <rect x="410" y="78" width="60" height="44" rx="5" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/>
+            <text x="440" y="104" text-anchor="middle" class="t-mono" style="font-size:11px">G</text>
+            <text x="440" y="140" text-anchor="middle" class="t-small">alternateur</text>
+            <path d="M470 100 H 500" class="stroke"/><text x="504" y="104" class="t-small">→ réseau</text>
+            <rect x="300" y="190" width="100" height="50" rx="8" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <text x="350" y="219" text-anchor="middle" class="t-small">condenseur</text>
+            <path d="M340 140 V 190" style="stroke:var(--ink-3);stroke-width:4;fill:none"/>
+            <path d="M300 220 H 190" style="stroke:var(--water);stroke-width:4;fill:none"/>
+            <text x="245" y="212" text-anchor="middle" class="t-small">eau</text>
+            <path d="M400 205 H 560 M560 235 H 400" style="stroke:var(--water);stroke-width:4;fill:none"/>
+            <path d="M560 260 C 575 200, 575 170, 565 120 L 655 120 C 645 170, 645 200, 660 260 Z" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <path d="M590 110 C 580 90, 600 80, 595 60 M630 110 C 640 88, 620 78, 630 55" class="stroke-2"/>
+            <text x="610" y="276" text-anchor="middle" class="t-small">tour de refroidissement</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 4.3</b> Centrale à eau pressurisée (type Beznau et Gösgen ; Leibstadt est à eau bouillante, sans générateur de vapeur séparé). Environ un tiers seulement de la chaleur devient de l'électricité ; le reste est évacué par une rivière (Beznau, dans l'Aar) ou par une tour de refroidissement (Gösgen, Leibstadt). Le panache blanc n'est que de la vapeur d'eau.</figcaption>
+      </figure>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Centrale (canton)</th><th class="r">Mise en service</th><th class="r">Puissance nette</th><th>Remarque</th></tr></thead>
+          <tbody>
+            <tr><td>Beznau 1 et 2 (AG)</td><td class="r">1969 / 1971</td><td class="r">2 × 365 MW</td><td>parmi les plus anciens réacteurs en service au monde ; arrêt prévu en 2032 et 2033</td></tr>
+            <tr><td>Gösgen (SO)</td><td class="r">1979</td><td class="r">1010 MW</td><td>à l'arrêt de mai 2025 au printemps 2026</td></tr>
+            <tr><td>Leibstadt (AG)</td><td class="r">1984</td><td class="r">1233 MW</td><td>la plus puissante ; environ un sixième de la consommation suisse</td></tr>
+            <tr><td>Mühleberg (BE)</td><td class="r">1972</td><td class="r">373 MW</td><td>définitivement arrêtée fin 2019, en démantèlement</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Avantages : production stable et pilotable, peu d'émissions de CO₂, énorme densité d'énergie (la fission complète de 1 g d'uranium 235 libère autant d'énergie que la combustion de près de 3 tonnes de charbon). Inconvénients : déchets radioactifs à isoler pendant des centaines de milliers d'années (la Nagra a proposé en 2022 le site du nord des Lägern, entre Zurich et Argovie, pour un dépôt en profondeur), risque d'accident grave, dépendance à l'uranium importé et coûts de construction très élevés.</p>
+    </section>
+
+    <!-- 4.6 -->
+    <section class="section" id="solaire">
+      <div class="section-head"><span class="label">4.6</span><h2>Solaire, éolien et autres</h2></div>
+      <h3>Le photovoltaïque</h3>
+      <p>Une cellule photovoltaïque est une jonction de deux couches de silicium « dopées » différemment. Un photon absorbé libère un électron, que le champ électrique interne de la jonction pousse d'un côté : la cellule devient un petit générateur d'environ 0,6 V. Pas de turbine, pas d'alternateur, pas de pièce mobile. On assemble des dizaines de cellules en série dans un panneau et des panneaux en série et en parallèle sur un toit. Le courant produit est continu ; un <strong>onduleur</strong> le transforme en courant alternatif à 50 Hz.</p>
+      <div class="box box--loi">
+        <span class="label">Estimer une production solaire</span>
+        <div class="formula"><span class="eq"><i>E</i> = <i>A</i> · <i>G</i> · <i>η</i> · <i>PR</i></span></div>
+        <p><i>A</i> : surface des panneaux (m²) ; <i>G</i> : rayonnement annuel reçu (kWh/m², environ 1100 à 1300 sur le Plateau, davantage en montagne) ; <i>η</i> : rendement des panneaux (20 à 23 %) ; <i>PR</i> : facteur de performance de l'installation (pertes, chaleur, ombres, environ 0,8). Règle pratique : 1 kW de panneaux (environ 5 m²) produit environ 1000 kWh par an sur le Plateau.</p>
+      </div>
+      <p>Le problème : en Suisse, un panneau du Plateau produit environ trois quarts de son énergie entre avril et septembre, quand les rivières débordent déjà d'électricité, et peu en hiver, sous le stratus. D'où l'intérêt du <strong>solaire alpin</strong> : au-dessus du brouillard, avec le rayonnement réfléchi par la neige et des panneaux presque verticaux, la production d'hiver est bien meilleure. Exemple : AlpinSolar, environ 5000 panneaux fixés sur le mur du barrage du Muttsee (GL) à 2500 m d'altitude, dont près de la moitié de la production tombe en hiver.</p>
+
+      <h3>L'éolien</h3>
+      <p>Une éolienne récupère l'énergie cinétique de l'air qui traverse son rotor :</p>
+      <div class="formula"><span class="eq"><i>P</i> = ½ · <i>ρ</i><sub>air</sub> · <i>A</i> · <i>v</i><sup>3</sup> · <i>C</i><sub>p</sub></span></div>
+      <p>Avec <i>ρ</i><sub>air</sub> ≈ 1,2 kg/m³, <i>A</i> l'aire balayée par les pales et <i>C</i><sub>p</sub> le coefficient de puissance (au maximum 59 %, limite de Betz ; 40 à 50 % en pratique). Le <i>v</i><sup>3</sup> change tout : deux fois plus de vent donne huit fois plus de puissance. L'éolien reste marginal en Suisse (0,2 % de la production) : sites venteux rares, procédures longues et oppositions fréquentes. Le plus grand parc est celui du Mont-Crosin, dans le Jura bernois, et l'éolienne de Gries (VS), à 2465 m, est la plus haute d'Europe.</p>
+
+      <h3>Les autres</h3>
+      <p>Les usines d'incinération des ordures (environ 30 en Suisse) brûlent les déchets non recyclables et produisent chaleur et électricité. S'y ajoutent la biomasse (bois, biogaz des stations d'épuration et des exploitations agricoles) et quelques installations thermiques. La géothermie profonde est encore au stade des projets.</p>
+    </section>
+
+    <!-- 4.7 -->
+    <section class="section" id="journee">
+      <div class="section-head"><span class="label">4.7</span><h2>Une journée sur le réseau</h2></div>
+      <p>L'électricité se stocke mal. À chaque instant, la production doit égaler exactement la consommation, sinon la fréquence du réseau s'écarte de 50 Hz. Swissgrid, la société nationale du réseau de transport, surveille cet équilibre seconde par seconde. Les centrales au fil de l'eau, nucléaires et solaires produisent quand elles peuvent ; les barrages, eux, sont <strong>pilotables</strong> et comblent les trous. Le modèle ci-dessous montre comment tout cela s'emboîte.</p>
+      <figure class="anim wide" id="anim-journee">
+        <div class="anim__head"><h4>Production et consommation sur 24 heures</h4><span class="label">Animation 4.4</span></div>
+        <div class="legend" id="day-legend"></div>
+        <div class="anim__stage" id="day-stage"><canvas class="anim-canvas" id="cv-day" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Graphique empilé de la production suisse heure par heure avec la courbe de consommation."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><span class="ctrl__name">Saison</span><div class="btns" id="day-season"><button class="btn" type="button" data-value="ete">Jour d'été</button><button class="btn" type="button" data-value="hiver" aria-pressed="true">Jour d'hiver</button></div></div>
+          <div class="ctrl"><label for="day-pv"><span>Photovoltaïque installé</span><output for="day-pv"></output></label><input type="range" id="day-pv" min="0" max="40" step="0.5" value="9.5"></div>
+          <div class="ctrl"><label for="day-cloud"><span>Nébulosité</span><output for="day-cloud"></output></label><input type="range" id="day-cloud" min="0" max="100" step="5" value="40"></div>
+          <div class="ctrl"><span class="ctrl__name">Nucléaire</span><div class="btns" id="day-nuc"><button class="btn" type="button" data-value="1" aria-pressed="true">En service</button><button class="btn" type="button" data-value="0">Arrêté</button></div></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="day-play"></button></div></div>
+        </div>
+        <div class="readouts" id="day-read"></div>
+        <figcaption><b>Modèle simplifié</b> Valeurs typiques et arrondies, pas des mesures réelles. Les barrages disposent d'un budget d'eau par jour (plus grand en hiver, quand on vide les lacs) et couvrent les pointes ; le reste du déficit est importé. Un surplus fait tourner les pompes (jusqu'à 4 GW) puis part à l'exportation. Essaie l'hiver sans nucléaire, puis l'été avec 30 GW de solaire.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.8 -->
+    <section class="section" id="transport">
+      <div class="section-head"><span class="label">4.8</span><h2>Transport et transformateurs</h2></div>
+      <p>Les grandes centrales sont dans les Alpes et en Argovie, les consommateurs dans les villes du Plateau. Pour transporter l'électricité, on utilise des lignes à <strong>très haute tension</strong> (220 et 380 kV). Pourquoi si haut ? Parce qu'à puissance égale, une tension plus élevée permet un courant plus faible, et les pertes par effet Joule dans les câbles dépendent du carré du courant :</p>
+      <div class="box box--loi">
+        <span class="label">Pertes en ligne</span>
+        <div class="formula">
+          <span class="eq"><i>I</i> = <span class="frac"><span><i>P</i></span><span><i>U</i></span></span></span>
+          <span class="eq"><i>P</i><sub>pertes</sub> = <i>R</i><sub>ligne</sub> · <i>I</i><sup>2</sup> = <i>R</i><sub>ligne</sub> · <span class="frac"><span><i>P</i><sup>2</sup></span><span><i>U</i><sup>2</sup></span></span></span>
+        </div>
+        <p>Multiplier la tension par 10 divise les pertes par 100.</p>
+      </div>
+      <div class="box box--loi">
+        <span class="label">Transformateur idéal</span>
+        <div class="formula">
+          <span class="eq"><span class="frac"><span><i>U</i><sub>2</sub></span><span><i>U</i><sub>1</sub></span></span> = <span class="frac"><span><i>N</i><sub>2</sub></span><span><i>N</i><sub>1</sub></span></span> = <span class="frac"><span><i>I</i><sub>1</sub></span><span><i>I</i><sub>2</sub></span></span></span>
+        </div>
+        <p>Deux bobines enroulées sur un même noyau de fer. Le courant alternatif dans la première crée un flux variable qui induit une tension dans la seconde (encore Faraday). Le rapport des tensions est celui des nombres de spires ; la puissance, elle, se conserve (à 1 ou 2 % près). C'est pour ça que le réseau est alternatif : en courant continu, pas de flux variable, pas de transformateur simple.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-transport">
+        <div class="anim__head"><h4>Pourquoi la très haute tension ?</h4><span class="label">Animation 4.5</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-transport" style="--ar: 5 / 2; --ar-m: 4 / 3" aria-label="Centrale, transformateur élévateur, ligne de 100 km, transformateur abaisseur et ville ; pertes affichées selon la tension choisie."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis:100%"><span class="ctrl__name">Tension de la ligne</span><div class="btns" id="tr-u">
+            <button class="btn" type="button" data-value="20">20 kV</button>
+            <button class="btn" type="button" data-value="50">50 kV</button>
+            <button class="btn" type="button" data-value="110">110 kV</button>
+            <button class="btn" type="button" data-value="220">220 kV</button>
+            <button class="btn" type="button" data-value="380" aria-pressed="true">380 kV</button>
+          </div></div>
+          <div class="ctrl"><label for="tr-p"><span>Puissance à transporter</span><output for="tr-p"></output></label><input type="range" id="tr-p" min="50" max="1500" step="50" value="500"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="tr-play"></button></div></div>
+        </div>
+        <div class="readouts" id="tr-read"></div>
+        <figcaption><b>Hypothèses</b> Ligne de 100 km, résistance totale 5 Ω, modèle monophasé simplifié ; l'alternateur fournit 20 kV. La vitesse des points est proportionnelle au courant, et la ligne rougit avec les pertes.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 700 200" role="img" aria-label="Niveaux de tension du réseau suisse : 380/220 kV pour le transport, 50 à 150 kV pour la distribution régionale, 10 à 35 kV pour la distribution locale, 400/230 V chez l'habitant.">
+            <g class="t-small">
+              <rect x="10" y="40" width="150" height="100" rx="8" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5"/>
+              <text x="85" y="72" text-anchor="middle" class="t-strong" style="font-size:20px">380 / 220 kV</text>
+              <text x="85" y="96" text-anchor="middle" class="t-small">transport national</text>
+              <text x="85" y="114" text-anchor="middle" class="t-small">et international</text>
+              <text x="85" y="130" text-anchor="middle" class="t-small">(Swissgrid)</text>
+              <rect x="185" y="50" width="150" height="80" rx="8" class="fill-card" style="stroke:var(--ink-3);stroke-width:1.5"/>
+              <text x="260" y="80" text-anchor="middle" class="t-strong" style="font-size:18px">50 à 150 kV</text>
+              <text x="260" y="102" text-anchor="middle" class="t-small">distribution</text>
+              <text x="260" y="118" text-anchor="middle" class="t-small">régionale</text>
+              <rect x="360" y="58" width="150" height="64" rx="8" class="fill-card" style="stroke:var(--ink-3);stroke-width:1.5"/>
+              <text x="435" y="84" text-anchor="middle" class="t-strong" style="font-size:16px">10 à 35 kV</text>
+              <text x="435" y="106" text-anchor="middle" class="t-small">quartiers, villages</text>
+              <rect x="535" y="64" width="155" height="52" rx="8" class="fill-card" style="stroke:var(--ink-3);stroke-width:1.5"/>
+              <text x="612" y="86" text-anchor="middle" class="t-strong" style="font-size:15px">400 / 230 V</text>
+              <text x="612" y="104" text-anchor="middle" class="t-small">ta prise</text>
+              <path d="M160 90 H 183 M335 90 H 358 M510 90 H 533" class="stroke" marker-end="url(#ah-ink)"/>
+              <text x="350" y="170" text-anchor="middle" class="t-small">un transformateur à chaque étape (on parle de « niveaux de réseau »)</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 4.4</b> Les étages du réseau électrique suisse. La Suisse est aussi un carrefour européen : une quarantaine de lignes transfrontalières la relient à ses voisins.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.9 -->
+    <section class="section" id="avenir">
+      <div class="section-head"><span class="label">4.9</span><h2>L'hiver et l'avenir</h2></div>
+      <p>Sur l'année, la Suisse produit à peu près ce qu'elle consomme. Mais pas au bon moment : en été, les rivières gonflées par la fonte des neiges et le soleil produisent trop, et on exporte ; en hiver, les rivières sont basses, le solaire faible et la consommation plus forte (chauffage, éclairage), et on importe. Les lacs de barrage servent justement à déplacer une partie de l'été vers l'hiver, mais leur volume est limité.</p>
+      <h3>Les grandes décisions</h3>
+      <ul>
+        <li><strong>2017, Stratégie énergétique 2050</strong> (acceptée par 58 % des votants) : interdiction de construire de nouvelles centrales nucléaires, les centrales existantes peuvent fonctionner tant qu'elles sont sûres ; encouragement des renouvelables et de l'efficacité.</li>
+        <li><strong>2024, loi sur l'approvisionnement en électricité</strong> (acceptée par 69 % des votants) : objectifs de 35 TWh de nouvelles renouvelables (hors hydraulique) en 2035 et 45 TWh en 2050, davantage de production d'hiver, procédures accélérées pour 16 projets hydrauliques.</li>
+        <li><strong>2026, retour du débat nucléaire</strong> : le Parlement a accepté de lever l'interdiction de nouvelles centrales (contre-projet à l'initiative « Stop au blackout »). Un référendum a été lancé, et le dernier mot devrait revenir au peuple.</li>
+      </ul>
+      <p>Il n'y a pas de solution unique. Les pistes discutées : plus de solaire (sur les toits, les façades et en montagne pour l'hiver), rehausser des barrages, de l'éolien, des accords avec l'Union européenne pour sécuriser les échanges, le stockage (pompage, batteries, hydrogène), garder ou non le nucléaire, et surtout consommer mieux : une pompe à chaleur fournit environ trois fois plus de chaleur qu'un chauffage électrique direct pour la même électricité. À toi de te faire une opinion, chiffres à l'appui : c'est aussi à ça que sert ce cours.</p>
+      <div class="box box--fun">
+        <span class="label">Le saviez-vous ?</span>
+        <p>Le kWh le moins cher et le plus propre est celui qu'on ne consomme pas. Si chaque ménage suisse éteignait vraiment ses appareils en veille (environ 50 kWh par an et par ménage), on économiserait la production annuelle de tout un parc d'éoliennes. Combien d'éoliennes exactement ? L'exercice 7 te le dira.</p>
+      </div>
+    </section>
+
+    <!-- 4.10 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">4.10</span><h2>Exercices</h2></div>
+      <ol class="exos">
+        <li>
+          <p><strong>La Grande Dixence en batterie</strong> <span class="niveau">moyen</span></p>
+          <p>Le lac des Dix contient au maximum 400 millions de m³ d'eau. On suppose une hauteur de chute moyenne de 1700 m et un rendement de 85 %. Quelle énergie électrique représente un lac plein, en TWh ? Quelle fraction de la consommation annuelle suisse (58 TWh) ? Combien de jours de consommation ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>E</i> = <i>η</i><i>mgh</i> = 0,85 · 4·10<sup>11</sup> kg · 9,81 · 1700 ≈ 5,7·10<sup>15</sup> J ≈ 1,6 TWh.</p>
+            <p>Soit environ 2,7 % de la consommation annuelle, environ 10 jours de consommation. Le plus grand lac de barrage du pays ne suffirait pas pour un mois d'hiver : c'est tout le problème du stockage.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Nant de Drance</strong> <span class="niveau">moyen</span></p>
+          <p>La centrale de pompage-turbinage de Nant de Drance utilise un bassin supérieur de 25 millions de m³, avec une chute d'environ 300 m, et turbine à 900 MW. a) Énergie stockée (rendement en turbinage 85 %) ? b) Combien d'heures peut-elle turbiner à pleine puissance ? c) Le rendement global (pompage puis turbinage) est d'environ 80 %. Pourquoi est-ce quand même rentable ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>E</i> = 0,85 · 2,5·10<sup>10</sup> · 9,81 · 300 ≈ 6,3·10<sup>13</sup> J ≈ 17 GWh (l'exploitant annonce environ 20 GWh).</p>
+            <p>b) <i>t</i> = 17·10<sup>9</sup> Wh / 9·10<sup>8</sup> W ≈ 19 h.</p>
+            <p>c) On pompe quand l'électricité est abondante et bon marché (nuit, midi ensoleillé) et on turbine quand elle est rare et chère. On perd 20 % de l'énergie, mais on gagne sur la valeur, et on stabilise le réseau.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Leibstadt</strong> <span class="niveau">moyen</span></p>
+          <p>La centrale de Leibstadt (1233 MW électriques, rendement 33 %) fonctionne 8000 heures par an. a) Production annuelle en TWh, et part de la consommation suisse ? b) La fission de 1 g d'uranium 235 libère 8,2·10<sup>10</sup> J. Quelle masse d'uranium 235 est fissionnée par an ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>E</i><sub>él</sub> = 1,233 GW · 8000 h ≈ 9,9 TWh, soit 17 % de 58 TWh.</p>
+            <p>b) Chaleur produite : 9,9 TWh / 0,33 = 30 TWh = 1,08·10<sup>17</sup> J. Masse : 1,08·10<sup>17</sup> / 8,2·10<sup>10</sup> ≈ 1,3·10<sup>6</sup> g ≈ 1,3 t d'uranium 235 par an.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Un toit solaire</strong> <span class="niveau">facile</span></p>
+          <p>Un toit de maison porte 30 m² de panneaux (rendement 21 %, facteur de performance 0,8) et reçoit 1150 kWh/m² par an. Production annuelle ? La famille consomme 4500 kWh par an : est-elle autonome ? Et en décembre ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>E</i> = 30 · 1150 · 0,21 · 0,8 ≈ 5800 kWh par an : plus que la consommation sur l'année.</p>
+            <p>Mais environ 75 % de cette production tombe d'avril à septembre. En décembre, le toit produit peut-être 150 kWh, pour une consommation d'environ 450 kWh : il faut le réseau. Autonome sur le papier, dépendant en hiver.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La loi du cube</strong> <span class="niveau">moyen</span></p>
+          <p>Une éolienne a un rotor de 90 m de diamètre et un coefficient de puissance de 0,40. Calcule sa puissance pour un vent de 7 m/s puis de 14 m/s (<i>ρ</i> = 1,2 kg/m³). Pourquoi les éoliennes ont-elles une « puissance nominale » maximale ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>A</i> = π · 45² ≈ 6360 m². À 7 m/s : <i>P</i> = 0,5 · 1,2 · 6360 · 343 · 0,40 ≈ 520 kW.</p>
+            <p>À 14 m/s : 2³ = 8 fois plus, soit environ 4,2 MW. En réalité, l'alternateur est limité (par exemple à 2 MW) : au-delà d'une certaine vitesse, on oriente les pales pour « laisser passer » le vent. Et par tempête, on arrête tout.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Les pertes en ligne</strong> <span class="niveau">moyen</span></p>
+          <p>On transporte 400 MW sur une ligne de résistance totale 4,0 Ω. Calcule le courant et les pertes (en MW et en %) sous 380 kV, puis sous 50 kV. Vérifie avec l'animation 4.5.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>380 kV : <i>I</i> = 4·10<sup>8</sup>/3,8·10<sup>5</sup> ≈ 1050 A ; pertes 4 · 1050² ≈ 4,4 MW, soit 1,1 %.</p>
+            <p>50 kV : <i>I</i> = 8000 A ; pertes 4 · 8000² = 256 MW, soit 64 % ! Sans compter que le câble ne supporterait pas 8000 A.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Les veilles</strong> <span class="niveau">défi</span></p>
+          <p>On estime à 50 kWh par an la consommation des appareils en veille d'un ménage, et la Suisse compte environ 4 millions de ménages. Une éolienne du Mont-Crosin produit environ 4 GWh par an. Combien d'éoliennes représentent les veilles du pays ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>4·10<sup>6</sup> · 50 kWh = 2·10<sup>8</sup> kWh = 200 GWh par an. 200/4 = 50 éoliennes, à peu près autant que toutes les grandes éoliennes du pays réunies. Éteindre la box et la télé le soir, ça compte.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'alternateur lent</strong> <span class="niveau">facile</span></p>
+          <p>Une turbine Kaplan tourne à 100 tr/min. Combien de paires de pôles doit avoir l'alternateur pour produire du 50 Hz ? Et un transformateur qui abaisse 16 kV en 400 V a 2000 spires au primaire : combien au secondaire ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>n</i> = 100/60 tr/s ; <i>p</i> = <i>f</i>/<i>n</i> = 50 · 60/100 = 30 paires de pôles (60 pôles).</p>
+            <p><i>N</i><sub>2</sub> = <i>N</i><sub>1</sub> · <i>U</i><sub>2</sub>/<i>U</i><sub>1</sub> = 2000 · 400/16 000 = 50 spires.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 4.11 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>Suisse 2025 : 67,5 TWh produits ; environ 56 % hydraulique, 27 % nucléaire, 12 % solaire. Consommation finale 58 TWh.</li>
+          <li>Induction : une variation de flux magnétique induit une tension, <i>U</i> = −<i>N</i>Δ<i>Φ</i>/Δ<i>t</i>. Le courant induit s'oppose à sa cause (Lenz).</li>
+          <li>Alternateur : un rotor aimanté tourne dans des bobines ; <i>f</i> = <i>p</i>·<i>n</i>, 50 Hz en Europe.</li>
+          <li>Hydraulique : <i>P</i> = <i>ηρgQh</i> ; fil de l'eau, accumulation, pompage-turbinage.</li>
+          <li>Transport à très haute tension, car <i>P</i><sub>pertes</sub> = <i>R</i>(<i>P</i>/<i>U</i>)². Transformateur : <i>U</i><sub>2</sub>/<i>U</i><sub>1</sub> = <i>N</i><sub>2</sub>/<i>N</i><sub>1</sub>.</li>
+          <li>Le vrai défi suisse est l'hiver : la production doit égaler la consommation à chaque instant.</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a href="3-lois-des-circuits.html"><span class="label">Chapitre 3</span><span class="t">← Lois des circuits</span></a>
+      <a class="next" href="index.html"><span class="label">Fin du cours</span><span class="t">Sommaire →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Électricité au gymnase · Chapitre 4 · Production en Suisse</span>
+  <span>Sources des chiffres : OFEN (Statistique suisse de l'électricité 2025), Swissolar, exploitants des centrales. Données arrondies, état automne 2026.</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch4.js"></script>
+</body>
+</html>

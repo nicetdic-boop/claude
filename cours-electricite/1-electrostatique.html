@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1 · Électrostatique — Électricité au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <symbol id="qp" viewBox="-10 -10 20 20"><circle r="9" style="fill:var(--plus)"/><path d="M-4.5 0h9M0-4.5v9" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="qm" viewBox="-10 -10 20 20"><circle r="9" style="fill:var(--minus)"/><path d="M-4.5 0h9" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <symbol id="qn" viewBox="-10 -10 20 20"><circle r="9" style="fill:var(--metal)"/></symbol>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+    <marker id="ah-minus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--minus)"/></marker>
+    <marker id="ah-plus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--plus)"/></marker>
+    <marker id="ah-field" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill: var(--field)"/></marker>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__wires" aria-hidden="true"><span></span><span></span><span></span></span>Électricité au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-electrostatique.html" aria-current="page"><span class="n">1</span><span class="t">Électrostatique</span></a>
+      <a href="2-electrodynamique.html"><span class="n">2</span><span class="t">Électrodynamique</span></a>
+      <a href="3-lois-des-circuits.html"><span class="n">3</span><span class="t">Lois des circuits</span></a>
+      <a href="4-production-suisse.html"><span class="n">4</span><span class="t">Production en Suisse</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 1</span>
+      <h1>Électrostatique : les charges au repos</h1>
+      <p class="lead">Le ballon qui colle au plafond, la décharge sur la poignée de porte, l'éclair au-dessus du Tessin. Tout commence avec une propriété discrète de la matière : la charge électrique.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>expliquer l'électrisation par frottement, contact et influence ;</li>
+          <li>calculer une force avec la loi de Coulomb ;</li>
+          <li>décrire un champ électrique et dessiner ses lignes de champ ;</li>
+          <li>relier tension, énergie et mouvement d'une charge.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">C<small>le coulomb</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#charge"><span class="n">1.1</span>La charge électrique</a></li>
+      <li><a href="#electrisation"><span class="n">1.2</span>Électriser un objet</a></li>
+      <li><a href="#coulomb"><span class="n">1.3</span>La loi de Coulomb</a></li>
+      <li><a href="#champ"><span class="n">1.4</span>Le champ électrique</a></li>
+      <li><a href="#tension"><span class="n">1.5</span>Tension, énergie, condensateur</a></li>
+      <li><a href="#vraie-vie"><span class="n">1.6</span>Dans la vraie vie</a></li>
+      <li><a href="#exercices"><span class="n">1.7</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">1.8</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 1.1 -->
+    <section class="section" id="charge">
+      <div class="section-head"><span class="label">1.1</span><h2>La charge électrique</h2></div>
+      <p>Toute la matière est faite d'atomes. Un atome contient un <strong>noyau</strong> (protons et neutrons) entouré d'<strong>électrons</strong>. Les protons portent une charge positive, les électrons une charge négative exactement opposée, les neutrons aucune.</p>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 620 250" role="img" aria-label="Modèle simplifié d'un atome de lithium : 3 protons et 4 neutrons dans le noyau, 3 électrons autour.">
+            <ellipse cx="170" cy="125" rx="140" ry="52" class="thin dash"/>
+            <ellipse cx="170" cy="125" rx="140" ry="52" class="thin dash" transform="rotate(60 170 125)"/>
+            <ellipse cx="170" cy="125" rx="140" ry="52" class="thin dash" transform="rotate(-60 170 125)"/>
+            <use href="#qn" x="152" y="108" width="18" height="18"/>
+            <use href="#qp" x="164" y="104" width="18" height="18"/>
+            <use href="#qn" x="174" y="114" width="18" height="18"/>
+            <use href="#qp" x="156" y="120" width="18" height="18"/>
+            <use href="#qn" x="168" y="126" width="18" height="18"/>
+            <use href="#qp" x="178" y="124" width="18" height="18"/>
+            <use href="#qn" x="160" y="132" width="18" height="18"/>
+            <use href="#qm" x="300" y="116" width="18" height="18"/>
+            <use href="#qm" x="92" y="225" width="18" height="18"/>
+            <use href="#qm" x="225" y="15" width="18" height="18"/>
+            <line x1="200" y1="125" x2="380" y2="80" class="thin"/>
+            <text x="388" y="76" class="t-strong">Noyau</text>
+            <text x="388" y="94" class="t-small">3 protons (+) et 4 neutrons</text>
+            <text x="388" y="110" class="t-small">contient 99,97 % de la masse</text>
+            <line x1="318" y1="125" x2="380" y2="150" class="thin"/>
+            <text x="388" y="152" class="t-strong">Électrons (−)</text>
+            <text x="388" y="170" class="t-small">3 électrons : l'atome est neutre</text>
+            <text x="388" y="214" class="t-small" font-style="italic">Pas à l'échelle : si le noyau avait la taille</text>
+            <text x="388" y="230" class="t-small" font-style="italic">d'une mouche, l'atome serait une cathédrale.</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 1.1</b> Atome de lithium (modèle simplifié). Autant de protons que d'électrons : la charge totale est nulle.</figcaption>
+      </figure>
+
+      <div class="box box--def">
+        <span class="label">Définition</span>
+        <p>La <strong>charge électrique</strong> <i>q</i> se mesure en <strong>coulombs</strong> (C). Elle existe sous deux signes : deux charges de même signe se <strong>repoussent</strong>, deux charges de signes opposés s'<strong>attirent</strong>.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Particule</th><th class="r">Charge</th><th class="r">Masse</th></tr></thead>
+          <tbody>
+            <tr><td>Électron</td><td class="r">−<i>e</i> = −1,602·10<sup>−19</sup> C</td><td class="r">9,11·10<sup>−31</sup> kg</td></tr>
+            <tr><td>Proton</td><td class="r">+<i>e</i> = +1,602·10<sup>−19</sup> C</td><td class="r">1,673·10<sup>−27</sup> kg</td></tr>
+            <tr><td>Neutron</td><td class="r">0</td><td class="r">1,675·10<sup>−27</sup> kg</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Deux lois fondamentales</h3>
+      <p><strong>Quantification.</strong> Toute charge observable est un multiple entier de la <em>charge élémentaire</em> <i>e</i> :</p>
+      <div class="formula"><span class="eq"><i>q</i> = <i>n</i> · <i>e</i></span><span class="eq" style="font-size:1rem;color:var(--ink-2)">avec <i>n</i> entier, <i>e</i> = 1,602·10<sup>−19</sup> C</span></div>
+      <p>Un coulomb, c'est donc énorme à l'échelle atomique : il faut 6,24·10<sup>18</sup> électrons pour faire −1 C. En électrostatique, on manipule plutôt des nanocoulombs (nC) ou des microcoulombs (µC).</p>
+      <p><strong>Conservation.</strong> Dans un système isolé, la charge totale reste constante. On ne crée pas de charge : on la <em>déplace</em>. Quand un objet devient négatif, un autre devient positif d'autant.</p>
+
+      <div class="box box--fun">
+        <span class="label">Le saviez-vous ?</span>
+        <p>Un trombone de 1 g contient environ 45 000 C d'électrons, compensés par autant de charge positive. Si on pouvait mettre tous ses électrons d'un côté et ses noyaux à 1 m de là, ils s'attireraient avec une force d'environ 2·10<sup>19</sup> N, à peu près le poids de 20 000 lacs Léman. La matière est neutre, et c'est tant mieux.</p>
+      </div>
+    </section>
+
+    <!-- 1.2 -->
+    <section class="section" id="electrisation">
+      <div class="section-head"><span class="label">1.2</span><h2>Électriser un objet</h2></div>
+      <p>Électriser un objet, c'est lui faire gagner ou perdre des électrons. Les noyaux, eux, ne bougent pas : ils sont lourds et solidement liés dans la matière. Il y a trois façons de s'y prendre.</p>
+
+      <h3>Conducteurs et isolants</h3>
+      <p>Dans un <strong>conducteur</strong> (métaux, eau salée, corps humain, graphite), certains électrons sont libres de se déplacer dans tout le matériau. Dans un <strong>isolant</strong> (plastique, verre, caoutchouc, air sec, laine), les électrons restent attachés à leurs atomes : une charge déposée reste là où on l'a mise.</p>
+
+      <h3>1. Par frottement</h3>
+      <p>En frottant deux matériaux différents, des électrons passent de l'un à l'autre. Lequel gagne ? Ça dépend du couple de matériaux : c'est la <strong>série triboélectrique</strong>.</p>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 640 230" role="img" aria-label="Avant le frottement, le ballon et le pull sont neutres. Après, le ballon a gagné des électrons (négatif) et le pull en a perdu (positif).">
+            <text x="20" y="24" class="t-strong">Avant</text>
+            <text x="340" y="24" class="t-strong">Après frottement</text>
+            <line x1="320" y1="10" x2="320" y2="220" class="thin dash"/>
+            <!-- avant -->
+            <ellipse cx="100" cy="110" rx="62" ry="74" class="stroke-2" style="fill:var(--paper)"/>
+            <path d="M100 184 l-6 12 h12 z" class="fill-ink"/>
+            <use href="#qp" x="64" y="76" width="16" height="16"/><use href="#qm" x="84" y="76" width="16" height="16"/>
+            <use href="#qp" x="106" y="92" width="16" height="16"/><use href="#qm" x="126" y="92" width="16" height="16"/>
+            <use href="#qp" x="62" y="118" width="16" height="16"/><use href="#qm" x="82" y="118" width="16" height="16"/>
+            <use href="#qp" x="104" y="138" width="16" height="16"/><use href="#qm" x="124" y="138" width="16" height="16"/>
+            <rect x="190" y="50" width="100" height="130" rx="10" class="stroke-2" style="fill:var(--paper)"/>
+            <use href="#qp" x="206" y="70" width="16" height="16"/><use href="#qm" x="226" y="70" width="16" height="16"/>
+            <use href="#qp" x="250" y="96" width="16" height="16"/><use href="#qm" x="270" y="96" width="16" height="16"/>
+            <use href="#qp" x="206" y="124" width="16" height="16"/><use href="#qm" x="226" y="124" width="16" height="16"/>
+            <use href="#qp" x="250" y="150" width="16" height="16"/><use href="#qm" x="270" y="150" width="16" height="16"/>
+            <text x="100" y="214" text-anchor="middle" class="t-small">ballon (caoutchouc)</text>
+            <text x="240" y="200" text-anchor="middle" class="t-small">pull en laine</text>
+            <!-- après -->
+            <ellipse cx="420" cy="110" rx="62" ry="74" class="stroke-2" style="fill:var(--minus-soft)"/>
+            <path d="M420 184 l-6 12 h12 z" class="fill-ink"/>
+            <use href="#qp" x="384" y="76" width="16" height="16"/><use href="#qm" x="404" y="76" width="16" height="16"/>
+            <use href="#qp" x="426" y="92" width="16" height="16"/><use href="#qm" x="446" y="92" width="16" height="16"/>
+            <use href="#qp" x="382" y="118" width="16" height="16"/><use href="#qm" x="402" y="118" width="16" height="16"/>
+            <use href="#qp" x="424" y="138" width="16" height="16"/><use href="#qm" x="444" y="138" width="16" height="16"/>
+            <use href="#qm" x="452" y="116" width="16" height="16"/><use href="#qm" x="414" y="160" width="16" height="16"/>
+            <rect x="510" y="50" width="100" height="130" rx="10" class="stroke-2" style="fill:var(--plus-soft)"/>
+            <use href="#qp" x="526" y="70" width="16" height="16"/><use href="#qm" x="546" y="70" width="16" height="16"/>
+            <use href="#qp" x="570" y="96" width="16" height="16"/>
+            <use href="#qp" x="526" y="124" width="16" height="16"/><use href="#qm" x="546" y="124" width="16" height="16"/>
+            <use href="#qp" x="570" y="150" width="16" height="16"/>
+            <path d="M505 112 C 490 108, 486 112, 476 118" class="stroke-minus" marker-end="url(#ah-minus)"/>
+            <text x="420" y="214" text-anchor="middle" class="t-small">charge −2e</text>
+            <text x="560" y="200" text-anchor="middle" class="t-small">charge +2e</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 1.2</b> Frotter un ballon sur un pull transfère des électrons de la laine vers le caoutchouc. La charge totale (ballon + pull) reste nulle.</figcaption>
+      </figure>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Série triboélectrique (extrait)</th><th>Tendance</th></tr></thead>
+          <tbody>
+            <tr><td>peau humaine sèche, verre, cheveux, laine</td><td>cède facilement des électrons → devient <strong style="color:var(--plus)">+</strong></td></tr>
+            <tr><td>coton, papier, acier</td><td>plutôt neutre</td></tr>
+            <tr><td>caoutchouc, polyester, PVC, téflon</td><td>capte facilement des électrons → devient <strong style="color:var(--minus)">−</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. Par contact</h3>
+      <p>Si on touche un conducteur neutre avec un objet chargé, une partie de la charge passe sur le conducteur : les deux objets finissent chargés du <em>même signe</em>, et donc se repoussent. C'est pour ça qu'une petite boule d'aluminium est d'abord attirée par une règle chargée, puis brusquement repoussée après l'avoir touchée.</p>
+
+      <h3>3. Par influence (ou induction)</h3>
+      <p>On approche un objet chargé d'un conducteur <strong>sans le toucher</strong>. Les électrons libres du conducteur se déplacent : attirés si l'objet est positif, repoussés s'il est négatif. Le conducteur reste neutre au total, mais ses deux faces portent des charges opposées. Si on le relie à la terre pendant ce temps, des électrons peuvent quitter ou rejoindre le conducteur, qui reste chargé une fois le fil retiré.</p>
+
+      <figure class="anim wide" id="anim-influence">
+        <div class="anim__head"><h4>Électrisation par influence</h4><span class="label">Animation 1.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-influence" style="--ar: 2 / 1; --ar-m: 4 / 3" aria-label="Sphère métallique et bâton chargé. Les électrons libres de la sphère se déplacent selon la charge et la distance du bâton."></canvas></div>
+        <div class="controls">
+          <div class="ctrl">
+            <span class="ctrl__name">Bâton</span>
+            <div class="btns" id="inf-rod">
+              <button class="btn" type="button" data-value="1">Verre (+)</button>
+              <button class="btn" type="button" data-value="-1" aria-pressed="true">PVC (−)</button>
+              <button class="btn" type="button" data-value="0">Retiré</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <label for="inf-dist"><span>Distance au bâton</span><output for="inf-dist"></output></label>
+            <input type="range" id="inf-dist" min="10" max="260" value="60">
+          </div>
+          <div class="ctrl">
+            <span class="ctrl__name">Mise à la terre</span>
+            <div class="btns"><button class="btn" type="button" id="inf-ground" aria-pressed="false">Relier à la terre</button><button class="btn" type="button" id="inf-reset">Neutraliser</button></div>
+          </div>
+        </div>
+        <div class="readouts"><span>Charge nette de la sphère : <b id="inf-q">0</b></span><span id="inf-msg">Le bâton attire ou repousse les électrons libres.</span></div>
+        <figcaption><b>Essaie</b> la séquence classique : bâton PVC proche → relier à la terre → couper la terre → retirer le bâton. La sphère reste chargée… positivement, alors qu'on ne l'a jamais touchée avec le bâton.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 1.3 -->
+    <section class="section" id="coulomb">
+      <div class="section-head"><span class="label">1.3</span><h2>La loi de Coulomb</h2></div>
+      <p>En 1785, Charles-Augustin de Coulomb mesure avec une balance de torsion la force entre deux petites sphères chargées. Résultat : la force est proportionnelle au produit des charges et inversement proportionnelle au carré de la distance. La même forme que la gravitation de Newton, avec des charges à la place des masses.</p>
+
+      <div class="box box--loi">
+        <span class="label">Loi de Coulomb</span>
+        <div class="formula">
+          <span class="eq"><i>F</i> = <i>k</i> · <span class="frac"><span>|<i>q</i><sub>1</sub>| · |<i>q</i><sub>2</sub>|</span><span><i>r</i><sup>2</sup></span></span></span>
+          <span class="eq" style="font-size:1.05rem"><i>k</i> = <span class="frac"><span>1</span><span>4π<i>ε</i><sub>0</sub></span></span> = 8,99·10<sup>9</sup> N·m²/C²</span>
+        </div>
+        <p><i>F</i> en newtons, <i>q</i> en coulombs, <i>r</i> (distance entre les centres) en mètres. La force est portée par la droite qui relie les charges ; répulsive si les signes sont égaux, attractive sinon. Les deux charges subissent des forces de même intensité et de sens opposés (3<sup>e</sup> loi de Newton), même si l'une est cent fois plus grande que l'autre.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-coulomb">
+        <div class="anim__head"><h4>Le laboratoire de Coulomb</h4><span class="label">Animation 1.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-coulomb" style="--ar: 2 / 1; --ar-m: 1 / 1" aria-label="Deux charges et les forces qu'elles exercent l'une sur l'autre, avec la courbe F en fonction de r."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="cl-q1"><span>Charge <i>q</i>₁</span><output for="cl-q1"></output></label><input type="range" id="cl-q1" min="-100" max="100" step="5" value="40"></div>
+          <div class="ctrl"><label for="cl-q2"><span>Charge <i>q</i>₂</span><output for="cl-q2"></output></label><input type="range" id="cl-q2" min="-100" max="100" step="5" value="-60"></div>
+          <div class="ctrl"><label for="cl-r"><span>Distance <i>r</i></span><output for="cl-r"></output></label><input type="range" id="cl-r" min="5" max="50" step="1" value="20"></div>
+        </div>
+        <div class="readouts"><span>Force : <b id="cl-F">—</b></span><span>Nature : <b id="cl-type">—</b></span><span>Équivalent poids : <b id="cl-m">—</b></span></div>
+        <figcaption><b>À observer</b> Divise la distance par 2 : la force est multipliée par 4. Change le signe d'une charge : seules les flèches changent de sens. Les deux flèches ont toujours la même longueur.</figcaption>
+      </figure>
+
+      <h3>Électrique contre gravitation</h3>
+      <p>Dans un atome d'hydrogène, le proton et l'électron sont à environ 5,3·10<sup>−11</sup> m. La force électrique vaut 8,2·10<sup>−8</sup> N, la force de gravitation 3,6·10<sup>−47</sup> N. Rapport : environ 10<sup>39</sup>. À l'échelle des atomes, la gravitation est totalement négligeable. Si on ne la sent pas au quotidien, c'est seulement parce que les objets sont presque parfaitement neutres.</p>
+
+      <div class="box box--ex">
+        <span class="label">Exemple résolu</span>
+        <p>Deux ballons gonflés, chargés chacun de −50 nC, sont suspendus à 20 cm l'un de l'autre. Quelle force ?</p>
+        <div class="formula" style="font-size:1.15rem"><span class="eq"><i>F</i> = 8,99·10<sup>9</sup> · <span class="frac"><span>(50·10<sup>−9</sup>)²</span><span>0,20²</span></span> = 5,6·10<sup>−4</sup> N</span></div>
+        <p>C'est le poids d'une masse de 0,06 g, une miette. Pourtant ça suffit pour écarter visiblement deux ballons très légers.</p>
+      </div>
+    </section>
+
+    <!-- 1.4 -->
+    <section class="section" id="champ">
+      <div class="section-head"><span class="label">1.4</span><h2>Le champ électrique</h2></div>
+      <p>Comment une charge « sait-elle » qu'une autre charge est là ? On décrit l'effet d'une charge par un <strong>champ électrique</strong> qui remplit l'espace autour d'elle. Une autre charge placée dans ce champ subit une force. Plus besoin de penser à l'action à distance : la charge réagit au champ là où elle se trouve.</p>
+
+      <div class="box box--def">
+        <span class="label">Définition</span>
+        <div class="formula">
+          <span class="eq"><span class="vec"><i>E</i></span> = <span class="frac"><span><span class="vec"><i>F</i></span></span><span><i>q</i></span></span></span>
+          <span class="eq"><i>E</i> = <i>k</i> · <span class="frac"><span>|<i>Q</i>|</span><span><i>r</i><sup>2</sup></span></span><span style="font-size:0.9rem;color:var(--ink-2);margin-left:0.4em">(charge ponctuelle)</span></span>
+        </div>
+        <p>Le champ s'exprime en N/C, ou de façon équivalente en V/m. C'est un <strong>vecteur</strong> : il pointe dans la direction de la force que subirait une charge test <em>positive</em>. Il s'éloigne donc des charges positives et pointe vers les charges négatives.</p>
+      </div>
+
+      <h3>Les lignes de champ</h3>
+      <p>Pour visualiser un champ, on dessine des lignes tangentes au vecteur <span class="vec"><i>E</i></span> en chaque point. Règles à retenir :</p>
+      <ul>
+        <li>elles partent des charges positives et arrivent sur les charges négatives (ou à l'infini) ;</li>
+        <li>elles ne se croisent jamais : en chaque point, le champ n'a qu'une direction ;</li>
+        <li>elles sont serrées là où le champ est intense et espacées là où il est faible ;</li>
+        <li>entre deux plaques parallèles chargées, elles sont parallèles et équidistantes : le champ est <strong>uniforme</strong>.</li>
+      </ul>
+
+      <figure class="anim wide" id="anim-champ">
+        <div class="anim__head"><h4>Visualiseur de champ électrique</h4><span class="label">Animation 1.3</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-champ" style="--ar: 16 / 10; --ar-m: 4 / 5" aria-label="Lignes de champ électrique autour de charges que l'on peut déplacer."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis:100%">
+            <span class="ctrl__name">Configuration</span>
+            <div class="btns" id="ch-preset">
+              <button class="btn" type="button" data-value="single">Charge seule</button>
+              <button class="btn" type="button" data-value="dipole" aria-pressed="true">Dipôle (+/−)</button>
+              <button class="btn" type="button" data-value="same">Deux charges + (4 et 1)</button>
+              <button class="btn" type="button" data-value="plates">Condensateur plan</button>
+              <button class="btn" type="button" data-value="trio">Trio</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <span class="ctrl__name">Affichage</span>
+            <div class="btns">
+              <button class="btn" type="button" id="ch-lines" aria-pressed="true">Lignes</button>
+              <button class="btn" type="button" id="ch-vectors" aria-pressed="false">Vecteurs</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <span class="ctrl__name">Ajouter</span>
+            <div class="btns">
+              <button class="btn" type="button" id="ch-addp">+ charge</button>
+              <button class="btn" type="button" id="ch-addm">− charge</button>
+              <button class="btn" type="button" id="ch-test">Lâcher une charge test</button>
+            </div>
+          </div>
+        </div>
+        <div class="readouts"><span>Champ au pointeur : <b id="ch-E">déplace la souris ou touche l'écran</b></span></div>
+        <figcaption><b>Mode d'emploi</b> Fais glisser les charges ; double-clic (ou appui long) sur une charge pour la supprimer. Clique dans le vide pour lâcher une charge test (+) : elle suit les lignes de champ. Échelle : 1 pixel ≈ 1 mm, une petite charge vaut 1 nC.</figcaption>
+      </figure>
+
+      <div class="box box--fun">
+        <span class="label">Le saviez-vous ?</span>
+        <p>L'air sec cesse d'être isolant vers 3·10<sup>6</sup> V/m : les molécules sont ionisées et une étincelle jaillit. C'est la limite physique de l'électrostatique de salon, et la raison pour laquelle on entend un petit « clac » en enlevant un pull en hiver.</p>
+      </div>
+    </section>
+
+    <!-- 1.5 -->
+    <section class="section" id="tension">
+      <div class="section-head"><span class="label">1.5</span><h2>Tension, énergie et condensateur</h2></div>
+      <p>Une charge placée dans un champ électrique subit une force ; si elle se déplace, le champ effectue un <strong>travail</strong>. On définit la <strong>tension</strong> (ou différence de potentiel) entre deux points A et B comme le travail fourni par unité de charge :</p>
+      <div class="box box--loi">
+        <span class="label">Tension électrique</span>
+        <div class="formula">
+          <span class="eq"><i>U</i><sub>AB</sub> = <span class="frac"><span><i>W</i><sub>A→B</sub></span><span><i>q</i></span></span></span>
+          <span class="eq"><i>W</i> = <i>q</i> · <i>U</i></span>
+          <span class="eq"><i>U</i> = <i>E</i> · <i>d</i><span style="font-size:0.9rem;color:var(--ink-2);margin-left:0.4em">(champ uniforme)</span></span>
+        </div>
+        <p>Unité : le <strong>volt</strong>, 1 V = 1 J/C. Une tension de 1 V signifie que chaque coulomb qui passe d'un point à l'autre reçoit (ou cède) 1 joule.</p>
+      </div>
+      <p>Pour les particules, on utilise souvent l'<strong>électron-volt</strong> : l'énergie gagnée par un électron accéléré sous 1 V. 1 eV = 1,602·10<sup>−19</sup> J. Un électron accéléré sous 2000 V gagne 2000 eV, ou 2 keV.</p>
+
+      <h3>Le condensateur plan</h3>
+      <p>Deux plaques conductrices parallèles, séparées par un isolant, forment un <strong>condensateur</strong>. Branché à une tension <i>U</i>, il accumule +<i>Q</i> sur une plaque et −<i>Q</i> sur l'autre. Entre les plaques règne un champ uniforme <i>E</i> = <i>U</i>/<i>d</i>.</p>
+      <div class="box box--loi">
+        <span class="label">Capacité et énergie</span>
+        <div class="formula">
+          <span class="eq"><i>C</i> = <span class="frac"><span><i>Q</i></span><span><i>U</i></span></span></span>
+          <span class="eq"><i>C</i> = <i>ε</i><sub>0</sub><i>ε</i><sub>r</sub> <span class="frac"><span><i>A</i></span><span><i>d</i></span></span></span>
+          <span class="eq"><i>E</i><sub>él</sub> = ½ <i>C U</i><sup>2</sup></span>
+        </div>
+        <p>Capacité en farads (F), <i>A</i> l'aire d'une plaque, <i>d</i> l'écart, <i>ε</i><sub>0</sub> = 8,85·10<sup>−12</sup> F/m, <i>ε</i><sub>r</sub> la permittivité relative de l'isolant (1 pour le vide, environ 1 pour l'air, de 2 à plusieurs milliers pour les céramiques).</p>
+      </div>
+
+      <figure class="anim wide" id="anim-canon">
+        <div class="anim__head"><h4>Électrons entre deux plaques</h4><span class="label">Animation 1.4</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-canon" style="--ar: 2 / 1; --ar-m: 4 / 3" aria-label="Électrons accélérés ou déviés par le champ uniforme entre deux plaques."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis:100%">
+            <span class="ctrl__name">Expérience</span>
+            <div class="btns" id="cn-mode">
+              <button class="btn" type="button" data-value="acc" aria-pressed="true">Canon à électrons (accélération)</button>
+              <button class="btn" type="button" data-value="dev">Déviation (comme un oscilloscope)</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="cn-u"><span>Tension accélératrice <i>U</i></span><output for="cn-u"></output></label><input type="range" id="cn-u" min="100" max="5000" step="100" value="2000"></div>
+          <div class="ctrl"><label for="cn-d"><span>Écart des plaques <i>d</i></span><output for="cn-d"></output></label><input type="range" id="cn-d" min="1" max="10" step="0.5" value="4"></div>
+          <div class="ctrl" id="cn-ud-wrap"><label for="cn-ud"><span>Tension de déviation</span><output for="cn-ud"></output></label><input type="range" id="cn-ud" min="-400" max="400" step="10" value="150"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="cn-play"></button></div></div>
+        </div>
+        <div class="readouts" id="cn-read"></div>
+        <figcaption><b>Ralenti</b> Le temps est ralenti 250 millions de fois. En mode accélération, compare la vitesse finale quand tu changes <i>d</i> : elle ne dépend que de <i>U</i>, car l'énergie gagnée vaut <i>eU</i>.</figcaption>
+      </figure>
+
+      <div class="box box--ex">
+        <span class="label">Exemple résolu</span>
+        <p>Un électron part du repos et traverse une tension de 2000 V. Quelle vitesse atteint-il ?</p>
+        <div class="formula" style="font-size:1.15rem">
+          <span class="eq">½ <i>m v</i><sup>2</sup> = <i>e U</i></span>
+          <span class="eq"><i>v</i> = <span style="white-space:nowrap">√(2<i>eU</i>/<i>m</i>)</span> = √(2 · 1,602·10<sup>−19</sup> · 2000 / 9,11·10<sup>−31</sup>) ≈ 2,65·10<sup>7</sup> m/s</span>
+        </div>
+        <p>Environ 9 % de la vitesse de la lumière, en quelques centimètres. C'est ainsi que fonctionnaient les tubes cathodiques des anciennes télévisions et que fonctionnent encore les microscopes électroniques.</p>
+      </div>
+    </section>
+
+    <!-- 1.6 -->
+    <section class="section" id="vraie-vie">
+      <div class="section-head"><span class="label">1.6</span><h2>Dans la vraie vie</h2></div>
+
+      <h3>L'orage et le paratonnerre</h3>
+      <p>Dans un cumulonimbus, les collisions entre grêlons et cristaux de glace séparent les charges : la base du nuage devient en général négative. Par influence, le sol en dessous se charge positivement. Quand le champ dépasse ce que l'air supporte, un canal ionisé se forme et la foudre décharge le tout.</p>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 640 300" role="img" aria-label="Nuage d'orage chargé négativement à sa base, sol chargé positivement par influence, paratonnerre sur une maison.">
+            <path d="M120 70 C 120 30, 190 20, 215 45 C 240 10, 330 10, 350 45 C 380 20, 470 30, 465 75 C 505 80, 510 125, 470 130 L 140 130 C 95 130, 90 80, 120 70 Z" class="stroke-2" style="fill:var(--rule-2)"/>
+            <use href="#qp" x="200" y="42" width="16" height="16"/><use href="#qp" x="280" y="34" width="16" height="16"/><use href="#qp" x="360" y="44" width="16" height="16"/>
+            <use href="#qm" x="150" y="104" width="16" height="16"/><use href="#qm" x="200" y="108" width="16" height="16"/><use href="#qm" x="250" y="104" width="16" height="16"/><use href="#qm" x="300" y="108" width="16" height="16"/><use href="#qm" x="350" y="104" width="16" height="16"/><use href="#qm" x="400" y="108" width="16" height="16"/><use href="#qm" x="440" y="102" width="16" height="16"/>
+            <path d="M330 132 L 318 175 L 334 178 L 312 228 L 330 230 L 306 268" fill="none" stroke="var(--signal)" stroke-width="4" stroke-linejoin="round"/>
+            <line x1="20" y1="270" x2="620" y2="270" class="stroke"/>
+            <use href="#qp" x="130" y="276" width="14" height="14"/><use href="#qp" x="190" y="276" width="14" height="14"/><use href="#qp" x="250" y="276" width="14" height="14"/><use href="#qp" x="300" y="276" width="14" height="14"/><use href="#qp" x="360" y="276" width="14" height="14"/><use href="#qp" x="420" y="276" width="14" height="14"/>
+            <!-- maison et paratonnerre -->
+            <path d="M500 270 V 210 L 545 175 L 590 210 V 270 Z" class="stroke-2" style="fill:var(--card)"/>
+            <line x1="545" y1="175" x2="545" y2="140" class="stroke"/>
+            <path d="M545 140 l-4 8 h8 z" class="fill-ink"/>
+            <path d="M545 175 L 592 205 L 600 205 L 600 285" class="stroke-accent"/>
+            <path d="M590 285 h20 M594 290 h12 M598 295 h4" class="stroke-accent"/>
+            <text x="20" y="160" class="t-small">base du nuage : −</text>
+            <text x="20" y="176" class="t-small">tension nuage-sol ≈ 10⁸ V</text>
+            <text x="20" y="250" class="t-small">sol chargé + par influence</text>
+            <text x="372" y="166" class="t-small">pointe : le champ y est intense,</text>
+            <text x="372" y="182" class="t-small">la foudre y est attirée</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 1.3</b> Le paratonnerre (inventé par Benjamin Franklin) offre à la foudre un chemin conducteur vers la terre, loin des murs et de l'installation électrique.</figcaption>
+      </figure>
+      <p>Ordres de grandeur d'un éclair : 10<sup>8</sup> V, 20 à 30 kA en pointe, environ 5 C transportés en moins d'une milliseconde. Énergie : environ 5·10<sup>8</sup> J, soit 140 kWh. Spectaculaire, mais ça ne couvre que dix jours de consommation d'un ménage suisse. Pas de quoi « récolter la foudre », malheureusement.</p>
+
+      <h3>La cage de Faraday</h3>
+      <p>Dans un conducteur à l'équilibre, les charges se répartissent sur la surface extérieure et le champ à l'intérieur est nul. Une enveloppe métallique protège donc ce qu'elle contient. Si tu es dans une voiture frappée par la foudre, tu es protégé par la carrosserie. Les pneus n'y sont pour rien : quelques centimètres de caoutchouc ne vont pas arrêter un éclair qui vient de traverser deux kilomètres d'air. Même principe pour la grille du four à micro-ondes et pour la perte de réseau dans un ascenseur.</p>
+
+      <h3>L'imprimante laser et la photocopieuse</h3>
+      <p>Un tambour photoconducteur est chargé uniformément. Le laser « dessine » la page en déchargeant les zones éclairées. Les grains de toner, chargés, ne se collent qu'aux zones restées chargées, puis sont transférés sur le papier (lui-même chargé) et fixés par chauffage. Une page imprimée, c'est de l'électrostatique cuite à 200 °C.</p>
+
+      <h3>Le filtre électrostatique</h3>
+      <p>Dans les usines d'incinération des déchets et les cimenteries, les fumées passent entre des électrodes à haute tension (plusieurs dizaines de kV). Les poussières se chargent puis sont attirées sur des plaques collectrices : plus de 99 % des particules sont retenues. La peinture des carrosseries de voitures utilise le même principe à l'envers : les gouttelettes chargées sont attirées par la pièce et l'enveloppent, même côté ombre.</p>
+
+      <div class="box box--warn">
+        <span class="label">Sécurité</span>
+        <p>Les étincelles d'électricité statique peuvent enflammer des vapeurs d'essence ou des poussières. C'est pour ça que les camions-citernes sont reliés à la terre avant le transvasement, et qu'il vaut mieux ne pas remonter dans la voiture pendant qu'on fait le plein.</p>
+      </div>
+    </section>
+
+    <!-- 1.7 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">1.7</span><h2>Exercices</h2></div>
+      <p>Constantes utiles : <i>e</i> = 1,602·10<sup>−19</sup> C ; <i>k</i> = 8,99·10<sup>9</sup> N·m²/C² ; <i>m</i><sub>e</sub> = 9,11·10<sup>−31</sup> kg ; <i>m</i><sub>p</sub> = 1,673·10<sup>−27</sup> kg ; <i>G</i> = 6,67·10<sup>−11</sup> N·m²/kg² ; <i>ε</i><sub>0</sub> = 8,85·10<sup>−12</sup> F/m.</p>
+      <ol class="exos">
+        <li>
+          <p><strong>Compter les électrons</strong> <span class="niveau">facile</span></p>
+          <p>a) Une règle en PVC porte une charge de −0,80 µC. Combien d'électrons en excès porte-t-elle ? b) Un objet peut-il porter une charge de 4,0·10<sup>−19</sup> C ? Justifie.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>n</i> = |<i>q</i>|/<i>e</i> = 0,80·10<sup>−6</sup> / 1,602·10<sup>−19</sup> ≈ 5,0·10<sup>12</sup> électrons.</p>
+            <p>b) 4,0·10<sup>−19</sup> / 1,602·10<sup>−19</sup> ≈ 2,5 : pas un entier. Impossible, la charge est quantifiée.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'atome d'hydrogène</strong> <span class="niveau">moyen</span></p>
+          <p>Le proton et l'électron sont distants de 5,3·10<sup>−11</sup> m. Calcule la force électrique, la force de gravitation et leur rapport.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>F</i><sub>e</sub> = <i>k e</i>²/<i>r</i>² = 8,99·10<sup>9</sup> · (1,602·10<sup>−19</sup>)² / (5,3·10<sup>−11</sup>)² ≈ 8,2·10<sup>−8</sup> N.</p>
+            <p><i>F</i><sub>g</sub> = <i>G m</i><sub>e</sub><i>m</i><sub>p</sub>/<i>r</i>² ≈ 6,67·10<sup>−11</sup> · 9,11·10<sup>−31</sup> · 1,673·10<sup>−27</sup> / (5,3·10<sup>−11</sup>)² ≈ 3,6·10<sup>−47</sup> N.</p>
+            <p>Rapport : ≈ 2,3·10<sup>39</sup>. La gravitation ne joue aucun rôle dans la structure de l'atome.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Où le champ s'annule-t-il ?</strong> <span class="niveau">moyen</span></p>
+          <p>Une charge de +4,0 µC est en <i>x</i> = 0 et une charge de +1,0 µC en <i>x</i> = 30 cm. En quel point du segment le champ total est-il nul ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Entre les deux charges, les champs sont opposés. On cherche <i>x</i> tel que <i>k</i>·4/<i>x</i>² = <i>k</i>·1/(0,30 − <i>x</i>)².</p>
+            <p>En prenant la racine : 2/<i>x</i> = 1/(0,30 − <i>x</i>), d'où 0,60 − 2<i>x</i> = <i>x</i> et <i>x</i> = 0,20 m. Le point est à 20 cm de la grosse charge, plus près de la petite : logique. Vérifie-le avec l'animation 1.3 (configuration « Deux charges + (4 et 1) »).</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'air tiendra-t-il ?</strong> <span class="niveau">facile</span></p>
+          <p>Quelle est l'intensité du champ à 10 cm d'une sphère portant 2,0 µC ? L'air risque-t-il de devenir conducteur (seuil 3·10<sup>6</sup> V/m) ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>E</i> = <i>kQ</i>/<i>r</i>² = 8,99·10<sup>9</sup> · 2,0·10<sup>−6</sup> / 0,10² ≈ 1,8·10<sup>6</sup> V/m. C'est en dessous du seuil, mais pas de beaucoup : une petite sphère portant cette charge serait à la limite de l'étincelle.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La poignée de porte</strong> <span class="niveau">moyen</span></p>
+          <p>Après avoir marché sur une moquette, ton corps (capacité ≈ 150 pF par rapport au sol) est à 10 kV. Quelle charge portes-tu ? Quelle énergie libère la décharge ? Pourquoi n'est-ce pas dangereux alors que 10 kV, c'est beaucoup ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>Q</i> = <i>CU</i> = 150·10<sup>−12</sup> · 10<sup>4</sup> = 1,5 µC.</p>
+            <p><i>E</i> = ½<i>CU</i>² = 0,5 · 150·10<sup>−12</sup> · (10<sup>4</sup>)² = 7,5 mJ.</p>
+            <p>La charge est minuscule et s'écoule en une fraction de microseconde : l'énergie est tout petite. Le danger d'une source électrique dépend de ce qu'elle peut débiter, pas seulement de sa tension. Une prise à 230 V est bien plus dangereuse (chapitre 2).</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le condensateur plan</strong> <span class="niveau">moyen</span></p>
+          <p>Deux plaques carrées de 10 cm de côté, séparées de 1,0 mm d'air, sont branchées sur 100 V. Calcule la capacité, la charge, le champ entre les plaques et l'énergie stockée.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>C</i> = <i>ε</i><sub>0</sub><i>A</i>/<i>d</i> = 8,85·10<sup>−12</sup> · 0,010 / 0,0010 ≈ 8,9·10<sup>−11</sup> F = 89 pF.</p>
+            <p><i>Q</i> = <i>CU</i> ≈ 8,9·10<sup>−9</sup> C ; <i>E</i> = <i>U</i>/<i>d</i> = 1,0·10<sup>5</sup> V/m ; <i>W</i> = ½<i>CU</i>² ≈ 4,4·10<sup>−7</sup> J.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'éclair</strong> <span class="niveau">défi</span></p>
+          <p>Un éclair transfère 5 C sous une tension de 10<sup>8</sup> V. a) Quelle énergie ? b) En kWh ? c) Combien de temps cela couvrirait-il la consommation d'un ménage suisse (environ 4500 kWh par an) ? d) Combien d'électrons ont été transférés ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>W</i> = <i>qU</i> = 5 · 10<sup>8</sup> = 5·10<sup>8</sup> J. b) 1 kWh = 3,6·10<sup>6</sup> J, donc ≈ 140 kWh.</p>
+            <p>c) 4500 kWh/an ≈ 12 kWh par jour : 140/12 ≈ 11 jours. d) <i>n</i> = 5/1,602·10<sup>−19</sup> ≈ 3·10<sup>19</sup> électrons.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 1.8 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>La charge est quantifiée (<i>q</i> = <i>ne</i>) et conservée. On électrise un objet en déplaçant des électrons : par frottement, contact ou influence.</li>
+          <li>Loi de Coulomb : <i>F</i> = <i>k</i>|<i>q</i><sub>1</sub><i>q</i><sub>2</sub>|/<i>r</i>², avec <i>k</i> = 8,99·10<sup>9</sup> N·m²/C².</li>
+          <li>Champ électrique : <span class="vec"><i>E</i></span> = <span class="vec"><i>F</i></span>/<i>q</i> ; pour une charge ponctuelle <i>E</i> = <i>k</i>|<i>Q</i>|/<i>r</i>². Les lignes vont du + vers le −.</li>
+          <li>Tension : <i>U</i> = <i>W</i>/<i>q</i> (en volts) ; dans un champ uniforme <i>U</i> = <i>E d</i>.</li>
+          <li>Condensateur : <i>C</i> = <i>Q</i>/<i>U</i> = <i>ε</i><sub>0</sub><i>ε</i><sub>r</sub><i>A</i>/<i>d</i>, énergie ½<i>CU</i>².</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a href="index.html"><span class="label">Retour</span><span class="t">Sommaire du cours</span></a>
+      <a class="next" href="2-electrodynamique.html"><span class="label">Chapitre 2</span><span class="t">Électrodynamique →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Électricité au gymnase · Chapitre 1 · Électrostatique</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch1.js"></script>
+</body>
+</html>

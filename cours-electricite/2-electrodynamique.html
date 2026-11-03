@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2 · Électrodynamique — Électricité au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+    <marker id="ah-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--accent)"/></marker>
+    <marker id="ah-minus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--minus)"/></marker>
+    <marker id="ah-plus" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--plus)"/></marker>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__wires" aria-hidden="true"><span></span><span></span><span></span></span>Électricité au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-electrostatique.html"><span class="n">1</span><span class="t">Électrostatique</span></a>
+      <a href="2-electrodynamique.html" aria-current="page"><span class="n">2</span><span class="t">Électrodynamique</span></a>
+      <a href="3-lois-des-circuits.html"><span class="n">3</span><span class="t">Lois des circuits</span></a>
+      <a href="4-production-suisse.html"><span class="n">4</span><span class="t">Production en Suisse</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 2</span>
+      <h1>Électrodynamique : les charges en mouvement</h1>
+      <p class="lead">Quand les charges se mettent à circuler, elles chauffent la bouilloire, font tourner les trains CFF et rechargent ton téléphone. Elles le font d'ailleurs à une vitesse ridiculement lente.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>définir le courant et la tension et donner leurs ordres de grandeur ;</li>
+          <li>appliquer la loi d'Ohm et calculer une résistance à partir de la résistivité ;</li>
+          <li>calculer une puissance, une énergie en kWh et le coût correspondant ;</li>
+          <li>expliquer pourquoi le courant est dangereux et comment on s'en protège.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">A<small>l'ampère</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#courant"><span class="n">2.1</span>Le courant électrique</a></li>
+      <li><a href="#tension"><span class="n">2.2</span>Tension et générateur</a></li>
+      <li><a href="#ohm"><span class="n">2.3</span>Résistance et loi d'Ohm</a></li>
+      <li><a href="#puissance"><span class="n">2.4</span>Puissance et énergie</a></li>
+      <li><a href="#securite"><span class="n">2.5</span>Le courant et le corps</a></li>
+      <li><a href="#exercices"><span class="n">2.6</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">2.7</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 2.1 -->
+    <section class="section" id="courant">
+      <div class="section-head"><span class="label">2.1</span><h2>Le courant électrique</h2></div>
+      <p>Un <strong>courant électrique</strong> est un déplacement d'ensemble de charges. Dans un métal, ce sont les électrons libres qui bougent ; dans une solution (l'eau salée, l'électrolyte d'une batterie, ton corps), ce sont des ions positifs et négatifs.</p>
+      <div class="box box--def">
+        <span class="label">Définition</span>
+        <div class="formula"><span class="eq"><i>I</i> = <span class="frac"><span>Δ<i>Q</i></span><span>Δ<i>t</i></span></span></span></div>
+        <p>L'<strong>intensité</strong> du courant est la charge qui traverse une section du conducteur par seconde. Unité : l'<strong>ampère</strong>, 1 A = 1 C/s. Un courant de 1 A, c'est 6,24·10<sup>18</sup> électrons qui passent chaque seconde.</p>
+      </div>
+
+      <h3>Un sens « conventionnel » à l'envers</h3>
+      <p>Le sens du courant a été choisi au XVIII<sup>e</sup> siècle, bien avant la découverte de l'électron (1897) : du <strong>+</strong> vers le <strong>−</strong> à l'extérieur du générateur. Manque de chance, les électrons, négatifs, se déplacent dans l'autre sens. On a gardé la convention : sur un schéma, la flèche du courant va du + au −, et les électrons remontent cette flèche.</p>
+
+      <figure class="anim wide" id="anim-fil">
+        <div class="anim__head"><h4>Dans un fil de cuivre</h4><span class="label">Animation 2.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-fil" style="--ar: 2 / 1; --ar-m: 4 / 3" aria-label="Électrons libres dans un fil de cuivre : agitation thermique et lente dérive d'ensemble."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="fil-i"><span>Intensité <i>I</i></span><output for="fil-i"></output></label><input type="range" id="fil-i" min="0" max="16" step="0.5" value="8"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Circuit</span>
+            <div class="btns"><button class="btn" type="button" id="fil-switch" aria-pressed="true">Ouvrir l'interrupteur</button><button class="btn" type="button" id="fil-conv" aria-pressed="true">Sens conventionnel</button></div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="fil-play"></button></div></div>
+        </div>
+        <div class="readouts" id="fil-read"></div>
+        <figcaption><b>À observer</b> Les électrons s'agitent dans tous les sens (agitation thermique, environ 10<sup>6</sup> m/s) et ne dérivent que très lentement vers la borne +. Dans l'animation, la dérive est exagérée des centaines de milliers de fois. Ferme l'interrupteur : tous les électrons du fil se mettent en route presque en même temps.</figcaption>
+      </figure>
+
+      <div class="box box--fun">
+        <span class="label">Le saviez-vous ?</span>
+        <p>Dans un fil de cuivre de 1,5 mm² parcouru par 10 A, les électrons dérivent à environ 0,5 mm/s. Un escargot va dix fois plus vite. Pourtant la lampe s'allume instantanément : le fil est déjà plein d'électrons, et c'est le champ électrique qui se propage presque à la vitesse de la lumière. Comme un tuyau d'arrosage déjà rempli : l'eau sort dès qu'on ouvre le robinet, même si elle n'est pas celle qui vient d'entrer.</p>
+      </div>
+    </section>
+
+    <!-- 2.2 -->
+    <section class="section" id="tension">
+      <div class="section-head"><span class="label">2.2</span><h2>Tension et générateur</h2></div>
+      <p>Pour qu'un courant circule en permanence, il faut deux choses : une <strong>boucle fermée</strong> de conducteurs et un <strong>générateur</strong> (pile, batterie, alternateur, cellule solaire) qui maintient une <strong>tension</strong> entre ses bornes. Au chapitre 1, on a vu que la tension mesure l'énergie fournie à chaque coulomb : <i>U</i> = <i>W</i>/<i>Q</i>. Le générateur « remonte » les charges, et elles redépensent cette énergie dans le circuit.</p>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 680 290" role="img" aria-label="Analogie hydraulique : une pompe fait circuler l'eau dans une boucle et entraîne une roue ; une pile fait circuler le courant et allume une lampe.">
+            <!-- circuit d'eau -->
+            <text x="20" y="22" class="t-strong">Circuit d'eau</text>
+            <rect x="50" y="50" width="230" height="170" rx="18" fill="none" style="stroke:var(--water);stroke-width:14;opacity:0.25"/>
+            <rect x="50" y="50" width="230" height="170" rx="18" fill="none" class="flow" style="stroke:var(--water);stroke-width:4"/>
+            <circle cx="50" cy="135" r="26" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <path d="M50 117 L 62 135 L 50 153 L 38 135 Z" class="fill-ink"/>
+            <text x="86" y="140" class="t-small">pompe</text>
+            <circle cx="280" cy="135" r="28" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <path d="M280 107 V 163 M252 135 H 308 M260 115 L 300 155 M300 115 L 260 155" class="stroke-2"/>
+            <text x="246" y="186" class="t-small" text-anchor="end">roue à aubes</text>
+            <text x="160" y="40" class="t-small" text-anchor="middle">débit d'eau (L/s)</text>
+            <text x="160" y="246" class="t-small" text-anchor="middle">la pompe crée une différence de pression</text>
+            <!-- circuit électrique -->
+            <text x="380" y="22" class="t-strong">Circuit électrique</text>
+            <path d="M410 120 V 50 H 640 V 115 M640 155 V 220 H 410 V 150" class="stroke"/>
+            <path d="M410 50 H 640 V 115 M640 155 V 220 H 410" fill="none" class="flow" style="stroke:var(--accent);stroke-width:3"/>
+            <line x1="392" y1="122" x2="428" y2="122" style="stroke:var(--ink);stroke-width:2"/>
+            <line x1="400" y1="148" x2="420" y2="148" style="stroke:var(--ink);stroke-width:6"/>
+            <text x="436" y="120" class="t-plus t-strong">+</text>
+            <text x="436" y="156" class="t-minus t-strong">−</text>
+            <text x="370" y="140" class="t-small" text-anchor="end">pile</text>
+            <circle cx="640" cy="135" r="20" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <path d="M626 121 L 654 149 M654 121 L 626 149" class="stroke"/>
+            <text x="612" y="186" class="t-small" text-anchor="end">lampe</text>
+            <text x="525" y="40" class="t-small" text-anchor="middle">courant I (A), sens conventionnel</text>
+            <text x="525" y="246" class="t-small" text-anchor="middle">la pile crée une différence de potentiel</text>
+            <line x1="340" y1="40" x2="340" y2="270" class="thin dash"/>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 2.1</b> L'analogie hydraulique. Pompe ↔ générateur, pression ↔ potentiel, différence de pression ↔ tension, débit ↔ courant, roue (qui freine l'eau et récupère son énergie) ↔ lampe ou résistance. Comme toute analogie, elle a ses limites : l'électricité n'a pas besoin de gravité et ne fuit pas d'un fil coupé.</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Tensions typiques</th><th class="r">U</th><th>Courants typiques</th><th class="r">I</th></tr></thead>
+          <tbody>
+            <tr><td>Influx nerveux</td><td class="r">0,1 V</td><td>LED témoin</td><td class="r">5 mA</td></tr>
+            <tr><td>Pile AA</td><td class="r">1,5 V</td><td>Charge d'un smartphone</td><td class="r">1 à 3 A</td></tr>
+            <tr><td>Batterie de voiture</td><td class="r">12 V</td><td>Bouilloire (2200 W)</td><td class="r">9,6 A</td></tr>
+            <tr><td>Prise suisse</td><td class="r">230 V</td><td>Démarreur de voiture</td><td class="r">200 A</td></tr>
+            <tr><td>Caténaire CFF</td><td class="r">15 kV</td><td>Locomotive au démarrage</td><td class="r">env. 1 kA</td></tr>
+            <tr><td>Ligne très haute tension</td><td class="r">380 kV</td><td>Éclair (pic)</td><td class="r">30 kA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>On mesure une tension avec un <strong>voltmètre</strong> branché en <em>parallèle</em> (entre les deux points), et un courant avec un <strong>ampèremètre</strong> branché en <em>série</em> (le courant doit le traverser). On y reviendra au chapitre 3.</p>
+    </section>
+
+    <!-- 2.3 -->
+    <section class="section" id="ohm">
+      <div class="section-head"><span class="label">2.3</span><h2>Résistance et loi d'Ohm</h2></div>
+      <p>Les électrons qui dérivent dans un métal se cognent sans arrêt aux ions du réseau cristallin et leur cèdent de l'énergie. Le matériau s'oppose au passage du courant : il a une <strong>résistance</strong>.</p>
+      <div class="box box--loi">
+        <span class="label">Résistance et loi d'Ohm</span>
+        <div class="formula">
+          <span class="eq"><i>R</i> = <span class="frac"><span><i>U</i></span><span><i>I</i></span></span></span>
+          <span class="eq"><i>U</i> = <i>R</i> · <i>I</i></span>
+        </div>
+        <p>Unité : l'<strong>ohm</strong> (Ω), 1 Ω = 1 V/A. Un conducteur est dit <strong>ohmique</strong> si sa résistance reste constante quand la tension change : son graphe <i>I</i>(<i>U</i>) est une droite qui passe par l'origine. C'est la <em>loi d'Ohm</em> (Georg Ohm, 1827). Beaucoup de composants ne la respectent pas.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-ui">
+        <div class="anim__head"><h4>Caractéristique courant-tension</h4><span class="label">Animation 2.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-ui" style="--ar: 16 / 9; --ar-m: 1 / 1" aria-label="Graphe du courant en fonction de la tension pour une résistance, une lampe ou une diode."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis:100%">
+            <span class="ctrl__name">Composant</span>
+            <div class="btns" id="ui-comp">
+              <button class="btn" type="button" data-value="R" aria-pressed="true">Résistance 47 Ω</button>
+              <button class="btn" type="button" data-value="L">Lampe à filament 12 V</button>
+              <button class="btn" type="button" data-value="D">Diode au silicium</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="ui-u"><span>Tension <i>U</i></span><output for="ui-u"></output></label><input type="range" id="ui-u" min="-100" max="100" value="50"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="ui-sweep"></button></div></div>
+        </div>
+        <div class="readouts" id="ui-read"></div>
+        <figcaption><b>À comparer</b> Pour la résistance, <i>R</i> = <i>U</i>/<i>I</i> ne change pas. Le filament de la lampe chauffe et sa résistance augmente avec la tension. La diode ne laisse passer le courant que dans un sens, et seulement au-delà d'environ 0,6 V.</figcaption>
+      </figure>
+
+      <h3>De quoi dépend la résistance d'un fil ?</h3>
+      <p>Un fil long oppose plus de résistance qu'un fil court (plus de chocs sur le chemin), un fil épais moins qu'un fil fin (plus de « voies » en parallèle). Et la matière compte beaucoup :</p>
+      <div class="box box--loi">
+        <span class="label">Résistance d'un fil</span>
+        <div class="formula"><span class="eq"><i>R</i> = <i>ρ</i> · <span class="frac"><span><i>L</i></span><span><i>A</i></span></span></span></div>
+        <p><i>ρ</i> (rhô) est la <strong>résistivité</strong> du matériau, en Ω·m ; <i>L</i> la longueur en m ; <i>A</i> l'aire de la section en m². Attention : 1 mm² = 10<sup>−6</sup> m².</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Matériau (20 °C)</th><th class="r">Résistivité ρ (Ω·m)</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td>Argent</td><td class="r">1,6·10<sup>−8</sup></td><td>contacts de qualité</td></tr>
+            <tr><td>Cuivre</td><td class="r">1,7·10<sup>−8</sup></td><td>câbles, bobinages</td></tr>
+            <tr><td>Aluminium</td><td class="r">2,7·10<sup>−8</sup></td><td>lignes à haute tension (léger)</td></tr>
+            <tr><td>Fer</td><td class="r">1,0·10<sup>−7</sup></td><td>rails</td></tr>
+            <tr><td>Constantan</td><td class="r">4,9·10<sup>−7</sup></td><td>résistances de précision</td></tr>
+            <tr><td>Nichrome</td><td class="r">1,1·10<sup>−6</sup></td><td>éléments chauffants</td></tr>
+            <tr><td>Eau du robinet</td><td class="r">env. 10 à 100</td><td>conduit assez pour être dangereuse</td></tr>
+            <tr><td>Verre, porcelaine</td><td class="r">10<sup>10</sup> à 10<sup>14</sup></td><td>isolateurs des lignes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>La résistance des métaux augmente avec la température : celle d'un filament de lampe éteinte est environ dix fois plus faible qu'à chaud. À l'inverse, certains matériaux refroidis à très basse température deviennent <strong>supraconducteurs</strong> : résistance nulle. Les aimants du LHC, au CERN près de Genève, utilisent des câbles supraconducteurs refroidis à 1,9 K (−271,3 °C).</p>
+
+      <div class="box box--ex">
+        <span class="label">Exemple résolu</span>
+        <p>Un enrouleur de 25 m contient deux conducteurs en cuivre de 1,5 mm² (aller et retour, donc 50 m de fil). Résistance ?</p>
+        <div class="formula" style="font-size:1.15rem"><span class="eq"><i>R</i> = 1,7·10<sup>−8</sup> · <span class="frac"><span>50</span><span>1,5·10<sup>−6</sup></span></span> ≈ 0,57 Ω</span></div>
+        <p>Avec 10 A, il chauffe de <i>RI</i>² ≈ 57 W, répartis sur tout le câble. Déroulé, aucun souci. Enroulé, la chaleur ne s'évacue plus et l'isolant peut fondre. C'est pour ça que les enrouleurs portent deux puissances maximales, « enroulé » et « déroulé ».</p>
+      </div>
+    </section>
+
+    <!-- 2.4 -->
+    <section class="section" id="puissance">
+      <div class="section-head"><span class="label">2.4</span><h2>Puissance et énergie</h2></div>
+      <p>Chaque coulomb qui traverse un appareil sous la tension <i>U</i> lui cède l'énergie <i>U</i> (en joules). S'il en passe <i>I</i> par seconde, l'appareil reçoit <i>U</i>·<i>I</i> joules par seconde : c'est sa <strong>puissance</strong>.</p>
+      <div class="box box--loi">
+        <span class="label">Puissance électrique</span>
+        <div class="formula">
+          <span class="eq"><i>P</i> = <i>U</i> · <i>I</i></span>
+          <span class="eq"><i>P</i> = <i>R</i> · <i>I</i><sup>2</sup> = <span class="frac"><span><i>U</i><sup>2</sup></span><span><i>R</i></span></span></span>
+          <span class="eq"><i>E</i> = <i>P</i> · <i>t</i></span>
+        </div>
+        <p>Puissance en watts (W = J/s), énergie en joules. Les deux formes avec <i>R</i> s'obtiennent avec la loi d'Ohm. Pour la facture, on compte l'énergie en <strong>kilowattheures</strong> : 1 kWh = 1000 W pendant 3600 s = 3,6·10<sup>6</sup> J.</p>
+      </div>
+
+      <h3>L'effet Joule</h3>
+      <p>Toute l'énergie électrique reçue par une résistance est transformée en chaleur : c'est l'<strong>effet Joule</strong>. Parfois c'est le but (bouilloire, grille-pain, chauffage, fer à repasser, fusible), parfois c'est une perte (câbles qui chauffent, chargeur tiède, pertes dans les lignes électriques, sujet du chapitre 4).</p>
+
+      <figure class="anim wide" id="anim-compteur">
+        <div class="anim__head"><h4>Le compteur de la maison</h4><span class="label">Animation 2.3</span></div>
+        <div class="anim__stage split">
+          <canvas class="anim-canvas" id="cv-compteur" style="--ar: 1 / 1; --ar-m: 4 / 3" aria-label="Compteur électrique à disque qui tourne plus ou moins vite selon la puissance consommée."></canvas>
+          <div id="cp-list" class="cp-list"></div>
+        </div>
+        <div class="readouts" id="cp-read"></div>
+        <figcaption><b>Mode d'emploi</b> Allume des appareils. Le disque du compteur tourne d'autant plus vite que la puissance totale est grande (animation accélérée, 1 s = 1 min). Les estimations annuelles utilisent la durée d'utilisation typique indiquée et un tarif de 28 ct/kWh, proche du tarif moyen des ménages suisses en 2026.</figcaption>
+      </figure>
+
+      <div class="box box--ex">
+        <span class="label">Exemple résolu : combien coûte ta douche ?</span>
+        <p>Une douche de 5 min à 9 L/min, eau chauffée de 10 °C à 38 °C par un chauffe-eau électrique. Chaleur massique de l'eau : 4186 J/(kg·K).</p>
+        <div class="formula" style="font-size:1.1rem">
+          <span class="eq"><i>Q</i> = <i>m c</i> Δ<i>T</i> = 45 · 4186 · 28 ≈ 5,3·10<sup>6</sup> J ≈ 1,5 kWh</span>
+        </div>
+        <p>À 28 ct/kWh : environ 41 centimes. Une douche par jour pendant un an : 150 francs. La même énergie ferait briller une LED de 8 W pendant… 7 jours non-stop.</p>
+      </div>
+    </section>
+
+    <!-- 2.5 -->
+    <section class="section" id="securite">
+      <div class="section-head"><span class="label">2.5</span><h2>Le courant et le corps humain</h2></div>
+      <p>Ce qui blesse, c'est le <strong>courant</strong> qui traverse le corps. Mais ce courant dépend de la tension et de la résistance du chemin (<i>I</i> = <i>U</i>/<i>R</i>). La résistance du corps varie énormément : quelques dizaines de kΩ avec la peau sèche, environ 1 kΩ avec la peau mouillée ou une large surface de contact. Sous 230 V et 1 kΩ : 230 mA. Largement de quoi tuer.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th class="r">Courant (50 Hz, main-pieds)</th><th>Effet typique</th></tr></thead>
+          <tbody>
+            <tr><td class="r">0,5 à 1 mA</td><td>seuil de perception : picotement</td></tr>
+            <tr><td class="r">5 à 10 mA</td><td>douleur, contractions musculaires</td></tr>
+            <tr><td class="r">10 à 30 mA</td><td>tétanisation : on ne peut plus lâcher l'objet ; difficultés respiratoires</td></tr>
+            <tr><td class="r">30 mA</td><td>seuil de déclenchement des disjoncteurs différentiels</td></tr>
+            <tr><td class="r">50 à 100 mA</td><td>risque de fibrillation cardiaque (le cœur bat de manière chaotique)</td></tr>
+            <tr><td class="r">plus de 1 A</td><td>brûlures internes graves, arrêt cardiaque</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>La protection dans une installation suisse</h3>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 680 300" role="img" aria-label="Installation avec phase, neutre et terre. Un défaut d'isolation met la carcasse sous tension ; le courant de défaut part par la terre ou par une personne ; le disjoncteur différentiel détecte la différence entre courant aller et retour.">
+            <!-- tableau électrique -->
+            <rect x="20" y="40" width="150" height="200" rx="8" class="fill-card" style="stroke:var(--ink-3);stroke-width:1.5"/>
+            <text x="95" y="30" text-anchor="middle" class="t-small">tableau électrique</text>
+            <rect x="40" y="60" width="50" height="70" rx="4" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5"/>
+            <text x="65" y="92" text-anchor="middle" class="t-mono" style="font-size:11px">FI</text>
+            <text x="65" y="108" text-anchor="middle" class="t-mono" style="font-size:10px">30 mA</text>
+            <rect x="105" y="60" width="45" height="70" rx="4" class="fill-paper" style="stroke:var(--ink-3);stroke-width:1.5"/>
+            <text x="127" y="92" text-anchor="middle" class="t-mono" style="font-size:11px">LS</text>
+            <text x="127" y="108" text-anchor="middle" class="t-mono" style="font-size:10px">13 A</text>
+            <!-- conducteurs -->
+            <path d="M170 90 H 470" style="stroke:var(--wire-phase);stroke-width:5;fill:none"/>
+            <path d="M170 130 H 470" style="stroke:var(--wire-neutral);stroke-width:5;fill:none"/>
+            <path d="M170 170 H 520" style="stroke:var(--wire-earth);stroke-width:5;fill:none"/>
+            <path d="M170 170 H 520" style="stroke:var(--wire-earth-2);stroke-width:5;fill:none;stroke-dasharray:6 10"/>
+            <path d="M210 90 H 330" class="flow" style="stroke:var(--card);stroke-width:2;fill:none"/>
+            <text x="180" y="82" class="t-small">phase L (brun)</text>
+            <text x="180" y="122" class="t-small">neutre N (bleu)</text>
+            <text x="180" y="196" class="t-small">terre PE (vert-jaune)</text>
+            <!-- appareil -->
+            <rect x="470" y="60" width="150" height="100" rx="8" style="fill:var(--rule-2);stroke:var(--ink);stroke-width:2.5"/>
+            <text x="545" y="52" text-anchor="middle" class="t-small">carcasse métallique</text>
+            <rect x="500" y="85" width="70" height="40" rx="4" class="fill-card" style="stroke:var(--ink-3);stroke-width:1.5"/>
+            <text x="535" y="110" text-anchor="middle" class="t-small">moteur</text>
+            <path d="M470 90 H 500 M470 130 H 500" class="stroke-2"/>
+            <path d="M570 100 L 600 72" style="stroke:var(--plus);stroke-width:2.5;fill:none;stroke-dasharray:3 3"/>
+            <text x="606" y="74" class="t-plus t-small">défaut</text>
+            <path d="M520 160 V 170" class="stroke"/>
+            <!-- personne -->
+            <circle cx="650" cy="190" r="10" class="stroke" style="fill:var(--card)"/>
+            <path d="M650 200 V 245 M650 245 L 638 275 M650 245 L 662 275 M650 212 L 624 160" class="stroke"/>
+            <path d="M628 168 L 640 200 L 650 240 L 660 280" class="flow" style="stroke:var(--plus);stroke-width:2;fill:none"/>
+            <line x1="590" y1="282" x2="680" y2="282" class="stroke-2"/>
+            <text x="440" y="250" class="t-small" text-anchor="end">Courant de défaut : par la terre (normal)</text>
+            <text x="440" y="268" class="t-small" text-anchor="end">ou à travers une personne (dangereux).</text>
+            <text x="440" y="286" class="t-small" text-anchor="end">Le FI coupe dès que I(L) − I(N) &gt; 30 mA.</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 2.2</b> En Suisse, chaque prise a trois conducteurs. Le <em>disjoncteur</em> (LS) protège les câbles contre la surchauffe en coupant au-delà de 10 ou 13 A. Le <em>disjoncteur différentiel</em> (FI, obligatoire pour les prises des nouvelles installations depuis 2010) protège les personnes : il compare le courant qui part par la phase à celui qui revient par le neutre, et coupe en quelques dizaines de millisecondes s'il manque plus de 30 mA.</figcaption>
+      </figure>
+
+      <div class="box box--warn">
+        <span class="label">Règles de survie</span>
+        <ul>
+          <li>Pas d'appareil branché sur le secteur près d'une baignoire, d'une piscine ou de mains mouillées.</li>
+          <li>Débrancher avant d'ouvrir ou de réparer. Couper le disjoncteur avant de toucher une installation (et laisser ça aux électricien·nes).</li>
+          <li>Ne jamais s'approcher d'une ligne tombée à terre ou d'une caténaire CFF : 15 000 V, et l'arc peut sauter sans contact.</li>
+          <li>Ne pas surcharger une multiprise : 10 A au total, soit 2300 W, pas plus.</li>
+        </ul>
+      </div>
+
+      <div class="box box--fun">
+        <span class="label">Et l'oiseau sur la ligne ?</span>
+        <p>Le pigeon posé sur un câble à 20 000 V ne risque rien : ses deux pattes sont au même potentiel (à quelques microvolts près, vu la minuscule résistance du câble entre ses pieds). Pas de différence de potentiel, pas de courant. La cigogne qui touche en même temps le câble et le poteau, avec ses grandes ailes, n'a pas cette chance. Morale : en électricité, ce n'est pas la tension d'un point qui compte, c'est la différence entre deux points.</p>
+      </div>
+    </section>
+
+    <!-- 2.6 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">2.6</span><h2>Exercices</h2></div>
+      <ol class="exos">
+        <li>
+          <p><strong>La batterie du téléphone</strong> <span class="niveau">facile</span></p>
+          <p>Une batterie de smartphone affiche 4000 mAh et 3,85 V. a) Quelle charge peut-elle débiter, en coulombs ? b) Quelle énergie stocke-t-elle, en J et en Wh ? c) Combien d'électrons cela représente-t-il ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) 4000 mAh = 4,0 A pendant 3600 s : <i>Q</i> = 14 400 C.</p>
+            <p>b) <i>E</i> = <i>QU</i> = 14 400 · 3,85 ≈ 55 kJ, soit 15,4 Wh. (Une bouilloire de 2200 W dépense ça en 25 s.)</p>
+            <p>c) <i>n</i> = <i>Q</i>/<i>e</i> ≈ 9,0·10<sup>22</sup> électrons.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'escargot électrique</strong> <span class="niveau">moyen</span></p>
+          <p>Un fil de cuivre de 1,5 mm² transporte 10 A. Le cuivre contient <i>n</i> = 8,5·10<sup>28</sup> électrons libres par m³. a) Montre que la vitesse de dérive vaut <i>v</i> = <i>I</i>/(<i>neA</i>) et calcule-la. b) Combien de temps met un électron pour parcourir les 2 m de câble entre l'interrupteur et la lampe ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) En Δ<i>t</i>, les électrons avancent de <i>v</i>Δ<i>t</i> ; ceux contenus dans le volume <i>A v</i> Δ<i>t</i> traversent la section. Δ<i>Q</i> = <i>n e A v</i> Δ<i>t</i>, donc <i>I</i> = <i>neAv</i>.</p>
+            <p><i>v</i> = 10 / (8,5·10<sup>28</sup> · 1,602·10<sup>−19</sup> · 1,5·10<sup>−6</sup>) ≈ 4,9·10<sup>−4</sup> m/s ≈ 0,5 mm/s.</p>
+            <p>b) <i>t</i> = 2 / 4,9·10<sup>−4</sup> ≈ 4100 s, plus d'une heure. Et en courant alternatif, les électrons ne font qu'osciller sur place : ils n'arrivent jamais.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La bouilloire</strong> <span class="niveau">facile</span></p>
+          <p>Une bouilloire porte l'indication « 230 V, 2200 W ». a) Courant et résistance de l'élément chauffant ? b) Combien de temps faut-il, au minimum, pour porter 1,0 L d'eau de 15 °C à 100 °C ? c) Coût à 28 ct/kWh ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>I</i> = <i>P</i>/<i>U</i> ≈ 9,6 A ; <i>R</i> = <i>U</i>²/<i>P</i> ≈ 24 Ω.</p>
+            <p>b) <i>Q</i> = <i>mc</i>Δ<i>T</i> = 1,0 · 4186 · 85 ≈ 3,6·10<sup>5</sup> J ; <i>t</i> = <i>Q</i>/<i>P</i> ≈ 160 s, soit 2 min 40 s (sans pertes ; en réalité un peu plus).</p>
+            <p>c) 3,6·10<sup>5</sup> J ≈ 0,099 kWh, donc environ 2,8 centimes.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>LED contre ampoule</strong> <span class="niveau">facile</span></p>
+          <p>Une ampoule à incandescence de 60 W est remplacée par une LED de 8 W qui éclaire autant. L'éclairage fonctionne 1000 h par an. Économie annuelle en kWh et en francs (28 ct/kWh) ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Économie de puissance : 52 W ; sur 1000 h : 52 kWh ; soit environ 14,60 CHF par an et par ampoule. Une ampoule à incandescence transforme environ 95 % de son énergie en chaleur : c'est un petit radiateur qui éclaire un peu.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Peau sèche, peau mouillée</strong> <span class="niveau">moyen</span></p>
+          <p>Calcule le courant qui traverse le corps pour une tension de 230 V puis de 24 V, avec une résistance de 50 kΩ (peau sèche) puis de 1 kΩ (peau mouillée). Commente avec le tableau des effets. Pourquoi les jouets et les lampes de piscine fonctionnent-ils en très basse tension ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>230 V : 4,6 mA (sec, douloureux) ; 230 mA (mouillé, mortel).</p>
+            <p>24 V : 0,48 mA (sec, à peine perceptible) ; 24 mA (mouillé, tétanisation possible mais le courant reste sous le seuil de fibrillation).</p>
+            <p>En dessous d'environ 50 V alternatif (on parle de « très basse tension de sécurité »), le courant reste faible même dans de mauvaises conditions : c'est pour ça qu'on l'utilise près de l'eau et pour les enfants.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La multiprise du petit-déjeuner</strong> <span class="niveau">moyen</span></p>
+          <p>Sur une même multiprise (protégée par un disjoncteur de 10 A) on branche une bouilloire de 2200 W, un grille-pain de 900 W et un micro-ondes de 1200 W. Que se passe-t-il ? Quels appareils peut-on utiliser ensemble ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Puissance totale : 4300 W, courant 4300/230 ≈ 18,7 A &gt; 10 A : le disjoncteur coupe (et heureusement : sans lui, le câble chaufferait).</p>
+            <p>Maximum : 10 · 230 = 2300 W. La bouilloire seule (2200 W), ou le grille-pain et le micro-ondes ensemble (2100 W).</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le fil chauffant</strong> <span class="niveau">défi</span></p>
+          <p>On veut fabriquer un petit chauffage de 1000 W fonctionnant sous 230 V avec du fil de nichrome de 0,50 mm de diamètre. Quelle longueur de fil faut-il ? Pourquoi n'utilise-t-on pas du cuivre ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>R</i> = <i>U</i>²/<i>P</i> = 230²/1000 ≈ 52,9 Ω. Section : <i>A</i> = π(0,25·10<sup>−3</sup>)² ≈ 1,96·10<sup>−7</sup> m².</p>
+            <p><i>L</i> = <i>RA</i>/<i>ρ</i> = 52,9 · 1,96·10<sup>−7</sup> / 1,1·10<sup>−6</sup> ≈ 9,4 m.</p>
+            <p>En cuivre, il en faudrait 610 m ! Et le cuivre s'oxyde à haute température, alors que le nichrome résiste au rouge.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 2.7 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>Courant : <i>I</i> = Δ<i>Q</i>/Δ<i>t</i> en ampères. Sens conventionnel du + vers le − ; les électrons vont dans l'autre sens, très lentement.</li>
+          <li>Tension : énergie par unité de charge, <i>U</i> = <i>W</i>/<i>Q</i>, en volts. Elle se mesure entre deux points.</li>
+          <li>Résistance : <i>R</i> = <i>U</i>/<i>I</i> ; conducteur ohmique si <i>R</i> est constante. Fil : <i>R</i> = <i>ρL</i>/<i>A</i>.</li>
+          <li>Puissance : <i>P</i> = <i>UI</i> = <i>RI</i>² = <i>U</i>²/<i>R</i>. Énergie : <i>E</i> = <i>Pt</i> ; 1 kWh = 3,6 MJ.</li>
+          <li>Danger : c'est le courant qui tue, dès quelques dizaines de mA. Disjoncteur pour les câbles, disjoncteur différentiel (30 mA) pour les personnes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a href="1-electrostatique.html"><span class="label">Chapitre 1</span><span class="t">← Électrostatique</span></a>
+      <a class="next" href="3-lois-des-circuits.html"><span class="label">Chapitre 3</span><span class="t">Lois des circuits →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Électricité au gymnase · Chapitre 2 · Électrodynamique</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch2.js"></script>
+</body>
+</html>
