@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thermodynamique au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+<style>
+  .home-hero { background: var(--card); border-bottom: 1px solid var(--rule); }
+  .home-hero__inner {
+    max-width: 76rem; margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 3rem 2.5rem;
+    display: grid; gap: 1.2rem;
+  }
+  .home-hero h1 { font-size: clamp(3rem, 9vw, 6.5rem); line-height: 0.92; letter-spacing: -0.01em; max-width: 13ch; }
+  .home-hero h1 .c { color: var(--cold); }
+  .home-hero h1 .h { color: var(--hot); }
+  .home-hero .lead { font-size: 1.25rem; color: var(--ink-2); max-width: 44rem; }
+  .home { max-width: 76rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 2.5rem 4rem; display: grid; gap: 3.5rem; }
+  .chapters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  @media (max-width: 760px) { .chapters { grid-template-columns: minmax(0, 1fr); } }
+  .chap {
+    position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.6rem;
+    padding: 1.3rem 1.4rem 1.2rem; background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius);
+    color: var(--ink); text-decoration: none; overflow: hidden; min-height: 16rem;
+  }
+  .chap:hover { border-color: var(--ink); }
+  .chap:hover .chap__go { color: var(--accent); }
+  .chap__num { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; }
+  .chap h2 { font-size: 2.1rem; position: relative; z-index: 1; max-width: 80%; }
+  .chap p { color: var(--ink-2); font-size: 1rem; position: relative; z-index: 1; max-width: 34rem; }
+  .chap__meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-family: var(--f-ui); font-size: 0.85rem; color: var(--ink-3); align-items: center; position: relative; z-index: 1; }
+  .chap__go { margin-left: auto; font-weight: 600; color: var(--ink); }
+  .chap__unit {
+    position: absolute; right: 1rem; top: 0.6rem;
+    font-family: var(--f-display); font-weight: 800; font-size: 6.5rem; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1.5px var(--rule); user-select: none; pointer-events: none;
+  }
+  .chap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--band); }
+  .chap--1 { --band: linear-gradient(90deg, var(--cold), var(--ice)); }
+  .chap--2 { --band: linear-gradient(90deg, var(--ice), var(--signal)); }
+  .chap--3 { --band: linear-gradient(90deg, var(--signal), var(--flame)); }
+  .chap--4 { --band: linear-gradient(90deg, var(--flame), var(--hot)); }
+  .two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; }
+  @media (max-width: 760px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
+  .two-col > * { min-width: 0; }
+  .block { display: grid; gap: 1rem; }
+  .block > p { max-width: var(--measure); }
+  .howto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  @media (max-width: 860px) { .howto { grid-template-columns: minmax(0, 1fr); } }
+  .howto div { border-top: 2px solid var(--ink); padding-top: 0.7rem; display: grid; gap: 0.35rem; align-content: start; }
+  .howto h3 { font-size: 1.3rem; }
+  .howto p { color: var(--ink-2); font-size: 0.98rem; }
+  .formulaire td:first-child { font-family: var(--f-ui); color: var(--ink-2); font-size: 0.88rem; }
+  .formulaire td:nth-child(2) { font-size: 1.05rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__thermo" aria-hidden="true"></span>Thermodynamique au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-temperature.html"><span class="n">1</span><span class="t">Température</span></a>
+      <a href="2-chaleur.html"><span class="n">2</span><span class="t">Chaleur</span></a>
+      <a href="3-gaz-parfaits.html"><span class="n">3</span><span class="t">Gaz parfaits</span></a>
+      <a href="4-machines-thermiques.html"><span class="n">4</span><span class="t">Machines thermiques</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="home-hero">
+  <div class="home-hero__inner">
+    <span class="eyebrow">Cours de physique · Gymnase</span>
+    <h1><span class="c">Thermo</span><span class="h">dynamique</span> au gymnase</h1>
+    <p class="lead">Pourquoi les rails ont des joints, pourquoi les pâtes cuisent mal au Jungfraujoch, pourquoi ton café refroidit et ne se réchauffe jamais tout seul, et comment une pompe à chaleur chauffe une maison avec de l'air à −5 °C. Quatre chapitres, dix-neuf simulations, des tests rapides et une trentaine d'exercices corrigés.</p>
+    <div class="thermo-band" aria-hidden="true">
+      <div class="thermo-band__bar"></div>
+      <div class="thermo-band__ticks"><span>1 K</span><span>10 K</span><span>100 K</span><span>1000 K</span><span>10 000 K</span></div>
+    </div>
+  </div>
+</section>
+
+<main class="home">
+
+  <section class="block" aria-labelledby="chapitres">
+    <div class="section-head"><span class="label">Sommaire</span><h2 id="chapitres">Quatre chapitres, du plus froid au plus chaud</h2></div>
+    <div class="chapters">
+      <a class="chap chap--1" href="1-temperature.html">
+        <span class="chap__unit" aria-hidden="true">K</span>
+        <span class="chap__num">Chapitre 1</span>
+        <h2>Température et dilatation</h2>
+        <p>Agitation thermique, équilibre thermique, échelles Celsius, Kelvin et Fahrenheit, dilatation des solides et des liquides, bilame et anomalie de l'eau du Léman.</p>
+        <span class="chap__meta"><span>5 simulations</span><span>7 exercices</span><span class="chap__go">Commencer →</span></span>
+      </a>
+      <a class="chap chap--2" href="2-chaleur.html">
+        <span class="chap__unit" aria-hidden="true">J</span>
+        <span class="chap__num">Chapitre 2</span>
+        <h2>Chaleur et changements d'état</h2>
+        <p>Énergie interne et chaleur, capacité thermique, calorimétrie, fusion et vaporisation, conduction, convection et rayonnement, isolation d'une maison.</p>
+        <span class="chap__meta"><span>5 simulations</span><span>8 exercices</span><span class="chap__go">Ouvrir →</span></span>
+      </a>
+      <a class="chap chap--3" href="3-gaz-parfaits.html">
+        <span class="chap__unit" aria-hidden="true">pV</span>
+        <span class="chap__num">Chapitre 3</span>
+        <h2>Les gaz parfaits</h2>
+        <p>Pression, lois de Boyle-Mariotte, de Charles et de Gay-Lussac, équation d'état, modèle cinétique, vitesse des molécules, pression et altitude dans les Alpes.</p>
+        <span class="chap__meta"><span>4 simulations</span><span>7 exercices</span><span class="chap__go">Ouvrir →</span></span>
+      </a>
+      <a class="chap chap--4" href="4-machines-thermiques.html">
+        <span class="chap__unit" aria-hidden="true">η</span>
+        <span class="chap__num">Chapitre 4</span>
+        <h2>Machines thermiques</h2>
+        <p>Travail d'un gaz, premier principe, transformations, moteur à quatre temps, rendement de Carnot, frigo et pompe à chaleur, deuxième principe et entropie.</p>
+        <span class="chap__meta"><span>5 simulations</span><span>8 exercices</span><span class="chap__go">Ouvrir →</span></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="mode">
+    <div class="section-head"><span class="label">Mode d'emploi</span><h2 id="mode">Comment utiliser ce cours</h2></div>
+    <div class="howto">
+      <div><h3>Lire</h3><p>Chaque chapitre commence par ses objectifs et finit par « L'essentiel ». Les cadres à trait épais contiennent les lois à connaître, les encadrés teintés des exemples de la vie réelle, les cadres pointillés des anecdotes.</p></div>
+      <div><h3>Manipuler</h3><p>Les simulations se pilotent avec les curseurs et les boutons. Avant de toucher, prédis ce qui va se passer : c'est quand la simulation te contredit que tu apprends quelque chose.</p></div>
+      <div><h3>S'exercer</h3><p>« Teste-toi » vérifie la compréhension en cinq questions. Les exercices ont une solution détaillée sous « Solution » et, souvent, une case pour vérifier ton résultat numérique. Le résumé Word du cours, <span class="num">resume-thermodynamique.docx</span>, est dans le même dossier.</p></div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="memo">
+    <div class="section-head"><span class="label">Aide-mémoire</span><h2 id="memo">Constantes, tables et formules</h2></div>
+    <div class="two-col">
+      <div class="block">
+        <h3>Constantes</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <tbody>
+              <tr><td>Constante des gaz parfaits</td><td class="r"><i>R</i> = 8,314 J/(mol·K)</td></tr>
+              <tr><td>Constante de Boltzmann</td><td class="r"><i>k</i> = 1,381·10<sup>−23</sup> J/K</td></tr>
+              <tr><td>Nombre d'Avogadro</td><td class="r"><i>N</i><sub>A</sub> = 6,022·10<sup>23</sup> mol<sup>−1</sup></td></tr>
+              <tr><td>Zéro absolu</td><td class="r">0 K = −273,15 °C</td></tr>
+              <tr><td>Pression atmosphérique normale</td><td class="r"><i>p</i><sub>0</sub> = 1013 hPa = 1,013·10<sup>5</sup> Pa</td></tr>
+              <tr><td>Volume molaire (0 °C, 1013 hPa)</td><td class="r">22,4 L/mol</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Capacités thermiques massiques</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Substance</th><th class="r"><i>c</i> en J/(kg·K)</th><th>Substance</th><th class="r"><i>c</i> en J/(kg·K)</th></tr></thead>
+            <tbody>
+              <tr><td>Eau liquide</td><td class="r">4186</td><td>Aluminium</td><td class="r">900</td></tr>
+              <tr><td>Glace</td><td class="r">2100</td><td>Fer, acier</td><td class="r">450</td></tr>
+              <tr><td>Vapeur d'eau</td><td class="r">2010</td><td>Cuivre</td><td class="r">385</td></tr>
+              <tr><td>Huile de cuisine</td><td class="r">1900</td><td>Plomb</td><td class="r">130</td></tr>
+              <tr><td>Éthanol</td><td class="r">2440</td><td>Verre</td><td class="r">840</td></tr>
+              <tr><td>Air (à pression constante)</td><td class="r">1005</td><td>Béton, pierre</td><td class="r">880</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Changements d'état</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Substance</th><th class="r">θ<sub>fusion</sub></th><th class="r"><i>L</i><sub>f</sub> (kJ/kg)</th><th class="r">θ<sub>ébullition</sub></th><th class="r"><i>L</i><sub>v</sub> (kJ/kg)</th></tr></thead>
+            <tbody>
+              <tr><td>Eau</td><td class="r">0 °C</td><td class="r">334</td><td class="r">100 °C</td><td class="r">2257</td></tr>
+              <tr><td>Éthanol</td><td class="r">−114 °C</td><td class="r">108</td><td class="r">78 °C</td><td class="r">846</td></tr>
+              <tr><td>Plomb</td><td class="r">327 °C</td><td class="r">23</td><td class="r">1749 °C</td><td class="r">858</td></tr>
+              <tr><td>Fer</td><td class="r">1538 °C</td><td class="r">247</td><td class="r">2862 °C</td><td class="r">6090</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Dilatation et conduction</h3>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Matériau</th><th class="r"><i>α</i> (10<sup>−6</sup> K<sup>−1</sup>)</th><th class="r"><i>λ</i> (W/(m·K))</th></tr></thead>
+            <tbody>
+              <tr><td>Cuivre</td><td class="r">17</td><td class="r">390</td></tr>
+              <tr><td>Aluminium</td><td class="r">23</td><td class="r">237</td></tr>
+              <tr><td>Acier</td><td class="r">12</td><td class="r">50</td></tr>
+              <tr><td>Laiton</td><td class="r">19</td><td class="r">110</td></tr>
+              <tr><td>Invar (fer-nickel)</td><td class="r">1,2</td><td class="r">13</td></tr>
+              <tr><td>Verre ordinaire</td><td class="r">9</td><td class="r">1,0</td></tr>
+              <tr><td>Béton</td><td class="r">12</td><td class="r">2,1</td></tr>
+              <tr><td>Brique</td><td class="r">6</td><td class="r">0,8</td></tr>
+              <tr><td>Bois (sapin)</td><td class="r">5</td><td class="r">0,13</td></tr>
+              <tr><td>Laine de roche, polystyrène</td><td class="r">—</td><td class="r">0,035</td></tr>
+              <tr><td>Air immobile</td><td class="r">—</td><td class="r">0,026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="block">
+        <h3>Formulaire</h3>
+        <div class="table-wrap">
+          <table class="data-table formulaire">
+            <tbody>
+              <tr><td>Kelvin et Celsius</td><td><i>T</i> = <i>θ</i> + 273,15 ; Δ<i>T</i> (K) = Δ<i>θ</i> (°C)</td></tr>
+              <tr><td>Dilatation linéaire</td><td>Δ<i>L</i> = <i>α L</i><sub>0</sub> Δ<i>T</i></td></tr>
+              <tr><td>Dilatation volumique</td><td>Δ<i>V</i> = <i>γ V</i><sub>0</sub> Δ<i>T</i> ; solides : <i>γ</i> ≈ 3<i>α</i></td></tr>
+              <tr><td>Chaleur et température</td><td><i>Q</i> = <i>m c</i> Δ<i>T</i> = <i>C</i> Δ<i>T</i></td></tr>
+              <tr><td>Changement d'état</td><td><i>Q</i> = <i>m L</i></td></tr>
+              <tr><td>Calorimètre isolé</td><td><i>Q</i><sub>1</sub> + <i>Q</i><sub>2</sub> + … = 0</td></tr>
+              <tr><td>Conduction (mur)</td><td><i>P</i> = <i>λ A</i> Δ<i>T</i> / <i>e</i> = <i>U A</i> Δ<i>T</i></td></tr>
+              <tr><td>Refroidissement (Newton)</td><td><i>T</i>(<i>t</i>) = <i>T</i><sub>a</sub> + (<i>T</i><sub>0</sub> − <i>T</i><sub>a</sub>) e<sup>−<i>t</i>/<i>τ</i></sup></td></tr>
+              <tr><td>Pression</td><td><i>p</i> = <i>F</i> / <i>A</i> ; 1 bar = 10<sup>5</sup> Pa</td></tr>
+              <tr><td>Équation d'état</td><td><i>pV</i> = <i>nRT</i> = <i>NkT</i></td></tr>
+              <tr><td>Gaz enfermé</td><td><i>p</i><sub>1</sub><i>V</i><sub>1</sub>/<i>T</i><sub>1</sub> = <i>p</i><sub>2</sub><i>V</i><sub>2</sub>/<i>T</i><sub>2</sub></td></tr>
+              <tr><td>Énergie cinétique moyenne</td><td>⟨<i>E</i><sub>c</sub>⟩ = <sup>3</sup>⁄<sub>2</sub> <i>kT</i></td></tr>
+              <tr><td>Vitesse quadratique moyenne</td><td><i>v</i><sub>q</sub> = √(3<i>RT</i>/<i>M</i>)</td></tr>
+              <tr><td>Énergie interne (monoatomique)</td><td><i>U</i> = <sup>3</sup>⁄<sub>2</sub> <i>nRT</i> ; diatomique : <sup>5</sup>⁄<sub>2</sub> <i>nRT</i></td></tr>
+              <tr><td>Travail reçu par le gaz</td><td><i>W</i> = −<i>p</i> Δ<i>V</i> (pression constante)</td></tr>
+              <tr><td>Premier principe</td><td>Δ<i>U</i> = <i>W</i> + <i>Q</i></td></tr>
+              <tr><td>Adiabatique</td><td><i>pV</i><sup><i>γ</i></sup> = cste ; <i>TV</i><sup><i>γ</i>−1</sup> = cste</td></tr>
+              <tr><td>Rendement d'un moteur</td><td><i>η</i> = |<i>W</i>| / <i>Q</i><sub>c</sub> ≤ 1 − <i>T</i><sub>f</sub>/<i>T</i><sub>c</sub></td></tr>
+              <tr><td>Réfrigérateur</td><td>COP = <i>Q</i><sub>f</sub> / <i>W</i> ≤ <i>T</i><sub>f</sub>/(<i>T</i><sub>c</sub> − <i>T</i><sub>f</sub>)</td></tr>
+              <tr><td>Pompe à chaleur</td><td>COP = |<i>Q</i><sub>c</sub>| / <i>W</i> ≤ <i>T</i><sub>c</sub>/(<i>T</i><sub>c</sub> − <i>T</i><sub>f</sub>)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box box--def">
+          <span class="label">Convention de signe</span>
+          <p>Dans tout le cours, on se place du point de vue du système : une énergie <strong>reçue</strong> (chaleur ou travail) est <strong>positive</strong>, une énergie cédée est négative. D'où Δ<i>U</i> = <i>W</i> + <i>Q</i>. Certains livres d'ingénieurs comptent le travail fourni par le gaz positivement et écrivent Δ<i>U</i> = <i>Q</i> − <i>W</i> : c'est la même physique, avec un autre signe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Thermodynamique au gymnase · cours en quatre chapitres pour le secondaire II.</span>
+  <span>Valeurs des tables arrondies ; elles varient un peu selon les sources et la température.</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1 · Température et dilatation — Thermodynamique au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+    <marker id="ah-hot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--hot)"/></marker>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__thermo" aria-hidden="true"></span>Thermodynamique au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-temperature.html" aria-current="page"><span class="n">1</span><span class="t">Température</span></a>
+      <a href="2-chaleur.html"><span class="n">2</span><span class="t">Chaleur</span></a>
+      <a href="3-gaz-parfaits.html"><span class="n">3</span><span class="t">Gaz parfaits</span></a>
+      <a href="4-machines-thermiques.html"><span class="n">4</span><span class="t">Machines thermiques</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 1</span>
+      <h1>Température et dilatation</h1>
+      <p class="lead">Ta main est un très mauvais thermomètre, les rails CFF s'allongent en été et la tour Eiffel prend quinze centimètres entre janvier et juillet. Tout ça parce que la matière ne tient jamais en place.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>expliquer la température par l'agitation des particules ;</li>
+          <li>énoncer le principe de l'équilibre thermique ;</li>
+          <li>passer des degrés Celsius aux kelvins (et, en cas de voyage, aux degrés Fahrenheit) ;</li>
+          <li>calculer la dilatation d'un solide ou d'un liquide ;</li>
+          <li>expliquer pourquoi un lac gèle par le haut et pas par le fond.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">K<small>le kelvin</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#sensation"><span class="n">1.1</span>Chaud ou froid ?</a></li>
+      <li><a href="#agitation"><span class="n">1.2</span>L'agitation thermique</a></li>
+      <li><a href="#equilibre"><span class="n">1.3</span>L'équilibre thermique</a></li>
+      <li><a href="#echelles"><span class="n">1.4</span>Échelles de température</a></li>
+      <li><a href="#dilatation"><span class="n">1.5</span>Dilatation des solides</a></li>
+      <li><a href="#liquides"><span class="n">1.6</span>Liquides et anomalie de l'eau</a></li>
+      <li><a href="#test"><span class="n">1.7</span>Teste-toi</a></li>
+      <li><a href="#exercices"><span class="n">1.8</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">1.9</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 1.1 -->
+    <section class="section" id="sensation">
+      <div class="section-head"><span class="label">1.1</span><h2>Chaud ou froid ?</h2></div>
+      <p>Un matin d'hiver, pose une main sur la poignée en métal de la porte et l'autre sur la porte en bois. La poignée paraît glaciale, le bois presque tiède. Pourtant, les deux sont dans la même pièce depuis la veille : ils sont à la <strong>même température</strong>.</p>
+      <p>Ce que ta peau ressent, ce n'est pas la température d'un objet, c'est la <strong>vitesse à laquelle tu perds (ou gagnes) de l'énergie</strong> à son contact. Le métal conduit très bien la chaleur et en pompe beaucoup à ta main ; le bois est un isolant et n'en prend presque pas. Même effet au sauna à 90 °C : le bois des bancs se touche sans problème, le clou en acier qui dépasse, beaucoup moins.</p>
+      <div class="box box--ex">
+        <span class="label">Expérience à faire chez toi</span>
+        <p>Prépare trois bols : eau froide, eau tiède, eau chaude. Trempe une main dans le froid et l'autre dans le chaud pendant une minute, puis les deux dans le tiède. La main « froide » trouve l'eau tiède chaude, la main « chaude » la trouve froide. Même eau, deux avis. Le philosophe John Locke décrivait déjà cette expérience en 1690.</p>
+      </div>
+      <p>Pour mesurer une température, il faut donc un instrument : le <strong>thermomètre</strong>. Il exploite une propriété qui change de façon régulière avec la température : le volume d'un liquide (alcool coloré), la résistance électrique d'un fil de platine, la courbure d'un bilame, ou le rayonnement infrarouge émis (thermomètre frontal).</p>
+    </section>
+
+    <!-- 1.2 -->
+    <section class="section" id="agitation">
+      <div class="section-head"><span class="label">1.2</span><h2>L'agitation thermique</h2></div>
+      <p>Toute matière est faite de particules (atomes, molécules) qui ne sont <strong>jamais immobiles</strong>. Dans un solide, elles vibrent autour d'une position fixe. Dans un liquide, elles restent en contact mais glissent les unes sur les autres. Dans un gaz, elles filent en ligne droite et se cognent de temps en temps.</p>
+      <div class="box box--def">
+        <span class="label">Définition</span>
+        <p>La <strong>température</strong> mesure l'intensité de l'agitation désordonnée des particules. Plus précisément, elle est proportionnelle à leur <strong>énergie cinétique moyenne</strong>. Plus c'est chaud, plus ça s'agite.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-etats">
+        <div class="anim__head"><h4>Les trois états de la matière</h4><span class="label">Simulation 1.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-etats" style="--ar: 16 / 9; --ar-m: 1 / 1" aria-label="Une centaine de particules qui s'attirent à courte distance, posées au fond d'une boîte. Selon la température, elles forment un cristal, une flaque liquide ou un gaz."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="etats-t"><span>Température du thermostat</span><output for="etats-t"></output></label><input type="range" id="etats-t" min="0.05" max="2.5" step="0.01" value="0.15"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Aller directement à…</span>
+            <div class="btns" id="etats-preset">
+              <button class="btn" type="button" data-v="0.15">Solide</button>
+              <button class="btn" type="button" data-v="0.46">Liquide</button>
+              <button class="btn" type="button" data-v="1.6">Gaz</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <span class="ctrl__name">Affichage</span>
+            <div class="btns"><button class="btn" type="button" id="etats-col" aria-pressed="true">Couleur selon la vitesse</button><button class="btn" type="button" id="etats-play"></button></div>
+          </div>
+        </div>
+        <div class="readouts" id="etats-read"></div>
+        <figcaption><b>À observer</b> Les particules s'attirent quand elles sont proches et se repoussent si on les serre trop. À basse température, cette attraction gagne : elles se rangent en cristal. Réchauffe doucement : le cristal se met à trembler, fond en une flaque, puis s'évapore. Refroidis ensuite : la vapeur se condense en gouttelettes. La température est en unités du modèle, pas en °C.</figcaption>
+      </figure>
+
+      <div class="box box--fun">
+        <span class="label">Le saviez-vous ?</span>
+        <p>À température ambiante, les molécules d'air qui te frappent le visage vont à environ 500 m/s, plus vite qu'un avion de ligne. Elles ne vont pas loin pour autant : chacune subit plusieurs milliards de collisions par seconde et zigzague comme un supporter à la sortie d'un match.</p>
+      </div>
+    </section>
+
+    <!-- 1.3 -->
+    <section class="section" id="equilibre">
+      <div class="section-head"><span class="label">1.3</span><h2>L'équilibre thermique</h2></div>
+      <p>Mets une canette tiède dans un seau d'eau glacée. Au bout d'un moment, canette et eau ont la même température. Les particules rapides du corps chaud cognent celles, plus lentes, du corps froid, et leur cèdent de l'énergie. L'échange continue tant que les agitations moyennes diffèrent.</p>
+      <div class="box box--loi">
+        <span class="label">Principe de l'équilibre thermique (« principe zéro »)</span>
+        <p>Deux corps en contact finissent par atteindre la <strong>même température</strong> : c'est l'<strong>équilibre thermique</strong>. Et si A est en équilibre avec B, et B avec C, alors A est en équilibre avec C. C'est ce qui permet au thermomètre (B) de comparer deux objets sans qu'ils se touchent.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-equi">
+        <div class="anim__head"><h4>Deux gaz séparés par une paroi</h4><span class="label">Simulation 1.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-equi" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Deux compartiments de gaz à des températures différentes, séparés par une paroi. Un graphique montre l'évolution des deux températures."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="equi-tg"><span>Départ à gauche</span><output for="equi-tg"></output></label><input type="range" id="equi-tg" min="100" max="800" step="10" value="600"></div>
+          <div class="ctrl"><label for="equi-td"><span>Départ à droite</span><output for="equi-td"></output></label><input type="range" id="equi-td" min="100" max="800" step="10" value="150"></div>
+          <div class="ctrl"><label for="equi-n"><span>Particules à droite</span><output for="equi-n"></output></label><input type="range" id="equi-n" min="10" max="90" step="5" value="40"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Paroi</span>
+            <div class="btns" id="equi-paroi">
+              <button class="btn" type="button" data-value="cond" aria-pressed="true">Conductrice</button>
+              <button class="btn" type="button" data-value="iso">Isolante</button>
+            </div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="equi-reset">Recommencer</button><button class="btn" type="button" id="equi-play"></button></div></div>
+        </div>
+        <div class="readouts" id="equi-read"></div>
+        <figcaption><b>À essayer</b> Avec une paroi conductrice, les températures se rejoignent. Avec une paroi isolante, rien ne bouge : chaque côté garde sa température. Mets trois fois plus de particules à droite : la température finale se rapproche de celle du côté le plus « gros ». Les températures affichées sont calculées à partir de l'énergie cinétique moyenne des particules, d'où les petites fluctuations.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 1.4 -->
+    <section class="section" id="echelles">
+      <div class="section-head"><span class="label">1.4</span><h2>Échelles de température</h2></div>
+      <p>Anders Celsius (1742) a choisi deux repères faciles à reproduire : la glace qui fond (0 °C) et l'eau qui bout sous la pression atmosphérique normale (100 °C), puis il a divisé l'intervalle en cent. Fun fact : à l'origine, il avait mis 100 pour la glace et 0 pour l'ébullition. On a retourné l'échelle peu après sa mort.</p>
+      <p>Mais l'agitation thermique peut diminuer jusqu'à un minimum absolu : à <strong>−273,15 °C</strong>, les particules ont la plus petite énergie possible. Impossible de faire plus froid. Lord Kelvin (1848) a donc proposé une échelle qui commence là : l'<strong>échelle absolue</strong>, en <strong>kelvins</strong> (K, sans « degré »).</p>
+      <div class="box box--loi">
+        <span class="label">Kelvins et degrés Celsius</span>
+        <div class="formula"><span class="eq"><i>T</i> = <i>θ</i> + 273,15</span><span class="eq">Δ<i>T</i> = Δ<i>θ</i></span></div>
+        <p><i>T</i> est la température absolue en K, <i>θ</i> (thêta) la température en °C. Un écart de 1 K est égal à un écart de 1 °C. Dans les formules des gaz et des machines thermiques (chapitres 3 et 4), on utilise <strong>toujours</strong> des kelvins.</p>
+      </div>
+      <p>Les États-Unis utilisent encore l'échelle de Fahrenheit (1724), où l'eau gèle à 32 °F et bout à 212 °F : <i>θ</i><sub>F</sub> = 1,8 <i>θ</i> + 32. Utile pour comprendre une météo de Floride ou une recette de cookies, pas pour la physique.</p>
+
+      <figure class="anim wide" id="anim-thermo">
+        <div class="anim__head"><h4>Le thermomètre à trois échelles</h4><span class="label">Simulation 1.3</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-thermo" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Trois thermomètres côte à côte gradués en degrés Celsius, en kelvins et en degrés Fahrenheit, avec des températures de référence."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis: 100%"><label for="thermo-t"><span>Température</span><output for="thermo-t"></output></label><input type="range" id="thermo-t" min="0" max="1000" step="1" value="500"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Échelle</span>
+            <div class="btns" id="thermo-mode">
+              <button class="btn" type="button" data-value="vie" aria-pressed="true">Vie courante (−60 à 120 °C)</button>
+              <button class="btn" type="button" data-value="ext">Extrêmes (1 K à 10 000 K, logarithmique)</button>
+            </div>
+          </div>
+          <div class="ctrl" style="flex-basis: 100%">
+            <span class="ctrl__name">Repères</span>
+            <div class="btns" id="thermo-ref"></div>
+          </div>
+        </div>
+        <div class="readouts" id="thermo-read"></div>
+        <figcaption><b>À remarquer</b> Les trois colonnes montent toujours ensemble : c'est la même température, écrite dans trois langues. En vue « extrêmes », chaque graduation multiplie la température absolue par 10 : de l'hélium liquide à la surface du Soleil.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 1.5 -->
+    <section class="section" id="dilatation">
+      <div class="section-head"><span class="label">1.5</span><h2>Dilatation des solides</h2></div>
+      <p>Quand on chauffe un solide, ses atomes vibrent plus fort et s'écartent un peu les uns des autres en moyenne : le solide <strong>se dilate</strong>. L'effet est minuscule pour un petit objet, mais il s'additionne sur la longueur. Un rail, un pont, une ligne à haute tension s'allongent de plusieurs centimètres, voire décimètres.</p>
+      <div class="box box--loi">
+        <span class="label">Dilatation linéaire</span>
+        <div class="formula"><span class="eq">Δ<i>L</i> = <i>α</i> · <i>L</i><sub>0</sub> · Δ<i>T</i></span><span class="eq"><i>L</i> = <i>L</i><sub>0</sub> (1 + <i>α</i> Δ<i>T</i>)</span></div>
+        <p><i>L</i><sub>0</sub> est la longueur initiale, Δ<i>T</i> la variation de température (en K ou en °C, c'est pareil) et <i>α</i> le <strong>coefficient de dilatation linéaire</strong> du matériau, en K<sup>−1</sup>. Pour l'acier, <i>α</i> = 12·10<sup>−6</sup> K<sup>−1</sup> : une barre de 1 m s'allonge de 12 µm par degré.</p>
+      </div>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 680 250" role="img" aria-label="Une barre s'allonge de delta L quand on la chauffe ; un joint en peigne sur un pont laisse la place à cet allongement.">
+            <text x="20" y="24" class="t-strong">Une barre chauffée s'allonge</text>
+            <rect x="30" y="48" width="240" height="22" rx="3" class="fill-cold-soft" style="stroke:var(--cold);stroke-width:1.5"/>
+            <text x="280" y="64" class="t-small">θ<tspan baseline-shift="sub" font-size="9">0</tspan></text>
+            <rect x="30" y="100" width="280" height="22" rx="3" class="fill-hot-soft" style="stroke:var(--hot);stroke-width:1.5"/>
+            <text x="320" y="116" class="t-small">θ<tspan baseline-shift="sub" font-size="9">0</tspan> + Δθ</text>
+            <line x1="30" y1="40" x2="30" y2="160" class="thin dash"/>
+            <line x1="270" y1="40" x2="270" y2="160" class="thin dash"/>
+            <line x1="310" y1="95" x2="310" y2="160" class="thin dash"/>
+            <line x1="34" y1="150" x2="266" y2="150" class="stroke-2" marker-start="url(#ah-ink)" marker-end="url(#ah-ink)"/>
+            <text x="150" y="172" text-anchor="middle" class="t-small">L<tspan baseline-shift="sub" font-size="9">0</tspan></text>
+            <line x1="272" y1="150" x2="308" y2="150" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <text x="290" y="172" text-anchor="middle" class="t-hot t-strong">ΔL</text>
+            <text x="30" y="214" class="t-small">(allongement très exagéré)</text>
+            <line x1="360" y1="20" x2="360" y2="230" class="thin dash"/>
+            <text x="385" y="24" class="t-strong">Joint de dilatation d'un pont</text>
+            <rect x="385" y="70" width="135" height="34" class="fill-paper" style="stroke:var(--ink-3);stroke-width:1.5"/>
+            <rect x="545" y="70" width="120" height="34" class="fill-paper" style="stroke:var(--ink-3);stroke-width:1.5"/>
+            <path d="M520 70 h 18 v 8 h -18 v 8 h 18 v 8 h -18 v 8 h 18" class="stroke"/>
+            <path d="M545 74 h -18 v 8 h 18 v 8 h -18 v 8 h 18" class="stroke"/>
+            <text x="452" y="128" text-anchor="middle" class="t-small">tablier (s'allonge en été)</text>
+            <text x="605" y="128" text-anchor="middle" class="t-small">culée</text>
+            <text x="532" y="58" text-anchor="middle" class="t-small">dents en peigne</text>
+            <line x1="452" y1="150" x2="510" y2="150" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <text x="385" y="188" class="t-small">Été : les dents s'imbriquent.</text>
+            <text x="385" y="206" class="t-small">Hiver : elles s'écartent.</text>
+            <text x="385" y="224" class="t-small">Les roues passent sans tomber dans un trou.</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 1.1</b> La loi de dilatation et l'une de ses conséquences pratiques : le joint en peigne, que tu sens sous les roues quand tu traverses un pont en voiture.</figcaption>
+      </figure>
+
+      <p>Pour un volume, chaque dimension se dilate : Δ<i>V</i> = <i>γ V</i><sub>0</sub> Δ<i>T</i>, avec, pour un solide, <i>γ</i> ≈ 3<i>α</i>. Et un trou dans une plaque ? Il <strong>s'agrandit</strong>, exactement comme s'il était rempli du même métal. C'est l'astuce pour décoincer un couvercle de bocal : passe-le sous l'eau chaude.</p>
+
+      <div class="box box--ex">
+        <span class="label">Dans la vraie vie</span>
+        <ul>
+          <li>Les rails CFF modernes sont soudés en barres continues de plusieurs centaines de mètres. Sans joints, ils sont posés « précontraints » et fixés solidement aux traverses : l'acier ne peut pas s'allonger, il se met en compression. Lors de canicules, il arrive qu'une voie se déforme quand même.</li>
+          <li>Les lignes électriques pendent plus en été qu'en hiver : on les installe avec assez de mou pour ne pas casser en janvier.</li>
+          <li>La tour Eiffel (300 m de fer) grandit d'environ 15 cm entre un jour de gel et un jour de canicule.</li>
+        </ul>
+      </div>
+
+      <h3>Le bilame : la dilatation au travail</h3>
+      <p>Soude ensemble deux lames de métaux différents. En chauffant, celle qui se dilate le plus s'allonge davantage et oblige l'ensemble à se courber du côté de l'autre. Ce <strong>bilame</strong> sert d'interrupteur automatique dans les fers à repasser, les grille-pain, les disjoncteurs et les vieux thermostats.</p>
+
+      <figure class="anim wide" id="anim-bilame">
+        <div class="anim__head"><h4>Le bilame et le thermostat</h4><span class="label">Simulation 1.4</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-bilame" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Un bilame encastré à gauche se courbe vers le haut quand la température augmente et peut ouvrir un contact électrique."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis: 100%">
+            <span class="ctrl__name">Mode</span>
+            <div class="btns" id="bil-mode">
+              <button class="btn" type="button" data-value="man" aria-pressed="true">Je règle la température</button>
+              <button class="btn" type="button" data-value="reg">Thermostat d'un fer à repasser</button>
+            </div>
+          </div>
+          <div class="ctrl" id="bil-t-box"><label for="bil-t"><span>Température</span><output for="bil-t"></output></label><input type="range" id="bil-t" min="-20" max="220" step="1" value="20"></div>
+          <div class="ctrl"><label for="bil-gap"><span>Vis de réglage (écart du contact)</span><output for="bil-gap"></output></label><input type="range" id="bil-gap" min="1" max="14" step="0.5" value="6"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Métaux (dessous / dessus)</span>
+            <div class="btns" id="bil-pair">
+              <button class="btn" type="button" data-value="li" aria-pressed="true">Laiton / invar</button>
+              <button class="btn" type="button" data-value="aa">Aluminium / acier</button>
+              <button class="btn" type="button" data-value="la">Laiton / acier</button>
+            </div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="bil-play"></button></div></div>
+        </div>
+        <div class="readouts" id="bil-read"></div>
+        <figcaption><b>À observer</b> La lame du dessous se dilate plus que celle du dessus : le bilame se courbe vers le haut. La flèche de la pointe est dessinée à l'échelle réelle (lame de 6 cm) ; seule l'épaisseur est exagérée. En mode thermostat, la lame touche le contact à froid, le fer chauffe, la lame se courbe, le contact s'ouvre, le fer refroidit… et la température oscille autour de la consigne.</figcaption>
+      </figure>
+
+      <div class="box box--fun">
+        <span class="label">Un Nobel neuchâtelois</span>
+        <p>Les horloges à pendule retardaient en été : la tige s'allonge, le pendule ralentit. En 1896, Charles-Édouard Guillaume, né à Fleurier, découvre un alliage fer-nickel qui ne se dilate presque pas, l'<strong>invar</strong> (pour « invariable »). Prix Nobel de physique 1920. On en met encore dans les montres, les instruments de précision et les cuves des méthaniers.</p>
+      </div>
+    </section>
+
+    <!-- 1.6 -->
+    <section class="section" id="liquides">
+      <div class="section-head"><span class="label">1.6</span><h2>Liquides et anomalie de l'eau</h2></div>
+      <p>Les liquides se dilatent en général bien plus que les solides : <i>γ</i> = 11·10<sup>−4</sup> K<sup>−1</sup> pour l'alcool, environ 9,5·10<sup>−4</sup> K<sup>−1</sup> pour l'essence. C'est ce qui fait monter le liquide coloré dans un thermomètre, et déborder un réservoir rempli à ras bord qui reste au soleil.</p>
+      <p>L'eau, elle, fait sa diva. Entre 0 °C et 4 °C, elle se <strong>contracte</strong> quand on la chauffe. Sa masse volumique est maximale à <strong>4 °C</strong> (999,97 kg/m³). Et en gelant, elle gonfle d'environ 9 % : la glace (917 kg/m³) flotte, les bouteilles oubliées au congélateur explosent, et le gel fait éclater les roches en montagne.</p>
+      <div class="box box--def">
+        <span class="label">Conséquence : les lacs gèlent par le haut</span>
+        <p>En automne, l'eau de surface refroidit, devient plus dense et coule : le lac se brasse. Mais dès que la surface passe sous 4 °C, l'eau froide devient plus <em>légère</em> et reste en haut. Elle gèle en surface, et la glace isole le reste. Au fond, l'eau reste vers 4 °C tout l'hiver : les poissons disent merci.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-lac">
+        <div class="anim__head"><h4>Un lac au fil des saisons</h4><span class="label">Simulation 1.5</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-lac" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Coupe d'un lac colorée selon la température de l'eau au fil des mois, à côté du graphique de la masse volumique de l'eau en fonction de la température."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis: 100%"><label for="lac-m"><span>Mois</span><output for="lac-m"></output></label><input type="range" id="lac-m" min="0" max="11.9" step="0.05" value="1"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Lac</span>
+            <div class="btns" id="lac-choix">
+              <button class="btn" type="button" data-value="sils" aria-pressed="true">Lac de Sils (1797 m, gèle)</button>
+              <button class="btn" type="button" data-value="leman">Léman (372 m, ne gèle pas)</button>
+            </div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="lac-play"></button></div></div>
+        </div>
+        <div class="readouts" id="lac-read"></div>
+        <figcaption><b>À suivre</b> Fais défiler l'année. Au printemps et en automne, quand toute la colonne d'eau passe par 4 °C, le lac se brasse de haut en bas (flèches) : l'oxygène descend, les nutriments remontent. En été, une couche chaude flotte sur l'eau froide du fond. En hiver, sous la glace du lac de Sils, l'ordre s'inverse : 0 °C en haut, 4 °C au fond. Profils simplifiés, inspirés des mesures réelles.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 1.7 -->
+    <section class="section" id="test">
+      <div class="section-head"><span class="label">1.7</span><h2>Teste-toi</h2></div>
+      <div class="quiz">
+        <p class="quiz__score"></p>
+        <div class="qcm">
+          <p class="q">Le matin, la poignée métallique de la porte paraît plus froide que la porte en bois. Pourquoi ?</p>
+          <div class="opts">
+            <button>Le métal est réellement plus froid que le bois.</button>
+            <button data-ok>Le métal conduit mieux la chaleur et en retire plus vite à ta main.</button>
+            <button>Le bois produit un peu de chaleur.</button>
+          </div>
+          <p class="fb" hidden>Après une nuit dans la même pièce, les deux sont à la même température. Ta peau mesure un flux d'énergie, pas une température.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Il fait 20 °C aujourd'hui et il faisait 10 °C hier. Fait-il « deux fois plus chaud » ?</p>
+          <div class="opts">
+            <button>Oui, 20 c'est le double de 10.</button>
+            <button data-ok>Non : en kelvins, c'est 293 K contre 283 K, soit 3,5 % de plus.</button>
+            <button>Oui, mais seulement en kelvins.</button>
+          </div>
+          <p class="fb" hidden>Le zéro de l'échelle Celsius est arbitraire. Seule l'échelle absolue permet de dire « deux fois plus ». Il faudrait 293 K × 2 = 586 K, soit 313 °C, pour doubler l'agitation.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">La température d'un four monte de 15 °C. En kelvins, l'augmentation vaut :</p>
+          <div class="opts">
+            <button data-ok>15 K</button>
+            <button>288 K</button>
+            <button>−258 K</button>
+          </div>
+          <p class="fb" hidden>Les deux échelles ont des graduations de même taille, seul le zéro diffère. Un écart en °C est égal au même écart en K.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">On chauffe une rondelle métallique (un anneau). Que fait le trou central ?</p>
+          <div class="opts">
+            <button>Il rétrécit, car le métal se dilate vers l'intérieur.</button>
+            <button data-ok>Il s'agrandit, dans la même proportion que le métal.</button>
+            <button>Il ne change pas.</button>
+          </div>
+          <p class="fb" hidden>Toutes les distances de la pièce augmentent du même facteur (1 + <i>α</i>Δ<i>T</i>), y compris le diamètre du trou. C'est comme un agrandissement photo.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Un lac de montagne est gelé depuis deux mois. Quelle est la température de l'eau au fond ?</p>
+          <div class="opts">
+            <button>0 °C, comme la glace.</button>
+            <button data-ok>Environ 4 °C.</button>
+            <button>Moins de 0 °C, puisqu'il fait −15 °C dehors.</button>
+          </div>
+          <p class="fb" hidden>L'eau à 4 °C est la plus dense : elle s'accumule au fond. La glace en surface isole le lac de l'air glacial.</p>
+        </div>
+        <div class="btns"><button class="btn quiz__reset" type="button">Recommencer le test</button></div>
+      </div>
+    </section>
+
+    <!-- 1.8 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">1.8</span><h2>Exercices</h2></div>
+      <p>Données utiles : coefficients <i>α</i> et <i>γ</i> dans l'<a href="index.html#memo">aide-mémoire</a>.</p>
+      <ol class="exos">
+        <li>
+          <p><strong>Conversions</strong> <span class="niveau">facile</span></p>
+          <p>a) Convertis en kelvins : 37 °C (corps humain), −196 °C (azote liquide), 1538 °C (fusion du fer). b) Convertis en °C : 0 K, 77 K, 300 K. c) Le thermomètre passe de −8 °C le matin à 14 °C l'après-midi. Quelle est la variation en K ?</p>
+          <div class="check" data-answer="310.15" data-tol="0.002" data-unit="K" data-label="37 °C ="></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) 37 + 273,15 = 310,15 K ; −196 + 273,15 = 77,15 K ; 1538 + 273,15 = 1811,15 K.</p>
+            <p>b) 0 K = −273,15 °C ; 77 K = −196,15 °C ; 300 K = 26,85 °C (une belle journée d'été).</p>
+            <p>c) Δ<i>θ</i> = 14 − (−8) = 22 °C, donc Δ<i>T</i> = 22 K. Pas besoin d'ajouter 273 à un écart.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Vacances en Floride</strong> <span class="niveau">facile</span></p>
+          <p>La météo de Miami annonce 95 °F. a) Combien cela fait-il en °C ? b) À quelle température les échelles Celsius et Fahrenheit affichent-elles le même nombre ?</p>
+          <div class="check" data-answer="35" data-tol="0.01" data-unit="°C" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>θ</i> = (<i>θ</i><sub>F</sub> − 32)/1,8 = (95 − 32)/1,8 = 35 °C. Prévois la crème solaire.</p>
+            <p>b) On cherche <i>x</i> = 1,8<i>x</i> + 32, donc −0,8<i>x</i> = 32 et <i>x</i> = −40. À −40 °C = −40 °F, peu importe l'échelle : il fait froid.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le rail à l'ancienne</strong> <span class="niveau">facile</span></p>
+          <p>Autrefois, les rails en acier mesuraient 30 m et étaient posés à 10 °C, avec un petit espace entre deux rails. En plein soleil d'été, un rail peut atteindre 50 °C ; en hiver −20 °C. a) De combien un rail s'allonge-t-il en été (en mm) ? b) De combien raccourcit-il en hiver ? c) Quelle doit être la largeur minimale du joint à 10 °C ?</p>
+          <div class="check" data-answer="14.4" data-tol="0.02" data-unit="mm" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) Δ<i>L</i> = <i>α L</i><sub>0</sub> Δ<i>T</i> = 12·10<sup>−6</sup> · 30 · 40 = 1,44·10<sup>−2</sup> m = 14,4 mm.</p>
+            <p>b) Δ<i>L</i> = 12·10<sup>−6</sup> · 30 · (−30) = −10,8 mm.</p>
+            <p>c) Le joint doit absorber l'allongement d'été : au moins 14,4 mm à 10 °C. En hiver, il s'ouvre à 14,4 + 10,8 ≈ 25 mm : d'où le fameux « tadam-tadam » des vieux trains.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La tour Eiffel</strong> <span class="niveau">facile</span></p>
+          <p>La structure en fer de la tour Eiffel mesure 300 m. De combien sa hauteur change-t-elle entre un matin d'hiver à −10 °C et un après-midi de canicule à 35 °C ? (<i>α</i><sub>fer</sub> = 12·10<sup>−6</sup> K<sup>−1</sup>)</p>
+          <div class="check" data-answer="0.162" data-tol="0.02" data-unit="m"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Δ<i>L</i> = 12·10<sup>−6</sup> · 300 · 45 = 0,162 m, soit environ 16 cm. En réalité, le soleil ne chauffe qu'un côté à la fois : la tour s'incline légèrement et son sommet décrit une petite boucle au cours de la journée.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le trou dans la plaque</strong> <span class="niveau">moyen</span></p>
+          <p>Une plaque d'aluminium percée d'un trou de 20,00 mm de diamètre à 20 °C est chauffée à 220 °C. a) Le trou s'agrandit-il ou rétrécit-il ? b) Quel est son nouveau diamètre ? c) Une bille d'acier de 20,05 mm à 20 °C passe-t-elle dans le trou si on chauffe les deux à 220 °C ?</p>
+          <div class="check" data-answer="20.092" data-tol="0.0004" data-unit="mm" data-label="b)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) Il s'agrandit, comme toutes les dimensions de la plaque.</p>
+            <p>b) <i>d</i> = 20,00 · (1 + 23·10<sup>−6</sup> · 200) = 20,00 · 1,0046 = 20,092 mm.</p>
+            <p>c) La bille d'acier devient 20,05 · (1 + 12·10<sup>−6</sup> · 200) = 20,098 mm. Elle reste plus grosse que le trou (20,092 mm) : elle ne passe pas. Il faudrait chauffer seulement la plaque : à 220 °C avec une bille froide, ça passe largement.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le réservoir qui déborde</strong> <span class="niveau">moyen</span></p>
+          <p>On remplit à ras bord un réservoir en acier de 60 L avec de l'essence à 12 °C (citerne souterraine de la station). La voiture reste ensuite garée au soleil et tout monte à 37 °C. Quel volume d'essence déborde ? (<i>γ</i><sub>essence</sub> = 9,5·10<sup>−4</sup> K<sup>−1</sup> ; pour l'acier, <i>γ</i> = 3<i>α</i>)</p>
+          <div class="check" data-answer="1.37" data-tol="0.03" data-unit="L"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>L'essence gagne Δ<i>V</i><sub>e</sub> = 9,5·10<sup>−4</sup> · 60 · 25 = 1,425 L.</p>
+            <p>Le réservoir aussi se dilate : <i>γ</i><sub>acier</sub> = 36·10<sup>−6</sup> K<sup>−1</sup>, Δ<i>V</i><sub>r</sub> = 36·10<sup>−6</sup> · 60 · 25 = 0,054 L.</p>
+            <p>Débordement : 1,425 − 0,054 ≈ 1,37 L. Voilà pourquoi la pompe s'arrête automatiquement avant le ras bord.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'horloge qui retarde</strong> <span class="niveau">défi</span></p>
+          <p>Une horloge à pendule a une tige en laiton (<i>α</i> = 19·10<sup>−6</sup> K<sup>−1</sup>) et donne l'heure exacte à 20 °C. La période d'un pendule vaut <i>T</i> = 2π√(<i>L</i>/<i>g</i>). a) L'horloge avance-t-elle ou retarde-t-elle à 30 °C ? b) De combien de secondes par jour ? Indication : pour <i>x</i> petit, √(1 + <i>x</i>) ≈ 1 + <i>x</i>/2.</p>
+          <div class="check" data-answer="8.2" data-tol="0.03" data-unit="s/jour" data-label="b)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) La tige s'allonge, la période augmente : chaque oscillation dure un peu plus, l'horloge compte moins d'oscillations par jour et <strong>retarde</strong>.</p>
+            <p>b) <i>T</i>' = 2π√(<i>L</i>(1 + <i>α</i>Δ<i>T</i>)/<i>g</i>) = <i>T</i>√(1 + <i>α</i>Δ<i>T</i>) ≈ <i>T</i>(1 + <i>α</i>Δ<i>T</i>/2). L'écart relatif vaut <i>α</i>Δ<i>T</i>/2 = 19·10<sup>−6</sup> · 10 / 2 = 9,5·10<sup>−5</sup>.</p>
+            <p>Sur un jour : 86 400 s · 9,5·10<sup>−5</sup> ≈ 8,2 s de retard. Presque une minute par semaine : de quoi motiver un physicien neuchâtelois à inventer l'invar.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 1.9 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>La température mesure l'agitation désordonnée des particules (leur énergie cinétique moyenne). Le toucher, lui, mesure un flux de chaleur.</li>
+          <li>Deux corps en contact atteignent la même température : c'est l'équilibre thermique (principe zéro).</li>
+          <li>Échelle absolue : <i>T</i> = <i>θ</i> + 273,15 ; le zéro absolu vaut −273,15 °C. Un écart de 1 K égale un écart de 1 °C.</li>
+          <li>Dilatation : Δ<i>L</i> = <i>α L</i><sub>0</sub> Δ<i>T</i> et Δ<i>V</i> = <i>γ V</i><sub>0</sub> Δ<i>T</i> (solides : <i>γ</i> ≈ 3<i>α</i>). Un trou se dilate comme le matériau.</li>
+          <li>Bilame : deux métaux de <i>α</i> différents se courbent en chauffant, ce qui permet d'ouvrir un contact (thermostat).</li>
+          <li>L'eau est la plus dense à 4 °C et la glace flotte : les lacs gèlent par le haut et gardent environ 4 °C au fond.</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a class="next" href="2-chaleur.html"><span class="label">Chapitre 2</span><span class="t">Chaleur et changements d'état →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Thermodynamique au gymnase · Chapitre 1 · Température et dilatation</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch1.js"></script>
+</body>
+</html>

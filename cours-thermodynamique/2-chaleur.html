@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2 · Chaleur et changements d'état — Thermodynamique au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+<style>
+  .sel { font-family: var(--f-ui); font-size: 0.9rem; padding: 0.38rem 0.5rem; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--ink); width: 100%; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+    <marker id="ah-hot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--hot)"/></marker>
+    <marker id="ah-cold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cold)"/></marker>
+    <marker id="ah-work" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--work)"/></marker>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__thermo" aria-hidden="true"></span>Thermodynamique au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-temperature.html"><span class="n">1</span><span class="t">Température</span></a>
+      <a href="2-chaleur.html" aria-current="page"><span class="n">2</span><span class="t">Chaleur</span></a>
+      <a href="3-gaz-parfaits.html"><span class="n">3</span><span class="t">Gaz parfaits</span></a>
+      <a href="4-machines-thermiques.html"><span class="n">4</span><span class="t">Machines thermiques</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 2</span>
+      <h1>Chaleur et changements d'état</h1>
+      <p class="lead">Une baignoire tiède contient plus de chaleur qu'une tasse de thé bouillante, faire fondre un glaçon coûte autant d'énergie que de chauffer la même eau jusqu'à 80 °C, et une doudoune ne fait que garder de l'air immobile. Bienvenue dans la comptabilité de l'énergie.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>distinguer température, chaleur et énergie interne ;</li>
+          <li>calculer la chaleur nécessaire pour chauffer un corps ou le faire changer d'état ;</li>
+          <li>résoudre un problème de calorimétrie (mélange, glaçons, mesure de <i>c</i>) ;</li>
+          <li>reconnaître conduction, convection et rayonnement, et calculer les pertes à travers un mur.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">J<small>le joule</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#energie"><span class="n">2.1</span>Énergie interne et chaleur</a></li>
+      <li><a href="#capacite"><span class="n">2.2</span>Capacité thermique</a></li>
+      <li><a href="#calorimetrie"><span class="n">2.3</span>Calorimétrie</a></li>
+      <li><a href="#etats"><span class="n">2.4</span>Changements d'état</a></li>
+      <li><a href="#transferts"><span class="n">2.5</span>Transferts thermiques</a></li>
+      <li><a href="#refroidir"><span class="n">2.6</span>Le café qui refroidit</a></li>
+      <li><a href="#test"><span class="n">2.7</span>Teste-toi</a></li>
+      <li><a href="#exercices"><span class="n">2.8</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">2.9</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 2.1 -->
+    <section class="section" id="energie">
+      <div class="section-head"><span class="label">2.1</span><h2>Énergie interne et chaleur</h2></div>
+      <p>Les particules d'un corps s'agitent (énergie cinétique) et s'attirent ou se repoussent (énergie potentielle). La somme de toutes ces énergies microscopiques s'appelle l'<strong>énergie interne</strong> <i>U</i>. On ne la connaît jamais en entier, mais on sait très bien mesurer ses <em>variations</em> Δ<i>U</i>.</p>
+      <p>Il y a deux façons de changer l'énergie interne d'un corps :</p>
+      <ul>
+        <li>lui fournir du <strong>travail</strong> <i>W</i> : frotter tes mains, gonfler un pneu, plier un fil de fer plusieurs fois. Une force agit le long d'un déplacement, et l'objet chauffe ;</li>
+        <li>lui fournir de la <strong>chaleur</strong> <i>Q</i> : le mettre en contact avec un corps plus chaud. Aucune force visible, juste des chocs entre particules à la frontière.</li>
+      </ul>
+      <div class="box box--def">
+        <span class="label">Définition</span>
+        <p>La <strong>chaleur</strong> <i>Q</i> est l'énergie transférée d'un corps à un autre <strong>à cause d'une différence de température</strong>. Elle se mesure en joules (J). Un corps ne « contient » pas de chaleur : il contient de l'énergie interne, et il en reçoit ou en cède sous forme de chaleur.</p>
+      </div>
+      <p>Dans la langue de tous les jours, on mélange tout : « il fait une de ces chaleurs ! ». En physique, <strong>température</strong> (en K, l'agitation moyenne), <strong>énergie interne</strong> (en J, ce que le corps possède) et <strong>chaleur</strong> (en J, ce qui passe) sont trois choses différentes. Une baignoire à 40 °C a une température plus basse qu'une tasse de thé à 80 °C, mais une énergie interne bien plus grande : il y a deux cents fois plus d'eau.</p>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 680 270" role="img" aria-label="L'expérience de Joule : deux masses qui descendent font tourner des palettes dans un récipient d'eau isolé ; un thermomètre mesure l'échauffement de l'eau.">
+            <rect x="230" y="110" width="220" height="130" rx="8" class="fill-card" style="stroke:var(--ink);stroke-width:2"/>
+            <rect x="238" y="130" width="204" height="102" rx="4" style="fill:var(--water);opacity:0.25"/>
+            <line x1="340" y1="40" x2="340" y2="222" class="stroke"/>
+            <g class="stroke-2">
+              <rect x="300" y="150" width="80" height="12" rx="2"/>
+              <rect x="300" y="180" width="80" height="12" rx="2"/>
+              <rect x="300" y="208" width="80" height="12" rx="2"/>
+            </g>
+            <rect x="320" y="40" width="40" height="16" rx="3" class="fill-paper" style="stroke:var(--ink);stroke-width:1.5"/>
+            <path d="M320 48 H 130 M360 48 H 550" class="stroke-2"/>
+            <circle cx="120" cy="48" r="12" class="fill-card" style="stroke:var(--ink);stroke-width:1.5"/>
+            <circle cx="560" cy="48" r="12" class="fill-card" style="stroke:var(--ink);stroke-width:1.5"/>
+            <line x1="108" y1="48" x2="108" y2="150" class="stroke-2"/>
+            <line x1="572" y1="48" x2="572" y2="150" class="stroke-2"/>
+            <rect x="88" y="150" width="40" height="44" rx="3" class="fill-metal"/>
+            <rect x="552" y="150" width="40" height="44" rx="3" class="fill-metal"/>
+            <line x1="70" y1="160" x2="70" y2="230" class="stroke-work" marker-end="url(#ah-work)"/>
+            <line x1="610" y1="160" x2="610" y2="230" class="stroke-work" marker-end="url(#ah-work)"/>
+            <text x="60" y="250" class="t-small" text-anchor="middle">les masses descendent</text>
+            <text x="610" y="250" class="t-small" text-anchor="middle">de la hauteur h</text>
+            <rect x="420" y="70" width="10" height="120" rx="5" class="fill-paper" style="stroke:var(--ink-3)"/>
+            <rect x="422" y="120" width="6" height="68" class="fill-hot"/>
+            <circle cx="425" cy="196" r="9" class="fill-hot"/>
+            <text x="440" y="90" class="t-small">thermomètre</text>
+            <text x="250" y="102" class="t-small">cuve isolée remplie d'eau, palettes</text>
+            <text x="340" y="22" class="t-small" text-anchor="middle">manivelle (pour remonter les masses)</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 2.1</b> L'expérience de James Prescott Joule (1845). En tombant, les masses font tourner des palettes qui brassent l'eau : l'énergie potentielle <i>mgh</i> devient de l'énergie interne, et l'eau chauffe. Résultat : il faut 4,2 J pour réchauffer 1 g d'eau de 1 °C. Chaleur et travail sont deux formes d'un même transfert d'énergie. Joule aurait même emporté un thermomètre en voyage de noces dans les Alpes, pour comparer la température de l'eau en haut et en bas d'une cascade.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 2.2 -->
+    <section class="section" id="capacite">
+      <div class="section-head"><span class="label">2.2</span><h2>Capacité thermique</h2></div>
+      <p>Pour chauffer un corps sans changer son état, la chaleur nécessaire est proportionnelle à sa masse et à l'élévation de température. Le coefficient dépend de la substance.</p>
+      <div class="box box--loi">
+        <span class="label">Chaleur et élévation de température</span>
+        <div class="formula"><span class="eq"><i>Q</i> = <i>m</i> · <i>c</i> · Δ<i>T</i></span></div>
+        <p><i>m</i> en kg, Δ<i>T</i> en K (ou °C) et <i>c</i> la <strong>capacité thermique massique</strong> (« chaleur massique »), en J/(kg·K) : l'énergie qu'il faut pour chauffer 1 kg de 1 K. Le produit <i>C</i> = <i>mc</i> est la <strong>capacité thermique</strong> du corps, en J/K. Si Δ<i>T</i> &lt; 0, <i>Q</i> &lt; 0 : le corps cède de la chaleur.</p>
+      </div>
+      <p>L'eau détient un record parmi les substances courantes : <i>c</i> = 4186 J/(kg·K), environ dix fois plus que le fer. Elle met longtemps à chauffer et longtemps à refroidir. C'est pour ça qu'on remplit les bouillottes d'eau, que les radiateurs de chauffage central transportent de l'eau, et que le climat de Genève est plus doux que celui de La Chaux-de-Fonds (pas seulement à cause de l'altitude : le Léman stocke la chaleur de l'été).</p>
+
+      <figure class="anim wide" id="anim-casseroles">
+        <div class="anim__head"><h4>Deux casseroles sur la même plaque</h4><span class="label">Simulation 2.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-cas" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Deux récipients chauffés avec la même puissance ; un graphique compare l'évolution de leurs températures."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="cas-a">Récipient A</label><select class="sel" id="cas-a"></select></div>
+          <div class="ctrl"><label for="cas-b">Récipient B</label><select class="sel" id="cas-b"></select></div>
+          <div class="ctrl"><label for="cas-m"><span>Masse de chaque contenu</span><output for="cas-m"></output></label><input type="range" id="cas-m" min="0.2" max="2" step="0.1" value="1"></div>
+          <div class="ctrl"><label for="cas-p"><span>Puissance de chaque plaque</span><output for="cas-p"></output></label><input type="range" id="cas-p" min="200" max="2000" step="100" value="1000"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="cas-reset">Recommencer</button><button class="btn" type="button" id="cas-play"></button></div></div>
+        </div>
+        <div class="readouts" id="cas-read"></div>
+        <figcaption><b>À comparer</b> Même puissance, même masse, mais pas la même vitesse de chauffe : la pente vaut <i>P</i>/(<i>mc</i>). L'eau s'arrête à 100 °C (elle bout, voir 2.4), l'huile continue. Le temps défile 20 fois plus vite que dans la réalité et on néglige les pertes vers l'air.</figcaption>
+      </figure>
+
+      <div class="box box--ex">
+        <span class="label">Plage et mer</span>
+        <p>En plein soleil d'août, le sable brûle les pieds et la mer reste fraîche. Le soleil apporte pourtant la même énergie par m². Mais le sable a une capacité thermique massique environ cinq fois plus faible que l'eau, et seule sa couche superficielle chauffe ; l'eau, elle, est brassée par les vagues sur plusieurs mètres. La nuit, c'est l'inverse : le sable refroidit vite, la mer reste tiède.</p>
+      </div>
+    </section>
+
+    <!-- 2.3 -->
+    <section class="section" id="calorimetrie">
+      <div class="section-head"><span class="label">2.3</span><h2>Calorimétrie</h2></div>
+      <p>Un <strong>calorimètre</strong> est un récipient bien isolé (comme une bouteille thermos). On y mélange des corps à des températures différentes. Comme aucune énergie ne s'échappe, toute la chaleur cédée par les corps chauds est reçue par les corps froids, jusqu'à l'équilibre thermique.</p>
+      <div class="box box--loi">
+        <span class="label">Bilan d'un calorimètre isolé</span>
+        <div class="formula"><span class="eq"><i>Q</i><sub>1</sub> + <i>Q</i><sub>2</sub> + <i>Q</i><sub>3</sub> + … = 0</span></div>
+        <p>Chaque <i>Q</i> vaut <i>m c</i> (<i>T</i><sub>f</sub> − <i>T</i><sub>initiale</sub>), avec la même température finale <i>T</i><sub>f</sub> pour tous. Les corps chauds ont un <i>Q</i> négatif, les froids un <i>Q</i> positif. Pour deux corps : <i>T</i><sub>f</sub> = (<i>m</i><sub>1</sub><i>c</i><sub>1</sub><i>T</i><sub>1</sub> + <i>m</i><sub>2</sub><i>c</i><sub>2</sub><i>T</i><sub>2</sub>) / (<i>m</i><sub>1</sub><i>c</i><sub>1</sub> + <i>m</i><sub>2</sub><i>c</i><sub>2</sub>), une moyenne pondérée par les capacités thermiques.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-calo">
+        <div class="anim__head"><h4>Le calorimètre</h4><span class="label">Simulation 2.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-calo" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Un bloc de métal chaud est plongé dans l'eau d'un calorimètre ; les deux températures se rejoignent et des barres comparent les chaleurs échangées."></canvas></div>
+        <div class="controls">
+          <div class="ctrl">
+            <span class="ctrl__name">Bloc</span>
+            <div class="btns" id="calo-met">
+              <button class="btn" type="button" data-value="al" aria-pressed="true">Aluminium</button>
+              <button class="btn" type="button" data-value="fe">Fer</button>
+              <button class="btn" type="button" data-value="cu">Cuivre</button>
+              <button class="btn" type="button" data-value="pb">Plomb</button>
+              <button class="btn" type="button" data-value="x">Métal mystère</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="calo-mb"><span>Masse du bloc</span><output for="calo-mb"></output></label><input type="range" id="calo-mb" min="50" max="1000" step="10" value="300"></div>
+          <div class="ctrl"><label for="calo-tb"><span>Bloc au départ</span><output for="calo-tb"></output></label><input type="range" id="calo-tb" min="20" max="200" step="1" value="100"></div>
+          <div class="ctrl"><label for="calo-me"><span>Masse d'eau</span><output for="calo-me"></output></label><input type="range" id="calo-me" min="50" max="1000" step="10" value="300"></div>
+          <div class="ctrl"><label for="calo-te"><span>Eau au départ</span><output for="calo-te"></output></label><input type="range" id="calo-te" min="0" max="60" step="1" value="20"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn btn--primary" type="button" id="calo-go">Plonger le bloc</button><button class="btn" type="button" id="calo-rev" hidden>Révéler le métal</button></div></div>
+        </div>
+        <div class="readouts" id="calo-read"></div>
+        <figcaption><b>À essayer</b> Prédis la température finale avant de plonger. Compare 300 g d'aluminium et 300 g de plomb à 100 °C dans 300 g d'eau : le plomb ne réchauffe presque pas l'eau. Avec le « métal mystère », mesure la température finale et calcule <i>c</i> pour l'identifier. On néglige la capacité thermique du récipient.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 2.4 -->
+    <section class="section" id="etats">
+      <div class="section-head"><span class="label">2.4</span><h2>Changements d'état</h2></div>
+      <p>Chauffe un glaçon sorti du congélateur. Sa température monte jusqu'à 0 °C, puis… elle reste bloquée à 0 °C tant qu'il reste de la glace, alors que la plaque chauffe toujours. Où passe l'énergie ? Elle sert à <strong>casser les liaisons</strong> qui tiennent les molécules en cristal. Pendant un changement d'état d'un corps pur, à pression constante, la température reste constante : c'est un <strong>palier</strong>.</p>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 640 230" role="img" aria-label="Les trois états de la matière et les six changements d'état qui les relient.">
+            <rect x="40" y="140" width="130" height="56" rx="6" class="fill-cold-soft" style="stroke:var(--cold);stroke-width:1.5"/>
+            <text x="105" y="174" text-anchor="middle" class="t-strong">solide</text>
+            <rect x="255" y="140" width="130" height="56" rx="6" class="fill-paper" style="stroke:var(--water);stroke-width:1.5"/>
+            <text x="320" y="174" text-anchor="middle" class="t-strong">liquide</text>
+            <rect x="470" y="140" width="130" height="56" rx="6" class="fill-hot-soft" style="stroke:var(--hot);stroke-width:1.5"/>
+            <text x="535" y="174" text-anchor="middle" class="t-strong">gaz</text>
+            <path d="M172 156 H 252" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <text x="212" y="148" text-anchor="middle" class="t-small">fusion</text>
+            <path d="M252 182 H 172" class="stroke-cold" marker-end="url(#ah-cold)"/>
+            <text x="212" y="200" text-anchor="middle" class="t-small">solidification</text>
+            <path d="M387 156 H 467" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <text x="427" y="148" text-anchor="middle" class="t-small">vaporisation</text>
+            <path d="M467 182 H 387" class="stroke-cold" marker-end="url(#ah-cold)"/>
+            <text x="427" y="200" text-anchor="middle" class="t-small">liquéfaction</text>
+            <path d="M105 136 C 160 40, 480 40, 535 136" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <text x="320" y="56" text-anchor="middle" class="t-small">sublimation (neige qui disparaît au soleil sans fondre)</text>
+            <path d="M520 136 C 470 70, 170 70, 120 136" class="stroke-cold" marker-end="url(#ah-cold)"/>
+            <text x="320" y="96" text-anchor="middle" class="t-small">condensation solide (givre sur la vitre)</text>
+            <text x="320" y="224" text-anchor="middle" class="t-small t-hot">→ flèches orange : le corps reçoit de la chaleur ; bleues : il en cède</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 2.2</b> Les changements d'état. « Évaporation » désigne une vaporisation lente à la surface du liquide, en dessous de la température d'ébullition (le linge qui sèche).</figcaption>
+      </figure>
+
+      <div class="box box--loi">
+        <span class="label">Chaleur latente</span>
+        <div class="formula"><span class="eq"><i>Q</i> = <i>m</i> · <i>L</i></span></div>
+        <p><i>L</i> est la <strong>chaleur latente</strong> (massique) du changement d'état, en J/kg. Pour l'eau : fusion <i>L</i><sub>f</sub> = 334 kJ/kg, vaporisation <i>L</i><sub>v</sub> = 2257 kJ/kg (à 100 °C). Dans l'autre sens (solidification, liquéfaction), le corps <strong>rend</strong> exactement la même énergie : <i>Q</i> = −<i>mL</i>.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-chauffe">
+        <div class="anim__head"><h4>Courbe de chauffe de l'eau</h4><span class="label">Simulation 2.3</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-chauffe" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Température d'un kilogramme d'eau, partant de la glace à moins 30 degrés, en fonction de l'énergie reçue, avec deux paliers. Une vue des molécules montre l'état."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="ch-p"><span>Puissance du réchaud</span><output for="ch-p"></output></label><input type="range" id="ch-p" min="500" max="3000" step="100" value="2000"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Sens</span>
+            <div class="btns" id="ch-sens">
+              <button class="btn" type="button" data-value="1" aria-pressed="true">Chauffer</button>
+              <button class="btn" type="button" data-value="-1">Refroidir</button>
+            </div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="ch-reset">Revenir à la glace</button><button class="btn" type="button" id="ch-play"></button></div></div>
+        </div>
+        <div class="readouts" id="ch-read"></div>
+        <figcaption><b>À observer</b> Deux paliers : 0 °C pendant la fusion, 100 °C pendant l'ébullition. Le palier d'ébullition est presque sept fois plus long que celui de fusion, et plus de cinq fois plus long que tout le chauffage de l'eau liquide de 0 à 100 °C. Le temps est accéléré 60 fois ; on suppose que la vapeur reste enfermée (dans un vrai réchaud, elle s'en va).</figcaption>
+      </figure>
+
+      <div class="box box--warn">
+        <span class="label">Attention : vapeur</span>
+        <p>Une brûlure par la vapeur à 100 °C est bien pire qu'une brûlure par l'eau à 100 °C. En se liquéfiant sur ta peau, chaque gramme de vapeur libère 2257 J, en plus des 420 J qu'il cède encore en refroidissant de 100 °C à 0 °C. Ne te penche jamais au-dessus d'une casserole en ouvrant le couvercle.</p>
+      </div>
+      <div class="box box--fun">
+        <span class="label">Le saviez-vous ?</span>
+        <p>Transpirer refroidit parce que la sueur s'évapore en prenant sa chaleur latente à ta peau. Les arboriculteurs valaisans font l'inverse : par nuit de gel au printemps, ils arrosent les abricotiers. L'eau gèle sur les bourgeons en libérant 334 kJ par kg, et cette chaleur maintient la fleur autour de 0 °C. Une carapace de glace pour ne pas geler : la physique a de l'humour.</p>
+      </div>
+    </section>
+
+    <!-- 2.5 -->
+    <section class="section" id="transferts">
+      <div class="section-head"><span class="label">2.5</span><h2>Transferts thermiques</h2></div>
+      <p>La chaleur va toujours spontanément du chaud vers le froid, par trois mécanismes :</p>
+      <ul>
+        <li><strong>Conduction</strong> : les particules agitées transmettent leur agitation à leurs voisines, de proche en proche, sans déplacement de matière. Les métaux conduisent très bien (électrons libres), l'air immobile très mal.</li>
+        <li><strong>Convection</strong> : un fluide chauffé se dilate, devient plus léger et monte en emportant son énergie ; le fluide froid descend le remplacer. Radiateur, eau qui bout dans une casserole, vent thermique en montagne, parapente.</li>
+        <li><strong>Rayonnement</strong> : tout corps émet de la lumière infrarouge, d'autant plus que sa température est élevée. Ce transfert traverse même le vide : c'est ainsi que le Soleil nous chauffe.</li>
+      </ul>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 640 240" role="img" aria-label="Une casserole sur un feu illustre les trois transferts : conduction à travers le fond, convection dans l'eau, rayonnement vers une main placée à côté.">
+            <path d="M200 196 h 160 M215 196 l -10 22 M345 196 l 10 22" class="stroke-2"/>
+            <path d="M240 194 q -8 -18 4 -30 q -2 16 10 18 q 4 -14 -2 -24 q 18 14 10 36 z" style="fill:var(--flame)"/>
+            <path d="M290 194 q -8 -18 4 -30 q -2 16 10 18 q 4 -14 -2 -24 q 18 14 10 36 z" style="fill:var(--flame)"/>
+            <path d="M190 80 V 160 H 370 V 80" class="stroke" style="stroke-width:3"/>
+            <rect x="192" y="96" width="176" height="62" style="fill:var(--water);opacity:0.25"/>
+            <path d="M370 100 H 440" class="stroke" style="stroke-width:4;stroke-linecap:round"/>
+            <path d="M240 150 C 220 120, 230 105, 255 105 C 280 105, 290 120, 275 150" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <path d="M320 150 C 300 120, 310 105, 335 105" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <text x="280" y="88" text-anchor="middle" class="t-small">convection</text>
+            <path d="M260 186 V 166" class="stroke-hot" marker-end="url(#ah-hot)"/>
+            <text x="150" y="176" text-anchor="end" class="t-small">conduction à travers le fond</text>
+            <line x1="152" y1="172" x2="232" y2="172" class="thin dash"/>
+            <text x="455" y="94" class="t-small">le manche chauffe aussi (conduction)</text>
+            <path d="M380 190 Q 420 180 460 190 T 540 190" class="stroke-hot" style="stroke-dasharray:4 4"/>
+            <path d="M380 210 Q 420 200 460 210 T 540 210" class="stroke-hot" style="stroke-dasharray:4 4"/>
+            <text x="560" y="204" class="t-small">rayonnement</text>
+            <text x="560" y="220" class="t-small">(ta main le sent)</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 2.3</b> Les trois modes de transfert autour d'une casserole. Un thermos les combat tous les trois : double paroi sous vide (ni conduction ni convection), parois argentées (le rayonnement est réfléchi), bouchon isolant.</figcaption>
+      </figure>
+
+      <h3>Conduction à travers un mur</h3>
+      <div class="box box--loi">
+        <span class="label">Loi de Fourier (régime permanent)</span>
+        <div class="formula"><span class="eq"><i>P</i> = <i>λ</i> · <i>A</i> · <span class="frac"><span>Δ<i>T</i></span><span><i>e</i></span></span></span><span class="eq"><i>P</i> = <i>U</i> · <i>A</i> · Δ<i>T</i></span></div>
+        <p><i>P</i> est la puissance qui traverse (en W), <i>A</i> l'aire, <i>e</i> l'épaisseur, Δ<i>T</i> l'écart de température entre les deux faces et <i>λ</i> la <strong>conductivité thermique</strong> du matériau, en W/(m·K). Pour un mur à plusieurs couches, on additionne les <strong>résistances thermiques</strong> <i>R</i> = <i>e</i>/<i>λ</i> de chaque couche ; le <strong>coefficient U</strong> du mur vaut 1/<i>R</i><sub>total</sub>, en W/(m²·K). Plus <i>U</i> est petit, mieux c'est.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-mur">
+        <div class="anim__head"><h4>Le mur de la maison</h4><span class="label">Simulation 2.4</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-mur" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Coupe d'un mur avec ses couches ; la température décroît de l'intérieur vers l'extérieur, surtout dans l'isolant."></canvas></div>
+        <div class="controls">
+          <div class="ctrl">
+            <span class="ctrl__name">Mur porteur</span>
+            <div class="btns" id="mur-type">
+              <button class="btn" type="button" data-value="brique" aria-pressed="true">Brique (années 60)</button>
+              <button class="btn" type="button" data-value="beton">Béton 20 cm</button>
+              <button class="btn" type="button" data-value="bois">Madriers de chalet</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="mur-iso"><span>Isolation extérieure (laine de roche)</span><output for="mur-iso"></output></label><input type="range" id="mur-iso" min="0" max="30" step="1" value="0"></div>
+          <div class="ctrl"><label for="mur-te"><span>Température extérieure</span><output for="mur-te"></output></label><input type="range" id="mur-te" min="-15" max="15" step="1" value="-5"></div>
+        </div>
+        <div class="readouts" id="mur-read"></div>
+        <figcaption><b>À essayer</b> Ajoute de l'isolation centimètre par centimètre : les premiers centimètres divisent les pertes par deux ou trois, les suivants rapportent de moins en moins. Regarde aussi où se fait la chute de température : presque entièrement dans l'isolant. Les besoins annuels sont estimés pour le Plateau suisse (environ 3500 degrés-jours) et 150 m² de façade.</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Élément de construction</th><th class="r"><i>U</i> en W/(m²·K)</th></tr></thead>
+          <tbody>
+            <tr><td>Simple vitrage</td><td class="r">5,8</td></tr>
+            <tr><td>Double vitrage des années 80</td><td class="r">2,8</td></tr>
+            <tr><td>Triple vitrage actuel</td><td class="r">0,5 à 0,7</td></tr>
+            <tr><td>Mur en brique non isolé</td><td class="r">1,0 à 1,3</td></tr>
+            <tr><td>Mur neuf (norme SIA 380/1)</td><td class="r">≤ 0,17</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2.6 -->
+    <section class="section" id="refroidir">
+      <div class="section-head"><span class="label">2.6</span><h2>Le café qui refroidit</h2></div>
+      <p>Un objet chaud dans une pièce perd de la chaleur d'autant plus vite qu'il est plus chaud que l'air ambiant. Sa température se rapproche donc de celle de la pièce de plus en plus lentement : c'est une décroissance exponentielle, la <strong>loi de refroidissement de Newton</strong>.</p>
+      <div class="box box--loi">
+        <span class="label">Loi de refroidissement de Newton</span>
+        <div class="formula"><span class="eq"><i>T</i>(<i>t</i>) = <i>T</i><sub>a</sub> + (<i>T</i><sub>0</sub> − <i>T</i><sub>a</sub>) · e<sup>−<i>t</i>/<i>τ</i></sup></span></div>
+        <p><i>T</i><sub>a</sub> est la température ambiante, <i>T</i><sub>0</sub> la température de départ et <i>τ</i> (tau) la <strong>constante de temps</strong> : après une durée <i>τ</i>, il ne reste que 37 % de l'écart initial. <i>τ</i> est grand pour un objet bien isolé ou de grande capacité thermique.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-cafe">
+        <div class="anim__head"><h4>Le lait tout de suite, ou à la fin ?</h4><span class="label">Simulation 2.5</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-cafe" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Deux courbes de refroidissement d'un café : lait froid ajouté au début ou juste avant de boire."></canvas></div>
+        <div class="controls">
+          <div class="ctrl">
+            <span class="ctrl__name">Récipient</span>
+            <div class="btns" id="cafe-tasse">
+              <button class="btn" type="button" data-value="25" aria-pressed="true">Tasse en porcelaine</button>
+              <button class="btn" type="button" data-value="16">Gobelet en carton</button>
+              <button class="btn" type="button" data-value="40">Mug avec couvercle</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="cafe-t"><span>Je bois après</span><output for="cafe-t"></output></label><input type="range" id="cafe-t" min="1" max="40" step="1" value="10"></div>
+          <div class="ctrl"><label for="cafe-lait"><span>Lait froid (6 °C)</span><output for="cafe-lait"></output></label><input type="range" id="cafe-lait" min="0" max="80" step="5" value="30"></div>
+        </div>
+        <div class="readouts" id="cafe-read"></div>
+        <figcaption><b>La question de la pause-café</b> Tu dois attendre avant de boire ton café de 200 mL à 85 °C. Pour l'avoir le plus chaud possible, faut-il verser le lait froid tout de suite ou juste avant de boire ? Les deux courbes répondent. Explication : un café plus chaud perd sa chaleur plus vite ; refroidi d'emblée par le lait, il en perd moins pendant l'attente.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 2.7 -->
+    <section class="section" id="test">
+      <div class="section-head"><span class="label">2.7</span><h2>Teste-toi</h2></div>
+      <div class="quiz">
+        <p class="quiz__score"></p>
+        <div class="qcm">
+          <p class="q">Une baignoire de 150 L d'eau à 40 °C et une tasse de 0,2 L de thé à 80 °C. Laquelle pourrait céder le plus de chaleur en refroidissant jusqu'à 20 °C ?</p>
+          <div class="opts">
+            <button>La tasse, elle est plus chaude.</button>
+            <button data-ok>La baignoire, de très loin.</button>
+            <button>Les deux autant.</button>
+          </div>
+          <p class="fb" hidden>Baignoire : 150 · 4186 · 20 ≈ 12,6 MJ. Tasse : 0,2 · 4186 · 60 ≈ 50 kJ. La température dit à quel point c'est agité, pas combien il y a d'énergie.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">L'eau bout à 100 °C dans une casserole. On pousse la plaque au maximum. Que fait la température de l'eau ?</p>
+          <div class="opts">
+            <button>Elle monte au-dessus de 100 °C.</button>
+            <button data-ok>Elle reste à 100 °C ; l'eau s'évapore plus vite.</button>
+            <button>Elle descend un peu, à cause des bulles.</button>
+          </div>
+          <p class="fb" hidden>Pendant le palier, l'énergie sert à vaporiser l'eau, pas à la chauffer. Cuire les pâtes « à gros bouillons » gaspille de l'énergie : un frémissement suffit.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Pourquoi une brûlure par la vapeur à 100 °C est-elle plus grave qu'une brûlure par l'eau à 100 °C ?</p>
+          <div class="opts">
+            <button>La vapeur est en réalité plus chaude que 100 °C.</button>
+            <button>La vapeur va plus vite et pénètre la peau.</button>
+            <button data-ok>En se liquéfiant sur la peau, la vapeur libère sa chaleur latente.</button>
+          </div>
+          <p class="fb" hidden>2257 kJ par kg libérés à la liquéfaction, plus de cinq fois ce que l'eau cède en passant de 100 °C à 0 °C.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Pourquoi une doudoune tient-elle chaud ?</p>
+          <div class="opts">
+            <button>Le duvet produit de la chaleur.</button>
+            <button data-ok>Elle emprisonne de l'air immobile, très mauvais conducteur.</button>
+            <button>Elle empêche le froid d'entrer.</button>
+          </div>
+          <p class="fb" hidden>Le froid n'est pas une substance qui « entre » : c'est ta chaleur qui sort. L'air immobile (<i>λ</i> = 0,026 W/(m·K)) la retient. Une doudoune mouillée ou écrasée isole beaucoup moins.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">On mélange 1 kg d'eau à 80 °C et 1 kg de fer à 20 °C dans un calorimètre. La température finale est :</p>
+          <div class="opts">
+            <button>50 °C, la moyenne.</button>
+            <button data-ok>Environ 74 °C.</button>
+            <button>Environ 26 °C.</button>
+          </div>
+          <p class="fb" hidden>La moyenne est pondérée par les capacités thermiques : (4186 · 80 + 450 · 20)/(4186 + 450) ≈ 74 °C. L'eau, avec sa grande capacité, impose presque sa température.</p>
+        </div>
+        <div class="btns"><button class="btn quiz__reset" type="button">Recommencer le test</button></div>
+      </div>
+    </section>
+
+    <!-- 2.8 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">2.8</span><h2>Exercices</h2></div>
+      <p>Données dans l'<a href="index.html#memo">aide-mémoire</a> : <i>c</i><sub>eau</sub> = 4186 J/(kg·K), <i>c</i><sub>glace</sub> = 2100 J/(kg·K), <i>L</i><sub>f</sub> = 334 kJ/kg, <i>L</i><sub>v</sub> = 2257 kJ/kg. 1 L d'eau a une masse de 1 kg.</p>
+      <ol class="exos">
+        <li>
+          <p><strong>La douche</strong> <span class="niveau">facile</span></p>
+          <p>Une douche de 5 minutes consomme 10 L d'eau par minute, chauffée de 12 °C à 40 °C. a) Quelle chaleur faut-il fournir ? b) Combien de kWh cela représente-t-il ? (1 kWh = 3,6 MJ)</p>
+          <div class="check" data-answer="5.86e6" data-tol="0.02" data-unit="J" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>m</i> = 50 kg ; <i>Q</i> = 50 · 4186 · 28 ≈ 5,86·10<sup>6</sup> J = 5,86 MJ.</p>
+            <p>b) 5,86 / 3,6 ≈ 1,6 kWh. Autant qu'un frigo pendant deux jours. Une douche de 10 minutes chaque jour, c'est environ 1200 kWh par an.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La bouilloire</strong> <span class="niveau">facile</span></p>
+          <p>Une bouilloire de 2200 W chauffe 1,2 L d'eau de 15 °C à 100 °C. 90 % de l'énergie électrique va dans l'eau. Combien de temps faut-il ?</p>
+          <div class="check" data-answer="216" data-tol="0.02" data-unit="s"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>Q</i> = 1,2 · 4186 · 85 ≈ 4,27·10<sup>5</sup> J. Puissance utile : 0,9 · 2200 = 1980 W.</p>
+            <p><i>t</i> = <i>Q</i>/<i>P</i> = 4,27·10<sup>5</sup>/1980 ≈ 216 s, soit 3 min 36 s.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le fer dans l'eau</strong> <span class="niveau">facile</span></p>
+          <p>On plonge 300 g de fer à 95 °C dans 250 g d'eau à 18 °C, dans un calorimètre parfait. Quelle est la température finale ?</p>
+          <div class="check" data-answer="26.8" data-tol="0.01" data-unit="°C"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>Q</i><sub>fer</sub> + <i>Q</i><sub>eau</sub> = 0 : 0,3 · 450 · (<i>T</i> − 95) + 0,25 · 4186 · (<i>T</i> − 18) = 0.</p>
+            <p>135<i>T</i> − 12 825 + 1046,5<i>T</i> − 18 837 = 0, donc <i>T</i> = 31 662/1181,5 ≈ 26,8 °C.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Quel est ce métal ?</strong> <span class="niveau">moyen</span></p>
+          <p>Un bloc de 200 g est chauffé à 100 °C dans de l'eau bouillante, puis plongé dans 300 g d'eau à 20,0 °C. La température finale vaut 24,6 °C. Calcule la capacité thermique massique du bloc et identifie le métal.</p>
+          <div class="check" data-answer="383" data-tol="0.03" data-unit="J/(kg·K)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Chaleur reçue par l'eau : 0,3 · 4186 · 4,6 ≈ 5777 J. Le bloc cède la même chaleur en passant de 100 °C à 24,6 °C.</p>
+            <p><i>c</i> = 5777 / (0,2 · 75,4) ≈ 383 J/(kg·K) : c'est du <strong>cuivre</strong> (385 J/(kg·K)).</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Des glaçons dans la limonade</strong> <span class="niveau">moyen</span></p>
+          <p>On met deux glaçons de 25 g à 0 °C dans 300 g de limonade (assimilée à de l'eau) à 22 °C. Quelle est la température finale une fois les glaçons fondus ?</p>
+          <div class="check" data-answer="7.46" data-tol="0.02" data-unit="°C"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Faire fondre la glace : 0,05 · 334 000 = 16 700 J. Puis chauffer cette eau de 0 °C à <i>T</i> : 0,05 · 4186 · <i>T</i>. La limonade cède 0,3 · 4186 · (22 − <i>T</i>).</p>
+            <p>16 700 + 209,3 <i>T</i> = 27 628 − 1255,8 <i>T</i>, donc <i>T</i> = 10 928/1465,1 ≈ 7,5 °C.</p>
+            <p>La fusion fait l'essentiel du travail : sans elle (eau à 0 °C au lieu de glace), on n'arriverait qu'à 18,9 °C.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La climatisation humaine</strong> <span class="niveau">moyen</span></p>
+          <p>Pendant une montée à vélo au col du Marchairuz, un cycliste évapore 1 L de sueur par heure. À la température de la peau, <i>L</i><sub>v</sub> ≈ 2,4·10<sup>6</sup> J/kg. Quelle puissance de refroidissement cela représente-t-il ?</p>
+          <div class="check" data-answer="667" data-tol="0.02" data-unit="W"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>P</i> = <i>mL</i>/<i>t</i> = 1 · 2,4·10<sup>6</sup> / 3600 ≈ 667 W. C'est à peu près la chaleur que produisent les muscles d'un cycliste qui développe 200 W mécaniques (rendement du corps humain d'environ 25 %). Le reste doit partir, sinon c'est le coup de chaleur.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Isoler ou ne pas isoler</strong> <span class="niveau">moyen</span></p>
+          <p>Un mur de 12 m² en briques pleines (<i>λ</i> = 0,8 W/(m·K)) de 25 cm d'épaisseur sépare un salon à 20 °C de l'extérieur à −5 °C. a) Quelle puissance traverse le mur (on ignore les résistances de surface) ? b) Même question si on ajoute 15 cm de laine de roche (<i>λ</i> = 0,035 W/(m·K)).</p>
+          <div class="check" data-answer="960" data-tol="0.02" data-unit="W" data-label="a)"></div>
+          <div class="check" data-answer="65.2" data-tol="0.03" data-unit="W" data-label="b)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>P</i> = <i>λA</i>Δ<i>T</i>/<i>e</i> = 0,8 · 12 · 25 / 0,25 = 960 W, un petit radiateur qui chauffe le jardin en permanence.</p>
+            <p>b) Résistances en série (par m²) : 0,25/0,8 + 0,15/0,035 = 0,3125 + 4,286 = 4,60 m²·K/W. <i>P</i> = <i>A</i>Δ<i>T</i>/<i>R</i> = 12 · 25 / 4,60 ≈ 65 W. Pertes divisées par 15.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Thé froid maison</strong> <span class="niveau">défi</span></p>
+          <p>On veut refroidir 1 L de thé de 90 °C à 10 °C en y jetant des glaçons sortis du congélateur à −18 °C. Quelle masse de glace faut-il ? Commente le résultat.</p>
+          <div class="check" data-answer="0.81" data-tol="0.02" data-unit="kg"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Le thé cède 1 · 4186 · 80 = 334 880 J.</p>
+            <p>Chaque kg de glace reçoit : 2100 · 18 (de −18 à 0 °C) + 334 000 (fusion) + 4186 · 10 (de 0 à 10 °C) = 37 800 + 334 000 + 41 860 = 413 660 J.</p>
+            <p><i>m</i> = 334 880 / 413 660 ≈ 0,81 kg. On obtient 1,8 L d'un thé très dilué. Mieux vaut infuser un thé deux fois plus fort, ou le laisser refroidir avant de le mettre au frigo.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 2.9 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>Énergie interne <i>U</i> : somme des énergies microscopiques. Elle change par travail <i>W</i> ou par chaleur <i>Q</i> (transfert dû à une différence de température).</li>
+          <li>Chauffer sans changer d'état : <i>Q</i> = <i>mc</i>Δ<i>T</i>. L'eau a une très grande capacité thermique massique (4186 J/(kg·K)).</li>
+          <li>Calorimètre isolé : la somme des chaleurs échangées est nulle ; la température finale est une moyenne pondérée par les <i>mc</i>.</li>
+          <li>Changement d'état : <i>Q</i> = <i>mL</i>, à température constante (palier). Eau : <i>L</i><sub>f</sub> = 334 kJ/kg, <i>L</i><sub>v</sub> = 2257 kJ/kg.</li>
+          <li>Transferts : conduction, convection, rayonnement. À travers un mur : <i>P</i> = <i>λA</i>Δ<i>T</i>/<i>e</i> ; les résistances <i>e</i>/<i>λ</i> des couches s'additionnent.</li>
+          <li>Refroidissement de Newton : l'écart à la température ambiante décroît exponentiellement, <i>T</i> − <i>T</i><sub>a</sub> ∝ e<sup>−<i>t</i>/<i>τ</i></sup>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a href="1-temperature.html"><span class="label">Chapitre 1</span><span class="t">← Température et dilatation</span></a>
+      <a class="next" href="3-gaz-parfaits.html"><span class="label">Chapitre 3</span><span class="t">Les gaz parfaits →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Thermodynamique au gymnase · Chapitre 2 · Chaleur et changements d'état</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch2.js"></script>
+</body>
+</html>

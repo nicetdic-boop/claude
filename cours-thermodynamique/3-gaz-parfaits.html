@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3 · Les gaz parfaits — Thermodynamique au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__thermo" aria-hidden="true"></span>Thermodynamique au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-temperature.html"><span class="n">1</span><span class="t">Température</span></a>
+      <a href="2-chaleur.html"><span class="n">2</span><span class="t">Chaleur</span></a>
+      <a href="3-gaz-parfaits.html" aria-current="page"><span class="n">3</span><span class="t">Gaz parfaits</span></a>
+      <a href="4-machines-thermiques.html"><span class="n">4</span><span class="t">Machines thermiques</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 3</span>
+      <h1>Les gaz parfaits</h1>
+      <p class="lead">Un gaz, c'est surtout du vide traversé par des molécules qui foncent à 500 m/s et cognent les parois des milliards de milliards de fois par seconde. De ce chaos sort une loi d'une simplicité insolente : <i>pV</i> = <i>nRT</i>.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>calculer une pression et distinguer pression absolue et relative ;</li>
+          <li>appliquer les lois de Boyle-Mariotte, de Charles et de Gay-Lussac ;</li>
+          <li>utiliser l'équation d'état <i>pV</i> = <i>nRT</i> ;</li>
+          <li>relier température et vitesse des molécules ;</li>
+          <li>expliquer pourquoi les pâtes cuisent mal au Jungfraujoch.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">pV<small>= nRT</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#pression"><span class="n">3.1</span>La pression</a></li>
+      <li><a href="#modele"><span class="n">3.2</span>Le modèle du gaz parfait</a></li>
+      <li><a href="#lois"><span class="n">3.3</span>Les lois des gaz</a></li>
+      <li><a href="#cinetique"><span class="n">3.4</span>Température et vitesse</a></li>
+      <li><a href="#altitude"><span class="n">3.5</span>Pression et altitude</a></li>
+      <li><a href="#test"><span class="n">3.6</span>Teste-toi</a></li>
+      <li><a href="#exercices"><span class="n">3.7</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">3.8</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 3.1 -->
+    <section class="section" id="pression">
+      <div class="section-head"><span class="label">3.1</span><h2>La pression</h2></div>
+      <p>Pourquoi enfonce-t-on des punaises par la pointe et pas par la tête ? Parce qu'une même force, concentrée sur une petite surface, produit un effet bien plus grand. Cette grandeur, c'est la <strong>pression</strong>.</p>
+      <div class="box box--def">
+        <span class="label">Définition</span>
+        <div class="formula"><span class="eq"><i>p</i> = <span class="frac"><span><i>F</i></span><span><i>A</i></span></span></span></div>
+        <p><i>F</i> est la force perpendiculaire à la surface (en N), <i>A</i> l'aire (en m²). Unité : le <strong>pascal</strong>, 1 Pa = 1 N/m². C'est minuscule (une feuille de papier posée à plat exerce environ 1 Pa), d'où les unités pratiques : 1 hPa = 100 Pa (météo), 1 bar = 10<sup>5</sup> Pa (pneus, bouteilles de plongée).</p>
+      </div>
+      <p>L'atmosphère pèse sur nous : la <strong>pression atmosphérique</strong> normale vaut 1013 hPa ≈ 1 bar, soit le poids d'une colonne d'air de 10 tonnes sur chaque mètre carré. On ne la sent pas parce qu'elle s'exerce dans toutes les directions et que nos tissus sont à la même pression. Au XVII<sup>e</sup> siècle, à Magdebourg, Otto von Guericke a fait le vide entre deux demi-sphères en cuivre : deux attelages de chevaux tirant en sens opposé n'ont pas réussi à les séparer.</p>
+      <div class="box box--ex">
+        <span class="label">Pression absolue ou relative ?</span>
+        <p>Le manomètre de la station-service indique la <strong>surpression</strong> (pression relative) par rapport à l'air ambiant. Un pneu « à 2 bar » contient de l'air à environ 3 bar absolus. Dans les lois des gaz, on utilise <strong>toujours la pression absolue</strong>.</p>
+      </div>
+    </section>
+
+    <!-- 3.2 -->
+    <section class="section" id="modele">
+      <div class="section-head"><span class="label">3.2</span><h2>Le modèle du gaz parfait</h2></div>
+      <p>Dans l'air qui t'entoure, les molécules n'occupent qu'environ 0,1 % du volume. Le reste est vide. D'où le modèle du <strong>gaz parfait</strong> :</p>
+      <ul>
+        <li>les molécules sont des points minuscules, en nombre énorme ;</li>
+        <li>elles se déplacent en ligne droite, dans toutes les directions, avec des vitesses très variées ;</li>
+        <li>elles n'interagissent que par des chocs élastiques, entre elles et avec les parois.</li>
+      </ul>
+      <p>La pression du gaz est l'effet moyen de tous ces chocs : chaque molécule qui rebondit sur une paroi lui donne une petite pichenette. Des milliards de milliards de pichenettes par seconde font une force parfaitement régulière.</p>
+
+      <figure class="anim wide" id="anim-cyl">
+        <div class="anim__head"><h4>Le gaz dans un cylindre</h4><span class="label">Simulation 3.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-cyl" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Des molécules rebondissent dans un cylindre fermé par un piston ; un manomètre affiche la pression mesurée à partir des chocs, à côté d'un diagramme pression-volume."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="cyl-n"><span>Nombre de molécules</span><output for="cyl-n"></output></label><input type="range" id="cyl-n" min="20" max="200" step="10" value="100"></div>
+          <div class="ctrl"><label for="cyl-t"><span>Température</span><output for="cyl-t"></output></label><input type="range" id="cyl-t" min="100" max="600" step="10" value="300"></div>
+          <div class="ctrl"><label for="cyl-v"><span>Volume (position du piston)</span><output for="cyl-v"></output></label><input type="range" id="cyl-v" min="0.3" max="1.2" step="0.02" value="1"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="cyl-trace">Effacer la trace</button><button class="btn" type="button" id="cyl-play"></button></div></div>
+        </div>
+        <div class="readouts" id="cyl-read"></div>
+        <figcaption><b>À essayer</b> Double le nombre de molécules : deux fois plus de chocs, deux fois plus de pression. Réduis le volume de moitié : les molécules reviennent deux fois plus souvent sur chaque paroi. Chauffe : elles frappent plus fort et plus souvent. Le cylindre est en contact avec un thermostat qui maintient la température choisie. Chaque bille représente 2,4·10<sup>20</sup> molécules ; la pression « mesurée » fluctue parce qu'on compte les chocs.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3.3 -->
+    <section class="section" id="lois">
+      <div class="section-head"><span class="label">3.3</span><h2>Les lois des gaz</h2></div>
+      <p>Au XVII<sup>e</sup> et au XVIII<sup>e</sup> siècle, sans rien savoir des molécules, des physiciens ont découvert expérimentalement trois lois. Chacune décrit une quantité de gaz enfermée dont on garde une grandeur constante.</p>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Loi</th><th>On garde constant</th><th>Relation</th><th>Exemple</th></tr></thead>
+          <tbody>
+            <tr><td>Boyle-Mariotte (1662)</td><td>la température</td><td><i>pV</i> = constante</td><td>seringue bouchée qu'on comprime</td></tr>
+            <tr><td>Charles (1787)</td><td>la pression</td><td><i>V</i>/<i>T</i> = constante</td><td>ballon de baudruche au congélateur</td></tr>
+            <tr><td>Gay-Lussac (1802)</td><td>le volume</td><td><i>p</i>/<i>T</i> = constante</td><td>pneu qui chauffe sur l'autoroute</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Dans les deux dernières lois, <i>T</i> est la température <strong>absolue</strong>. En fait, c'est l'inverse qui s'est produit historiquement : en prolongeant les droites <i>V</i>(<i>θ</i>) et <i>p</i>(<i>θ</i>) mesurées, on a vu qu'elles coupaient toutes l'axe vers −273 °C. C'est ainsi qu'on a deviné l'existence du zéro absolu.</p>
+
+      <figure class="anim wide" id="anim-labo">
+        <div class="anim__head"><h4>Le laboratoire des lois des gaz</h4><span class="label">Simulation 3.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-labo" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Montage expérimental et graphique des mesures pour l'une des trois lois des gaz."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis: 100%">
+            <span class="ctrl__name">Expérience</span>
+            <div class="btns" id="labo-exp">
+              <button class="btn" type="button" data-value="boyle" aria-pressed="true">Boyle-Mariotte : seringue</button>
+              <button class="btn" type="button" data-value="charles">Charles : piston libre dans un bain</button>
+              <button class="btn" type="button" data-value="gl">Gay-Lussac : ballon rigide dans un bain</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="labo-x"><span id="labo-xlab">Volume</span><output for="labo-x"></output></label><input type="range" id="labo-x" min="0" max="100" step="1" value="50"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn btn--primary" type="button" id="labo-mes">Mesurer</button><button class="btn" type="button" id="labo-fit" aria-pressed="false">Ajuster</button><button class="btn" type="button" id="labo-clr">Effacer</button></div></div>
+        </div>
+        <div class="readouts" id="labo-read"></div>
+        <figcaption><b>Mode d'emploi</b> Règle le curseur, clique sur « Mesurer », recommence pour cinq ou six valeurs, puis « Ajuster ». Pour Boyle-Mariotte, l'ajustement trace <i>p</i> en fonction de 1/<i>V</i> : une droite. Pour Charles et Gay-Lussac, la droite est prolongée jusqu'à l'axe : lis la température du zéro absolu. Les mesures ont une petite erreur aléatoire, comme au labo.</figcaption>
+      </figure>
+
+      <p>Les trois lois se combinent en une seule. Pour une quantité de gaz fixée, <i>pV</i>/<i>T</i> reste constant. Et en 1811, Amedeo Avogadro a compris qu'à la même pression et la même température, des volumes égaux de gaz différents contiennent le même nombre de molécules.</p>
+      <div class="box box--loi">
+        <span class="label">Équation d'état des gaz parfaits</span>
+        <div class="formula"><span class="eq"><i>p V</i> = <i>n R T</i></span><span class="eq"><i>p V</i> = <i>N k T</i></span></div>
+        <p><i>p</i> en Pa, <i>V</i> en m³, <i>T</i> en K, <i>n</i> la quantité de matière en mol, <i>R</i> = 8,314 J/(mol·K) la constante des gaz parfaits. Version « molécules » : <i>N</i> = <i>n N</i><sub>A</sub> molécules et <i>k</i> = <i>R</i>/<i>N</i><sub>A</sub> = 1,381·10<sup>−23</sup> J/K, la constante de Boltzmann. Pour un gaz enfermé : <i>p</i><sub>1</sub><i>V</i><sub>1</sub>/<i>T</i><sub>1</sub> = <i>p</i><sub>2</sub><i>V</i><sub>2</sub>/<i>T</i><sub>2</sub>.</p>
+      </div>
+      <p>Conséquence : à 0 °C et 1013 hPa, une mole de n'importe quel gaz (2 g d'hydrogène, 32 g d'oxygène, 44 g de CO<sub>2</sub>) occupe 22,4 L. Les gaz réels s'écartent du modèle à très haute pression ou près de leur liquéfaction ; pour l'air dans les conditions habituelles, l'erreur est inférieure à 0,1 %.</p>
+    </section>
+
+    <!-- 3.4 -->
+    <section class="section" id="cinetique">
+      <div class="section-head"><span class="label">3.4</span><h2>Température et vitesse des molécules</h2></div>
+      <p>En calculant la force moyenne des chocs sur une paroi, on trouve <i>pV</i> = <sup>2</sup>⁄<sub>3</sub> <i>N</i> ⟨<i>E</i><sub>c</sub>⟩. En comparant avec <i>pV</i> = <i>NkT</i>, on obtient la signification microscopique de la température :</p>
+      <div class="box box--loi">
+        <span class="label">Énergie cinétique moyenne d'une molécule</span>
+        <div class="formula"><span class="eq">⟨<i>E</i><sub>c</sub>⟩ = <span class="frac"><span>3</span><span>2</span></span> <i>k T</i></span><span class="eq"><i>v</i><sub>q</sub> = <span class="math">√</span>(<span class="frac"><span>3<i>RT</i></span><span><i>M</i></span></span>)</span></div>
+        <p>La température absolue est proportionnelle à l'énergie cinétique moyenne des molécules, quelle que soit leur nature. <i>v</i><sub>q</sub> est la vitesse quadratique moyenne (la racine de la moyenne des <i>v</i>²), <i>M</i> la masse molaire en <strong>kg</strong>/mol. À la même température, les molécules légères vont plus vite.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-maxwell">
+        <div class="anim__head"><h4>La course des molécules</h4><span class="label">Simulation 3.3</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-maxwell" style="--ar: 16 / 9; --ar-m: 3 / 4" aria-label="Distribution des vitesses de Maxwell pour plusieurs gaz et course de molécules tirées au hasard selon cette distribution."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="mx-t"><span>Température</span><output for="mx-t"></output></label><input type="range" id="mx-t" min="50" max="2000" step="10" value="293"></div>
+          <div class="ctrl" style="flex-basis: 60%">
+            <span class="ctrl__name">Gaz affichés</span>
+            <div class="btns" id="mx-gaz"></div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="mx-play"></button></div></div>
+        </div>
+        <div class="readouts" id="mx-read"></div>
+        <figcaption><b>À observer</b> Les vitesses sont très étalées : quelques molécules sont presque immobiles, d'autres trois fois plus rapides que la moyenne. C'est la <strong>distribution de Maxwell</strong>. Dans la course, chaque molécule garde une vitesse tirée selon cette distribution (1 km/s à l'écran = 1 s pour traverser la piste). Monte à 1000 K, la température de la haute atmosphère : une infime fraction des molécules d'hydrogène dépasse la vitesse de libération de la Terre (11,2 km/s). Sur des milliards d'années, ça suffit : la Terre a perdu presque tout son hydrogène libre.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 3.5 -->
+    <section class="section" id="altitude">
+      <div class="section-head"><span class="label">3.5</span><h2>Pression et altitude</h2></div>
+      <p>La pression atmosphérique vient du poids de l'air au-dessus de nous. Plus on monte, moins il en reste : la pression baisse, d'environ 11 % tous les 1000 m près du sol. Au Jungfraujoch, il ne reste que les deux tiers de l'atmosphère au-dessus de ta tête ; au sommet de l'Everest, un tiers.</p>
+      <p>Conséquence culinaire : l'eau bout quand la pression de sa vapeur égale la pression ambiante. Moins de pression, ébullition plus tôt. À Zermatt l'eau bout vers 95 °C, au Jungfraujoch vers 88 °C : les pâtes et les œufs mettent plus longtemps à cuire, et la fondue est moins chaude. L'<strong>autocuiseur</strong> fait l'inverse : en gardant la vapeur enfermée, il monte la pression vers 2 bar et l'eau bout à 120 °C.</p>
+
+      <figure class="anim wide" id="anim-alt">
+        <div class="anim__head"><h4>Du Léman au sommet de l'Everest</h4><span class="label">Simulation 3.4</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-alt" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Profil d'altitude avec des lieux suisses et l'Everest ; un sachet de chips gonfle et la température d'ébullition de l'eau diminue avec l'altitude."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis: 100%"><label for="alt-h"><span>Altitude</span><output for="alt-h"></output></label><input type="range" id="alt-h" min="0" max="8849" step="1" value="372"></div>
+          <div class="ctrl" style="flex-basis: 100%">
+            <span class="ctrl__name">Aller à…</span>
+            <div class="btns" id="alt-lieux"></div>
+          </div>
+        </div>
+        <div class="readouts" id="alt-read"></div>
+        <figcaption><b>Le modèle</b> Atmosphère standard (température qui baisse de 6,5 °C par km). Le sachet de chips a été scellé à 400 m d'altitude et reste à la même température : <i>pV</i> = constante, donc il gonfle quand la pression baisse. Il éclate si son volume dépasse 1,8 fois le volume de départ. Température d'ébullition calculée avec la relation de Clausius-Clapeyron.</figcaption>
+      </figure>
+
+      <div class="box box--fun">
+        <span class="label">Le saviez-vous ?</span>
+        <p>Les gourdes en plastique fermées au sommet d'une montagne sont toutes écrasées quand on revient en plaine. Même effet en avion : la cabine est pressurisée à l'équivalent de 2000 m environ, c'est pourquoi les petits pots de yaourt servis à bord sont bombés.</p>
+      </div>
+    </section>
+
+    <!-- 3.6 -->
+    <section class="section" id="test">
+      <div class="section-head"><span class="label">3.6</span><h2>Teste-toi</h2></div>
+      <div class="quiz">
+        <p class="quiz__score"></p>
+        <div class="qcm">
+          <p class="q">Le manomètre de la station indique 2,0 bar dans ton pneu de vélo. La pression absolue de l'air dans le pneu vaut environ :</p>
+          <div class="opts">
+            <button>1,0 bar</button>
+            <button>2,0 bar</button>
+            <button data-ok>3,0 bar</button>
+          </div>
+          <p class="fb" hidden>Le manomètre mesure la surpression par rapport à l'atmosphère (≈ 1 bar). Pression absolue = 2,0 + 1,0 = 3,0 bar.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">On chauffe un gaz enfermé dans un récipient rigide de 20 °C à 40 °C. Sa pression :</p>
+          <div class="opts">
+            <button>double.</button>
+            <button data-ok>augmente d'environ 7 %.</button>
+            <button>ne change pas, le volume est constant.</button>
+          </div>
+          <p class="fb" hidden>Gay-Lussac avec des kelvins : <i>p</i><sub>2</sub>/<i>p</i><sub>1</sub> = 313/293 ≈ 1,07. Pour doubler la pression, il faudrait 586 K, soit 313 °C.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Dans l'air à 20 °C, comparons une molécule de dioxygène (O<sub>2</sub>) et une de diazote (N<sub>2</sub>) :</p>
+          <div class="opts">
+            <button data-ok>Elles ont en moyenne la même énergie cinétique ; N<sub>2</sub>, plus léger, va un peu plus vite.</button>
+            <button>Elles ont la même vitesse moyenne.</button>
+            <button>O<sub>2</sub> a plus d'énergie, car il est plus lourd.</button>
+          </div>
+          <p class="fb" hidden>⟨<i>E</i><sub>c</sub>⟩ = 3/2 <i>kT</i> ne dépend que de la température. Comme <i>v</i><sub>q</sub> ∝ 1/√<i>M</i>, N<sub>2</sub> (28 g/mol) va √(32/28) ≈ 1,07 fois plus vite que O<sub>2</sub>.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Quel volume occupe une mole d'hélium à 0 °C et 1013 hPa ? Et une mole de CO<sub>2</sub> ?</p>
+          <div class="opts">
+            <button>2 L pour l'hélium, 44 L pour le CO<sub>2</sub>.</button>
+            <button data-ok>22,4 L tous les deux.</button>
+            <button>Ça dépend de la taille des molécules.</button>
+          </div>
+          <p class="fb" hidden><i>V</i> = <i>nRT</i>/<i>p</i> ne dépend pas de la nature du gaz : 1 · 8,314 · 273,15 / 101 325 = 0,0224 m³. Les molécules sont si petites par rapport aux distances qui les séparent que leur taille ne compte pas.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Au Jungfraujoch, l'eau bout vers 88 °C. Pourquoi ?</p>
+          <div class="opts">
+            <button>Il fait froid, donc l'eau perd sa chaleur plus vite.</button>
+            <button data-ok>La pression de l'air est plus faible : la vapeur peut se former à plus basse température.</button>
+            <button>Il y a moins d'oxygène pour « nourrir » l'ébullition.</button>
+          </div>
+          <p class="fb" hidden>L'ébullition commence quand la pression de vapeur de l'eau atteint la pression ambiante. À 3454 m, environ 660 hPa au lieu de 1013 hPa : ce seuil est atteint dès 88 °C.</p>
+        </div>
+        <div class="btns"><button class="btn quiz__reset" type="button">Recommencer le test</button></div>
+      </div>
+    </section>
+
+    <!-- 3.7 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">3.7</span><h2>Exercices</h2></div>
+      <p>Pense à convertir : températures en K, volumes en m³ (1 L = 10<sup>−3</sup> m³), pressions absolues en Pa.</p>
+      <ol class="exos">
+        <li>
+          <p><strong>Talon aiguille contre éléphant</strong> <span class="niveau">facile</span></p>
+          <p>a) Une personne de 60 kg tient un instant tout son poids sur un talon aiguille de 1,0 cm². Quelle pression exerce-t-elle sur le parquet ? b) Un éléphant de 5,0 t se tient sur ses quatre pattes, chacune de 0,10 m². Quelle pression exerce-t-il ? c) Qui abîme le plus le parquet ?</p>
+          <div class="check" data-answer="5.89e6" data-tol="0.02" data-unit="Pa" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>p</i> = <i>mg</i>/<i>A</i> = 60 · 9,81 / 1,0·10<sup>−4</sup> ≈ 5,9·10<sup>6</sup> Pa = 59 bar.</p>
+            <p>b) <i>p</i> = 5000 · 9,81 / 0,40 ≈ 1,2·10<sup>5</sup> Pa = 1,2 bar.</p>
+            <p>c) Le talon aiguille, avec une pression 48 fois plus grande. Certains musées interdisent les talons aiguilles, pas les éléphants (qui ont d'autres raisons de rester dehors).</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Ne jamais bloquer sa respiration</strong> <span class="niveau">facile</span></p>
+          <p>À 20 m de profondeur dans le Léman, la pression vaut 3,0 bar. Un plongeur y remplit ses poumons de 6,0 L d'air fourni par son détendeur. S'il remontait à la surface (1,0 bar) en bloquant sa respiration, quel volume cet air voudrait-il occuper ? On suppose la température constante.</p>
+          <div class="check" data-answer="18" data-tol="0.02" data-unit="L"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Boyle-Mariotte : <i>V</i><sub>2</sub> = <i>p</i><sub>1</sub><i>V</i><sub>1</sub>/<i>p</i><sub>2</sub> = 3,0 · 6,0 / 1,0 = 18 L. Les poumons ne peuvent pas suivre : c'est la surpression pulmonaire, l'accident le plus grave en plongée. Règle d'or : on expire en remontant.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le pneu sur l'autoroute</strong> <span class="niveau">facile</span></p>
+          <p>Un matin à 10 °C, on gonfle un pneu de voiture à 2,2 bar au manomètre (pression relative). Après une heure d'autoroute, l'air du pneu est à 45 °C. Le volume du pneu ne change pratiquement pas. a) Quelle est la nouvelle pression absolue ? b) Que lit-on au manomètre ?</p>
+          <div class="check" data-answer="3.60" data-tol="0.01" data-unit="bar" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) Pression absolue au départ : 2,2 + 1,0 = 3,2 bar. Gay-Lussac : <i>p</i><sub>2</sub> = 3,2 · 318,15/283,15 ≈ 3,60 bar.</p>
+            <p>b) 3,60 − 1,0 ≈ 2,6 bar. C'est pourquoi on contrôle la pression des pneus à froid.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'air de ta chambre</strong> <span class="niveau">moyen</span></p>
+          <p>Ta chambre mesure 4,0 m × 3,0 m × 2,5 m. L'air y est à 20 °C et 960 hPa. a) Quelle quantité de matière d'air contient-elle ? b) Combien de molécules ? c) Quelle est la masse de cet air (<i>M</i> = 29 g/mol) ?</p>
+          <div class="check" data-answer="1182" data-tol="0.02" data-unit="mol" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>n</i> = <i>pV</i>/(<i>RT</i>) = 96 000 · 30 / (8,314 · 293,15) ≈ 1,18·10<sup>3</sup> mol.</p>
+            <p>b) <i>N</i> = <i>n N</i><sub>A</sub> ≈ 1182 · 6,022·10<sup>23</sup> ≈ 7,1·10<sup>26</sup> molécules.</p>
+            <p>c) <i>m</i> = <i>nM</i> ≈ 1182 · 0,029 ≈ 34 kg. L'air de ta chambre pèse à peu près autant que toi à 10 ans.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le ballon qui s'envole</strong> <span class="niveau">moyen</span></p>
+          <p>Un ballon souple de 5,0 L est rempli d'hélium au bord du lac (1000 hPa, 20 °C). Lâché, il monte jusqu'à 3000 m, où la pression vaut 700 hPa et la température 1 °C. Quel est alors son volume ? (On néglige la tension de l'enveloppe.)</p>
+          <div class="check" data-answer="6.68" data-tol="0.02" data-unit="L"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>V</i><sub>2</sub> = <i>V</i><sub>1</sub> · (<i>p</i><sub>1</sub>/<i>p</i><sub>2</sub>) · (<i>T</i><sub>2</sub>/<i>T</i><sub>1</sub>) = 5,0 · (1000/700) · (274,15/293,15) ≈ 6,7 L.</p>
+            <p>La baisse de pression fait gonfler, le froid fait un peu dégonfler ; la pression gagne. Un ballon-sonde météo, qui monte à 30 km, part avec un diamètre d'environ 2 m et éclate quand il atteint 6 à 10 m.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Vitesse des molécules</strong> <span class="niveau">moyen</span></p>
+          <p>Calcule la vitesse quadratique moyenne des molécules de dioxygène (<i>M</i> = 32 g/mol) et de dihydrogène (<i>M</i> = 2,0 g/mol) à 20 °C. Quel est le rapport entre les deux ?</p>
+          <div class="check" data-answer="478" data-tol="0.02" data-unit="m/s" data-label="O₂ :"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>O<sub>2</sub> : <i>v</i><sub>q</sub> = √(3 · 8,314 · 293,15 / 0,032) ≈ 478 m/s.</p>
+            <p>H<sub>2</sub> : √(3 · 8,314 · 293,15 / 0,0020) ≈ 1,91·10<sup>3</sup> m/s.</p>
+            <p>Rapport : √(32/2) = 4. Attention au piège classique : <i>M</i> en kg/mol, pas en g/mol, sinon on trouve des vitesses 32 fois trop petites.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>La bouteille de plongée</strong> <span class="niveau">défi</span></p>
+          <p>Une bouteille de plongée de 12 L contient de l'air à 200 bar et 20 °C. a) Quelle masse d'air contient-elle (<i>M</i> = 29 g/mol) ? b) Quel volume cet air occuperait-il à 1,0 bar et 20 °C ? c) Un plongeur consomme 20 L d'air par minute, mesurés à la pression à laquelle il respire. Combien de temps peut-il rester à 20 m (3,0 bar) s'il garde 50 bar de réserve ?</p>
+          <div class="check" data-answer="2.86" data-tol="0.02" data-unit="kg" data-label="a)"></div>
+          <div class="check" data-answer="30" data-tol="0.03" data-unit="min" data-label="c)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>n</i> = <i>pV</i>/(<i>RT</i>) = 200·10<sup>5</sup> · 0,012 / (8,314 · 293,15) ≈ 98,5 mol, donc <i>m</i> ≈ 98,5 · 0,029 ≈ 2,9 kg. La bouteille pleine est 3 kg plus lourde que vide.</p>
+            <p>b) Boyle-Mariotte : 12 · 200 / 1,0 = 2400 L.</p>
+            <p>c) Air utilisable : de 200 à 50 bar, soit 12 · 150 = 1800 L ramenés à 1 bar. À 3 bar, chaque minute consomme 20 L à 3 bar, soit 60 L ramenés à 1 bar. Durée : 1800/60 = 30 min. En surface, la même bouteille durerait trois fois plus longtemps.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 3.8 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>Pression : <i>p</i> = <i>F</i>/<i>A</i> en Pa ; 1 bar = 10<sup>5</sup> Pa ; atmosphère ≈ 1013 hPa. Dans les lois des gaz : pression <strong>absolue</strong>.</li>
+          <li>Gaz parfait : molécules ponctuelles qui n'interagissent que par chocs. La pression est l'effet moyen des chocs sur les parois.</li>
+          <li>Boyle-Mariotte (<i>T</i> constante) : <i>pV</i> = cste. Charles (<i>p</i> constante) : <i>V</i>/<i>T</i> = cste. Gay-Lussac (<i>V</i> constant) : <i>p</i>/<i>T</i> = cste, avec <i>T</i> en K.</li>
+          <li>Équation d'état : <i>pV</i> = <i>nRT</i> = <i>NkT</i>. Une mole de gaz occupe 22,4 L à 0 °C et 1013 hPa.</li>
+          <li>⟨<i>E</i><sub>c</sub>⟩ = 3/2 <i>kT</i> : la température mesure l'énergie cinétique moyenne des molécules. <i>v</i><sub>q</sub> = √(3<i>RT</i>/<i>M</i>), quelques centaines de m/s.</li>
+          <li>La pression diminue avec l'altitude ; la température d'ébullition de l'eau aussi (environ −1 °C par 300 m).</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a href="2-chaleur.html"><span class="label">Chapitre 2</span><span class="t">← Chaleur et changements d'état</span></a>
+      <a class="next" href="4-machines-thermiques.html"><span class="label">Chapitre 4</span><span class="t">Machines thermiques →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Thermodynamique au gymnase · Chapitre 3 · Les gaz parfaits</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch3.js"></script>
+</body>
+</html>

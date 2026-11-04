@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>4 · Machines thermiques — Thermodynamique au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/cours.css">
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+    <marker id="ah-hot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--hot)"/></marker>
+    <marker id="ah-cold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--cold)"/></marker>
+    <marker id="ah-work" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--work)"/></marker>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="index.html"><span class="brand__thermo" aria-hidden="true"></span>Thermodynamique au gymnase</a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="1-temperature.html"><span class="n">1</span><span class="t">Température</span></a>
+      <a href="2-chaleur.html"><span class="n">2</span><span class="t">Chaleur</span></a>
+      <a href="3-gaz-parfaits.html"><span class="n">3</span><span class="t">Gaz parfaits</span></a>
+      <a href="4-machines-thermiques.html" aria-current="page"><span class="n">4</span><span class="t">Machines thermiques</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="chapter-hero">
+  <div class="chapter-hero__inner">
+    <div class="chapter-hero__text">
+      <span class="eyebrow">Chapitre 4</span>
+      <h1>Machines thermiques</h1>
+      <p class="lead">Une voiture jette par le pot d'échappement et le radiateur les deux tiers de l'énergie de son essence, et ce n'est pas la faute des ingénieurs : c'est la loi. Une pompe à chaleur, elle, donne quatre kWh de chaleur pour un kWh d'électricité, et ce n'est pas de la magie. Le premier et le deuxième principe expliquent tout ça.</p>
+      <div class="objectifs">
+        <span class="label">À la fin du chapitre, tu sais…</span>
+        <ul>
+          <li>calculer le travail échangé par un gaz et le lire dans un diagramme <i>p</i>-<i>V</i> ;</li>
+          <li>appliquer le premier principe Δ<i>U</i> = <i>W</i> + <i>Q</i> aux quatre transformations de base ;</li>
+          <li>décrire le fonctionnement d'un moteur à quatre temps ;</li>
+          <li>calculer un rendement, un COP et leurs limites de Carnot ;</li>
+          <li>expliquer pourquoi certains phénomènes n'arrivent jamais à l'envers.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="chapter-hero__unit" aria-hidden="true">η<small style="margin-top:1.9rem">le rendement</small></div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" open>
+    <summary><span class="label">Dans ce chapitre</span></summary>
+    <ol>
+      <li><a href="#travail"><span class="n">4.1</span>Le travail d'un gaz</a></li>
+      <li><a href="#premier"><span class="n">4.2</span>Le premier principe</a></li>
+      <li><a href="#moteurs"><span class="n">4.3</span>Les moteurs thermiques</a></li>
+      <li><a href="#pac"><span class="n">4.4</span>Frigo et pompe à chaleur</a></li>
+      <li><a href="#entropie"><span class="n">4.5</span>Deuxième principe et entropie</a></li>
+      <li><a href="#test"><span class="n">4.6</span>Teste-toi</a></li>
+      <li><a href="#exercices"><span class="n">4.7</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">4.8</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 4.1 -->
+    <section class="section" id="travail">
+      <div class="section-head"><span class="label">4.1</span><h2>Le travail d'un gaz</h2></div>
+      <p>Un gaz enfermé sous un piston pousse sur celui-ci avec la force <i>F</i> = <i>pA</i>. Si le piston recule d'une distance Δ<i>x</i>, le gaz fournit le travail <i>F</i>Δ<i>x</i> = <i>pA</i>Δ<i>x</i> = <i>p</i>Δ<i>V</i>. Si au contraire on enfonce le piston, c'est le gaz qui <em>reçoit</em> du travail.</p>
+      <div class="box box--loi">
+        <span class="label">Travail reçu par un gaz (pression constante)</span>
+        <div class="formula"><span class="eq"><i>W</i> = −<i>p</i> · Δ<i>V</i></span></div>
+        <p>Convention : <i>W</i> &gt; 0 si le gaz <strong>reçoit</strong> du travail (compression, Δ<i>V</i> &lt; 0), <i>W</i> &lt; 0 s'il en <strong>fournit</strong> (détente). Si la pression varie, |<i>W</i>| est l'<strong>aire sous la courbe</strong> dans le diagramme <i>p</i>-<i>V</i>.</p>
+      </div>
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 640 230" role="img" aria-label="Diagramme pression-volume : l'aire sous la courbe d'une détente représente le travail fourni par le gaz.">
+            <line x1="60" y1="190" x2="320" y2="190" class="stroke-2" marker-end="url(#ah-ink)"/>
+            <line x1="60" y1="190" x2="60" y2="20" class="stroke-2" marker-end="url(#ah-ink)"/>
+            <text x="318" y="210" class="t-small" text-anchor="end">V</text>
+            <text x="48" y="30" class="t-small" text-anchor="end">p</text>
+            <path d="M100 60 C 150 110, 220 140, 290 150 L 290 190 L 100 190 Z" style="fill:var(--work);opacity:0.18"/>
+            <path d="M100 60 C 150 110, 220 140, 290 150" class="stroke-work" marker-end="url(#ah-work)"/>
+            <circle cx="100" cy="60" r="4" class="fill-ink"/><text x="108" y="54" class="t-small">état 1</text>
+            <circle cx="290" cy="150" r="4" class="fill-ink"/><text x="284" y="140" class="t-small" text-anchor="end">état 2</text>
+            <text x="190" y="176" class="t-small t-work" text-anchor="middle">aire = |W|</text>
+            <rect x="380" y="40" width="160" height="140" class="fill-paper" style="stroke:var(--ink);stroke-width:2"/>
+            <rect x="382" y="96" width="156" height="82" style="fill:var(--hot);opacity:0.15"/>
+            <rect x="382" y="84" width="156" height="12" class="fill-metal"/>
+            <rect x="454" y="20" width="12" height="64" class="fill-metal"/>
+            <line x1="560" y1="96" x2="560" y2="56" class="stroke-work" marker-end="url(#ah-work)"/>
+            <text x="568" y="80" class="t-small t-work">Δx</text>
+            <text x="460" y="140" class="t-small" text-anchor="middle">gaz à la pression p</text>
+            <text x="460" y="205" class="t-small" text-anchor="middle">le piston d'aire A recule : le gaz fournit pAΔx</text>
+          </svg>
+        </div>
+        <figcaption><b>Fig. 4.1</b> Le travail échangé par un gaz se lit comme une aire dans le diagramme de Clapeyron (<i>p</i>-<i>V</i>). Détente : le gaz fournit ce travail. Compression dans l'autre sens : il le reçoit.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.2 -->
+    <section class="section" id="premier">
+      <div class="section-head"><span class="label">4.2</span><h2>Le premier principe</h2></div>
+      <p>L'énergie ne se crée pas et ne se perd pas. Pour un système, cela donne une comptabilité très simple : ce qui entre sous forme de travail et de chaleur s'ajoute à l'énergie interne.</p>
+      <div class="box box--loi">
+        <span class="label">Premier principe de la thermodynamique</span>
+        <div class="formula"><span class="eq">Δ<i>U</i> = <i>W</i> + <i>Q</i></span></div>
+        <p>Pour un gaz parfait, l'énergie interne ne dépend que de la température : <i>U</i> = <sup>3</sup>⁄<sub>2</sub> <i>nRT</i> pour un gaz monoatomique (hélium, argon), <i>U</i> = <sup>5</sup>⁄<sub>2</sub> <i>nRT</i> pour un gaz diatomique comme l'air (les molécules tournent aussi sur elles-mêmes). Donc Δ<i>U</i> = <sup>5</sup>⁄<sub>2</sub> <i>nR</i>Δ<i>T</i> pour l'air.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Transformation</th><th>Ce qui est constant</th><th><i>W</i></th><th><i>Q</i></th><th>Δ<i>U</i></th></tr></thead>
+          <tbody>
+            <tr><td>Isochore</td><td>volume</td><td>0</td><td>= Δ<i>U</i></td><td><sup>5</sup>⁄<sub>2</sub> <i>nR</i>Δ<i>T</i></td></tr>
+            <tr><td>Isobare</td><td>pression</td><td>−<i>p</i>Δ<i>V</i></td><td><sup>7</sup>⁄<sub>2</sub> <i>nR</i>Δ<i>T</i></td><td><sup>5</sup>⁄<sub>2</sub> <i>nR</i>Δ<i>T</i></td></tr>
+            <tr><td>Isotherme</td><td>température</td><td><i>nRT</i> ln(<i>V</i><sub>1</sub>/<i>V</i><sub>2</sub>)</td><td>= −<i>W</i></td><td>0</td></tr>
+            <tr><td>Adiabatique</td><td>aucun échange de chaleur</td><td>= Δ<i>U</i></td><td>0</td><td><sup>5</sup>⁄<sub>2</sub> <i>nR</i>Δ<i>T</i></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Valeurs pour l'air (diatomique). Une transformation <strong>adiabatique</strong> est soit très bien isolée, soit trop rapide pour que la chaleur ait le temps de passer. Elle suit <i>pV</i><sup><i>γ</i></sup> = constante, avec <i>γ</i> = 1,4 pour l'air : la courbe est plus raide qu'une isotherme. Comprimer vite chauffe le gaz (pompe à vélo, moteur diesel), détendre vite le refroidit (bombe aérosol, nuages qui se forment dans l'air qui monte).</p>
+
+      <figure class="anim wide" id="anim-transfo">
+        <div class="anim__head"><h4>Les quatre transformations</h4><span class="label">Simulation 4.1</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-transfo" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Un cylindre d'air subit une transformation ; le diagramme pression-volume trace le chemin et des barres montrent le travail, la chaleur et la variation d'énergie interne."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis: 100%">
+            <span class="ctrl__name">Transformation (départ : 1 L d'air à 1 bar et 20 °C)</span>
+            <div class="btns" id="tr-type">
+              <button class="btn" type="button" data-value="isochore">Isochore</button>
+              <button class="btn" type="button" data-value="isobare">Isobare</button>
+              <button class="btn" type="button" data-value="isotherme" aria-pressed="true">Isotherme</button>
+              <button class="btn" type="button" data-value="adiabatique">Adiabatique</button>
+            </div>
+          </div>
+          <div class="ctrl" style="flex-basis: 60%"><label for="tr-x"><span id="tr-xlab">Volume final</span><output for="tr-x"></output></label><input type="range" id="tr-x" min="0" max="1000" step="1" value="500"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="tr-play"></button></div></div>
+        </div>
+        <div class="readouts" id="tr-read"></div>
+        <figcaption><b>À essayer</b> En isotherme, le gaz reçoit du travail et rend exactement autant de chaleur : Δ<i>U</i> = 0. En adiabatique, comprime 20 fois : sans échange de chaleur, tout le travail reste dans le gaz, qui dépasse 600 °C. C'est le principe du briquet pneumatique (un bout de coton s'enflamme au fond du tube) et du moteur diesel, qui n'a pas besoin de bougie.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.3 -->
+    <section class="section" id="moteurs">
+      <div class="section-head"><span class="label">4.3</span><h2>Les moteurs thermiques</h2></div>
+      <p>Un <strong>moteur thermique</strong> transforme de la chaleur en travail en faisant parcourir à un fluide un <strong>cycle</strong> : une suite de transformations qui le ramène à son état de départ. Sur un cycle, Δ<i>U</i> = 0. Le travail fourni est l'aire enclose par le cycle dans le diagramme <i>p</i>-<i>V</i>.</p>
+      <p>Tout moteur a besoin de <strong>deux sources de chaleur</strong> : il prend <i>Q</i><sub>c</sub> à une source chaude (la combustion), fournit le travail |<i>W</i>| et rejette obligatoirement <i>Q</i><sub>f</sub> à une source froide (l'air ambiant, une rivière). Impossible de tout transformer en travail : c'est l'une des formes du <strong>deuxième principe</strong>.</p>
+      <div class="box box--loi">
+        <span class="label">Rendement et limite de Carnot</span>
+        <div class="formula"><span class="eq"><i>η</i> = <span class="frac"><span>|<i>W</i>|</span><span><i>Q</i><sub>c</sub></span></span> = 1 − <span class="frac"><span>|<i>Q</i><sub>f</sub>|</span><span><i>Q</i><sub>c</sub></span></span></span><span class="eq"><i>η</i> ≤ <i>η</i><sub>Carnot</sub> = 1 − <span class="frac"><span><i>T</i><sub>f</sub></span><span><i>T</i><sub>c</sub></span></span></span></div>
+        <p>Sadi Carnot (1824) a montré qu'aucun moteur fonctionnant entre deux températures absolues <i>T</i><sub>c</sub> et <i>T</i><sub>f</sub> ne peut dépasser ce rendement, quelle que soit sa technologie. Pour gagner, il faut une source chaude très chaude et une source froide très froide.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-otto">
+        <div class="anim__head"><h4>Le moteur à quatre temps</h4><span class="label">Simulation 4.2</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-otto" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Un cylindre de moteur à essence avec soupapes, bougie, bielle et vilebrequin, synchronisé avec le cycle d'Otto dans le diagramme pression-volume."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="otto-r"><span>Taux de compression</span><output for="otto-r"></output></label><input type="range" id="otto-r" min="5" max="14" step="0.5" value="10"></div>
+          <div class="ctrl"><label for="otto-v"><span>Vitesse de l'animation</span><output for="otto-v"></output></label><input type="range" id="otto-v" min="0.1" max="2" step="0.05" value="0.5"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="otto-play"></button></div></div>
+        </div>
+        <div class="readouts" id="otto-read"></div>
+        <figcaption><b>Les quatre temps</b> 1. Admission : le piston descend et aspire le mélange air-essence. 2. Compression : soupapes fermées, le piston remonte (adiabatique). 3. Explosion et détente : la bougie allume le mélange, la pression bondit et pousse le piston, c'est le seul temps moteur. 4. Échappement : les gaz brûlés sont chassés. Le vilebrequin fait deux tours par cycle. Le rendement théorique 1 − 1/<i>r</i><sup>0,4</sup> augmente avec le taux de compression <i>r</i> ; frottements et pertes le divisent à peu près par deux en pratique.</figcaption>
+      </figure>
+
+      <div class="box box--ex">
+        <span class="label">Ordres de grandeur</span>
+        <ul>
+          <li>Moteur à essence d'une voiture : 25 à 35 % en bon régime, bien moins en ville.</li>
+          <li>Gros moteur diesel de cargo : jusqu'à 50 %.</li>
+          <li>Centrale nucléaire suisse (Gösgen, Leibstadt) : environ 33 %. La vapeur sort du réacteur vers 280 °C seulement, d'où une limite de Carnot modeste. Le panache de la tour de refroidissement, c'est la chaleur <i>Q</i><sub>f</sub> rejetée, deux fois la puissance électrique.</li>
+          <li>Moteur électrique : plus de 90 %, mais ce n'est pas une machine thermique, Carnot ne le concerne pas.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4.4 -->
+    <section class="section" id="pac">
+      <div class="section-head"><span class="label">4.4</span><h2>Frigo et pompe à chaleur</h2></div>
+      <p>Faisons tourner un moteur à l'envers. En lui fournissant du travail <i>W</i> (un compresseur électrique), on peut <strong>prendre de la chaleur à une source froide</strong> et la <strong>déposer dans une source chaude</strong>. Exactement ce que la chaleur ne fait jamais toute seule.</p>
+      <ul>
+        <li>Le <strong>réfrigérateur</strong> sert à refroidir : ce qui compte, c'est la chaleur <i>Q</i><sub>f</sub> retirée à l'intérieur. La grille noire à l'arrière, tiède, rejette <i>Q</i><sub>f</sub> + <i>W</i> dans la cuisine.</li>
+        <li>La <strong>pompe à chaleur</strong> (PAC) sert à chauffer : ce qui compte, c'est la chaleur <i>Q</i><sub>c</sub> livrée dans la maison, prise en partie à l'air extérieur, au sol ou à un lac.</li>
+      </ul>
+      <div class="box box--loi">
+        <span class="label">Coefficient de performance (COP)</span>
+        <div class="formula">
+          <span class="eq">COP<sub>frigo</sub> = <span class="frac"><span><i>Q</i><sub>f</sub></span><span><i>W</i></span></span> ≤ <span class="frac"><span><i>T</i><sub>f</sub></span><span><i>T</i><sub>c</sub> − <i>T</i><sub>f</sub></span></span></span>
+          <span class="eq">COP<sub>PAC</sub> = <span class="frac"><span>|<i>Q</i><sub>c</sub>|</span><span><i>W</i></span></span> ≤ <span class="frac"><span><i>T</i><sub>c</sub></span><span><i>T</i><sub>c</sub> − <i>T</i><sub>f</sub></span></span></span>
+        </div>
+        <p>Le COP peut être bien plus grand que 1 sans violer la conservation de l'énergie : |<i>Q</i><sub>c</sub>| = <i>Q</i><sub>f</sub> + <i>W</i>, la majeure partie de la chaleur vient de dehors. Plus l'écart de température est petit, meilleur est le COP.</p>
+      </div>
+
+      <figure class="anim wide" id="anim-flux">
+        <div class="anim__head"><h4>Où va l'énergie ?</h4><span class="label">Simulation 4.3</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-flux" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Diagramme des flux d'énergie entre une source chaude, une machine et une source froide, avec des flèches proportionnelles aux énergies."></canvas></div>
+        <div class="controls">
+          <div class="ctrl" style="flex-basis: 100%">
+            <span class="ctrl__name">Machine</span>
+            <div class="btns" id="flux-type">
+              <button class="btn" type="button" data-value="moteur" aria-pressed="true">Moteur</button>
+              <button class="btn" type="button" data-value="frigo">Réfrigérateur</button>
+              <button class="btn" type="button" data-value="pac">Pompe à chaleur</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="flux-tc"><span>Source chaude</span><output for="flux-tc"></output></label><input type="range" id="flux-tc" min="20" max="600" step="5" value="300"></div>
+          <div class="ctrl"><label for="flux-tf"><span>Source froide</span><output for="flux-tf"></output></label><input type="range" id="flux-tf" min="-30" max="40" step="1" value="20"></div>
+          <div class="ctrl"><label for="flux-q"><span>Qualité de la machine</span><output for="flux-q"></output></label><input type="range" id="flux-q" min="20" max="100" step="5" value="100"></div>
+        </div>
+        <div class="readouts" id="flux-read"></div>
+        <figcaption><b>À lire</b> La largeur de chaque flèche est proportionnelle à l'énergie échangée par cycle. Le bilan est toujours équilibré : ce qui entre dans la machine en ressort. « Qualité » = fraction du rendement (ou du COP) de Carnot atteinte ; une vraie machine se situe entre 40 et 60 %.</figcaption>
+      </figure>
+
+      <h3>La pompe à chaleur, star des maisons suisses</h3>
+      <p>En Suisse, la grande majorité des maisons neuves se chauffent avec une pompe à chaleur, et beaucoup de chaudières à mazout sont remplacées par des PAC. Le fluide frigorigène fait le tour d'un circuit fermé : il s'évapore dehors en prenant de la chaleur à l'air froid (oui, même à −5 °C), le compresseur le comprime et le chauffe, il se condense dans la maison en cédant sa chaleur à l'eau du chauffage, puis un détendeur fait chuter sa pression et sa température.</p>
+
+      <figure class="anim wide" id="anim-pac">
+        <div class="anim__head"><h4>La pompe à chaleur en hiver</h4><span class="label">Simulation 4.4</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-pac" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Schéma du circuit d'une pompe à chaleur air-eau et graphique du COP en fonction de la température extérieure pour un chauffage au sol ou des radiateurs."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="pac-te"><span>Température extérieure</span><output for="pac-te"></output></label><input type="range" id="pac-te" min="-15" max="15" step="1" value="0"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Distribution de la chaleur</span>
+            <div class="btns" id="pac-emet">
+              <button class="btn" type="button" data-value="35" aria-pressed="true">Chauffage au sol (35 °C)</button>
+              <button class="btn" type="button" data-value="55">Radiateurs (55 °C)</button>
+            </div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="pac-play"></button></div></div>
+        </div>
+        <div class="readouts" id="pac-read"></div>
+        <figcaption><b>À comparer</b> Le COP réel est pris égal à 45 % du COP de Carnot, ce qui est typique d'une PAC air-eau. Avec un chauffage au sol, l'eau n'a besoin que de 35 °C : l'écart de température est plus petit et le COP bien meilleur qu'avec de vieux radiateurs à 55 °C. Les besoins de chaleur de la maison augmentent quand il fait plus froid dehors (environ 10 kW à −10 °C).</figcaption>
+      </figure>
+    </section>
+
+    <!-- 4.5 -->
+    <section class="section" id="entropie">
+      <div class="section-head"><span class="label">4.5</span><h2>Deuxième principe et entropie</h2></div>
+      <p>Le premier principe dit que l'énergie se conserve. Il n'interdit pourtant pas qu'un café tiède se réchauffe tout seul en refroidissant la pièce, ni qu'un œuf brouillé se reconstitue. Ces choses n'arrivent jamais. Le <strong>deuxième principe</strong> dit dans quel sens vont les phénomènes.</p>
+      <div class="box box--loi">
+        <span class="label">Deuxième principe (énoncés équivalents)</span>
+        <ul>
+          <li><strong>Clausius</strong> : la chaleur ne passe jamais spontanément d'un corps froid à un corps chaud.</li>
+          <li><strong>Kelvin</strong> : aucun moteur ne peut transformer intégralement en travail la chaleur prise à une seule source.</li>
+          <li><strong>Entropie</strong> : dans un système isolé, l'entropie <i>S</i> ne peut qu'augmenter (ou rester constante). Les transformations réelles sont <strong>irréversibles</strong>.</li>
+        </ul>
+      </div>
+      <p>L'<strong>entropie</strong> mesure, en gros, le nombre de façons microscopiques de réaliser un même état macroscopique. Il y a énormément plus de façons de répartir des molécules dans toute une boîte que de les regrouper dans une moitié. Le système va vers les états les plus probables, c'est tout. Ludwig Boltzmann l'a résumé par <i>S</i> = <i>k</i> ln Ω, gravé sur sa tombe à Vienne.</p>
+
+      <figure class="anim wide" id="anim-detente">
+        <div class="anim__head"><h4>La détente dans le vide</h4><span class="label">Simulation 4.5</span></div>
+        <div class="anim__stage"><canvas class="anim-canvas" id="cv-det" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Des molécules d'abord regroupées à gauche d'une boîte se répandent dans toute la boîte quand on retire la cloison ; un graphique suit le nombre de molécules à gauche."></canvas></div>
+        <div class="controls">
+          <div class="ctrl">
+            <span class="ctrl__name">Nombre de molécules</span>
+            <div class="btns" id="det-n">
+              <button class="btn" type="button" data-value="4">4</button>
+              <button class="btn" type="button" data-value="10">10</button>
+              <button class="btn" type="button" data-value="40" aria-pressed="true">40</button>
+              <button class="btn" type="button" data-value="200">200</button>
+            </div>
+          </div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn btn--primary" type="button" id="det-go">Retirer la cloison</button><button class="btn" type="button" id="det-reset">Tout remettre à gauche</button><button class="btn" type="button" id="det-play"></button></div></div>
+        </div>
+        <div class="readouts" id="det-read"></div>
+        <figcaption><b>À méditer</b> Avec 4 molécules, il arrive souvent qu'elles se retrouvent toutes à gauche : la probabilité vaut (1/2)<sup>4</sup> = 1/16. Avec 10, c'est rare (1/1024). Avec 200, il faudrait attendre bien plus longtemps que l'âge de l'Univers. Dans un litre d'air, il y a 2,5·10<sup>22</sup> molécules : la détente est irréversible, non parce que le retour est interdit, mais parce qu'il est absurdement improbable.</figcaption>
+      </figure>
+
+      <div class="box box--fun">
+        <span class="label">La mort thermique</span>
+        <p>Si l'entropie de l'Univers ne fait qu'augmenter, il finira, dans un avenir inimaginablement lointain, à une température uniforme où plus aucune machine ne pourra fonctionner, faute de source froide. Les physiciens du XIX<sup>e</sup> siècle appelaient ça la « mort thermique ». Rien ne presse : on a encore le temps de finir les exercices.</p>
+      </div>
+    </section>
+
+    <!-- 4.6 -->
+    <section class="section" id="test">
+      <div class="section-head"><span class="label">4.6</span><h2>Teste-toi</h2></div>
+      <div class="quiz">
+        <p class="quiz__score"></p>
+        <div class="qcm">
+          <p class="q">En gonflant un pneu de vélo, l'embout de la pompe devient chaud. Pourquoi ?</p>
+          <div class="opts">
+            <button>À cause des frottements du piston uniquement.</button>
+            <button data-ok>L'air reçoit du travail en étant comprimé rapidement : son énergie interne et sa température augmentent.</button>
+            <button>L'air du pneu était déjà chaud.</button>
+          </div>
+          <p class="fb" hidden>Compression presque adiabatique : <i>Q</i> ≈ 0, donc Δ<i>U</i> = <i>W</i> &gt; 0. Les frottements jouent un petit rôle, mais l'essentiel est là.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Un gaz parfait est comprimé lentement à température constante. Que peut-on dire ?</p>
+          <div class="opts">
+            <button>Δ<i>U</i> &gt; 0, car il reçoit du travail.</button>
+            <button data-ok>Δ<i>U</i> = 0, donc il cède autant de chaleur qu'il reçoit de travail.</button>
+            <button><i>Q</i> = 0, car la température ne change pas.</button>
+          </div>
+          <p class="fb" hidden>Pour un gaz parfait, <i>U</i> ne dépend que de <i>T</i>. Isotherme ⇒ Δ<i>U</i> = 0 ⇒ <i>Q</i> = −<i>W</i>. Ne confonds pas « température constante » et « pas de chaleur ».</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Un moteur fonctionne entre une source à 327 °C et une source à 27 °C. Son rendement maximal vaut :</p>
+          <div class="opts">
+            <button>92 %</button>
+            <button data-ok>50 %</button>
+            <button>8 %</button>
+          </div>
+          <p class="fb" hidden>En kelvins : 1 − 300/600 = 0,50. Avec des °C, on trouverait 1 − 27/327 ≈ 92 %, une erreur classique.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Par une journée de canicule, on laisse la porte du frigo ouverte pour rafraîchir la cuisine fermée. La cuisine :</p>
+          <div class="opts">
+            <button>se refroidit un peu.</button>
+            <button>ne change pas de température.</button>
+            <button data-ok>se réchauffe.</button>
+          </div>
+          <p class="fb" hidden>Le frigo prend <i>Q</i><sub>f</sub> à la cuisine (par la porte) et rejette <i>Q</i><sub>f</sub> + <i>W</i> dans la même cuisine (par la grille). Bilan : la cuisine reçoit <i>W</i>, l'énergie électrique du compresseur.</p>
+        </div>
+        <div class="qcm">
+          <p class="q">Une pompe à chaleur a un COP de 4. Cela signifie que :</p>
+          <div class="opts">
+            <button>elle crée de l'énergie à partir de rien, ce qui est impossible.</button>
+            <button data-ok>pour 1 kWh d'électricité, elle livre 4 kWh de chaleur, dont 3 pris à l'air extérieur.</button>
+            <button>elle a un rendement de 400 % parce qu'elle perd peu de chaleur.</button>
+          </div>
+          <p class="fb" hidden>|<i>Q</i><sub>c</sub>| = <i>W</i> + <i>Q</i><sub>f</sub> : 4 = 1 + 3. L'énergie est conservée ; elle est juste « pompée » du froid vers le chaud.</p>
+        </div>
+        <div class="btns"><button class="btn quiz__reset" type="button">Recommencer le test</button></div>
+      </div>
+    </section>
+
+    <!-- 4.7 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">4.7</span><h2>Exercices</h2></div>
+      <p>Convention : énergie reçue par le système positive. Air : gaz diatomique, <i>γ</i> = 1,4.</p>
+      <ol class="exos">
+        <li>
+          <p><strong>Détente isobare</strong> <span class="niveau">facile</span></p>
+          <p>Un gaz à 1,0 bar se détend à pression constante de 2,0 L à 5,0 L. Quel travail reçoit-il ? Interprète le signe.</p>
+          <div class="check" data-answer="-300" data-tol="0.01" data-unit="J"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>W</i> = −<i>p</i>Δ<i>V</i> = −1,0·10<sup>5</sup> · 3,0·10<sup>−3</sup> = −300 J. Le signe négatif signifie que le gaz <em>fournit</em> 300 J au piston.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Bilan d'énergie</strong> <span class="niveau">facile</span></p>
+          <p>Un gaz reçoit 500 J de chaleur et fournit dans le même temps 200 J de travail. a) Quelle est la variation de son énergie interne ? b) Sa température augmente-t-elle ?</p>
+          <div class="check" data-answer="300" data-tol="0.01" data-unit="J" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>Q</i> = +500 J, <i>W</i> = −200 J, donc Δ<i>U</i> = <i>W</i> + <i>Q</i> = +300 J.</p>
+            <p>b) Oui : pour un gaz parfait, <i>U</i> augmente avec <i>T</i>.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>L'hélium dans la bouteille</strong> <span class="niveau">moyen</span></p>
+          <p>Une bouteille rigide contient 0,10 mol d'hélium (gaz monoatomique). On la chauffe de 20 °C à 120 °C. Quelle chaleur a-t-on fournie ? Quel travail le gaz a-t-il échangé ?</p>
+          <div class="check" data-answer="124.7" data-tol="0.02" data-unit="J"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Volume constant : <i>W</i> = 0, donc <i>Q</i> = Δ<i>U</i> = <sup>3</sup>⁄<sub>2</sub> <i>nR</i>Δ<i>T</i> = 1,5 · 0,10 · 8,314 · 100 ≈ 125 J.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le moteur diesel</strong> <span class="niveau">moyen</span></p>
+          <p>Dans un moteur diesel, l'air aspiré à 20 °C est comprimé très rapidement (adiabatiquement) à un volume 18 fois plus petit. a) Quelle température atteint-il ? Utilise <i>TV</i><sup><i>γ</i>−1</sup> = constante. b) Le gazole injecté s'enflamme spontanément vers 250 °C. Pourquoi un diesel n'a-t-il pas besoin de bougie ?</p>
+          <div class="check" data-answer="932" data-tol="0.01" data-unit="K" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>T</i><sub>2</sub> = <i>T</i><sub>1</sub> (<i>V</i><sub>1</sub>/<i>V</i><sub>2</sub>)<sup><i>γ</i>−1</sup> = 293,15 · 18<sup>0,4</sup> ≈ 293,15 · 3,18 ≈ 932 K, soit environ 660 °C.</p>
+            <p>b) L'air comprimé est bien plus chaud que la température d'auto-inflammation du gazole : le carburant s'enflamme dès qu'on l'injecte.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Rendement d'un moteur</strong> <span class="niveau">facile</span></p>
+          <p>À chaque cycle, un moteur reçoit 2000 J de la combustion et fournit 600 J de travail. a) Quel est son rendement ? b) Quelle chaleur rejette-t-il ?</p>
+          <div class="check" data-answer="30" data-tol="0.01" data-unit="%" data-label="a)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>η</i> = 600/2000 = 0,30 = 30 %.</p>
+            <p>b) |<i>Q</i><sub>f</sub>| = 2000 − 600 = 1400 J, rejetés par l'échappement et le radiateur.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Une centrale nucléaire</strong> <span class="niveau">moyen</span></p>
+          <p>Une centrale nucléaire comme celle de Gösgen produit environ 1000 MW électriques à partir de 3000 MW de chaleur. La vapeur entre dans la turbine vers 280 °C ; elle est condensée par de l'eau de refroidissement à 25 °C. a) Quel est le rendement réel ? b) Quel est le rendement de Carnot ? c) Quelle puissance thermique part dans la tour de refroidissement ?</p>
+          <div class="check" data-answer="46.1" data-tol="0.01" data-unit="%" data-label="b)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>η</i> = 1000/3000 ≈ 33 %.</p>
+            <p>b) <i>η</i><sub>C</sub> = 1 − 298,15/553,15 ≈ 0,461 = 46,1 %.</p>
+            <p>c) 3000 − 1000 = 2000 MW, de quoi chauffer environ 200 000 maisons en hiver. Certaines centrales en livrent une petite partie à un réseau de chauffage à distance (comme Beznau, dans la vallée de l'Aar).</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Le frigo</strong> <span class="niveau">moyen</span></p>
+          <p>L'intérieur d'un frigo est à 5 °C, la cuisine à 25 °C. a) Quel est le COP maximal ? b) Un vrai frigo a un COP de 3 et son compresseur consomme 100 W. Quelle puissance thermique retire-t-il à l'intérieur ? Quelle puissance rejette-t-il dans la cuisine ?</p>
+          <div class="check" data-answer="13.9" data-tol="0.01" data-label="a) COP ="></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) COP<sub>max</sub> = <i>T</i><sub>f</sub>/(<i>T</i><sub>c</sub> − <i>T</i><sub>f</sub>) = 278,15/20 ≈ 13,9.</p>
+            <p>b) <i>P</i><sub>f</sub> = 3 · 100 = 300 W retirés ; la cuisine reçoit 300 + 100 = 400 W.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><strong>Mazout ou pompe à chaleur ?</strong> <span class="niveau">défi</span></p>
+          <p>Une maison a besoin de 12 000 kWh de chaleur par an. a) Avec une PAC air-eau de COP annuel moyen 3,2, combien d'électricité consomme-t-elle ? b) Avec une chaudière à mazout de rendement 90 %, combien de litres de mazout faut-il (1 L ≈ 10 kWh) ? c) D'où viennent les kWh de chaleur « manquants » de la PAC ?</p>
+          <div class="check" data-answer="3750" data-tol="0.01" data-unit="kWh" data-label="a)"></div>
+          <div class="check" data-answer="1333" data-tol="0.01" data-unit="L" data-label="b)"></div>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>W</i> = <i>Q</i><sub>c</sub>/COP = 12 000/3,2 = 3750 kWh d'électricité.</p>
+            <p>b) Énergie du mazout : 12 000/0,9 ≈ 13 333 kWh, soit environ 1333 L.</p>
+            <p>c) 12 000 − 3750 = 8250 kWh sont pris à l'air extérieur, gratuitement. L'air froid contient encore beaucoup d'énergie interne : il suffit de la pomper.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 4.8 -->
+    <section class="section" id="essentiel">
+      <div class="essentiel">
+        <span class="label">L'essentiel</span>
+        <ul>
+          <li>Travail reçu par un gaz : <i>W</i> = −<i>p</i>Δ<i>V</i> à pression constante ; en général, |<i>W</i>| est l'aire sous la courbe dans le diagramme <i>p</i>-<i>V</i>.</li>
+          <li>Premier principe : Δ<i>U</i> = <i>W</i> + <i>Q</i> (énergie reçue positive). Gaz parfait : <i>U</i> ne dépend que de <i>T</i> (<sup>3</sup>⁄<sub>2</sub> <i>nRT</i> monoatomique, <sup>5</sup>⁄<sub>2</sub> <i>nRT</i> diatomique).</li>
+          <li>Isochore : <i>W</i> = 0. Isotherme : Δ<i>U</i> = 0. Adiabatique : <i>Q</i> = 0 et <i>pV</i><sup><i>γ</i></sup> = cste ; comprimer vite chauffe.</li>
+          <li>Moteur : <i>η</i> = |<i>W</i>|/<i>Q</i><sub>c</sub> ≤ 1 − <i>T</i><sub>f</sub>/<i>T</i><sub>c</sub> (températures en K). Il faut toujours une source froide.</li>
+          <li>Frigo et PAC : machines inversées. COP = (chaleur utile)/<i>W</i>, souvent supérieur à 1 ; meilleur quand l'écart de température est petit.</li>
+          <li>Deuxième principe : la chaleur va spontanément du chaud vers le froid ; l'entropie d'un système isolé augmente ; les phénomènes réels sont irréversibles.</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="Chapitres voisins">
+      <a href="3-gaz-parfaits.html"><span class="label">Chapitre 3</span><span class="t">← Les gaz parfaits</span></a>
+      <a class="next" href="index.html"><span class="label">Fin du cours</span><span class="t">Retour au sommaire →</span></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="site-footer"><div class="site-footer__inner">
+  <span>Thermodynamique au gymnase · Chapitre 4 · Machines thermiques</span>
+</div></footer>
+
+<script src="assets/cours.js"></script>
+<script src="assets/ch4.js"></script>
+</body>
+</html>
