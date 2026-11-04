@@ -1,0 +1,1452 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dynamique au gymnase</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="assets/dynamique.css">
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <marker id="ah-poids" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--v-poids)"/></marker>
+    <marker id="ah-normale" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--v-normale)"/></marker>
+    <marker id="ah-frott" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--v-frott)"/></marker>
+    <marker id="ah-tension" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--v-tension)"/></marker>
+    <marker id="ah-app" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--v-app)"/></marker>
+    <marker id="ah-vit" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--v-vit)"/></marker>
+    <marker id="ah-acc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--v-acc)"/></marker>
+    <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--ink)"/></marker>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="#top">
+      <svg class="brand__mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="10" height="10" rx="1.5" style="fill:none;stroke:var(--ink);stroke-width:2"/><path d="M13 14h7" style="stroke:var(--v-app);stroke-width:2.4;stroke-linecap:round"/><path d="M18 10.5l3.5 3.5-3.5 3.5" style="fill:none;stroke:var(--v-app);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"/></svg>
+      Dynamique au gymnase
+    </a>
+    <nav class="chapnav" aria-label="Chapitres">
+      <a href="#ch1"><span class="n">1</span><span class="t">Forces</span></a>
+      <a href="#ch2"><span class="n">2</span><span class="t">Inertie</span></a>
+      <a href="#ch3"><span class="n">3</span><span class="t">ΣF = ma</span></a>
+      <a href="#ch4"><span class="n">4</span><span class="t">Action–réaction</span></a>
+      <a href="#ch5"><span class="n">5</span><span class="t">Frottement</span></a>
+      <a href="#ch6"><span class="n">6</span><span class="t">Systèmes liés</span></a>
+      <a href="#ch7"><span class="n">7</span><span class="t">Virages</span></a>
+      <a href="#evaluation" class="is-eval"><span class="t">Évaluation</span></a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero__inner">
+    <div class="hero__text">
+      <p class="eyebrow">Physique · Secondaire II · Mécanique</p>
+      <h1>Dynamique</h1>
+      <p class="lead">La cinématique décrit comment les objets bougent. La dynamique explique pourquoi ils bougent, pourquoi ils s'arrêtent, et pourquoi ta voiture sort du virage quand la route est verglacée.</p>
+      <div class="hero__facts">
+        <span><b>7</b> chapitres</span>
+        <span><b>9</b> simulations</span>
+        <span><b>27</b> exercices corrigés</span>
+        <span>Évaluation notée sur <b>6</b></span>
+      </div>
+      <p class="hint">Prérequis : MRU, MRUA et vecteurs. Durée indicative : 10 à 12 périodes. Dans tout le cours, <i>g</i> = 9,81&nbsp;m/s².</p>
+    </div>
+    <div class="hero__law" aria-hidden="true">
+      <div class="big">ΣF = m·a</div>
+      <svg viewBox="0 0 420 120" class="hero__canvas" role="img" aria-label="Code couleur des vecteurs">
+        <g transform="translate(14 10)">
+          <line x1="0" y1="12" x2="48" y2="12" style="stroke:var(--v-poids);stroke-width:3" marker-end="url(#ah-poids)"/><text x="58" y="17" class="t-vec" style="fill:var(--v-poids)">P</text><text x="76" y="17" class="t-small">poids</text>
+          <line x1="0" y1="44" x2="48" y2="44" style="stroke:var(--v-normale);stroke-width:3" marker-end="url(#ah-normale)"/><text x="58" y="49" class="t-vec" style="fill:var(--v-normale)">N</text><text x="76" y="49" class="t-small">normale</text>
+          <line x1="0" y1="76" x2="48" y2="76" style="stroke:var(--v-tension);stroke-width:3" marker-end="url(#ah-tension)"/><text x="58" y="81" class="t-vec" style="fill:var(--v-tension)">T</text><text x="76" y="81" class="t-small">tension</text>
+        </g>
+        <g transform="translate(150 10)">
+          <line x1="0" y1="12" x2="48" y2="12" style="stroke:var(--v-frott);stroke-width:3" marker-end="url(#ah-frott)"/><text x="58" y="17" class="t-vec" style="fill:var(--v-frott)">F<tspan baseline-shift="sub" font-size="11">f</tspan></text><text x="80" y="17" class="t-small">frottement</text>
+          <line x1="0" y1="44" x2="48" y2="44" style="stroke:var(--v-app);stroke-width:3" marker-end="url(#ah-app)"/><text x="58" y="49" class="t-vec" style="fill:var(--v-app)">F</text><text x="80" y="49" class="t-small">force appliquée</text>
+          <line x1="0" y1="76" x2="48" y2="76" style="stroke:var(--ink);stroke-width:4" marker-end="url(#ah-ink)"/><text x="58" y="81" class="t-vec">ΣF</text><text x="86" y="81" class="t-small">résultante</text>
+        </g>
+        <g transform="translate(300 10)">
+          <line x1="0" y1="12" x2="48" y2="12" style="stroke:var(--v-vit);stroke-width:3" marker-end="url(#ah-vit)"/><text x="58" y="17" class="t-vec" style="fill:var(--v-vit)">v</text><text x="72" y="17" class="t-small">vitesse</text>
+          <line x1="0" y1="44" x2="48" y2="44" style="stroke:var(--v-acc);stroke-width:3" marker-end="url(#ah-acc)"/><text x="58" y="49" class="t-vec" style="fill:var(--v-acc)">a</text><text x="72" y="49" class="t-small">accél.</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="layout">
+  <details class="toc" id="toc" open>
+    <summary class="label">Sommaire</summary>
+    <ol>
+      <li><a href="#ch1"><span class="n">1</span><span>Les forces</span></a></li>
+      <li><a href="#ch2"><span class="n">2</span><span>Première loi : l'inertie</span></a></li>
+      <li><a href="#ch3"><span class="n">3</span><span>Deuxième loi : ΣF = m·a</span></a></li>
+      <li><a href="#ch4"><span class="n">4</span><span>Troisième loi : action et réaction</span></a></li>
+      <li><a href="#ch5"><span class="n">5</span><span>Frottement et plan incliné</span></a></li>
+      <li><a href="#ch6"><span class="n">6</span><span>Poids apparent et systèmes liés</span></a></li>
+      <li><a href="#ch7"><span class="n">7</span><span>Mouvement circulaire</span></a></li>
+      <li><a href="#formulaire"><span class="n">F</span><span>Formulaire</span></a></li>
+      <li><a href="#evaluation"><span class="n">É</span><span>Évaluation finale</span></a></li>
+    </ol>
+    <div class="toc__legend">
+      <span class="label">Code couleur</span>
+      <span class="swatch c-poids"><i style="background:currentColor"></i>Poids P</span>
+      <span class="swatch c-normale"><i style="background:currentColor"></i>Normale N</span>
+      <span class="swatch c-tension"><i style="background:currentColor"></i>Tension T</span>
+      <span class="swatch c-frott"><i style="background:currentColor"></i>Frottement F<sub>f</sub></span>
+      <span class="swatch c-app"><i style="background:currentColor"></i>Force appliquée F</span>
+      <span class="swatch c-vit"><i style="background:currentColor"></i>Vitesse v</span>
+      <span class="swatch c-acc"><i style="background:currentColor"></i>Accélération a</span>
+    </div>
+  </details>
+
+  <main class="content">
+
+    <section class="section" id="mode-emploi">
+      <div class="section-head"><span class="label">Avant de commencer</span><h3>Mode d'emploi</h3></div>
+      <ol class="steps">
+        <li><span><strong>Lis la théorie</strong> chapitre par chapitre. Les encadrés noirs contiennent les lois à connaître par cœur.</span></li>
+        <li><span><strong>Joue avec les simulations.</strong> Sous chacune, la liste « À essayer » te guide. Les valeurs affichées sont calculées avec les formules du cours.</span></li>
+        <li><span><strong>Fais les exercices.</strong> Tape ta réponse (virgule ou point, comme tu veux), puis « Vérifier ». Une tolérance de 2&nbsp;% couvre les arrondis. La solution détaillée est cachée juste en dessous, pour quand tu as vraiment essayé.</span></li>
+        <li><span><strong>Passe l'évaluation finale</strong> : 16 questions, note sur 6. « Nouvelle série » change les nombres pour t'entraîner autant que tu veux.</span></li>
+      </ol>
+    </section>
+
+    <!-- ================================================================
+         CHAPITRE 1
+         ================================================================ -->
+    <article class="chapter" id="ch1" data-chapter="1">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Chapitre 1</span>
+          <h2>Les forces</h2>
+          <p class="lead">Avant de prédire un mouvement, il faut savoir qui pousse, qui tire, et dans quelle direction.</p>
+          <div class="objectifs"><span class="label">Objectifs</span>
+            <ul>
+              <li>Définir une force et la représenter par un vecteur.</li>
+              <li>Reconnaître les forces usuelles : poids, normale, tension, frottement, force élastique.</li>
+              <li>Additionner des forces pour trouver la résultante.</li>
+              <li>Utiliser la loi de Hooke et dessiner un diagramme des forces.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">N</div>
+      </header>
+
+      <section class="section" id="s1-1">
+        <div class="section-head"><span class="label">1.1</span><h3>Qu'est-ce qu'une force ?</h3></div>
+        <p>Une force décrit l'action d'un objet sur un autre. Elle peut mettre un objet en mouvement, le freiner, le dévier ou le déformer. On la nomme toujours avec son auteur et sa cible : « la force de la corde sur la luge », « la force de la Terre sur le skieur ».</p>
+        <div class="box box--def">
+          <span class="label">Définition</span>
+          <p>Une force se représente par un <strong>vecteur</strong> <span class="vec">F</span> caractérisé par :</p>
+          <ul>
+            <li>son <strong>point d'application</strong> (où elle agit) ;</li>
+            <li>sa <strong>direction</strong> et son <strong>sens</strong> ;</li>
+            <li>son <strong>intensité</strong> (la longueur du vecteur), notée <i>F</i>, en <strong>newtons</strong> (N).</li>
+          </ul>
+          <p class="formula"><span class="eq">1&nbsp;N = 1&nbsp;kg·m/s²</span></p>
+        </div>
+        <p>Pour fixer les idées : une tablette de chocolat de 100&nbsp;g pèse environ 1&nbsp;N. Un élève de 60&nbsp;kg pèse environ 590&nbsp;N. Une locomotive Re&nbsp;460 des CFF tire au maximum avec environ 300&nbsp;000&nbsp;N. On mesure une force avec un <strong>dynamomètre</strong>, un ressort gradué en newtons.</p>
+        <div class="box box--fun">
+          <span class="label">Le test du « qui ? »</span>
+          <p>Pour chaque force, demande-toi quel objet l'exerce. Si personne ne l'exerce, elle n'existe pas. La « force de l'élan », la « force du mouvement » et la « force de la volonté » échouent toutes au test. La dernière reste utile pour finir les exercices.</p>
+        </div>
+      </section>
+
+      <section class="section" id="s1-2">
+        <div class="section-head"><span class="label">1.2</span><h3>Les forces usuelles</h3></div>
+        <p>En mécanique au gymnase, on rencontre presque toujours les mêmes six forces. Le poids agit à distance ; toutes les autres demandent un contact.</p>
+        <div class="table-wrap wide">
+          <table class="data-table">
+            <thead><tr><th>Force</th><th>Exercée par</th><th>Direction et sens</th><th>Intensité</th></tr></thead>
+            <tbody>
+              <tr><td><span class="c-poids">Poids <i>P</i></span></td><td>la Terre, à distance</td><td>verticale, vers le bas</td><td><i>P</i> = <i>m</i>·<i>g</i></td></tr>
+              <tr><td><span class="c-normale">Force normale <i>N</i></span></td><td>la surface d'appui</td><td>perpendiculaire à la surface, elle pousse</td><td>s'ajuste à la situation</td></tr>
+              <tr><td><span class="c-tension">Tension <i>T</i></span></td><td>une corde, un câble</td><td>le long de la corde, elle tire</td><td>s'ajuste ; la même partout dans une corde idéale</td></tr>
+              <tr><td><span class="c-frott">Frottement <i>F</i><sub>f</sub></span></td><td>la surface</td><td>parallèle à la surface, contre le glissement</td><td><i>F</i><sub>f</sub> ≤ <i>μ</i><sub>s</sub>·<i>N</i> ou <i>F</i><sub>f</sub> = <i>μ</i><sub>c</sub>·<i>N</i> (chapitre 5)</td></tr>
+              <tr><td><span class="c-ressort">Force élastique <i>F</i><sub>él</sub></span></td><td>un ressort</td><td>le long du ressort, vers sa longueur au repos</td><td><i>F</i><sub>él</sub> = <i>k</i>·Δ<i>l</i></td></tr>
+              <tr><td>Résistance de l'air <i>F</i><sub>air</sub></td><td>l'air</td><td>opposée à la vitesse</td><td>augmente avec la vitesse</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box box--def">
+          <span class="label">Masse ou poids ?</span>
+          <p>La <strong>masse</strong> <i>m</i> (en kg) mesure la quantité de matière et l'inertie d'un objet. Elle est la même partout. Le <strong>poids</strong> <i>P</i> (en N) est la force d'attraction de la planète. Il dépend du lieu :</p>
+          <p class="formula"><span class="eq"><i>P</i> = <i>m</i>·<i>g</i></span><span class="note">g = 9,81 N/kg en Suisse · 1,62 sur la Lune · 3,71 sur Mars · 24,8 sur Jupiter</span></p>
+          <p>Sur la Lune, tu gardes toute ta masse mais tu perds 83&nbsp;% de ton poids. Aucun régime n'ose promettre ça.</p>
+        </div>
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · le sac de ski</span>
+          <p>Ton sac de ski a une masse de 12&nbsp;kg. Son poids vaut <span class="math"><i>P</i> = <i>m</i>·<i>g</i> = 12 × 9,81 = 118&nbsp;N</span>. Pour le porter immobile, tes bretelles doivent exercer ensemble 118&nbsp;N vers le haut. À Zermatt comme à Lausanne : <i>g</i> varie de moins de 0,1&nbsp;% en Suisse.</p>
+        </div>
+      </section>
+
+      <section class="section" id="s1-3">
+        <div class="section-head"><span class="label">1.3</span><h3>Additionner des forces : la résultante</h3></div>
+        <p>Quand plusieurs forces agissent sur le même objet, seul compte leur effet total : la <strong>force résultante</strong>. C'est une somme de <em>vecteurs</em>, pas de nombres. Deux forces de 30&nbsp;N et 40&nbsp;N peuvent donner n'importe quoi entre 10&nbsp;N et 70&nbsp;N selon leurs directions.</p>
+        <p class="formula"><span class="eq">Σ<span class="vec">F</span> = <span class="vec">F</span><sub>1</sub> + <span class="vec">F</span><sub>2</sub> + <span class="vec">F</span><sub>3</sub> + …</span></p>
+        <ul>
+          <li><strong>Même direction, même sens</strong> : on additionne les intensités.</li>
+          <li><strong>Sens opposés</strong> : on soustrait ; la résultante va dans le sens de la plus grande.</li>
+          <li><strong>Directions perpendiculaires</strong> : Pythagore, <span class="math"><i>F</i><sub>R</sub> = √(<i>F</i><sub>1</sub>² + <i>F</i><sub>2</sub>²)</span>, et l'angle avec tan <i>θ</i> = <i>F</i><sub>2</sub> / <i>F</i><sub>1</sub>.</li>
+          <li><strong>Cas général</strong> : on additionne les composantes, <span class="math"><i>R</i><sub>x</sub> = Σ<i>F</i><sub>x</sub></span> et <span class="math"><i>R</i><sub>y</sub> = Σ<i>F</i><sub>y</sub></span>.</li>
+        </ul>
+
+        <figure class="sim wide" id="sim-somme" data-sim="somme">
+          <div class="sim__head"><h4>Somme de forces</h4><span class="label">Simulation 1</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas is-drag" id="cv-somme" style="--ar: 16 / 10; --ar-m: 1 / 1" aria-label="Forces appliquées sur une caisse, à déplacer en tirant leur pointe. La résultante est dessinée en noir."></canvas></div>
+          <div class="controls">
+            <div class="btns">
+              <button class="btn" type="button" id="somme-f3" aria-pressed="false">Ajouter F₃</button>
+              <button class="btn" type="button" id="somme-chain" aria-pressed="true">Construction bout à bout</button>
+            </div>
+            <div class="btns">
+              <button class="btn" type="button" data-preset="perp">30 N et 40 N à angle droit</button>
+              <button class="btn" type="button" data-preset="corde">Tir à la corde</button>
+              <button class="btn" type="button" data-preset="equi">Équilibre à trois</button>
+            </div>
+          </div>
+          <div class="readouts" id="somme-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Tire la pointe des flèches. Un carreau vaut 10&nbsp;N.</li>
+              <li>Avec « 30 N et 40 N à angle droit », vérifie Pythagore : la résultante vaut 50&nbsp;N.</li>
+              <li>Ajoute F₃ et cherche à rendre la résultante nulle. La caisse est alors en équilibre.</li>
+              <li>Mets F₁ et F₂ dans le même sens, puis en sens opposés. Quand la résultante est-elle maximale ?</li>
+            </ol>
+          </div>
+        </figure>
+
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · tir à la corde</span>
+          <p>L'équipe de gauche tire avec 1&nbsp;200&nbsp;N, celle de droite avec 1&nbsp;150&nbsp;N. Résultante sur la corde : 1&nbsp;200 − 1&nbsp;150 = 50&nbsp;N vers la gauche. La corde (et les deux équipes) accélèrent vers la gauche, doucement. Si les deux tiraient avec 1&nbsp;200&nbsp;N, la résultante serait nulle et rien ne bougerait, malgré 2&nbsp;400&nbsp;N d'efforts. Le sport, parfois, c'est ça.</p>
+        </div>
+      </section>
+
+      <section class="section" id="s1-4">
+        <div class="section-head"><span class="label">1.4</span><h3>Ressorts et loi de Hooke</h3></div>
+        <p>Un ressort s'allonge proportionnellement à la force qui le tire, tant qu'on ne le déforme pas pour de bon. C'est le principe du dynamomètre et du pèse-bagage.</p>
+        <div class="box box--loi">
+          <span class="label">Loi de Hooke</span>
+          <p class="formula"><span class="eq"><i>F</i><sub>él</sub> = <i>k</i>·Δ<i>l</i></span></p>
+          <p><i>k</i> est la <strong>constante de raideur</strong> du ressort, en N/m. Δ<i>l</i> est l'allongement (ou la compression) par rapport à la longueur au repos, en mètres. Un ressort dur a un grand <i>k</i>.</p>
+        </div>
+
+        <figure class="sim wide" id="sim-hooke" data-sim="hooke">
+          <div class="sim__head"><h4>Le banc d'essai des ressorts</h4><span class="label">Simulation 2</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-hooke" style="--ar: 16 / 10; --ar-m: 4 / 5" aria-label="Un ressort vertical auquel on accroche des masses, une règle graduée et un graphique force en fonction de l'allongement."></canvas></div>
+          <div class="controls">
+            <div class="ctrl"><label for="hooke-ressort">Ressort</label>
+              <select id="hooke-ressort">
+                <option value="20">Ressort A (k = 20 N/m)</option>
+                <option value="50">Ressort B (k = 50 N/m)</option>
+                <option value="mystere">Ressort mystère (k = ?)</option>
+              </select>
+            </div>
+            <div class="ctrl"><label for="hooke-m">Masse accrochée <output id="hooke-m-out">200 g</output></label><input type="range" id="hooke-m" min="0" max="500" step="50" value="200"></div>
+            <div class="btns">
+              <button class="btn btn--primary" type="button" id="hooke-noter">Noter la mesure</button>
+              <button class="btn" type="button" id="hooke-effacer">Effacer le graphique</button>
+            </div>
+          </div>
+          <div class="readouts" id="hooke-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Accroche 200&nbsp;g au ressort A et lis l'allongement sur la règle quand il s'est calmé.</li>
+              <li>Note au moins quatre mesures avec des masses différentes : les points s'alignent sur une droite qui passe par l'origine. Sa pente, c'est <i>k</i>.</li>
+              <li>Pendant les oscillations, compare les flèches : le poids ne change pas, la force du ressort oui.</li>
+              <li>Détermine la raideur du ressort mystère (c'est l'exercice 1.3 c).</li>
+            </ol>
+          </div>
+        </figure>
+
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · le pèse-bagage</span>
+          <p>Un pèse-bagage contient un ressort de raideur <i>k</i> = 2&nbsp;000&nbsp;N/m. Tu y suspends ta valise de 23&nbsp;kg, la limite de la plupart des compagnies. Le ressort exerce <i>F</i> = <i>P</i> = 23 × 9,81 = 226&nbsp;N, donc il s'allonge de <span class="math">Δ<i>l</i> = <i>F</i>/<i>k</i> = 226/2&nbsp;000 = 0,113&nbsp;m</span>, soit 11,3&nbsp;cm. Le fabricant n'a plus qu'à graduer en kilogrammes.</p>
+        </div>
+      </section>
+
+      <section class="section" id="s1-5">
+        <div class="section-head"><span class="label">1.5</span><h3>Le diagramme des forces</h3></div>
+        <p>Pour résoudre un problème de dynamique, on commence toujours par dessiner l'objet seul avec toutes les forces qu'il <em>subit</em>. Ce dessin s'appelle le <strong>diagramme des forces</strong> (ou diagramme du corps isolé). Neuf erreurs sur dix commencent par un diagramme faux.</p>
+        <div class="box box--loi">
+          <span class="label">Méthode</span>
+          <ol class="steps">
+            <li><span>Isole l'objet étudié : dessine-le seul, comme une boîte ou un point.</span></li>
+            <li><span>Dessine le poids, vertical vers le bas, depuis le centre de l'objet.</span></li>
+            <li><span>Fais le tour de l'objet : chaque contact donne une force (normale, frottement, tension, poussée).</span></li>
+            <li><span>Donne à chaque flèche un nom et une longueur à peu près proportionnelle à son intensité.</span></li>
+            <li><span>N'ajoute pas les forces que l'objet exerce sur les autres : elles vont dans le diagramme des autres.</span></li>
+          </ol>
+        </div>
+        <div class="fig-row wide">
+          <figure class="fig" id="fig-livre">
+            <div class="fig__body">
+              <svg viewBox="0 0 440 230" role="img" aria-label="Un livre posé sur une table, puis le livre isolé avec son poids vers le bas et la force normale vers le haut, de même longueur.">
+                <rect x="20" y="150" width="190" height="10" class="wood"/>
+                <path d="M34 160v60M196 160v60" class="ink"/>
+                <rect x="70" y="122" width="90" height="28" rx="2" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5"/>
+                <text x="115" y="140" text-anchor="middle" class="t-small">livre</text>
+                <text x="115" y="30" text-anchor="middle" class="t-small">situation</text>
+                <line x1="240" y1="20" x2="240" y2="220" class="ink-3 dash"/>
+                <text x="345" y="30" text-anchor="middle" class="t-small">diagramme des forces</text>
+                <rect x="305" y="102" width="80" height="28" rx="2" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5"/>
+                <circle cx="345" cy="116" r="3" style="fill:var(--ink)"/>
+                <line x1="345" y1="116" x2="345" y2="44" style="stroke:var(--v-normale);stroke-width:3" marker-end="url(#ah-normale)"/>
+                <text x="356" y="56" class="t-vec" style="fill:var(--v-normale)">N</text>
+                <line x1="345" y1="116" x2="345" y2="188" style="stroke:var(--v-poids);stroke-width:3" marker-end="url(#ah-poids)"/>
+                <text x="356" y="186" class="t-vec" style="fill:var(--v-poids)">P</text>
+              </svg>
+            </div>
+            <figcaption><b>Fig. 1</b>Un livre immobile sur une table. <i>N</i> et <i>P</i> ont la même intensité et se compensent. Attention : ce n'est pas une paire action–réaction (chapitre 4).</figcaption>
+          </figure>
+          <figure class="fig" id="fig-luge">
+            <div class="fig__body">
+              <svg viewBox="0 0 440 230" role="img" aria-label="Une luge tirée par une corde inclinée de 30 degrés : poids vers le bas, normale vers le haut plus courte que le poids, tension le long de la corde, frottement vers l'arrière.">
+                <line x1="20" y1="170" x2="420" y2="170" class="ink"/>
+                <path d="M30 170l-8 10M60 170l-8 10M90 170l-8 10M120 170l-8 10M150 170l-8 10M180 170l-8 10M210 170l-8 10M240 170l-8 10M270 170l-8 10M300 170l-8 10M330 170l-8 10M360 170l-8 10M390 170l-8 10M420 170l-8 10" class="ink-3"/>
+                <path d="M128 140h104l12 -8M120 166h120c10 0 14 -6 12 -12" class="ink"/>
+                <rect x="132" y="140" width="96" height="18" rx="2" class="wood"/>
+                <line x1="244" y1="140" x2="350" y2="79" class="ink-3 dash"/>
+                <text x="356" y="76" class="t-small">vers l'enfant</text>
+                <circle cx="180" cy="150" r="3" style="fill:var(--ink)"/>
+                <line x1="180" y1="150" x2="180" y2="222" style="stroke:var(--v-poids);stroke-width:3" marker-end="url(#ah-poids)"/>
+                <text x="188" y="220" class="t-vec" style="fill:var(--v-poids)">P</text>
+                <line x1="180" y1="150" x2="180" y2="98" style="stroke:var(--v-normale);stroke-width:3" marker-end="url(#ah-normale)"/>
+                <text x="166" y="100" class="t-vec" style="fill:var(--v-normale)" text-anchor="end">N</text>
+                <line x1="180" y1="150" x2="262" y2="103" style="stroke:var(--v-tension);stroke-width:3" marker-end="url(#ah-tension)"/>
+                <text x="262" y="122" class="t-vec" style="fill:var(--v-tension)">T</text>
+                <line x1="180" y1="150" x2="118" y2="150" style="stroke:var(--v-frott);stroke-width:3" marker-end="url(#ah-frott)"/>
+                <text x="98" y="140" class="t-vec" style="fill:var(--v-frott)">F<tspan baseline-shift="sub" font-size="11">f</tspan></text>
+                <path d="M222 150a42 42 0 0 0 -5 -21" class="ink-3"/>
+                <text x="228" y="142" class="t-small">30°</text>
+              </svg>
+            </div>
+            <figcaption><b>Fig. 2</b>Une luge tirée à vitesse constante. <i>N</i> est plus courte que <i>P</i> : la corde soulève un peu la luge.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="ex1">
+        <div class="section-head"><span class="label">Exercices · chapitre 1</span><h3>À toi de jouer</h3></div>
+        <ol class="exos">
+          <li class="exo" id="ex-1-1">
+            <div class="exo__head"><span class="exo__num">1.1</span><span class="exo__title">Un astronaute sur la Lune</span><span class="niveau">Niveau 1</span></div>
+            <p>Un astronaute équipé a une masse de 75&nbsp;kg.</p>
+            <div class="answer" data-ans="735.75"><label for="a11a">a) Son poids sur Terre</label><input type="text" id="a11a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="answer" data-ans="121.5"><label for="a11b">b) Son poids sur la Lune (g = 1,62&nbsp;N/kg)</label><input type="text" id="a11b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="answer" data-ans="75"><label for="a11c">c) Sa masse sur la Lune</label><input type="text" id="a11c" inputmode="decimal" autocomplete="off"><span class="unit">kg</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) <span class="math"><i>P</i> = <i>m</i>·<i>g</i> = 75 × 9,81 = 736&nbsp;N</span>.</p>
+              <p>b) <span class="math"><i>P</i><sub>Lune</sub> = 75 × 1,62 = 122&nbsp;N</span>, six fois moins.</p>
+              <p>c) La masse ne dépend pas du lieu : toujours 75&nbsp;kg. Il sautera plus haut, mais il aura autant de peine à se mettre en mouvement (même inertie).</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-1-2">
+            <div class="exo__head"><span class="exo__num">1.2</span><span class="exo__title">Deux chiens, une laisse</span><span class="niveau">Niveau 2</span></div>
+            <p>Deux chiens sont attachés au même anneau. Le premier tire vers l'est avec 30&nbsp;N, le second vers le nord avec 40&nbsp;N.</p>
+            <div class="answer" data-ans="50"><label for="a12a">a) Intensité de la résultante</label><input type="text" id="a12a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="answer" data-ans="53.13"><label for="a12b">b) Angle entre la résultante et la direction est</label><input type="text" id="a12b" inputmode="decimal" autocomplete="off"><span class="unit">°</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Les forces sont perpendiculaires : <span class="math"><i>F</i><sub>R</sub> = √(30² + 40²) = √2&nbsp;500 = 50&nbsp;N</span>.</p>
+              <p>Angle : <span class="math">tan <i>θ</i> = 40/30</span>, donc <i>θ</i> = 53,1° au nord de l'est. Tu peux le vérifier avec la simulation 1.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-1-3">
+            <div class="exo__head"><span class="exo__num">1.3</span><span class="exo__title">Le ressort du labo</span><span class="niveau">Niveau 2</span></div>
+            <p>Un ressort s'allonge de 4,0&nbsp;cm quand on le tire avec une force de 2,0&nbsp;N.</p>
+            <div class="answer" data-ans="50"><label for="a13a">a) Sa constante de raideur</label><input type="text" id="a13a" inputmode="decimal" autocomplete="off"><span class="unit">N/m</span></div>
+            <div class="answer" data-ans="5.886"><label for="a13b">b) Son allongement si on y suspend 300&nbsp;g</label><input type="text" id="a13b" inputmode="decimal" autocomplete="off"><span class="unit">cm</span></div>
+            <div class="answer" data-ans="32"><label for="a13c">c) Avec la simulation 2 : la raideur du ressort mystère</label><input type="text" id="a13c" inputmode="decimal" autocomplete="off"><span class="unit">N/m</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) Attention aux unités : 4,0&nbsp;cm = 0,040&nbsp;m. <span class="math"><i>k</i> = <i>F</i>/Δ<i>l</i> = 2,0/0,040 = 50&nbsp;N/m</span>.</p>
+              <p>b) <span class="math"><i>F</i> = <i>m</i>·<i>g</i> = 0,300 × 9,81 = 2,94&nbsp;N</span>, puis <span class="math">Δ<i>l</i> = <i>F</i>/<i>k</i> = 2,94/50 = 0,0589&nbsp;m = 5,9&nbsp;cm</span>.</p>
+              <p>c) Avec 250&nbsp;g, on lit environ 7,7&nbsp;cm : <span class="math"><i>k</i> = 0,250 × 9,81 / 0,077 ≈ 32&nbsp;N/m</span>. Avec plusieurs mesures, la pente du graphique donne la même valeur.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-1-4">
+            <div class="exo__head"><span class="exo__num">1.4</span><span class="exo__title">La balle de tennis</span><span class="niveau">Niveau 1</span></div>
+            <p>Une balle de tennis vient de quitter la raquette et monte en direction du filet. On néglige la résistance de l'air. Quelles forces agissent sur la balle pendant son vol ?</p>
+            <ul class="qcm" data-ans="b">
+              <li><label><input type="radio" name="q14" value="a"><span>Le poids et la force de la raquette, qui diminue petit à petit.</span></label></li>
+              <li><label><input type="radio" name="q14" value="b"><span>Uniquement le poids.</span></label></li>
+              <li><label><input type="radio" name="q14" value="c"><span>Le poids et une « force du mouvement » dirigée vers l'avant.</span></label></li>
+              <li><label><input type="radio" name="q14" value="d"><span>Aucune force, puisque la balle est en l'air.</span></label></li>
+            </ul>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Réponse b. Test du « qui ? » : une fois la balle partie, la raquette ne la touche plus, elle ne peut donc plus exercer de force. Seule la Terre agit encore, à distance. La balle avance par inertie (chapitre 2), pas grâce à une force.</p>
+            </div></details>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="essentiel">
+        <span class="label">L'essentiel du chapitre 1</span>
+        <ul>
+          <li>Une force est l'action d'un objet sur un autre ; c'est un vecteur, mesuré en newtons.</li>
+          <li>Poids : <i>P</i> = <i>m</i>·<i>g</i>, vers le bas. Masse en kg, poids en N.</li>
+          <li>Normale, tension et frottement s'ajustent à la situation ; ils n'ont pas de formule fixe.</li>
+          <li>La résultante est la somme vectorielle de toutes les forces sur l'objet.</li>
+          <li>Loi de Hooke : <i>F</i> = <i>k</i>·Δ<i>l</i>.</li>
+          <li>Tout problème commence par un diagramme des forces.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- ================================================================
+         CHAPITRE 2
+         ================================================================ -->
+    <article class="chapter" id="ch2" data-chapter="2">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Chapitre 2</span>
+          <h2>Première loi : l'inertie</h2>
+          <p class="lead">Rien ne s'arrête tout seul. Si quelque chose s'arrête, quelque chose l'a freiné.</p>
+          <div class="objectifs"><span class="label">Objectifs</span>
+            <ul>
+              <li>Énoncer la première loi de Newton.</li>
+              <li>Expliquer des situations du quotidien par l'inertie.</li>
+              <li>Résoudre un problème d'équilibre avec les composantes.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">ΣF = 0</div>
+      </header>
+
+      <section class="section" id="s2-1">
+        <div class="section-head"><span class="label">2.1</span><h3>Aristote avait tort (il n'avait jamais joué au curling)</h3></div>
+        <p>Pendant près de 2&nbsp;000 ans, on a cru qu'il fallait une force pour entretenir un mouvement : la charrette s'arrête dès que le cheval cesse de tirer. Galilée puis Newton ont compris que la charrette s'arrête à cause du frottement. Sans frottement, elle continuerait indéfiniment, en ligne droite et à vitesse constante.</p>
+        <div class="box box--loi">
+          <span class="label">Première loi de Newton · principe d'inertie</span>
+          <p>Si la somme des forces qui agissent sur un objet est nulle, cet objet est <strong>au repos</strong> ou en <strong>mouvement rectiligne uniforme</strong> (MRU). Inversement, si un objet est au repos ou en MRU, la somme des forces sur lui est nulle.</p>
+          <p class="formula"><span class="eq">Σ<span class="vec">F</span> = <span class="vec">0</span> &nbsp;⇔&nbsp; <span class="vec">v</span> = constante</span></p>
+        </div>
+        <p>Retiens la conséquence : il ne faut <strong>aucune</strong> force pour maintenir une vitesse. Il en faut une pour la <strong>changer</strong> : accélérer, freiner ou tourner. La tendance d'un objet à garder sa vitesse s'appelle l'<strong>inertie</strong> ; elle est mesurée par la masse.</p>
+
+        <figure class="sim wide" id="sim-inertie" data-sim="inertie">
+          <div class="sim__head"><h4>La pierre de curling</h4><span class="label">Simulation 3</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-inertie" style="--ar: 16 / 8; --ar-m: 4 / 4" aria-label="Une pierre de curling lancée sur différentes surfaces, avec sa vitesse, le frottement et le graphique de la vitesse en fonction du temps."></canvas></div>
+          <div class="controls">
+            <div class="ctrl"><label for="inertie-surface">Surface</label>
+              <select id="inertie-surface">
+                <option value="0.008">Glace balayée (μ = 0,008)</option>
+                <option value="0.012" selected>Glace de curling (μ = 0,012)</option>
+                <option value="0.25">Parquet (μ = 0,25)</option>
+                <option value="0.5">Moquette (μ = 0,50)</option>
+                <option value="0">Sans aucun frottement (μ = 0)</option>
+              </select>
+            </div>
+            <div class="ctrl"><label for="inertie-v0">Vitesse de lancer <output id="inertie-v0-out">2,8 m/s</output></label><input type="range" id="inertie-v0" min="0.5" max="4" step="0.1" value="2.8"></div>
+            <div class="btns">
+              <button class="btn btn--primary btn--play" type="button" id="inertie-go">Lancer</button>
+              <button class="btn" type="button" id="inertie-reset">Ramener</button>
+            </div>
+          </div>
+          <div class="readouts" id="inertie-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Lance la pierre sur la glace : elle doit s'arrêter dans la maison, à 32&nbsp;m. Quelles vitesses de lancer conviennent ?</li>
+              <li>Recommence sur le parquet puis sur la moquette. Le graphique <i>v</i>(<i>t</i>) est une droite : quelle est sa pente ?</li>
+              <li>Choisis « Sans aucun frottement ». La vitesse ne diminue plus du tout : c'est la première loi.</li>
+              <li>Remarque que <i>P</i> et <i>N</i> se compensent toujours : seul le frottement compte dans la résultante.</li>
+            </ol>
+          </div>
+        </figure>
+      </section>
+
+      <section class="section" id="s2-2">
+        <div class="section-head"><span class="label">2.2</span><h3>L'inertie au quotidien</h3></div>
+        <ul>
+          <li><strong>Le bus qui freine</strong> : tu continues tout droit pendant que le bus ralentit sous tes pieds. Personne ne t'a « poussé en avant ».</li>
+          <li><strong>La ceinture de sécurité</strong> fournit la force qui te freine en même temps que la voiture. Sans elle, c'est le pare-brise qui s'en charge.</li>
+          <li><strong>L'appuie-tête</strong> sert lors d'un choc par l'arrière : la voiture et ton dos partent vers l'avant, ta tête resterait sur place sans lui.</li>
+          <li><strong>Le tour de la nappe</strong> : tirée assez vite, la nappe glisse sous la vaisselle, qui reste presque immobile. À tester avec la vaisselle de quelqu'un d'autre.</li>
+          <li><strong>Le ketchup</strong> : on secoue la bouteille vers le bas et on l'arrête net ; le ketchup continue sa route.</li>
+          <li><strong>Le parachutiste</strong> : quand la résistance de l'air égale le poids, Σ<i>F</i> = 0 et il tombe à vitesse constante, environ 200&nbsp;km/h bras écartés, 18&nbsp;km/h sous voile.</li>
+        </ul>
+        <div class="box box--def">
+          <span class="label">Référentiel d'inertie</span>
+          <p>La première loi n'est valable que dans un référentiel qui n'accélère pas, appelé <strong>référentiel d'inertie</strong> (ou galiléen). Le sol convient très bien pour nos expériences. Un bus qui freine ne convient pas : vu depuis le bus, ton sac glisse vers l'avant sans qu'aucune force ne le pousse.</p>
+        </div>
+      </section>
+
+      <section class="section" id="s2-3">
+        <div class="section-head"><span class="label">2.3</span><h3>L'équilibre</h3></div>
+        <p>Un objet est en <strong>équilibre</strong> quand Σ<span class="vec">F</span> = <span class="vec">0</span>. En pratique, on projette les forces sur deux axes perpendiculaires et on écrit deux équations :</p>
+        <p class="formula"><span class="eq">Σ<i>F</i><sub>x</sub> = 0</span><span class="eq">Σ<i>F</i><sub>y</sub> = 0</span></p>
+        <figure class="fig wide" id="fig-corde">
+          <div class="fig__body">
+            <svg viewBox="0 0 520 200" role="img" aria-label="Un pull suspendu au milieu d'une corde à linge presque horizontale. Les deux tensions sont très grandes par rapport au poids.">
+              <path d="M40 30v160M480 30v160" class="ink"/>
+              <path d="M40 40L260 70L480 40" style="fill:none;stroke:var(--ink-3);stroke-width:1.5"/>
+              <path d="M240 70h40l6 40h-52z" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5"/>
+              <circle cx="260" cy="70" r="3" style="fill:var(--ink)"/>
+              <line x1="260" y1="70" x2="142" y2="54" style="stroke:var(--v-tension);stroke-width:3" marker-end="url(#ah-tension)"/>
+              <text x="150" y="42" class="t-vec" style="fill:var(--v-tension)">T<tspan baseline-shift="sub" font-size="11">1</tspan></text>
+              <line x1="260" y1="70" x2="378" y2="54" style="stroke:var(--v-tension);stroke-width:3" marker-end="url(#ah-tension)"/>
+              <text x="362" y="42" class="t-vec" style="fill:var(--v-tension)">T<tspan baseline-shift="sub" font-size="11">2</tspan></text>
+              <line x1="260" y1="70" x2="260" y2="104" style="stroke:var(--v-poids);stroke-width:3" marker-end="url(#ah-poids)"/>
+              <text x="296" y="132" class="t-vec" style="fill:var(--v-poids)">P <tspan class="t-small" style="font-style:normal">(tout petit à côté de T)</tspan></text>
+              <line x1="380" y1="70" x2="480" y2="70" class="ink-3 dash"/>
+              <path d="M440 70a40 40 0 0 0 -1 -6" class="ink-3"/>
+              <text x="420" y="88" class="t-small">α</text>
+            </svg>
+          </div>
+          <figcaption><b>Fig. 3</b>Corde à linge : selon l'axe vertical, 2&nbsp;<i>T</i>&nbsp;sin&nbsp;<i>α</i> = <i>P</i>. Plus la corde est horizontale, plus <i>α</i> est petit et plus la tension est grande.</figcaption>
+        </figure>
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · pourquoi une corde n'est jamais parfaitement tendue</span>
+          <p>Une lampe de 5,0&nbsp;kg est suspendue au milieu d'un câble ; chaque moitié fait un angle <i>α</i> = 10° avec l'horizontale. Selon <i>x</i>, les composantes horizontales des deux tensions s'annulent : les tensions sont égales. Selon <i>y</i> :</p>
+          <p class="formula"><span class="eq">2&nbsp;<i>T</i>&nbsp;sin&nbsp;<i>α</i> = <i>m</i>·<i>g</i> &nbsp;⇒&nbsp; <i>T</i> = <span class="frac"><span>5,0 × 9,81</span><span>2 × sin&nbsp;10°</span></span> = 141&nbsp;N</span></p>
+          <p>Avec <i>α</i> = 1°, il faudrait 1&nbsp;405&nbsp;N, presque 30 fois le poids de la lampe. Pour une corde parfaitement horizontale, la tension serait infinie. Aucune corde à linge n'y survit.</p>
+        </div>
+      </section>
+
+      <section class="section" id="ex2">
+        <div class="section-head"><span class="label">Exercices · chapitre 2</span><h3>À toi de jouer</h3></div>
+        <ol class="exos">
+          <li class="exo" id="ex-2-1">
+            <div class="exo__head"><span class="exo__num">2.1</span><span class="exo__title">Moteurs coupés</span><span class="niveau">Niveau 1</span></div>
+            <p>Une sonde spatiale, très loin de toute étoile et de toute planète, file à 15&nbsp;km/s. Elle coupe ses moteurs. Que se passe-t-il ?</p>
+            <ul class="qcm" data-ans="c">
+              <li><label><input type="radio" name="q21" value="a"><span>Elle ralentit peu à peu, puis s'arrête.</span></label></li>
+              <li><label><input type="radio" name="q21" value="b"><span>Elle s'arrête immédiatement.</span></label></li>
+              <li><label><input type="radio" name="q21" value="c"><span>Elle continue en ligne droite à 15&nbsp;km/s.</span></label></li>
+              <li><label><input type="radio" name="q21" value="d"><span>Elle se met à tourner en rond.</span></label></li>
+            </ul>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Réponse c. Sans force, la vitesse ne change pas (première loi). C'est ce qui arrive aux sondes Voyager, lancées en 1977, qui quittent le système solaire sans moteur depuis des décennies.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-2-2">
+            <div class="exo__head"><span class="exo__num">2.2</span><span class="exo__title">Sous la voile</span><span class="niveau">Niveau 1</span></div>
+            <p>Un parachutiste et son équipement ont une masse de 85&nbsp;kg. Sous sa voile ouverte, il descend à la vitesse constante de 5,0&nbsp;m/s. Quelle force l'air exerce-t-il sur lui (et sa voile) ?</p>
+            <div class="answer" data-ans="833.85"><label for="a22a">Force de l'air</label><input type="text" id="a22a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Vitesse constante en ligne droite, donc Σ<i>F</i> = 0 : la force de l'air compense exactement le poids. <span class="math"><i>F</i><sub>air</sub> = <i>m</i>·<i>g</i> = 85 × 9,81 = 834&nbsp;N</span>, vers le haut. La valeur 5,0&nbsp;m/s ne sert à rien : c'est un piège classique.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-2-3">
+            <div class="exo__head"><span class="exo__num">2.3</span><span class="exo__title">Le pull mouillé</span><span class="niveau">Niveau 3</span></div>
+            <p>Un pull mouillé de 2,0&nbsp;kg est suspendu au milieu d'une corde à linge. Chaque moitié de la corde fait un angle de 5,0° avec l'horizontale. Quelle est la tension dans la corde ?</p>
+            <div class="answer" data-ans="112.56"><label for="a23a">Tension</label><input type="text" id="a23a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Comme dans l'exemple de la lampe : <span class="math">2&nbsp;<i>T</i>&nbsp;sin&nbsp;5,0° = <i>m</i>·<i>g</i></span>, donc <span class="math"><i>T</i> = 2,0 × 9,81 / (2 × 0,0872) = 113&nbsp;N</span>. La corde tire presque six fois plus fort que le poids du pull.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-2-4">
+            <div class="exo__head"><span class="exo__num">2.4</span><span class="exo__title">Vrai ou faux ?</span><span class="niveau">Niveau 1</span></div>
+            <p>« Si un objet se déplace, il y a forcément une force qui le pousse dans le sens du mouvement. »</p>
+            <ul class="qcm" data-ans="b">
+              <li><label><input type="radio" name="q24" value="a"><span>Vrai</span></label></li>
+              <li><label><input type="radio" name="q24" value="b"><span>Faux</span></label></li>
+            </ul>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Faux. Un objet en MRU peut n'avoir aucune force résultante sur lui (la pierre de curling sans frottement). Une force dans le sens du mouvement fait <em>accélérer</em>, elle n'est pas nécessaire pour avancer.</p>
+            </div></details>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="essentiel">
+        <span class="label">L'essentiel du chapitre 2</span>
+        <ul>
+          <li>Σ<i>F</i> = 0 ⇔ repos ou MRU. Une force change la vitesse, elle ne l'entretient pas.</li>
+          <li>L'inertie est la tendance à garder sa vitesse ; la masse la mesure.</li>
+          <li>La première loi vaut dans un référentiel d'inertie (le sol, pas un bus qui freine).</li>
+          <li>Équilibre : Σ<i>F</i><sub>x</sub> = 0 et Σ<i>F</i><sub>y</sub> = 0.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- ================================================================
+         CHAPITRE 3
+         ================================================================ -->
+    <article class="chapter" id="ch3" data-chapter="3">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Chapitre 3</span>
+          <h2>Deuxième loi : ΣF = m·a</h2>
+          <p class="lead">La loi la plus utile de la mécanique, en cinq caractères.</p>
+          <div class="objectifs"><span class="label">Objectifs</span>
+            <ul>
+              <li>Énoncer et appliquer la loi fondamentale de la dynamique.</li>
+              <li>Résoudre un problème avec la méthode en cinq étapes.</li>
+              <li>Combiner la dynamique et les formules du MRUA.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">m·a</div>
+      </header>
+
+      <section class="section" id="s3-1">
+        <div class="section-head"><span class="label">3.1</span><h3>La loi fondamentale de la dynamique</h3></div>
+        <div class="box box--loi">
+          <span class="label">Deuxième loi de Newton</span>
+          <p class="formula"><span class="eq">Σ<span class="vec">F</span> = <i>m</i>·<span class="vec">a</span></span></p>
+          <p>L'accélération d'un objet a la direction et le sens de la force résultante. Son intensité est proportionnelle à la force résultante et inversement proportionnelle à la masse : <span class="math"><i>a</i> = Σ<i>F</i> / <i>m</i></span>.</p>
+        </div>
+        <p>À force égale, une masse double accélère deux fois moins. Pousse un caddie vide, puis le même caddie rempli pour une semaine de raclettes : même effort, accélération bien différente. La masse mesure exactement cette résistance au changement de vitesse.</p>
+        <p>La première loi est un cas particulier de la deuxième : si Σ<i>F</i> = 0, alors <i>a</i> = 0 et la vitesse reste constante.</p>
+
+        <figure class="sim wide" id="sim-chariot" data-sim="chariot">
+          <div class="sim__head"><h4>Le chariot sur rail</h4><span class="label">Simulation 4</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-chariot" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Un chariot tiré par un dynamomètre sur un rail de 2 mètres, avec le graphique de la vitesse en fonction du temps pour chaque essai."></canvas></div>
+          <div class="controls">
+            <div class="ctrl"><label for="chariot-f">Force de traction <output id="chariot-f-out">6,0 N</output></label><input type="range" id="chariot-f" min="0" max="20" step="0.5" value="6"></div>
+            <div class="ctrl"><label for="chariot-m">Masse du chariot <output id="chariot-m-out">2,00 kg</output></label><input type="range" id="chariot-m" min="0.5" max="5" step="0.25" value="2"></div>
+            <div class="ctrl"><label for="chariot-mu">Contact</label>
+              <select id="chariot-mu">
+                <option value="0">Rail à coussin d'air (μ = 0)</option>
+                <option value="0.02">Roulettes (μ = 0,02)</option>
+                <option value="0.3">Patin en bois (μ = 0,30)</option>
+              </select>
+            </div>
+            <div class="btns">
+              <button class="btn btn--primary btn--play" type="button" id="chariot-go">Lancer</button>
+              <button class="btn" type="button" id="chariot-effacer">Effacer les courbes</button>
+            </div>
+          </div>
+          <div class="readouts" id="chariot-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Lance avec 6&nbsp;N et 2&nbsp;kg sur le coussin d'air. La pente de la droite <i>v</i>(<i>t</i>) est l'accélération : compare-la à <i>F</i>/<i>m</i>.</li>
+              <li>Double la force, puis double la masse. Chaque essai laisse sa courbe : compare les pentes.</li>
+              <li>Passe au patin en bois avec une petite force : le chariot ne bouge pas. Combien faut-il au minimum ?</li>
+            </ol>
+          </div>
+        </figure>
+      </section>
+
+      <section class="section" id="s3-2">
+        <div class="section-head"><span class="label">3.2</span><h3>La méthode en cinq étapes</h3></div>
+        <p>Presque tous les problèmes de dynamique se résolvent de la même façon. Suis l'ordre, même quand tu crois voir la réponse tout de suite.</p>
+        <div class="box box--loi">
+          <span class="label">Méthode de résolution</span>
+          <ol class="steps">
+            <li><span><strong>Schéma</strong> : dessine la situation et choisis l'objet étudié.</span></li>
+            <li><span><strong>Diagramme des forces</strong> de cet objet (chapitre 1.5).</span></li>
+            <li><span><strong>Axes</strong> : choisis un axe dans le sens du mouvement ou de l'accélération, l'autre perpendiculaire.</span></li>
+            <li><span><strong>Équations</strong> : écris Σ<i>F</i> = <i>m</i>·<i>a</i> sur chaque axe (souvent <i>a</i> = 0 sur l'axe perpendiculaire).</span></li>
+            <li><span><strong>Résous et vérifie</strong> : unités, signe, ordre de grandeur. Une voiture qui freine à 300&nbsp;m/s² a un problème, ou toi.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="s3-3">
+        <div class="section-head"><span class="label">3.3</span><h3>Dynamique et cinématique</h3></div>
+        <p>Si la force résultante est constante, l'accélération l'est aussi : le mouvement est un MRUA. La dynamique donne <i>a</i>, la cinématique fait le reste.</p>
+        <p class="formula"><span class="eq"><i>v</i> = <i>v</i><sub>0</sub> + <i>a</i>·<i>t</i></span><span class="eq"><i>x</i> = <i>x</i><sub>0</sub> + <i>v</i><sub>0</sub>·<i>t</i> + ½·<i>a</i>·<i>t</i>²</span><span class="eq"><i>v</i>² = <i>v</i><sub>0</sub>² + 2·<i>a</i>·Δ<i>x</i></span></p>
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · le démarrage d'un InterCity</span>
+          <p>Un train de 400&nbsp;t passe de 0 à 72&nbsp;km/h (20&nbsp;m/s) en 40&nbsp;s. On néglige les frottements.</p>
+          <p>Accélération : <span class="math"><i>a</i> = Δ<i>v</i>/Δ<i>t</i> = 20/40 = 0,50&nbsp;m/s²</span>. Force résultante : <span class="math">Σ<i>F</i> = <i>m</i>·<i>a</i> = 400&nbsp;000 × 0,50 = 200&nbsp;000&nbsp;N = 200&nbsp;kN</span>. Une locomotive Re&nbsp;460 fournit au maximum environ 300&nbsp;kN : ça passe, avec de la marge pour les frottements.</p>
+        </div>
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · le freinage d'urgence</span>
+          <p>Une voiture de 1&nbsp;200&nbsp;kg roule à 50&nbsp;km/h (13,9&nbsp;m/s) et s'arrête sur 14&nbsp;m. Avec <i>v</i>² = <i>v</i><sub>0</sub>² + 2<i>a</i>Δ<i>x</i> et <i>v</i> = 0 :</p>
+          <p class="formula"><span class="eq"><i>a</i> = − <span class="frac"><span><i>v</i><sub>0</sub>²</span><span>2·Δ<i>x</i></span></span> = − <span class="frac"><span>13,9²</span><span>2 × 14</span></span> = −6,9&nbsp;m/s²</span></p>
+          <p>Force résultante : <span class="math">1&nbsp;200 × 6,9 = 8,3&nbsp;kN</span>, vers l'arrière. Qui l'exerce ? La route, par frottement sur les pneus. Pas les freins : eux agissent sur les roues, qui font partie de la voiture.</p>
+        </div>
+      </section>
+
+      <section class="section" id="ex3">
+        <div class="section-head"><span class="label">Exercices · chapitre 3</span><h3>À toi de jouer</h3></div>
+        <ol class="exos">
+          <li class="exo" id="ex-3-1">
+            <div class="exo__head"><span class="exo__num">3.1</span><span class="exo__title">La trottinette électrique</span><span class="niveau">Niveau 1</span></div>
+            <p>Une trottinette électrique et sa conductrice (90&nbsp;kg au total) passent de 0 à 20&nbsp;km/h en 4,0&nbsp;s.</p>
+            <div class="answer" data-ans="1.3889"><label for="a31a">a) Accélération</label><input type="text" id="a31a" inputmode="decimal" autocomplete="off"><span class="unit">m/s²</span></div>
+            <div class="answer" data-ans="125"><label for="a31b">b) Force résultante</label><input type="text" id="a31b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) 20&nbsp;km/h = 20/3,6 = 5,56&nbsp;m/s. <span class="math"><i>a</i> = 5,56/4,0 = 1,39&nbsp;m/s²</span>.</p>
+              <p>b) <span class="math">Σ<i>F</i> = 90 × 1,39 = 125&nbsp;N</span>.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-3-2">
+            <div class="exo__head"><span class="exo__num">3.2</span><span class="exo__title">Le tir frappé</span><span class="niveau">Niveau 2</span></div>
+            <p>Un palet de hockey de 170&nbsp;g passe de 0 à 30&nbsp;m/s pendant les 10&nbsp;ms que dure le contact avec la crosse. Quelle force moyenne la crosse exerce-t-elle ?</p>
+            <div class="answer" data-ans="510"><label for="a32a">Force moyenne</label><input type="text" id="a32a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p><span class="math"><i>a</i> = 30/0,010 = 3&nbsp;000&nbsp;m/s²</span>, puis <span class="math"><i>F</i> = 0,170 × 3&nbsp;000 = 510&nbsp;N</span>. Environ le poids d'un élève de 52&nbsp;kg, concentré pendant un centième de seconde sur un palet.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-3-3">
+            <div class="exo__head"><span class="exo__num">3.3</span><span class="exo__title">Le chariot freiné</span><span class="niveau">Niveau 2</span></div>
+            <p>On tire un chariot de 2,0&nbsp;kg avec une force horizontale de 10&nbsp;N. Le frottement vaut 3,0&nbsp;N. Le chariot part du repos.</p>
+            <div class="answer" data-ans="3.5"><label for="a33a">a) Accélération</label><input type="text" id="a33a" inputmode="decimal" autocomplete="off"><span class="unit">m/s²</span></div>
+            <div class="answer" data-ans="7"><label for="a33b">b) Distance parcourue en 2,0&nbsp;s</label><input type="text" id="a33b" inputmode="decimal" autocomplete="off"><span class="unit">m</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) Selon l'axe du mouvement : <span class="math">Σ<i>F</i> = 10 − 3,0 = 7,0&nbsp;N</span>, donc <span class="math"><i>a</i> = 7,0/2,0 = 3,5&nbsp;m/s²</span>.</p>
+              <p>b) <span class="math"><i>x</i> = ½ × 3,5 × 2,0² = 7,0&nbsp;m</span>.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-3-4">
+            <div class="exo__head"><span class="exo__num">3.4</span><span class="exo__title">Distance de freinage sur l'autoroute</span><span class="niveau">Niveau 3</span></div>
+            <p>Une voiture de 1&nbsp;500&nbsp;kg roule à 90&nbsp;km/h. En freinant, la force résultante sur elle vaut 6&nbsp;000&nbsp;N vers l'arrière.</p>
+            <div class="answer" data-ans="4"><label for="a34a">a) Décélération (valeur positive)</label><input type="text" id="a34a" inputmode="decimal" autocomplete="off"><span class="unit">m/s²</span></div>
+            <div class="answer" data-ans="78.125"><label for="a34b">b) Distance de freinage</label><input type="text" id="a34b" inputmode="decimal" autocomplete="off"><span class="unit">m</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) <span class="math"><i>a</i> = 6&nbsp;000/1&nbsp;500 = 4,0&nbsp;m/s²</span>.</p>
+              <p>b) 90&nbsp;km/h = 25&nbsp;m/s. <span class="math">Δ<i>x</i> = <i>v</i><sub>0</sub>²/(2<i>a</i>) = 625/8,0 = 78&nbsp;m</span>. Sans compter la distance parcourue pendant le temps de réaction.</p>
+            </div></details>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="essentiel">
+        <span class="label">L'essentiel du chapitre 3</span>
+        <ul>
+          <li>Σ<span class="vec">F</span> = <i>m</i>·<span class="vec">a</span> : l'accélération va dans le sens de la résultante.</li>
+          <li>Méthode : schéma, diagramme, axes, équations, vérification.</li>
+          <li>Force résultante constante ⇒ MRUA : on réutilise les formules de cinématique.</li>
+          <li>Convertis toujours en unités SI : kg, m, s, m/s (km/h ÷ 3,6).</li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- ================================================================
+         CHAPITRE 4
+         ================================================================ -->
+    <article class="chapter" id="ch4" data-chapter="4">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Chapitre 4</span>
+          <h2>Troisième loi : action et réaction</h2>
+          <p class="lead">Tu ne peux pas pousser sans être poussé. Même le mur te repousse, il est juste plus discret.</p>
+          <div class="objectifs"><span class="label">Objectifs</span>
+            <ul>
+              <li>Énoncer la troisième loi de Newton.</li>
+              <li>Identifier les paires action–réaction.</li>
+              <li>Ne pas confondre une paire action–réaction avec deux forces qui s'équilibrent.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">⇄</div>
+      </header>
+
+      <section class="section" id="s4-1">
+        <div class="section-head"><span class="label">4.1</span><h3>Les forces vont toujours par paires</h3></div>
+        <div class="box box--loi">
+          <span class="label">Troisième loi de Newton</span>
+          <p>Si un objet A exerce une force sur un objet B, alors B exerce sur A une force de <strong>même intensité</strong>, de <strong>même direction</strong> et de <strong>sens opposé</strong>.</p>
+          <p class="formula"><span class="eq"><span class="vec">F</span><sub>A→B</sub> = − <span class="vec">F</span><sub>B→A</sub></span></p>
+          <p>Les deux forces existent en même temps, sont de même nature (deux forces de contact, ou deux forces de gravitation) et agissent sur <strong>deux objets différents</strong>. Elles ne s'annulent donc jamais entre elles.</p>
+        </div>
+        <ul>
+          <li><strong>Marcher</strong> : ton pied pousse le sol vers l'arrière, le sol pousse ton pied vers l'avant. C'est cette force du sol qui te fait avancer. Sur une glace parfaite, impossible de pousser le sol vers l'arrière, donc impossible d'avancer.</li>
+          <li><strong>La fusée</strong> pousse les gaz vers le bas, les gaz poussent la fusée vers le haut. Pas besoin d'air pour « s'appuyer » : ça marche aussi dans le vide.</li>
+          <li><strong>La lance d'incendie</strong> repousse les pompiers vers l'arrière, il faut parfois deux personnes pour la tenir.</li>
+          <li><strong>La gravitation</strong> : la Terre attire la pomme avec 1&nbsp;N, la pomme attire la Terre avec 1&nbsp;N. La Terre ne bouge pas beaucoup, pour une raison de masse (chapitre 3).</li>
+        </ul>
+
+        <figure class="sim wide" id="sim-patineurs" data-sim="patineurs">
+          <div class="sim__head"><h4>Deux patineurs se repoussent</h4><span class="label">Simulation 5</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-patineurs" style="--ar: 16 / 8; --ar-m: 4 / 3" aria-label="Deux patineurs sur la glace se repoussent avec les mains. Les deux forces sont égales et opposées ; le plus léger part plus vite."></canvas></div>
+          <div class="controls">
+            <div class="ctrl"><label for="pat-ma">Masse de Léa <output id="pat-ma-out">50 kg</output></label><input type="range" id="pat-ma" min="30" max="120" step="5" value="50"></div>
+            <div class="ctrl"><label for="pat-mb">Masse de Marc <output id="pat-mb-out">75 kg</output></label><input type="range" id="pat-mb" min="30" max="120" step="5" value="75"></div>
+            <div class="ctrl"><label for="pat-f">Force de poussée <output id="pat-f-out">150 N</output></label><input type="range" id="pat-f" min="50" max="400" step="10" value="150"></div>
+            <div class="btns">
+              <button class="btn btn--primary btn--play" type="button" id="pat-go">Se pousser</button>
+              <button class="btn" type="button" id="pat-reset">Recommencer</button>
+            </div>
+          </div>
+          <div class="readouts" id="pat-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Pendant la poussée (0,5&nbsp;s), compare les deux flèches rouges : elles sont toujours de même longueur.</li>
+              <li>Après la poussée, compare les vitesses. Le rapport <i>v</i><sub>Léa</sub>/<i>v</i><sub>Marc</sub> vaut-il <i>m</i><sub>Marc</sub>/<i>m</i><sub>Léa</sub> ?</li>
+              <li>Donne la même masse aux deux : que se passe-t-il ?</li>
+            </ol>
+          </div>
+        </figure>
+      </section>
+
+      <section class="section" id="s4-2">
+        <div class="section-head"><span class="label">4.2</span><h3>Le piège du livre sur la table</h3></div>
+        <p>Sur la figure 1, le poids <i>P</i> et la normale <i>N</i> du livre ont la même intensité et des sens opposés. Pourtant, ce n'est <strong>pas</strong> une paire action–réaction : les deux forces agissent sur le même objet, et elles ne sont pas de même nature. Elles se compensent parce que le livre est immobile (première loi). La preuve : dans un ascenseur qui démarre vers le haut, <i>N</i> devient plus grande que <i>P</i>, alors qu'une paire action–réaction reste toujours égale.</p>
+        <figure class="fig wide" id="fig-paires">
+          <div class="fig__body">
+            <svg viewBox="0 0 520 300" role="img" aria-label="Vue éclatée : livre, table et Terre. Les forces de gravitation forment une paire, les forces de contact entre livre et table en forment une autre.">
+              <rect x="220" y="60" width="90" height="26" rx="2" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5"/>
+              <text x="265" y="78" text-anchor="middle" class="t-small">livre</text>
+              <rect x="150" y="162" width="230" height="12" class="wood"/>
+              <path d="M162 174v58M368 174v58" class="ink"/>
+              <text x="395" y="172" class="t-small">table</text>
+              <path d="M0 290Q260 250 520 290" style="fill:var(--rule-2);stroke:var(--ink-3);stroke-width:1.2"/>
+              <text x="440" y="292" class="t-small">Terre</text>
+              <line x1="248" y1="73" x2="248" y2="18" style="stroke:var(--v-normale);stroke-width:3" marker-end="url(#ah-normale)"/>
+              <text x="240" y="26" text-anchor="end" class="t-small" style="fill:var(--v-normale)">N : table → livre</text>
+              <line x1="282" y1="73" x2="282" y2="128" style="stroke:var(--v-poids);stroke-width:3" marker-end="url(#ah-poids)"/>
+              <text x="292" y="124" class="t-small" style="fill:var(--v-poids)">P : Terre → livre</text>
+              <line x1="248" y1="168" x2="248" y2="223" style="stroke:var(--v-normale);stroke-width:3;stroke-dasharray:6 4" marker-end="url(#ah-normale)"/>
+              <text x="240" y="216" text-anchor="end" class="t-small" style="fill:var(--v-normale)">livre → table</text>
+              <line x1="282" y1="282" x2="282" y2="237" style="stroke:var(--v-poids);stroke-width:3;stroke-dasharray:6 4" marker-end="url(#ah-poids)"/>
+              <text x="292" y="250" class="t-small" style="fill:var(--v-poids)">livre → Terre</text>
+            </svg>
+          </div>
+          <figcaption><b>Fig. 4</b>Vue éclatée. Même couleur = même paire action–réaction. Chaque paire relie deux objets différents ; trait plein = force sur le livre, pointillé = force exercée par le livre.</figcaption>
+        </figure>
+        <div class="box box--fun">
+          <span class="label">Le paradoxe de l'âne</span>
+          <p>« Si la charrette tire l'âne aussi fort que l'âne tire la charrette, ils ne peuvent pas avancer », dit l'âne, qui n'a pas envie de travailler. Réponse : les deux forces agissent sur des objets différents. Pour savoir si l'âne avance, on regarde les forces <em>sur l'âne</em> : le sol pousse ses sabots vers l'avant plus fort que la charrette le retient. L'âne avance, la charrette suit. L'âne a perdu le débat.</p>
+        </div>
+      </section>
+
+      <section class="section" id="ex4">
+        <div class="section-head"><span class="label">Exercices · chapitre 4</span><h3>À toi de jouer</h3></div>
+        <ol class="exos">
+          <li class="exo" id="ex-4-1">
+            <div class="exo__head"><span class="exo__num">4.1</span><span class="exo__title">Le camion et le moustique</span><span class="niveau">Niveau 1</span></div>
+            <p>Sur l'autoroute, un moustique s'écrase sur le pare-brise d'un camion. Pendant le choc, quelle force est la plus grande ?</p>
+            <ul class="qcm" data-ans="c">
+              <li><label><input type="radio" name="q41" value="a"><span>La force du camion sur le moustique.</span></label></li>
+              <li><label><input type="radio" name="q41" value="b"><span>La force du moustique sur le camion.</span></label></li>
+              <li><label><input type="radio" name="q41" value="c"><span>Elles sont égales.</span></label></li>
+            </ul>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Réponse c, par la troisième loi. Les effets sont très différents parce que les masses le sont : avec la même force, l'accélération du moustique est énorme (<i>a</i> = <i>F</i>/<i>m</i>), celle du camion imperceptible. Le moustique n'en tire aucune consolation.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-4-2">
+            <div class="exo__head"><span class="exo__num">4.2</span><span class="exo__title">Léa et Marc</span><span class="niveau">Niveau 2</span></div>
+            <p>Léa (50&nbsp;kg) et Marc (75&nbsp;kg), immobiles sur la glace, se repoussent. Léa part à 1,5&nbsp;m/s. On néglige le frottement.</p>
+            <div class="answer" data-ans="1"><label for="a42a">a) Vitesse de Marc</label><input type="text" id="a42a" inputmode="decimal" autocomplete="off"><span class="unit">m/s</span></div>
+            <div class="answer" data-ans="150"><label for="a42b">b) Force moyenne de la poussée si elle dure 0,50&nbsp;s</label><input type="text" id="a42b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) Les deux forces sont égales et durent le même temps. Pour chacun, <i>v</i> = <i>a</i>·<i>t</i> = (<i>F</i>/<i>m</i>)·<i>t</i>, donc <span class="math"><i>m</i><sub>L</sub>·<i>v</i><sub>L</sub> = <i>m</i><sub>M</sub>·<i>v</i><sub>M</sub></span>. <span class="math"><i>v</i><sub>M</sub> = 50 × 1,5 / 75 = 1,0&nbsp;m/s</span>, en sens opposé.</p>
+              <p>b) Pour Léa : <span class="math"><i>a</i> = 1,5/0,50 = 3,0&nbsp;m/s²</span> et <span class="math"><i>F</i> = 50 × 3,0 = 150&nbsp;N</span>. Même calcul pour Marc : 75 × 2,0 = 150&nbsp;N. La simulation 5 reproduit exactement cette situation.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-4-3">
+            <div class="exo__head"><span class="exo__num">4.3</span><span class="exo__title">Où est la réaction ?</span><span class="niveau">Niveau 2</span></div>
+            <p>Une pomme pend à sa branche. Quelle force forme une paire action–réaction avec le poids de la pomme ?</p>
+            <ul class="qcm" data-ans="b">
+              <li><label><input type="radio" name="q43" value="a"><span>La force de la branche sur la pomme.</span></label></li>
+              <li><label><input type="radio" name="q43" value="b"><span>La force d'attraction de la pomme sur la Terre.</span></label></li>
+              <li><label><input type="radio" name="q43" value="c"><span>La force de la pomme sur la branche.</span></label></li>
+              <li><label><input type="radio" name="q43" value="d"><span>Aucune : le poids n'a pas de réaction.</span></label></li>
+            </ul>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Réponse b. Le poids est la force de la Terre sur la pomme ; sa réaction est la force de la pomme sur la Terre, de même nature (gravitation). La force de la branche (a) compense le poids, mais agit sur le même objet : c'est la première loi, pas la troisième. La réponse c forme une paire avec a.</p>
+            </div></details>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="essentiel">
+        <span class="label">L'essentiel du chapitre 4</span>
+        <ul>
+          <li><span class="vec">F</span><sub>A→B</sub> = −<span class="vec">F</span><sub>B→A</sub> : toujours, en même temps, même nature.</li>
+          <li>Les deux forces d'une paire agissent sur deux objets différents : elles ne s'annulent pas.</li>
+          <li>Deux forces qui se compensent sur un même objet relèvent de la première loi, pas de la troisième.</li>
+          <li>Même force, masses différentes : accélérations différentes.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- ================================================================
+         CHAPITRE 5
+         ================================================================ -->
+    <article class="chapter" id="ch5" data-chapter="5">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Chapitre 5</span>
+          <h2>Frottement et plan incliné</h2>
+          <p class="lead">Le frottement est l'ennemi du curling et l'ami des freins. Il est aussi la raison pour laquelle tu ne glisses pas dans la rue en pente.</p>
+          <div class="objectifs"><span class="label">Objectifs</span>
+            <ul>
+              <li>Distinguer frottement statique et frottement cinétique.</li>
+              <li>Décomposer le poids sur un plan incliné.</li>
+              <li>Calculer l'accélération sur un plan incliné, avec ou sans frottement.</li>
+              <li>Déterminer un coefficient de frottement par l'angle limite.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">μ</div>
+      </header>
+
+      <section class="section" id="s5-1">
+        <div class="section-head"><span class="label">5.1</span><h3>Frottement statique et cinétique</h3></div>
+        <p>Pousse une armoire. D'abord, rien ne bouge : le <strong>frottement statique</strong> s'ajuste exactement pour compenser ta poussée. Pousse plus fort : il augmente aussi, jusqu'à une valeur maximale. Au-delà, l'armoire part, et il devient soudain plus facile de la pousser : c'est le <strong>frottement cinétique</strong>, plus faible.</p>
+        <div class="box box--loi">
+          <span class="label">Lois du frottement</span>
+          <p class="formula"><span class="eq">statique : <i>F</i><sub>f</sub> ≤ <i>μ</i><sub>s</sub>·<i>N</i></span><span class="eq">cinétique : <i>F</i><sub>f</sub> = <i>μ</i><sub>c</sub>·<i>N</i></span></p>
+          <p>Les coefficients <i>μ</i><sub>s</sub> (statique) et <i>μ</i><sub>c</sub> (cinétique) n'ont pas d'unité et dépendent des deux matériaux en contact. En général <i>μ</i><sub>c</sub> &lt; <i>μ</i><sub>s</sub>. Le frottement ne dépend presque pas de l'aire de contact : une brique glisse de la même façon à plat ou sur la tranche.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Matériaux en contact</th><th class="r">μ<sub>s</sub></th><th class="r">μ<sub>c</sub></th></tr></thead>
+            <tbody>
+              <tr><td>Pneu sur route sèche</td><td class="r">1,0</td><td class="r">0,8</td></tr>
+              <tr><td>Pneu sur route mouillée</td><td class="r">0,7</td><td class="r">0,5</td></tr>
+              <tr><td>Pneu sur neige tassée</td><td class="r">0,3</td><td class="r">0,2</td></tr>
+              <tr><td>Bois sur bois</td><td class="r">0,5</td><td class="r">0,3</td></tr>
+              <tr><td>Acier sur acier (sec)</td><td class="r">0,6</td><td class="r">0,4</td></tr>
+              <tr><td>Ski fartée sur neige</td><td class="r">0,10</td><td class="r">0,05</td></tr>
+              <tr><td>Glace sur glace</td><td class="r">0,10</td><td class="r">0,03</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Valeurs typiques, arrondies : elles varient avec la température, l'état des surfaces et l'usure.</p>
+      </section>
+
+      <section class="section" id="s5-2">
+        <div class="section-head"><span class="label">5.2</span><h3>Le plan incliné</h3></div>
+        <p>Sur une pente d'angle <i>α</i>, on choisit l'axe <i>x</i> le long de la pente et l'axe <i>y</i> perpendiculaire. Le poids n'est aligné avec aucun des deux : on le décompose.</p>
+        <p class="formula"><span class="eq"><i>P</i><sub>∥</sub> = <i>m</i>·<i>g</i>·sin&nbsp;<i>α</i></span><span class="eq"><i>P</i><sub>⊥</sub> = <i>m</i>·<i>g</i>·cos&nbsp;<i>α</i></span><span class="eq"><i>N</i> = <i>m</i>·<i>g</i>·cos&nbsp;<i>α</i></span></p>
+        <p><i>P</i><sub>∥</sub> tire l'objet vers le bas de la pente. <i>P</i><sub>⊥</sub> le presse contre la pente et est compensée par la normale (rien ne bouge perpendiculairement). Selon l'axe de la pente, la deuxième loi donne :</p>
+        <div class="box box--loi">
+          <span class="label">Plan incliné · objet qui descend</span>
+          <p class="formula"><span class="eq">sans frottement : <i>a</i> = <i>g</i>·sin&nbsp;<i>α</i></span><span class="eq">avec frottement : <i>a</i> = <i>g</i>·(sin&nbsp;<i>α</i> − <i>μ</i><sub>c</sub>·cos&nbsp;<i>α</i>)</span></p>
+          <p>L'objet posé immobile commence à glisser dès que <i>P</i><sub>∥</sub> dépasse le frottement statique maximal, c'est-à-dire quand <span class="math">tan&nbsp;<i>α</i> &gt; <i>μ</i><sub>s</sub></span>. L'angle limite vaut <span class="math"><i>α</i><sub>lim</sub> = arctan&nbsp;<i>μ</i><sub>s</sub></span>. La masse n'intervient nulle part.</p>
+        </div>
+
+        <figure class="sim wide" id="sim-plan" data-sim="plan">
+          <div class="sim__head"><h4>Le plan incliné</h4><span class="label">Simulation 6</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-plan" style="--ar: 16 / 10; --ar-m: 1 / 1" aria-label="Un bloc sur une pente réglable, avec son poids, sa décomposition, la normale et le frottement."></canvas></div>
+          <div class="controls">
+            <div class="ctrl"><label for="plan-a">Angle de la pente <output id="plan-a-out">20,0°</output></label><input type="range" id="plan-a" min="0" max="60" step="0.5" value="20"></div>
+            <div class="ctrl"><label for="plan-m">Masse <output id="plan-m-out">5,0 kg</output></label><input type="range" id="plan-m" min="1" max="20" step="0.5" value="5"></div>
+            <div class="ctrl"><label for="plan-mat">Contact</label>
+              <select id="plan-mat">
+                <option value="0.5,0.3">Bois sur bois (μs 0,50 · μc 0,30)</option>
+                <option value="0.1,0.05">Ski fartée sur neige (μs 0,10 · μc 0,05)</option>
+                <option value="1.0,0.8">Caoutchouc sur béton (μs 1,0 · μc 0,8)</option>
+                <option value="0.1,0.03">Glace sur glace (μs 0,10 · μc 0,03)</option>
+                <option value="0,0">Sans frottement</option>
+              </select>
+            </div>
+            <div class="btns">
+              <button class="btn" type="button" id="plan-decomp" aria-pressed="true">Décomposer le poids</button>
+              <button class="btn btn--primary" type="button" id="plan-reset">Remettre en haut</button>
+            </div>
+          </div>
+          <div class="readouts" id="plan-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Bois sur bois : augmente l'angle très lentement. À quel angle le bloc démarre-t-il ? Compare avec arctan&nbsp;0,50.</li>
+              <li>Une fois qu'il glisse, rebaisse un peu l'angle : il continue ! Le frottement cinétique est plus faible que le statique.</li>
+              <li>Change la masse : l'angle limite et l'accélération ne changent pas.</li>
+              <li>Ski sur neige à 20° : calcule l'accélération à la main, puis compare.</li>
+            </ol>
+          </div>
+        </figure>
+
+        <div class="box box--def">
+          <span class="label">Les pentes en pour-cent</span>
+          <p>Les panneaux routiers suisses indiquent la pente en pour-cent : <span class="math">pente = tan&nbsp;<i>α</i> × 100&nbsp;%</span>. Un panneau « 10&nbsp;% » signifie qu'on monte de 10&nbsp;m pour 100&nbsp;m à l'horizontale, soit <i>α</i> = 5,7°. Le Stoosbahn, dans le canton de Schwyz, est le funiculaire le plus raide du monde : 110&nbsp;%, soit 47,7°. Ses cabines sont des cylindres qui pivotent pour garder le plancher horizontal, sinon personne ne resterait debout.</p>
+        </div>
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · la luge</span>
+          <p>Une luge descend une pente de 15° ; le frottement cinétique avec la neige vaut <i>μ</i><sub>c</sub> = 0,05.</p>
+          <p class="formula"><span class="eq"><i>a</i> = 9,81 × (sin&nbsp;15° − 0,05 × cos&nbsp;15°) = 9,81 × (0,259 − 0,048) = 2,1&nbsp;m/s²</span></p>
+          <p>Après 10&nbsp;s, la luge roulerait à 21&nbsp;m/s, près de 75&nbsp;km/h. Heureusement, la résistance de l'air et les virages s'en mêlent.</p>
+        </div>
+      </section>
+
+      <section class="section" id="ex5">
+        <div class="section-head"><span class="label">Exercices · chapitre 5</span><h3>À toi de jouer</h3></div>
+        <ol class="exos">
+          <li class="exo" id="ex-5-1">
+            <div class="exo__head"><span class="exo__num">5.1</span><span class="exo__title">Déménagement</span><span class="niveau">Niveau 1</span></div>
+            <p>Une caisse de 40&nbsp;kg repose sur un sol horizontal. <i>μ</i><sub>s</sub> = 0,50 et <i>μ</i><sub>c</sub> = 0,35.</p>
+            <div class="answer" data-ans="196.2"><label for="a51a">a) Force horizontale minimale pour la mettre en mouvement</label><input type="text" id="a51a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="answer" data-ans="137.34"><label for="a51b">b) Force pour la faire glisser ensuite à vitesse constante</label><input type="text" id="a51b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Sol horizontal : <span class="math"><i>N</i> = <i>P</i> = 40 × 9,81 = 392&nbsp;N</span>.</p>
+              <p>a) Il faut dépasser le frottement statique maximal : <span class="math"><i>μ</i><sub>s</sub>·<i>N</i> = 0,50 × 392 = 196&nbsp;N</span>.</p>
+              <p>b) À vitesse constante, Σ<i>F</i> = 0 : la poussée égale le frottement cinétique, <span class="math">0,35 × 392 = 137&nbsp;N</span>.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-5-2">
+            <div class="exo__head"><span class="exo__num">5.2</span><span class="exo__title">La piste rouge</span><span class="niveau">Niveau 2</span></div>
+            <p>Un skieur de 70&nbsp;kg descend en ligne droite une pente de 20°.</p>
+            <div class="answer" data-ans="3.3552"><label for="a52a">a) Accélération sans frottement</label><input type="text" id="a52a" inputmode="decimal" autocomplete="off"><span class="unit">m/s²</span></div>
+            <div class="answer" data-ans="2.6178"><label for="a52b">b) Accélération avec <i>μ</i><sub>c</sub> = 0,08</label><input type="text" id="a52b" inputmode="decimal" autocomplete="off"><span class="unit">m/s²</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) <span class="math"><i>a</i> = <i>g</i>·sin&nbsp;20° = 9,81 × 0,342 = 3,36&nbsp;m/s²</span>.</p>
+              <p>b) <span class="math"><i>a</i> = 9,81 × (0,342 − 0,08 × 0,940) = 9,81 × 0,267 = 2,62&nbsp;m/s²</span>. La masse de 70&nbsp;kg ne sert à rien : elle se simplifie.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-5-3">
+            <div class="exo__head"><span class="exo__num">5.3</span><span class="exo__title">Le Stoosbahn</span><span class="niveau">Niveau 2</span></div>
+            <p>La pente maximale du Stoosbahn est de 110&nbsp;%.</p>
+            <div class="answer" data-ans="47.73"><label for="a53a">a) Angle de la pente</label><input type="text" id="a53a" inputmode="decimal" autocomplete="off"><span class="unit">°</span></div>
+            <div class="answer" data-ans="1.1"><label for="a53b">b) <i>μ</i><sub>s</sub> minimal pour qu'une valise posée sur un plancher incliné ainsi ne glisse pas</label><input type="text" id="a53b" inputmode="decimal" autocomplete="off"><span class="unit"></span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) <span class="math">tan&nbsp;<i>α</i> = 1,10</span> donc <i>α</i> = 47,7°.</p>
+              <p>b) Pas de glissement si <span class="math">tan&nbsp;<i>α</i> ≤ <i>μ</i><sub>s</sub></span>, donc <i>μ</i><sub>s</sub> ≥ 1,10. Même le caoutchouc sur béton n'y suffit pas : d'où les cabines pivotantes.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-5-4">
+            <div class="exo__head"><span class="exo__num">5.4</span><span class="exo__title">La gomme et la règle</span><span class="niveau">Niveau 2</span></div>
+            <p>Une gomme posée sur une règle commence à glisser quand on incline la règle de 31° par rapport à l'horizontale. Quel est le coefficient de frottement statique entre la gomme et la règle ?</p>
+            <div class="answer" data-ans="0.6009"><label for="a54a"><i>μ</i><sub>s</sub></label><input type="text" id="a54a" inputmode="decimal" autocomplete="off"><span class="unit"></span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>À l'angle limite, <span class="math"><i>μ</i><sub>s</sub> = tan&nbsp;31° = 0,60</span>. Une expérience de deux minutes, à refaire en classe avec ta propre gomme.</p>
+            </div></details>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="essentiel">
+        <span class="label">L'essentiel du chapitre 5</span>
+        <ul>
+          <li>Statique : <i>F</i><sub>f</sub> s'ajuste jusqu'à <i>μ</i><sub>s</sub>·<i>N</i>. Cinétique : <i>F</i><sub>f</sub> = <i>μ</i><sub>c</sub>·<i>N</i>, avec <i>μ</i><sub>c</sub> &lt; <i>μ</i><sub>s</sub>.</li>
+          <li>Plan incliné : <i>P</i><sub>∥</sub> = <i>mg</i>&nbsp;sin&nbsp;<i>α</i>, <i>P</i><sub>⊥</sub> = <i>N</i> = <i>mg</i>&nbsp;cos&nbsp;<i>α</i>.</li>
+          <li>Descente : <i>a</i> = <i>g</i>(sin&nbsp;<i>α</i> − <i>μ</i><sub>c</sub>&nbsp;cos&nbsp;<i>α</i>).</li>
+          <li>Angle limite : tan&nbsp;<i>α</i><sub>lim</sub> = <i>μ</i><sub>s</sub>. La masse ne compte pas.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- ================================================================
+         CHAPITRE 6
+         ================================================================ -->
+    <article class="chapter" id="ch6" data-chapter="6">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Chapitre 6</span>
+          <h2>Poids apparent et systèmes liés</h2>
+          <p class="lead">Ta balance ne mesure pas ton poids. Elle mesure la force avec laquelle elle te pousse, ce qui n'est pas la même chose dans un ascenseur.</p>
+          <div class="objectifs"><span class="label">Objectifs</span>
+            <ul>
+              <li>Calculer le poids apparent dans un ascenseur.</li>
+              <li>Expliquer l'apesanteur par la chute libre.</li>
+              <li>Résoudre un problème à deux objets reliés par une corde.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">T</div>
+      </header>
+
+      <section class="section" id="s6-1">
+        <div class="section-head"><span class="label">6.1</span><h3>Le poids apparent</h3></div>
+        <p>Une balance mesure la force normale <i>N</i> qu'elle exerce sur toi, puis l'affiche en kilogrammes en divisant par <i>g</i>. Debout dans un ascenseur, tu subis ton poids <i>P</i> vers le bas et <i>N</i> vers le haut. Avec un axe vers le haut :</p>
+        <p class="formula"><span class="eq"><i>N</i> − <i>m</i>·<i>g</i> = <i>m</i>·<i>a</i> &nbsp;⇒&nbsp; <i>N</i> = <i>m</i>·(<i>g</i> + <i>a</i>)</span></p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Situation de l'ascenseur</th><th>Accélération</th><th>Balance</th></tr></thead>
+            <tbody>
+              <tr><td>Immobile, ou à vitesse constante (dans les deux sens)</td><td><i>a</i> = 0</td><td>affiche ta vraie masse</td></tr>
+              <tr><td>Démarre vers le haut, ou freine en descendant</td><td><i>a</i> &gt; 0 (vers le haut)</td><td>affiche plus</td></tr>
+              <tr><td>Démarre vers le bas, ou freine en montant</td><td><i>a</i> &lt; 0 (vers le bas)</td><td>affiche moins</td></tr>
+              <tr><td>Câble coupé : chute libre</td><td><i>a</i> = −<i>g</i></td><td>affiche 0 : apesanteur</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Les astronautes de la Station spatiale internationale ne sont pas « sans gravité » : à 400&nbsp;km d'altitude, <i>g</i> vaut encore 8,7&nbsp;N/kg. Ils flottent parce que la station et eux sont en chute libre permanente autour de la Terre (chapitre 7).</p>
+
+        <figure class="sim wide" id="sim-ascenseur" data-sim="ascenseur">
+          <div class="sim__head"><h4>La balance dans l'ascenseur</h4><span class="label">Simulation 7</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-ascenseur" style="--ar: 16 / 10; --ar-m: 4 / 5" aria-label="Un ascenseur dans un immeuble de dix étages, une personne sur une balance, et les graphiques de l'accélération et de l'affichage de la balance."></canvas></div>
+          <div class="controls">
+            <div class="ctrl"><label for="asc-m">Masse de la personne <output id="asc-m-out">60 kg</output></label><input type="range" id="asc-m" min="40" max="120" step="1" value="60"></div>
+            <div class="ctrl"><label for="asc-a">Accélération au démarrage <output id="asc-a-out">1,5 m/s²</output></label><input type="range" id="asc-a" min="0.5" max="3" step="0.1" value="1.5"></div>
+            <div class="btns">
+              <button class="btn btn--primary" type="button" id="asc-up">Monter au 10<sup>e</sup></button>
+              <button class="btn btn--primary" type="button" id="asc-down">Descendre au rez</button>
+              <button class="btn" type="button" id="asc-cut">Couper le câble</button>
+            </div>
+          </div>
+          <div class="readouts" id="asc-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Monte au 10<sup>e</sup> et observe la balance au démarrage, pendant le trajet et au freinage.</li>
+              <li>Vérifie la formule : avec 60&nbsp;kg et 1,5&nbsp;m/s², la balance doit afficher 60 × (9,81 + 1,5)/9,81 = 69,2&nbsp;kg.</li>
+              <li>Au 10<sup>e</sup>, coupe le câble (les freins de sécurité sont garantis par le fabricant de la simulation). Que lit-on pendant la chute ? Et pendant le freinage d'urgence ?</li>
+            </ol>
+          </div>
+        </figure>
+      </section>
+
+      <section class="section" id="s6-2">
+        <div class="section-head"><span class="label">6.2</span><h3>Objets reliés par une corde</h3></div>
+        <p>Quand plusieurs objets sont reliés par une corde tendue, on suppose la corde inextensible et de masse négligeable, et la poulie sans frottement. Alors :</p>
+        <ul>
+          <li>tous les objets ont la <strong>même accélération</strong> (en intensité) ;</li>
+          <li>la <strong>tension est la même</strong> aux deux bouts de la corde.</li>
+        </ul>
+        <p>Méthode : un diagramme des forces <em>pour chaque objet</em>, la deuxième loi pour chacun, puis on combine les équations. Pour l'accélération seule, il existe un raccourci : on considère tout le système comme un seul objet, et la tension (force intérieure) disparaît.</p>
+        <p class="formula"><span class="eq"><i>a</i> = <span class="frac"><span>forces qui entraînent − forces qui freinent</span><span>masse totale</span></span></span></p>
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · le bloc et la masse suspendue</span>
+          <p>Un bloc de <i>m</i><sub>1</sub> = 2,0&nbsp;kg glisse sans frottement sur une table. Une corde passe sur une poulie au bord de la table et retient une masse <i>m</i><sub>2</sub> = 1,0&nbsp;kg suspendue.</p>
+          <p>Bloc (axe horizontal) : <span class="math"><i>T</i> = <i>m</i><sub>1</sub>·<i>a</i></span>. Masse suspendue (axe vers le bas) : <span class="math"><i>m</i><sub>2</sub>·<i>g</i> − <i>T</i> = <i>m</i><sub>2</sub>·<i>a</i></span>.</p>
+          <p>On additionne : <span class="math"><i>m</i><sub>2</sub>·<i>g</i> = (<i>m</i><sub>1</sub> + <i>m</i><sub>2</sub>)·<i>a</i></span>, donc <span class="math"><i>a</i> = 9,81/3,0 = 3,27&nbsp;m/s²</span> et <span class="math"><i>T</i> = 2,0 × 3,27 = 6,54&nbsp;N</span>. La tension est plus petite que le poids de <i>m</i><sub>2</sub> (9,81&nbsp;N), sinon <i>m</i><sub>2</sub> ne descendrait pas en accélérant.</p>
+        </div>
+
+        <figure class="sim wide" id="sim-lies" data-sim="lies">
+          <div class="sim__head"><h4>Poulies et cordes</h4><span class="label">Simulation 8</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-lies" style="--ar: 16 / 9; --ar-m: 1 / 1" aria-label="Deux masses reliées par une corde passant sur une poulie, sur une table ou en machine d'Atwood, avec leurs forces."></canvas></div>
+          <div class="controls">
+            <div class="btns" role="group" aria-label="Montage">
+              <button class="btn" type="button" id="lies-table" aria-pressed="true">Bloc sur table</button>
+              <button class="btn" type="button" id="lies-atwood" aria-pressed="false">Machine d'Atwood</button>
+            </div>
+            <div class="ctrl"><label for="lies-m1">Masse m₁ <output id="lies-m1-out">2,0 kg</output></label><input type="range" id="lies-m1" min="0.5" max="10" step="0.5" value="2"></div>
+            <div class="ctrl"><label for="lies-m2">Masse m₂ <output id="lies-m2-out">1,0 kg</output></label><input type="range" id="lies-m2" min="0.5" max="10" step="0.5" value="1"></div>
+            <div class="ctrl" id="lies-mu-ctrl"><label for="lies-mu">Frottement μ (bloc) <output id="lies-mu-out">0,00</output></label><input type="range" id="lies-mu" min="0" max="0.6" step="0.02" value="0"></div>
+            <div class="btns">
+              <button class="btn btn--primary btn--play" type="button" id="lies-go">Lâcher</button>
+              <button class="btn" type="button" id="lies-reset">Remettre</button>
+            </div>
+          </div>
+          <div class="readouts" id="lies-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Avec 2,0&nbsp;kg et 1,0&nbsp;kg sans frottement, retrouve <i>a</i> = 3,27&nbsp;m/s² et <i>T</i> = 6,54&nbsp;N de l'exemple.</li>
+              <li>Augmente le frottement : à partir de quelle valeur de <i>μ</i> le système reste-t-il immobile ?</li>
+              <li>En machine d'Atwood, mets deux masses presque égales : l'accélération devient toute petite. C'est comme ça qu'on « ralentissait » la chute libre pour la mesurer, au XVIII<sup>e</sup> siècle.</li>
+            </ol>
+          </div>
+        </figure>
+      </section>
+
+      <section class="section" id="ex6">
+        <div class="section-head"><span class="label">Exercices · chapitre 6</span><h3>À toi de jouer</h3></div>
+        <ol class="exos">
+          <li class="exo" id="ex-6-1">
+            <div class="exo__head"><span class="exo__num">6.1</span><span class="exo__title">Ça monte</span><span class="niveau">Niveau 1</span></div>
+            <p>Une élève de 55&nbsp;kg est debout sur une balance dans un ascenseur qui démarre vers le haut avec une accélération de 1,2&nbsp;m/s².</p>
+            <div class="answer" data-ans="605.55"><label for="a61a">a) Force normale exercée par la balance</label><input type="text" id="a61a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="answer" data-ans="61.73"><label for="a61b">b) Valeur affichée par la balance</label><input type="text" id="a61b" inputmode="decimal" autocomplete="off"><span class="unit">kg</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) <span class="math"><i>N</i> = <i>m</i>(<i>g</i> + <i>a</i>) = 55 × (9,81 + 1,2) = 606&nbsp;N</span>.</p>
+              <p>b) La balance affiche <span class="math"><i>N</i>/<i>g</i> = 606/9,81 = 61,7&nbsp;kg</span>.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-6-2">
+            <div class="exo__head"><span class="exo__num">6.2</span><span class="exo__title">Le régime le plus rapide du monde</span><span class="niveau">Niveau 2</span></div>
+            <p>Même élève, même ascenseur, mais il freine en arrivant en haut avec une accélération de 2,0&nbsp;m/s² vers le bas. Que lit-elle sur la balance ?</p>
+            <div class="answer" data-ans="43.79"><label for="a62a">Affichage</label><input type="text" id="a62a" inputmode="decimal" autocomplete="off"><span class="unit">kg</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Axe vers le haut : <i>a</i> = −2,0&nbsp;m/s². <span class="math"><i>N</i> = 55 × (9,81 − 2,0) = 430&nbsp;N</span>, affichage <span class="math">430/9,81 = 43,8&nbsp;kg</span>. Onze kilos de moins, pendant deux secondes. Aucun effet durable garanti.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-6-3">
+            <div class="exo__head"><span class="exo__num">6.3</span><span class="exo__title">Machine d'Atwood</span><span class="niveau">Niveau 2</span></div>
+            <p>Deux masses <i>m</i><sub>1</sub> = 3,0&nbsp;kg et <i>m</i><sub>2</sub> = 5,0&nbsp;kg pendent de part et d'autre d'une poulie idéale.</p>
+            <div class="answer" data-ans="2.4525"><label for="a63a">a) Accélération</label><input type="text" id="a63a" inputmode="decimal" autocomplete="off"><span class="unit">m/s²</span></div>
+            <div class="answer" data-ans="36.7875"><label for="a63b">b) Tension de la corde</label><input type="text" id="a63b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) Système complet : <span class="math"><i>a</i> = (<i>m</i><sub>2</sub> − <i>m</i><sub>1</sub>)·<i>g</i> / (<i>m</i><sub>1</sub> + <i>m</i><sub>2</sub>) = 2,0 × 9,81/8,0 = 2,45&nbsp;m/s²</span>.</p>
+              <p>b) Pour <i>m</i><sub>1</sub>, qui monte : <span class="math"><i>T</i> − <i>m</i><sub>1</sub><i>g</i> = <i>m</i><sub>1</sub><i>a</i></span>, donc <span class="math"><i>T</i> = 3,0 × (9,81 + 2,45) = 36,8&nbsp;N</span>.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-6-4">
+            <div class="exo__head"><span class="exo__num">6.4</span><span class="exo__title">Bloc freiné sur la table</span><span class="niveau">Niveau 3</span></div>
+            <p>Un bloc de 4,0&nbsp;kg glisse sur une table avec <i>μ</i><sub>c</sub> = 0,20. Il est relié par une poulie à une masse suspendue de 2,0&nbsp;kg.</p>
+            <div class="answer" data-ans="1.962"><label for="a64a">a) Accélération</label><input type="text" id="a64a" inputmode="decimal" autocomplete="off"><span class="unit">m/s²</span></div>
+            <div class="answer" data-ans="15.696"><label for="a64b">b) Tension de la corde</label><input type="text" id="a64b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) Force qui entraîne : <span class="math"><i>m</i><sub>2</sub><i>g</i> = 19,6&nbsp;N</span>. Force qui freine : <span class="math"><i>μ</i><sub>c</sub><i>m</i><sub>1</sub><i>g</i> = 0,20 × 4,0 × 9,81 = 7,85&nbsp;N</span>. <span class="math"><i>a</i> = (19,6 − 7,85)/6,0 = 1,96&nbsp;m/s²</span>.</p>
+              <p>b) Pour la masse suspendue : <span class="math"><i>T</i> = <i>m</i><sub>2</sub>(<i>g</i> − <i>a</i>) = 2,0 × (9,81 − 1,96) = 15,7&nbsp;N</span>. Vérification avec le bloc : <span class="math"><i>T</i> − 7,85 = 4,0 × 1,96</span>, soit 15,7&nbsp;N. Ça colle.</p>
+            </div></details>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="essentiel">
+        <span class="label">L'essentiel du chapitre 6</span>
+        <ul>
+          <li>La balance mesure <i>N</i> = <i>m</i>(<i>g</i> + <i>a</i>), axe vers le haut.</li>
+          <li>Chute libre : <i>N</i> = 0, c'est l'apesanteur. La gravité, elle, est toujours là.</li>
+          <li>Objets reliés : même accélération, même tension aux deux bouts.</li>
+          <li>Un diagramme et une équation par objet ; ou le système entier pour trouver <i>a</i> directement.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- ================================================================
+         CHAPITRE 7
+         ================================================================ -->
+    <article class="chapter" id="ch7" data-chapter="7">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Chapitre 7</span>
+          <h2>Mouvement circulaire uniforme</h2>
+          <p class="lead">Tourner, c'est accélérer, même à vitesse constante. Ton compteur de vitesse ne le dit pas, tes pneus si.</p>
+          <div class="objectifs"><span class="label">Objectifs</span>
+            <ul>
+              <li>Calculer l'accélération centripète d'un MCU.</li>
+              <li>Identifier la force qui joue le rôle de force centripète.</li>
+              <li>Calculer la vitesse maximale dans un virage.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">v²/r</div>
+      </header>
+
+      <section class="section" id="s7-1">
+        <div class="section-head"><span class="label">7.1</span><h3>L'accélération centripète</h3></div>
+        <p>Dans un mouvement circulaire uniforme (MCU), l'intensité de la vitesse est constante, mais sa <em>direction</em> change sans cesse. Le vecteur vitesse change, donc il y a une accélération. Elle pointe vers le centre du cercle : c'est l'<strong>accélération centripète</strong>.</p>
+        <p class="formula"><span class="eq"><i>a</i><sub>c</sub> = <span class="frac"><span><i>v</i>²</span><span><i>r</i></span></span></span><span class="eq"><i>v</i> = <span class="frac"><span>2π<i>r</i></span><span><i>T</i></span></span></span><span class="note">r : rayon (m) · T : période, durée d'un tour (s)</span></p>
+        <figure class="fig" id="fig-mcu">
+          <div class="fig__body">
+            <svg viewBox="0 0 340 300" role="img" aria-label="Un cercle parcouru dans le sens inverse des aiguilles d'une montre. En trois points, la vitesse est tangente au cercle et l'accélération pointe vers le centre.">
+              <circle cx="170" cy="150" r="105" style="fill:none;stroke:var(--ink-3);stroke-width:1.5;stroke-dasharray:5 5"/>
+              <circle cx="170" cy="150" r="3" style="fill:var(--ink)"/>
+              <line x1="170" y1="150" x2="261" y2="97.5" class="ink-3"/>
+              <text x="205" y="112" class="t-small">r</text>
+              <g>
+                <circle cx="261" cy="97.5" r="7" style="fill:var(--ink)"/>
+                <line x1="261" y1="97.5" x2="231" y2="45.5" style="stroke:var(--v-vit);stroke-width:3" marker-end="url(#ah-vit)"/>
+                <text x="238" y="40" class="t-vec" style="fill:var(--v-vit)">v</text>
+                <line x1="261" y1="97.5" x2="226" y2="117.7" style="stroke:var(--v-acc);stroke-width:3" marker-end="url(#ah-acc)"/>
+              </g>
+              <g>
+                <circle cx="79" cy="97.5" r="7" style="fill:var(--ink)"/>
+                <line x1="79" y1="97.5" x2="49" y2="149.5" style="stroke:var(--v-vit);stroke-width:3" marker-end="url(#ah-vit)"/>
+                <line x1="79" y1="97.5" x2="114" y2="117.7" style="stroke:var(--v-acc);stroke-width:3" marker-end="url(#ah-acc)"/>
+                <text x="110" y="100" class="t-vec" style="fill:var(--v-acc)">a</text>
+              </g>
+              <g>
+                <circle cx="170" cy="255" r="7" style="fill:var(--ink)"/>
+                <line x1="170" y1="255" x2="230" y2="255" style="stroke:var(--v-vit);stroke-width:3" marker-end="url(#ah-vit)"/>
+                <line x1="170" y1="255" x2="170" y2="215" style="stroke:var(--v-acc);stroke-width:3" marker-end="url(#ah-acc)"/>
+              </g>
+            </svg>
+          </div>
+          <figcaption><b>Fig. 5</b>MCU : la vitesse est toujours tangente au cercle, l'accélération toujours dirigée vers le centre.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section" id="s7-2">
+        <div class="section-head"><span class="label">7.2</span><h3>La force centripète</h3></div>
+        <p>D'après la deuxième loi, une accélération vers le centre exige une force résultante vers le centre :</p>
+        <p class="formula"><span class="eq">Σ<i>F</i> = <i>m</i>·<span class="frac"><span><i>v</i>²</span><span><i>r</i></span></span></span></p>
+        <p>Ce n'est pas une nouvelle sorte de force à ajouter au diagramme. C'est un <strong>rôle</strong>, joué par une des forces déjà connues :</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Situation</th><th>Force qui joue le rôle de force centripète</th></tr></thead>
+            <tbody>
+              <tr><td>Voiture dans un virage plat</td><td><span class="c-frott">frottement</span> des pneus sur la route</td></tr>
+              <tr><td>Pierre qui tourne au bout d'une ficelle</td><td><span class="c-tension">tension</span> de la ficelle</td></tr>
+              <tr><td>Satellite, Lune autour de la Terre</td><td><span class="c-poids">poids</span> (gravitation)</td></tr>
+              <tr><td>Linge dans le tambour de l'essoreuse</td><td><span class="c-normale">normale</span> de la paroi du tambour</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dans l'essoreuse, l'eau passe par les trous du tambour : plus rien ne la pousse vers le centre, alors elle part tout droit. Le linge, lui, est retenu par la paroi. Si la force centripète disparaît, l'objet continue en ligne droite, tangentiellement au cercle (première loi) : c'est le principe de la fronde et du lancer du marteau.</p>
+        <div class="box box--warn">
+          <span class="label">Et la force centrifuge ?</span>
+          <p>Dans une voiture qui tourne, tu as l'impression d'être poussé vers l'extérieur. Pourtant, aucun objet ne te pousse vers l'extérieur : ton corps tend à continuer tout droit (inertie), et c'est la portière qui te pousse vers le centre. Vue depuis le sol, la « force centrifuge » n'existe pas. Elle n'apparaît que si on raisonne depuis la voiture, qui n'est pas un référentiel d'inertie.</p>
+        </div>
+        <div class="box box--ex">
+          <span class="label">Exemple pratique · vitesse maximale dans un virage</span>
+          <p>Dans un virage plat, le frottement statique maximal <i>μ</i><sub>s</sub>·<i>m</i>·<i>g</i> doit suffire à fournir <i>m</i>·<i>v</i>²/<i>r</i>. La masse se simplifie :</p>
+          <p class="formula"><span class="eq"><i>v</i><sub>max</sub> = √(<i>μ</i><sub>s</sub>·<i>g</i>·<i>r</i>)</span></p>
+          <p>Virage de 50&nbsp;m de rayon, route sèche (<i>μ</i><sub>s</sub> = 0,8) : <span class="math">√(0,8 × 9,81 × 50) = 19,8&nbsp;m/s</span>, soit 71&nbsp;km/h. Sur le verglas (<i>μ</i><sub>s</sub> = 0,08) : 6,3&nbsp;m/s, à peine 23&nbsp;km/h. Un camion de 40&nbsp;t et une Smart ont la même vitesse limite.</p>
+        </div>
+
+        <figure class="sim wide" id="sim-virage" data-sim="virage">
+          <div class="sim__head"><h4>Le virage</h4><span class="label">Simulation 9</span></div>
+          <div class="sim__stage"><canvas class="sim-canvas" id="cv-virage" style="--ar: 16 / 10; --ar-m: 1 / 1" aria-label="Vue du dessus d'une voiture qui tourne sur une route circulaire, avec sa vitesse et la force de frottement vers le centre. Si la vitesse est trop grande, la voiture sort de la route."></canvas></div>
+          <div class="controls">
+            <div class="ctrl"><label for="vir-v">Vitesse <output id="vir-v-out">50 km/h</output></label><input type="range" id="vir-v" min="10" max="130" step="1" value="50"></div>
+            <div class="ctrl"><label for="vir-r">Rayon du virage <output id="vir-r-out">50 m</output></label><input type="range" id="vir-r" min="10" max="150" step="5" value="50"></div>
+            <div class="ctrl"><label for="vir-route">Route</label>
+              <select id="vir-route">
+                <option value="0.8">Sèche (μs = 0,8)</option>
+                <option value="0.5">Mouillée (μs = 0,5)</option>
+                <option value="0.25">Neige (μs = 0,25)</option>
+                <option value="0.08">Verglas (μs = 0,08)</option>
+              </select>
+            </div>
+            <div class="btns">
+              <button class="btn btn--primary btn--play" type="button" id="vir-go">Rouler</button>
+              <button class="btn" type="button" id="vir-reset">Dépanneuse</button>
+            </div>
+          </div>
+          <div class="readouts" id="vir-out" aria-live="polite"></div>
+          <div class="essayer"><span class="label">À essayer</span>
+            <ol>
+              <li>Route sèche, rayon 50&nbsp;m : augmente la vitesse jusqu'à la sortie de route. Compare avec <i>v</i><sub>max</sub> = 71&nbsp;km/h.</li>
+              <li>Passe sur la neige sans changer la vitesse. Que se passe-t-il ?</li>
+              <li>Double le rayon : la vitesse maximale est-elle doublée ? (Indice : racine carrée.)</li>
+              <li>Après une sortie de route, observe la trajectoire : la voiture part tout droit, tangentiellement.</li>
+            </ol>
+          </div>
+        </figure>
+      </section>
+
+      <section class="section" id="s7-3">
+        <div class="section-head"><span class="label">7.3</span><h3>Pour aller plus loin : les satellites</h3></div>
+        <p>Pour un satellite, c'est le poids qui joue le rôle de force centripète : <span class="math"><i>m</i>·<i>g</i><sub>h</sub> = <i>m</i>·<i>v</i>²/<i>r</i></span>, où <i>g</i><sub>h</sub> est l'intensité de la pesanteur à l'altitude <i>h</i>. Pour la Station spatiale internationale, à 400&nbsp;km d'altitude (<i>r</i> = 6&nbsp;771&nbsp;km, <i>g</i><sub>h</sub> = 8,7&nbsp;N/kg) :</p>
+        <p class="formula"><span class="eq"><i>v</i> = √(<i>g</i><sub>h</sub>·<i>r</i>) = √(8,7 × 6,771·10<sup>6</sup>) ≈ 7,7&nbsp;km/s</span></p>
+        <p>Un tour de Terre prend <span class="math"><i>T</i> = 2π<i>r</i>/<i>v</i> ≈ 92&nbsp;min</span>. L'ISS tombe en permanence vers la Terre, mais elle va si vite de côté que le sol se dérobe au même rythme sous elle. Elle rate la Terre, environ seize fois par jour.</p>
+      </section>
+
+      <section class="section" id="ex7">
+        <div class="section-head"><span class="label">Exercices · chapitre 7</span><h3>À toi de jouer</h3></div>
+        <ol class="exos">
+          <li class="exo" id="ex-7-1">
+            <div class="exo__head"><span class="exo__num">7.1</span><span class="exo__title">La fronde</span><span class="niveau">Niveau 2</span></div>
+            <p>Une pierre de 0,20&nbsp;kg tourne horizontalement au bout d'une ficelle de 0,80&nbsp;m, à 3,0 tours par seconde. On néglige le poids.</p>
+            <div class="answer" data-ans="15.08"><label for="a71a">a) Vitesse de la pierre</label><input type="text" id="a71a" inputmode="decimal" autocomplete="off"><span class="unit">m/s</span></div>
+            <div class="answer" data-ans="56.85"><label for="a71b">b) Tension de la ficelle</label><input type="text" id="a71b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) Période <i>T</i> = 1/3,0 = 0,333&nbsp;s. <span class="math"><i>v</i> = 2π × 0,80/0,333 = 15,1&nbsp;m/s</span>.</p>
+              <p>b) La tension joue le rôle de force centripète : <span class="math"><i>T</i> = <i>m</i><i>v</i>²/<i>r</i> = 0,20 × 15,1²/0,80 = 57&nbsp;N</span>.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-7-2">
+            <div class="exo__head"><span class="exo__num">7.2</span><span class="exo__title">Le giratoire sous la pluie</span><span class="niveau">Niveau 2</span></div>
+            <p>Une voiture de 1&nbsp;300&nbsp;kg tourne dans un giratoire de 20&nbsp;m de rayon à 36&nbsp;km/h. La route est mouillée (<i>μ</i><sub>s</sub> = 0,5).</p>
+            <div class="answer" data-ans="6500"><label for="a72a">a) Force centripète nécessaire</label><input type="text" id="a72a" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <div class="answer" data-ans="6376.5"><label for="a72b">b) Frottement statique maximal disponible</label><input type="text" id="a72b" inputmode="decimal" autocomplete="off"><span class="unit">N</span></div>
+            <ul class="qcm" data-ans="b">
+              <li><label><input type="radio" name="q72" value="a"><span>c) La voiture passe sans problème.</span></label></li>
+              <li><label><input type="radio" name="q72" value="b"><span>c) La voiture glisse vers l'extérieur.</span></label></li>
+            </ul>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>a) 36&nbsp;km/h = 10&nbsp;m/s. <span class="math"><i>F</i> = 1&nbsp;300 × 10²/20 = 6&nbsp;500&nbsp;N</span>.</p>
+              <p>b) <span class="math">0,5 × 1&nbsp;300 × 9,81 = 6&nbsp;380&nbsp;N</span>.</p>
+              <p>c) Il faudrait 6&nbsp;500&nbsp;N, la route n'en offre que 6&nbsp;380 : la voiture glisse, de justesse. À 35&nbsp;km/h, elle passait.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-7-3">
+            <div class="exo__head"><span class="exo__num">7.3</span><span class="exo__title">Le seau qui ne se vide pas</span><span class="niveau">Niveau 3</span></div>
+            <p>Tu fais tourner un seau d'eau dans un cercle vertical de 1,0&nbsp;m de rayon. Au sommet du cercle, quelle vitesse minimale faut-il pour que l'eau reste dans le seau ?</p>
+            <div class="answer" data-ans="3.1321"><label for="a73a">Vitesse minimale</label><input type="text" id="a73a" inputmode="decimal" autocomplete="off"><span class="unit">m/s</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p>Au sommet, le poids de l'eau et la poussée du fond du seau pointent tous deux vers le centre (vers le bas) : <span class="math"><i>m</i><i>g</i> + <i>N</i> = <i>m</i><i>v</i>²/<i>r</i></span>. À la vitesse minimale, le fond ne pousse plus : <i>N</i> = 0, et le poids suffit tout juste. <span class="math"><i>v</i> = √(<i>g</i><i>r</i>) = √9,81 = 3,1&nbsp;m/s</span>. Plus lentement, l'eau suit une parabole, en direction de tes cheveux.</p>
+            </div></details>
+          </li>
+          <li class="exo" id="ex-7-4">
+            <div class="exo__head"><span class="exo__num">7.4</span><span class="exo__title">Le col enneigé</span><span class="niveau">Niveau 2</span></div>
+            <p>Dans un col, un virage en épingle a un rayon de 80&nbsp;m. La route est enneigée (<i>μ</i><sub>s</sub> = 0,20). Quelle est la vitesse maximale, en km/h ?</p>
+            <div class="answer" data-ans="45.1"><label for="a74a">Vitesse maximale</label><input type="text" id="a74a" inputmode="decimal" autocomplete="off"><span class="unit">km/h</span></div>
+            <div class="check-row"><button class="btn btn--primary" type="button" data-check>Vérifier</button><span class="fb" aria-live="polite"></span></div>
+            <details class="solution"><summary>Voir la solution</summary><div>
+              <p><span class="math"><i>v</i><sub>max</sub> = √(0,20 × 9,81 × 80) = √157 = 12,5&nbsp;m/s</span>, soit 12,5 × 3,6 = 45&nbsp;km/h. Tu peux le vérifier avec la simulation 9 en choisissant « Neige » (μ<sub>s</sub> = 0,25 dans la simulation : tu obtiendras un peu plus).</p>
+            </div></details>
+          </li>
+        </ol>
+      </section>
+
+      <aside class="essentiel">
+        <span class="label">L'essentiel du chapitre 7</span>
+        <ul>
+          <li>MCU : vitesse constante en intensité, mais accélération <i>a</i><sub>c</sub> = <i>v</i>²/<i>r</i> vers le centre.</li>
+          <li>Il faut une force résultante <i>m</i><i>v</i>²/<i>r</i> vers le centre, fournie par une force connue (frottement, tension, poids, normale).</li>
+          <li>Sans force centripète, l'objet part en ligne droite, tangentiellement.</li>
+          <li>Virage plat : <i>v</i><sub>max</sub> = √(<i>μ</i><sub>s</sub><i>g</i><i>r</i>), indépendante de la masse.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- ================================================================
+         FORMULAIRE
+         ================================================================ -->
+    <section class="section" id="formulaire">
+      <div class="section-head"><span class="label">Aide-mémoire</span><h3>Formulaire</h3></div>
+      <div class="table-wrap wide">
+        <table class="data-table formulaire">
+          <thead><tr><th>Grandeur ou loi</th><th>Formule</th><th>Unités</th></tr></thead>
+          <tbody>
+            <tr><td>Poids</td><td><i>P</i> = <i>m</i>·<i>g</i></td><td>N, kg, <i>g</i> = 9,81&nbsp;N/kg</td></tr>
+            <tr><td>Loi de Hooke</td><td><i>F</i> = <i>k</i>·Δ<i>l</i></td><td>N, N/m, m</td></tr>
+            <tr><td>Première loi</td><td>Σ<i>F</i> = 0 ⇔ <i>v</i> constante</td><td>–</td></tr>
+            <tr><td>Deuxième loi</td><td>Σ<i>F</i> = <i>m</i>·<i>a</i></td><td>N, kg, m/s²</td></tr>
+            <tr><td>Troisième loi</td><td><i>F</i><sub>A→B</sub> = −<i>F</i><sub>B→A</sub></td><td>N</td></tr>
+            <tr><td>Frottement statique</td><td><i>F</i><sub>f</sub> ≤ <i>μ</i><sub>s</sub>·<i>N</i></td><td>N, sans unité</td></tr>
+            <tr><td>Frottement cinétique</td><td><i>F</i><sub>f</sub> = <i>μ</i><sub>c</sub>·<i>N</i></td><td>N, sans unité</td></tr>
+            <tr><td>Plan incliné : composantes du poids</td><td><i>P</i><sub>∥</sub> = <i>mg</i>&nbsp;sin&nbsp;<i>α</i>, <i>P</i><sub>⊥</sub> = <i>mg</i>&nbsp;cos&nbsp;<i>α</i></td><td>N</td></tr>
+            <tr><td>Plan incliné : descente</td><td><i>a</i> = <i>g</i>(sin&nbsp;<i>α</i> − <i>μ</i><sub>c</sub>&nbsp;cos&nbsp;<i>α</i>)</td><td>m/s²</td></tr>
+            <tr><td>Angle limite</td><td>tan&nbsp;<i>α</i><sub>lim</sub> = <i>μ</i><sub>s</sub></td><td>–</td></tr>
+            <tr><td>Poids apparent (axe vers le haut)</td><td><i>N</i> = <i>m</i>(<i>g</i> + <i>a</i>)</td><td>N</td></tr>
+            <tr><td>Machine d'Atwood</td><td><i>a</i> = (<i>m</i><sub>2</sub> − <i>m</i><sub>1</sub>)<i>g</i>/(<i>m</i><sub>1</sub> + <i>m</i><sub>2</sub>)</td><td>m/s²</td></tr>
+            <tr><td>Accélération centripète</td><td><i>a</i><sub>c</sub> = <i>v</i>²/<i>r</i></td><td>m/s²</td></tr>
+            <tr><td>Vitesse en MCU</td><td><i>v</i> = 2π<i>r</i>/<i>T</i></td><td>m/s</td></tr>
+            <tr><td>Force centripète</td><td><i>F</i> = <i>m</i>·<i>v</i>²/<i>r</i></td><td>N</td></tr>
+            <tr><td>Vitesse maximale en virage plat</td><td><i>v</i><sub>max</sub> = √(<i>μ</i><sub>s</sub>·<i>g</i>·<i>r</i>)</td><td>m/s</td></tr>
+            <tr><td>MRUA</td><td><i>v</i> = <i>v</i><sub>0</sub> + <i>at</i> ; <i>x</i> = <i>x</i><sub>0</sub> + <i>v</i><sub>0</sub><i>t</i> + ½<i>at</i>² ; <i>v</i>² = <i>v</i><sub>0</sub>² + 2<i>a</i>Δ<i>x</i></td><td>m, s, m/s</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         ÉVALUATION
+         ================================================================ -->
+    <article class="chapter" id="evaluation">
+      <header class="chapter-head">
+        <div class="chapter-head__text">
+          <span class="label">Évaluation finale</span>
+          <h2>L'épreuve</h2>
+          <p class="lead">Seize questions sur les sept chapitres. Calculatrice et formulaire autorisés, simulations aussi : tant que tu comprends ce que tu fais, ce n'est pas de la triche.</p>
+        </div>
+        <div class="chapter-head__sym" aria-hidden="true">6</div>
+      </header>
+      <section class="section eval-intro">
+        <p>L'évaluation compte <strong>26 points</strong> : 6 questions à choix multiple à 1 point et 10 calculs à 2 points. Un calcul est juste si ta réponse est à moins de 2&nbsp;% de la valeur exacte, dans l'unité demandée. La note suit le barème habituel :</p>
+        <p class="formula"><span class="eq">note = 1 + 5 × <span class="frac"><span>points obtenus</span><span>26</span></span></span><span class="note">arrondie au demi-point</span></p>
+        <p>La <strong>série A</strong> est identique à l'épreuve du document Word. « Nouvelle série » tire d'autres valeurs numériques, pour t'entraîner autant que tu veux.</p>
+        <div class="eval-bar">
+          <span>Série : <span class="serie" id="eval-serie">A</span></span>
+          <button class="btn" type="button" id="eval-new">Nouvelle série</button>
+          <button class="btn" type="button" id="eval-a">Revenir à la série A</button>
+          <span class="progress" id="eval-progress" aria-live="polite"></span>
+        </div>
+      </section>
+      <section class="section">
+        <ol class="eval-list wide" id="eval-list"></ol>
+        <div class="check-row wide">
+          <button class="btn btn--primary btn--big" type="button" id="eval-submit">Rendre l'évaluation</button>
+          <button class="btn btn--big" type="button" id="eval-retry" hidden>Recommencer</button>
+        </div>
+        <div class="result wide" id="eval-result" hidden aria-live="polite"></div>
+      </section>
+    </article>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>Dynamique au gymnase · cours interactif de physique, secondaire II. Les valeurs numériques des exemples sont arrondies ; les coefficients de frottement sont des ordres de grandeur.</p>
+    <p>Une retranscription complète du cours, des exercices et de l'évaluation, avec corrigé, est disponible au format Word (cours-dynamique.docx).</p>
+  </div>
+</footer>
+
+<script src="assets/moteur.js"></script>
+<script src="assets/simulations.js"></script>
+<script src="assets/evaluation.js"></script>
+</body>
+</html>
