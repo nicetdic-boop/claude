@@ -52,4 +52,8 @@ Les chiffres suisses (production 2025, centrales, lois) proviennent de l'OFEN, d
 | 8. Exercices | 10 exercices (niveaux 1 à 3) avec solutions | |
 | 9. L'essentiel | résumé et formulaire | |
 
+## Fiche d'exercices (Word)
+
+[`cours-corps-noir/fiche-exercices-corps-noir.docx`](cours-corps-noir/fiche-exercices-corps-noir.docx) accompagne le cours, sur le modèle de la fiche d'électricité : quatre parties (corps noir ; Planck et Wien ; Stefan-Boltzmann et bilans ; quanta), chacune avec cinq questions théoriques à lignes de réponse et cinq à sept exercices progressifs (niveaux 1 à 3), dont deux sur graphique. Le corrigé détaillé commence à la page 14, dans une section séparée qu'on peut retirer avant de distribuer. Mise en page pour la photocopie : noir et blanc, Arial 12, interligne 1,5, format A4.
+
 Les couleurs des corps noirs sont calculées à partir de la loi de Planck et des fonctions colorimétriques CIE 1931 (ajustement analytique de Wyman, Sloan et Shirley), puis converties en sRGB.
