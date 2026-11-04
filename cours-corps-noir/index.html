@@ -1,0 +1,2155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rayonnement du corps noir</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Cours interactif de physique (secondaire II) sur le rayonnement thermique : corps noir, loi de Planck, loi de Wien, loi de Stefan-Boltzmann, température des planètes et naissance des quanta, avec sept simulations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Mise en page : colonne de lecture étroite avec rail de sommaire.
+   Chaque simulation s'ouvre comme une fenêtre d'observation sombre
+   (l'oculaire d'un pyromètre) : l'incandescence ne se voit bien que dans le noir. */
+:root {
+  --paper: #f4f3f7;
+  --card: #ffffff;
+  --ink: #1c1929;
+  --ink-2: #4f4a63;
+  --ink-3: #767090;
+  --rule: #dcd9e5;
+  --rule-2: #ebe9f2;
+  --accent: #5534c9;      /* violet : le bout ultraviolet du spectre */
+  --accent-soft: #ece7fc;
+  --accent-ink: #ffffff;
+  --hot: #c4430b;         /* incandescence */
+  --hot-soft: #fdebe1;
+  --ir: #b3163f;          /* infrarouge, prédiction classique */
+  --cold: #1d62c4;
+  --ok: #1b7f4c;
+
+  /* Fenêtre d'observation : identique dans les deux thèmes, volontairement */
+  --stage: #0d0c13;
+  --stage-2: #191722;
+  --stage-ink: #eceaf4;
+  --stage-ink-2: #a6a2b7;
+  --stage-rule: #2e2b3c;
+  --stage-ir: #ff5d6c;
+  --stage-sun: #ffd36a;
+  --copper: #c47a3a;
+
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Spectral", Georgia, "Times New Roman", serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --f-ui: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.2rem;
+  --measure: 44rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #100f16;
+    --card: #18161f;
+    --ink: #ebe9f2;
+    --ink-2: #b2aec2;
+    --ink-3: #8c879e;
+    --rule: #2e2b3a;
+    --rule-2: #23212d;
+    --accent: #a891ff;
+    --accent-soft: #29223f;
+    --accent-ink: #140d2c;
+    --hot: #ff8a4c;
+    --hot-soft: #3a2218;
+    --ir: #ff6585;
+    --cold: #6aa6ff;
+    --ok: #4cc486;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #100f16;
+  --card: #18161f;
+  --ink: #ebe9f2;
+  --ink-2: #b2aec2;
+  --ink-3: #8c879e;
+  --rule: #2e2b3a;
+  --rule-2: #23212d;
+  --accent: #a891ff;
+  --accent-soft: #29223f;
+  --accent-ink: #140d2c;
+  --hot: #ff8a4c;
+  --hot-soft: #3a2218;
+  --ir: #ff6585;
+  --cold: #6aa6ff;
+  --ok: #4cc486;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 1.5rem; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+}
+img, svg, canvas { max-width: 100%; }
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-stretch: 112%;
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0;
+}
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); font-weight: 650; margin-top: 0.8rem; }
+h4 { font-size: var(--step-1); font-weight: 650; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 1.3em; }
+li + li { margin-top: 0.3em; }
+strong { font-weight: 600; }
+sub, sup { font-size: 0.7em; line-height: 0; }
+.label {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* ---------- En-tête ---------- */
+.hero { background: var(--stage); color: var(--stage-ink); }
+.hero__inner {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.6rem 2.2rem;
+  display: grid;
+  gap: 1.4rem;
+}
+.hero .label { color: var(--stage-ink-2); }
+.hero h1 {
+  font-size: clamp(2.3rem, 6.4vw, 4.4rem);
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+.hero .lead { font-size: 1.2rem; max-width: 40rem; color: var(--stage-ink); }
+.hero-strip { margin: 0; display: grid; gap: 0.5rem; }
+.hero-strip canvas { display: block; width: 100%; aspect-ratio: 900 / 140; }
+.hero-strip figcaption { font-family: var(--f-ui); font-size: 0.95rem; color: var(--stage-ink-2); min-height: 1.5em; }
+.hero-strip figcaption output { color: var(--stage-ink); font-family: var(--f-mono); font-size: 0.9rem; }
+@media (max-width: 560px) { .hero-strip canvas { aspect-ratio: 520 / 150; } }
+.objectifs {
+  display: grid;
+  gap: 0.5rem;
+  border-top: 1px solid var(--stage-rule);
+  padding-top: 1.2rem;
+  font-family: var(--f-ui);
+  font-size: 1rem;
+  color: var(--stage-ink);
+}
+.objectifs ul { columns: 2 18rem; column-gap: 2.5rem; }
+.objectifs li { break-inside: avoid; }
+
+/* ---------- Mise en page ---------- */
+.layout {
+  max-width: 74rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 1040px) {
+  .layout { grid-template-columns: 13.5rem minmax(0, 46rem); gap: 3.5rem; justify-content: center; }
+}
+.toc { font-family: var(--f-ui); font-size: 0.95rem; }
+.toc summary { cursor: pointer; padding-block: 0.4rem; list-style: none; display: flex; align-items: center; gap: 0.5rem; }
+.toc summary::-webkit-details-marker { display: none; }
+.toc summary::after { content: "+"; font-family: var(--f-mono); color: var(--ink-3); }
+.toc[open] summary::after { content: "−"; }
+.toc ol { list-style: none; padding: 0; display: grid; gap: 0.1rem; margin-top: 0.4rem; }
+.toc li + li { margin-top: 0; }
+.toc a {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.3rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  color: var(--ink-2);
+  text-decoration: none;
+  line-height: 1.3;
+}
+.toc a:hover { background: var(--rule-2); color: var(--ink); }
+.toc a.is-active { color: var(--ink); background: var(--accent-soft); }
+.toc .n { font-family: var(--f-mono); font-size: 0.8rem; color: var(--ink-3); padding-top: 0.1rem; }
+@media (min-width: 1040px) {
+  .toc { position: sticky; top: calc(1.5rem + env(safe-area-inset-top, 0px)); align-self: start; }
+  .toc summary { cursor: default; }
+  .toc summary::after { display: none; }
+}
+@media (max-width: 1039px) {
+  .toc { border: 1px solid var(--rule); background: var(--card); border-radius: 8px; padding: 0.4rem 0.8rem; }
+}
+
+.content { min-width: 0; display: grid; gap: 0; }
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding-block: 2.6rem;
+  border-top: 1px solid var(--rule);
+  min-width: 0;
+}
+.section:first-child { border-top: 0; padding-top: 1rem; }
+.section-head { display: grid; gap: 0.35rem; }
+.section-head .label { color: var(--hot); }
+
+/* ---------- Encadrés ---------- */
+.box { border-radius: 8px; padding: 1rem 1.15rem; display: grid; gap: 0.55rem; min-width: 0; }
+.box--def { background: var(--accent-soft); }
+.box--law { background: var(--card); border: 1px solid var(--rule); }
+.box--fun { background: var(--hot-soft); }
+.box--fun .label { color: var(--hot); }
+.box--ex { border: 1px dashed var(--rule); }
+.box--def .label { color: var(--accent); }
+.formula {
+  font-family: var(--f-body);
+  font-size: 1.35rem;
+  text-align: center;
+  padding-block: 0.4rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.formula .eq { display: inline-flex; align-items: center; gap: 0.35rem; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.25; }
+.frac > span:first-child { border-bottom: 1.5px solid currentColor; padding: 0 0.25em 0.08em; }
+.frac > span:last-child { padding: 0.08em 0.25em 0; }
+.legend-list { list-style: none; padding: 0; display: grid; gap: 0.2rem; font-size: 0.98rem; }
+.legend-list li + li { margin-top: 0; }
+
+/* ---------- Simulations ---------- */
+.sim {
+  margin: 0.4rem 0;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 0;
+}
+.sim__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 0.8rem 1rem 0.7rem; }
+.sim__head h4 { font-size: 1.15rem; }
+.stage { background: var(--stage); }
+.plot { background: var(--card); border-top: 1px solid var(--rule-2); border-bottom: 1px solid var(--rule-2); }
+.stage canvas, .plot canvas { display: block; width: 100%; aspect-ratio: var(--ar, 16 / 9); touch-action: pan-y; }
+@media (max-width: 560px) {
+  .stage canvas, .plot canvas { aspect-ratio: var(--ar-m, var(--ar, 4 / 3)); }
+}
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.9rem 1.4rem;
+  padding: 0.9rem 1rem 0.4rem;
+  font-family: var(--f-ui);
+}
+.ctrl { display: grid; gap: 0.35rem; min-width: 0; }
+.ctrl label, .ctrl .ctrl__name { display: flex; justify-content: space-between; gap: 0.6rem; font-size: 0.92rem; color: var(--ink-2); }
+.ctrl output { font-family: var(--f-mono); font-size: 0.85rem; color: var(--ink); white-space: nowrap; }
+.ctrl--wide { grid-column: 1 / -1; }
+input[type="range"] { width: 100%; accent-color: var(--accent); margin: 0; height: 1.6rem; }
+.btns { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.btn {
+  font-family: var(--f-ui);
+  font-size: 0.88rem;
+  font-weight: 550;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  line-height: 1.3;
+}
+.btn:hover { border-color: var(--ink-3); }
+.btn[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.btn--main { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn--main:hover { filter: brightness(1.08); }
+.btn--play { min-width: 6.5rem; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.readouts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.7rem 1.2rem;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--rule-2);
+}
+.ro { display: grid; gap: 0.1rem; align-content: start; min-width: 0; }
+.ro b { font-family: var(--f-ui); font-size: 0.8rem; font-weight: 500; color: var(--ink-3); }
+.ro span { font-family: var(--f-mono); font-size: 0.98rem; font-variant-numeric: tabular-nums; color: var(--ink); overflow-wrap: anywhere; }
+.ro .sub { font-family: var(--f-ui); font-size: 0.85rem; color: var(--ink-2); }
+.swatch { display: inline-block; width: 1.6em; height: 1em; border-radius: 3px; vertical-align: -0.12em; margin-right: 0.4em; border: 1px solid var(--rule); }
+.sim figcaption {
+  padding: 0.8rem 1rem 1rem;
+  border-top: 1px solid var(--rule-2);
+  font-size: 0.98rem;
+  color: var(--ink-2);
+}
+.sim figcaption b { display: block; margin-bottom: 0.3rem; font-family: var(--f-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--hot); }
+.note-line { padding: 0.7rem 1rem; border-top: 1px solid var(--rule-2); font-family: var(--f-ui); font-size: 0.95rem; color: var(--ink); min-height: 2.9rem; }
+.note-line strong { color: var(--hot); }
+
+/* ---------- Figures statiques ---------- */
+.fig { margin: 0.4rem 0; background: var(--card); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.fig__body { overflow-x: auto; padding: 0.8rem 0.6rem 0.2rem; }
+.fig__body svg { display: block; width: 100%; min-width: 34rem; height: auto; }
+.fig figcaption { padding: 0.6rem 1rem 0.9rem; font-size: 0.95rem; color: var(--ink-2); }
+svg text { font-family: var(--f-ui); fill: var(--ink-2); font-size: 13px; }
+svg .t-strong { fill: var(--ink); font-weight: 600; }
+svg .t-small { font-size: 11.5px; fill: var(--ink-3); }
+svg .t-mono { font-family: var(--f-mono); font-size: 11px; fill: var(--ink-3); }
+svg .leader { stroke: var(--ink-3); stroke-width: 1; }
+svg .dot { fill: var(--ink); }
+svg .band-uv { fill: var(--accent); opacity: 0.35; }
+svg .band-ir { fill: var(--ir); opacity: 0.28; }
+svg .band-mw { fill: var(--cold); opacity: 0.3; }
+svg .axis { stroke: var(--ink-3); stroke-width: 1; }
+
+/* ---------- Tableaux ---------- */
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-family: var(--f-ui); font-size: 0.95rem; }
+th, td { text-align: left; padding: 0.45rem 0.8rem; border-bottom: 1px solid var(--rule-2); white-space: nowrap; }
+th { font-family: var(--f-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+tr:last-child td { border-bottom: 0; }
+td.r, th.r { text-align: right; font-variant-numeric: tabular-nums; }
+.chip { display: inline-block; width: 2.4rem; height: 1.1rem; border-radius: 3px; vertical-align: -0.2em; background: var(--stage); }
+
+/* ---------- Exercices ---------- */
+.exos { padding-left: 0; list-style: none; counter-reset: ex; display: grid; gap: 1.3rem; }
+.exos > li { counter-increment: ex; display: grid; gap: 0.5rem; padding-top: 1rem; border-top: 1px solid var(--rule-2); }
+.exos > li + li { margin-top: 0; }
+.exos > li::before {
+  content: "Exercice " counter(ex);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--hot);
+}
+.lvl { font-family: var(--f-mono); font-size: 0.75rem; color: var(--ink-3); }
+.solution { border: 1px solid var(--rule); border-radius: 8px; background: var(--card); }
+.solution summary { cursor: pointer; padding: 0.5rem 0.9rem; font-family: var(--f-ui); font-weight: 600; font-size: 0.95rem; color: var(--accent); }
+.solution > div { padding: 0.2rem 0.9rem 0.9rem; display: grid; gap: 0.5rem; }
+
+/* ---------- L'essentiel ---------- */
+.essentiel { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.8rem; }
+.essentiel .box { background: var(--card); border: 1px solid var(--rule); }
+.essentiel .formula { font-size: 1.15rem; text-align: left; }
+
+.foot { font-family: var(--f-ui); font-size: 0.9rem; color: var(--ink-3); padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero__inner">
+    <span class="label">Physique · secondaire II · cours interactif</span>
+    <h1>Le rayonnement du corps noir</h1>
+    <p class="lead">Tout ce qui a une température brille. La forge, le Soleil, la plaque de cuisson, et toi aussi, en ce moment, vers 9 µm. Les caméras thermiques le savent, les moustiques aussi.</p>
+    <figure class="hero-strip">
+      <canvas id="cv-hero" aria-label="Bande de couleurs d'un corps noir de 1000 K à 15 000 K : rouge, orange, jaune, blanc puis bleuté, avec la bougie, la lampe, Bételgeuse, le Soleil, Sirius et Rigel."></canvas>
+      <figcaption>La couleur d'un corps noir selon sa température. Survole ou touche la bande : <output id="hero-out">5772 K, la surface du Soleil.</output></figcaption>
+    </figure>
+    <div class="objectifs">
+      <span class="label">À la fin du cours, tu sais…</span>
+      <ul>
+        <li>expliquer ce qu'est un corps noir et pourquoi un trou dans un four en est un ;</li>
+        <li>lire un spectre de Planck et dire comment il change avec la température ;</li>
+        <li>utiliser la loi de Wien pour mesurer une température à distance ;</li>
+        <li>utiliser la loi de Stefan-Boltzmann pour calculer une puissance rayonnée ;</li>
+        <li>estimer la température d'une planète et le rôle de l'effet de serre ;</li>
+        <li>raconter comment ce problème a fait naître la physique quantique.</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <details class="toc" id="toc">
+    <summary><span class="label">Sommaire</span></summary>
+    <ol>
+      <li><a href="#chaud"><span class="n">1</span>Tout ce qui est chaud brille</a></li>
+      <li><a href="#corps-noir"><span class="n">2</span>Le corps noir</a></li>
+      <li><a href="#planck"><span class="n">3</span>Le spectre de Planck</a></li>
+      <li><a href="#wien"><span class="n">4</span>La loi de Wien</a></li>
+      <li><a href="#stefan"><span class="n">5</span>La loi de Stefan-Boltzmann</a></li>
+      <li><a href="#planetes"><span class="n">6</span>La température des planètes</a></li>
+      <li><a href="#quanta"><span class="n">7</span>La catastrophe ultraviolette</a></li>
+      <li><a href="#exercices"><span class="n">8</span>Exercices</a></li>
+      <li><a href="#essentiel"><span class="n">9</span>L'essentiel</a></li>
+    </ol>
+  </details>
+
+  <main class="content">
+
+    <!-- 1 -->
+    <section class="section" id="chaud">
+      <div class="section-head"><span class="label">1</span><h2>Tout ce qui est chaud brille</h2></div>
+      <p>Approche la main d'une plaque de cuisson qu'on vient d'éteindre : tu sens la chaleur à distance, sans la toucher. Cette chaleur voyage sous forme de lumière, une lumière que tes yeux ne voient pas : de l'<strong>infrarouge</strong>.</p>
+      <p>Tout corps dont la température est au-dessus du zéro absolu émet un rayonnement électromagnétique, appelé <strong>rayonnement thermique</strong>. Il vient de l'agitation des charges dans la matière : des charges qui vibrent émettent des ondes électromagnétiques. Plus le corps est chaud, plus il émet, et plus son rayonnement se décale vers les courtes longueurs d'onde : d'abord invisible, puis rouge sombre, orange, jaune, blanc, et enfin bleuté pour les étoiles les plus chaudes.</p>
+      <div class="box box--law">
+        <span class="label">Trois observations</span>
+        <ul>
+          <li>Une barre de fer qu'on chauffe passe du rouge sombre à l'orange, puis au jaune et au blanc. Les forgerons lisaient la température à la couleur, bien avant les thermomètres.</li>
+          <li>Un radiateur ou une plaque tiède chauffent sans briller : leur rayonnement est entièrement infrarouge.</li>
+          <li>Ta peau, vers 33 °C, émet environ 500 W par mètre carré d'infrarouge. Une caméra thermique te voit dans le noir complet.</li>
+        </ul>
+      </div>
+      <p>Le plus surprenant, c'est que le spectre de ce rayonnement ne dépend presque que de la <strong>température</strong>, pas de la matière. Fer, brique, charbon ou gaz d'une étoile : à la même température, à peu près la même lumière. Pour l'étudier, les physiciens ont inventé un objet idéal, le <strong>corps noir</strong>, et trouvé trois lois qui le décrivent. En chemin, ils ont dû inventer la physique quantique, ce qui n'était pas prévu au programme.</p>
+      <div class="box box--fun">
+        <span class="label">Pour briller en société</span>
+        <p>Les moustiques <i>Aedes</i> repèrent l'infrarouge émis par ta peau jusqu'à environ 70 cm (étude publiée dans <i>Nature</i> en 2024). Combiné au CO₂ que tu expires, c'est leur système de guidage.</p>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="section" id="corps-noir">
+      <div class="section-head"><span class="label">2</span><h2>Le corps noir, un objet idéal</h2></div>
+      <div class="box box--def">
+        <span class="label">Définition</span>
+        <p>Un <strong>corps noir</strong> absorbe la totalité du rayonnement qu'il reçoit, à toutes les longueurs d'onde, sans rien réfléchir ni transmettre. La seule lumière qui en sort est celle qu'il émet lui-même à cause de sa température. Son spectre d'émission ne dépend que de sa température <i>T</i>.</p>
+      </div>
+      <p>« Noir » ne veut pas dire sombre. À température ambiante, un corps noir paraît noir parce qu'il émet uniquement de l'infrarouge. Chauffé à 5800 K, il éblouit. Le Soleil est d'ailleurs un assez bon corps noir, ce qui fait de lui l'objet noir le plus brillant du ciel.</p>
+
+      <h3>Le piège à lumière</h3>
+      <p>Aucune matière n'absorbe parfaitement tout. Gustav Kirchhoff a proposé en 1860 une astuce : prendre une boîte fermée, percer un tout petit trou, et regarder le trou. La lumière qui y entre rebondit sur les parois intérieures, perd un peu d'énergie à chaque rebond, et n'a presque aucune chance de retrouver la sortie. Le trou absorbe donc presque tout : il est plus noir que la peinture la plus noire.</p>
+      <p>Inversement, si on chauffe les parois, le rayonnement qui sort du trou a exactement le spectre du corps noir, quelle que soit la matière de la boîte. C'est ainsi qu'on fabrique les corps noirs de laboratoire : un four avec un petit trou.</p>
+
+      <figure class="sim" id="sim-cavite">
+        <div class="sim__head"><h4>Le four à trou</h4><span class="label">Simulation 1</span></div>
+        <div class="stage"><canvas id="cv-cav" style="--ar: 16 / 9; --ar-m: 1 / 1" aria-label="Coupe d'une cavité percée d'un trou. Des photons entrent, rebondissent sur les parois et sont absorbés ; presque aucun ne ressort."></canvas></div>
+        <div class="controls">
+          <div class="ctrl">
+            <span class="ctrl__name">Expérience</span>
+            <div class="btns" id="cav-mode">
+              <button class="btn" type="button" data-value="light" aria-pressed="true">Éclairer de l'extérieur</button>
+              <button class="btn" type="button" data-value="heat" aria-pressed="false">Chauffer les parois</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="cav-alpha"><span>Absorption des parois α</span><output for="cav-alpha"></output></label><input type="range" id="cav-alpha" min="0.05" max="0.95" step="0.05" value="0.5"></div>
+          <div class="ctrl"><label for="cav-hole"><span>Taille du trou</span><output for="cav-hole"></output></label><input type="range" id="cav-hole" min="2" max="45" step="1" value="6"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn" type="button" id="cav-reset">Remettre à zéro</button><button class="btn btn--play" type="button" id="cav-play"></button></div></div>
+        </div>
+        <div class="readouts" id="cav-read"></div>
+        <figcaption><b>À essayer</b> Avec la lumière extérieure, compare ce que renvoie la paroi extérieure (une fraction 1 − α) et ce que renvoie le trou : presque rien, même avec des parois claires. Passe ensuite en mode « chauffer » et baisse α : la paroi extérieure brille de moins en moins, alors que le trou continue de rayonner presque comme un corps noir (la mesure se précise avec le temps). Il ne décroche que si le trou est grand ou les parois très réfléchissantes : la lumière s'échappe alors avant d'avoir assez rebondi. Seul un tiers des photons est dessiné.</figcaption>
+      </figure>
+
+      <h3>Bon absorbeur, bon émetteur</h3>
+      <p>La simulation montre une règle générale, la <strong>loi de Kirchhoff</strong> : à une température donnée, un corps émet d'autant mieux qu'il absorbe bien. On la résume avec l'<strong>émissivité</strong> ε, un nombre entre 0 et 1 : un corps réel émet ε fois ce qu'émettrait un corps noir à la même température. Le corps noir a ε = 1.</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Surface</th><th class="r">Émissivité ε (infrarouge)</th></tr></thead>
+          <tbody>
+            <tr><td>Noir de carbone, suie</td><td class="r">0,95 à 0,98</td></tr>
+            <tr><td>Peau humaine</td><td class="r">0,98</td></tr>
+            <tr><td>Eau, glace</td><td class="r">0,96</td></tr>
+            <tr><td>Brique, béton</td><td class="r">0,9</td></tr>
+            <tr><td>Fer oxydé</td><td class="r">0,8</td></tr>
+            <tr><td>Aluminium poli</td><td class="r">0,05</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box box--fun">
+        <span class="label">Pour briller en société</span>
+        <p>Une couverture de survie fonctionne grâce à son aluminium poli : il renvoie ton infrarouge vers toi et, côté extérieur, il rayonne vingt fois moins que ta peau. La paroi argentée d'une bouteille isotherme fait la même chose pour le thé.</p>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="section" id="planck">
+      <div class="section-head"><span class="label">3</span><h2>Le spectre de Planck</h2></div>
+      <p>Le <strong>spectre</strong> d'un corps noir indique, pour chaque longueur d'onde λ, la puissance émise par mètre carré de surface et par unité de longueur d'onde. On l'appelle l'<strong>exitance spectrale</strong> <i>M</i><sub>λ</sub>, en W·m⁻²·µm⁻¹. En 1900, après des années de mesures très précises à Berlin, Max Planck trouve la formule qui colle parfaitement aux résultats :</p>
+      <div class="box box--law">
+        <span class="label">Loi de Planck</span>
+        <div class="formula"><span class="eq"><i>M</i><sub>λ</sub>(λ, <i>T</i>) = <span class="frac"><span>2π<i>hc</i>²</span><span>λ⁵</span></span> · <span class="frac"><span>1</span><span>e<sup><i>hc</i> / (λ<i>kT</i>)</sup> − 1</span></span></span></div>
+        <ul class="legend-list">
+          <li><i>h</i> = 6,626·10⁻³⁴ J·s, la constante de Planck</li>
+          <li><i>c</i> = 2,998·10⁸ m/s, la vitesse de la lumière</li>
+          <li><i>k</i> = 1,381·10⁻²³ J/K, la constante de Boltzmann</li>
+          <li><i>T</i> en kelvins, λ en mètres</li>
+        </ul>
+      </div>
+      <p>Pas besoin de connaître cette formule par cœur. Ce qu'il faut savoir, c'est lire la forme de la courbe. C'est le rôle de la simulation suivante.</p>
+
+      <figure class="sim" id="sim-spectre">
+        <div class="sim__head"><h4>Spectromètre de corps noir</h4><span class="label">Simulation 2</span></div>
+        <div class="plot"><canvas id="cv-spec" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Courbe de Planck : exitance spectrale en fonction de la longueur d'onde, pour la température choisie."></canvas></div>
+        <div class="controls">
+          <div class="ctrl ctrl--wide"><label for="spec-t"><span>Température <i>T</i></span><output for="spec-t"></output></label><input type="range" id="spec-t" min="0" max="1000" step="1" value="800"></div>
+          <div class="ctrl ctrl--wide">
+            <span class="ctrl__name">Exemples</span>
+            <div class="btns" id="spec-presets">
+              <button class="btn" type="button" data-t="2.725">Fond cosmologique</button>
+              <button class="btn" type="button" data-t="306">Toi</button>
+              <button class="btn" type="button" data-t="900">Plaque de cuisson</button>
+              <button class="btn" type="button" data-t="2800">Lampe à incandescence</button>
+              <button class="btn" type="button" data-t="3600">Bételgeuse</button>
+              <button class="btn" type="button" data-t="5772">Soleil</button>
+              <button class="btn" type="button" data-t="9940">Sirius</button>
+              <button class="btn" type="button" data-t="12100">Rigel</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <span class="ctrl__name">Axe des longueurs d'onde</span>
+            <div class="btns" id="spec-x">
+              <button class="btn" type="button" data-value="vis" aria-pressed="true">0 à 3 µm</button>
+              <button class="btn" type="button" data-value="ir" aria-pressed="false">0 à 30 µm</button>
+              <button class="btn" type="button" data-value="log" aria-pressed="false">Logarithmique</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <span class="ctrl__name">Comparer</span>
+            <div class="btns"><button class="btn" type="button" id="spec-pin">Garder cette courbe</button><button class="btn" type="button" id="spec-clear">Effacer</button></div>
+          </div>
+        </div>
+        <div class="readouts" id="spec-read"></div>
+        <figcaption><b>À essayer</b> Garde la courbe du Soleil, puis passe à Bételgeuse : le maximum recule vers l'infrarouge et l'aire sous la courbe s'effondre. Remarque que deux courbes ne se croisent jamais. Pour « Toi » et le fond cosmologique, passe en échelle logarithmique : leur maximum est loin à droite.</figcaption>
+      </figure>
+
+      <h3>Lire la courbe</h3>
+      <ul>
+        <li>La courbe a un seul <strong>maximum</strong>, à la longueur d'onde λ<sub>max</sub>. Plus <i>T</i> est grande, plus λ<sub>max</sub> est petite : c'est la loi de Wien (section 4).</li>
+        <li>L'<strong>aire sous la courbe</strong> est la puissance totale émise par mètre carré. Elle augmente très vite avec <i>T</i> : c'est la loi de Stefan-Boltzmann (section 5).</li>
+        <li>Un corps plus chaud émet davantage <strong>à toutes les longueurs d'onde</strong> : les courbes ne se croisent pas.</li>
+        <li>Le <strong>visible</strong> (380 à 780 nm) n'est qu'une petite fenêtre. Même pour le Soleil, plus de la moitié de l'énergie tombe hors du visible.</li>
+      </ul>
+      <div class="box box--fun">
+        <span class="label">Pour briller en société</span>
+        <p>Le maximum du Soleil tombe vers 500 nm, dans le vert-bleu. Le Soleil est-il vert ? Non : ton œil additionne toutes les longueurs d'onde, et le mélange paraît blanc. Les plantes, elles, sont vertes parce qu'elles renvoient justement cette partie-là. Elles ont leurs raisons.</p>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="section" id="wien">
+      <div class="section-head"><span class="label">4</span><h2>La loi de Wien : la couleur comme thermomètre</h2></div>
+      <p>En 1893, Wilhelm Wien montre que la position du maximum est inversement proportionnelle à la température. Doubler la température divise λ<sub>max</sub> par deux.</p>
+      <div class="box box--law">
+        <span class="label">Loi du déplacement de Wien</span>
+        <div class="formula"><span class="eq">λ<sub>max</sub> · <i>T</i> = <i>b</i>&nbsp;&nbsp;&nbsp;avec&nbsp;&nbsp;<i>b</i> = 2,898·10⁻³ m·K</span></div>
+        <p>λ<sub>max</sub> en mètres, <i>T</i> en kelvins.</p>
+      </div>
+      <div class="box box--ex">
+        <span class="label">Exemple</span>
+        <p>Le spectre du Soleil culmine à λ<sub>max</sub> ≈ 502 nm. Sa température de surface vaut donc <i>T</i> = <i>b</i> / λ<sub>max</sub> = 2,898·10⁻³ / 502·10⁻⁹ ≈ <strong>5770 K</strong>. On n'a pas eu besoin d'y aller avec un thermomètre, ce qui est aussi bien.</p>
+      </div>
+      <p>C'est tout l'intérêt de la loi : elle permet de mesurer une température <strong>à distance</strong>. Il suffit de trouver le pic du spectre. C'est comme ça qu'on connaît la température de surface des étoiles, et c'est le principe des thermomètres infrarouges sans contact.</p>
+
+      <figure class="fig">
+        <div class="fig__body">
+          <svg viewBox="0 0 680 180" role="img" aria-label="Échelle logarithmique des longueurs d'onde de 100 nm à 1 cm, avec la position du maximum d'émission pour Rigel, le Soleil, une lampe, une plaque de cuisson, le corps humain, Pluton et le fond cosmologique.">
+            <defs>
+              <linearGradient id="g-vis" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0" stop-color="#7a00d4"/><stop offset="0.15" stop-color="#2a3cff"/><stop offset="0.3" stop-color="#00a6ff"/><stop offset="0.45" stop-color="#18d14a"/><stop offset="0.6" stop-color="#e3e600"/><stop offset="0.75" stop-color="#ff8c00"/><stop offset="1" stop-color="#c40000"/>
+              </linearGradient>
+            </defs>
+            <rect x="40" y="98" width="69.6" height="18" class="band-uv"/>
+            <rect x="109.6" y="98" width="37.5" height="18" fill="url(#g-vis)"/>
+            <rect x="147.1" y="98" width="372.9" height="18" class="band-ir"/>
+            <rect x="520" y="98" width="120" height="18" class="band-mw"/>
+            <text x="74.8" y="134" text-anchor="middle" class="t-small">UV</text>
+            <text x="128.3" y="134" text-anchor="middle" class="t-small">visible</text>
+            <text x="333.5" y="134" text-anchor="middle" class="t-small">infrarouge</text>
+            <text x="580" y="134" text-anchor="middle" class="t-small">micro-ondes</text>
+            <g class="axis">
+              <line x1="40" y1="146" x2="640" y2="146"/>
+              <line x1="40" y1="146" x2="40" y2="151"/><line x1="160" y1="146" x2="160" y2="151"/><line x1="280" y1="146" x2="280" y2="151"/><line x1="400" y1="146" x2="400" y2="151"/><line x1="520" y1="146" x2="520" y2="151"/><line x1="640" y1="146" x2="640" y2="151"/>
+            </g>
+            <text x="40" y="166" text-anchor="middle" class="t-mono">100 nm</text>
+            <text x="160" y="166" text-anchor="middle" class="t-mono">1 µm</text>
+            <text x="280" y="166" text-anchor="middle" class="t-mono">10 µm</text>
+            <text x="400" y="166" text-anchor="middle" class="t-mono">100 µm</text>
+            <text x="520" y="166" text-anchor="middle" class="t-mono">1 mm</text>
+            <text x="640" y="166" text-anchor="middle" class="t-mono">1 cm</text>
+            <!-- maxima -->
+            <line x1="85.5" y1="52" x2="85.5" y2="104" class="leader"/><circle cx="85.5" cy="107" r="3.5" class="dot"/>
+            <text x="85.5" y="46" text-anchor="middle" class="t-strong">Rigel</text>
+            <line x1="124.1" y1="26" x2="124.1" y2="104" class="leader"/><circle cx="124.1" cy="107" r="3.5" class="dot"/>
+            <text x="124.1" y="20" text-anchor="middle" class="t-strong">Soleil</text>
+            <line x1="161.8" y1="76" x2="161.8" y2="104" class="leader"/><circle cx="161.8" cy="107" r="3.5" class="dot"/>
+            <text x="166" y="72" text-anchor="start" class="t-strong">lampe</text>
+            <line x1="220.9" y1="52" x2="220.9" y2="104" class="leader"/><circle cx="220.9" cy="107" r="3.5" class="dot"/>
+            <text x="220.9" y="46" text-anchor="middle" class="t-strong">plaque 900 K</text>
+            <line x1="277.2" y1="26" x2="277.2" y2="104" class="leader"/><circle cx="277.2" cy="107" r="3.5" class="dot"/>
+            <text x="277.2" y="20" text-anchor="middle" class="t-strong">toi</text>
+            <line x1="383.2" y1="52" x2="383.2" y2="104" class="leader"/><circle cx="383.2" cy="107" r="3.5" class="dot"/>
+            <text x="383.2" y="46" text-anchor="middle" class="t-strong">Pluton, 40 K</text>
+            <line x1="523.2" y1="26" x2="523.2" y2="104" class="leader"/><circle cx="523.2" cy="107" r="3.5" class="dot"/>
+            <text x="523.2" y="20" text-anchor="middle" class="t-strong">fond cosmologique</text>
+          </svg>
+        </div>
+        <figcaption>Où tombe le maximum ? L'échelle est logarithmique : chaque graduation multiplie la longueur d'onde par 10. Le visible est une fente étroite, et seuls les objets entre 3000 K et 10 000 K environ y placent leur pic.</figcaption>
+      </figure>
+
+      <h3>L'échelle des forgerons</h3>
+      <p>Bien avant Wien, les forgerons jugeaient la température du fer à sa couleur. En 1836, le physicien Claude Pouillet a mis des chiffres sur ce savoir-faire. Les pastilles ci-dessous sont calculées à partir du spectre de Planck, telles qu'on les verrait dans une forge sombre.</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Couleur</th><th>Nom des forgerons</th><th class="r">Température</th></tr></thead>
+          <tbody id="pouillet">
+            <tr><td><span class="chip" data-t="798"></span></td><td>rouge naissant</td><td class="r">525 °C</td></tr>
+            <tr><td><span class="chip" data-t="973"></span></td><td>rouge sombre</td><td class="r">700 °C</td></tr>
+            <tr><td><span class="chip" data-t="1073"></span></td><td>cerise naissant</td><td class="r">800 °C</td></tr>
+            <tr><td><span class="chip" data-t="1173"></span></td><td>cerise</td><td class="r">900 °C</td></tr>
+            <tr><td><span class="chip" data-t="1273"></span></td><td>cerise clair</td><td class="r">1000 °C</td></tr>
+            <tr><td><span class="chip" data-t="1373"></span></td><td>orangé foncé</td><td class="r">1100 °C</td></tr>
+            <tr><td><span class="chip" data-t="1473"></span></td><td>orangé clair</td><td class="r">1200 °C</td></tr>
+            <tr><td><span class="chip" data-t="1573"></span></td><td>blanc</td><td class="r">1300 °C</td></tr>
+            <tr><td><span class="chip" data-t="1673"></span></td><td>blanc soudant</td><td class="r">1400 °C</td></tr>
+            <tr><td><span class="chip" data-t="1773"></span></td><td>blanc éblouissant</td><td class="r">1500 °C</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Le « rouge naissant » à 525 °C (798 K) n'est pas un hasard : c'est la température à partir de laquelle n'importe quel objet commence à rougeoyer faiblement dans l'obscurité. On l'appelle le <strong>point de Draper</strong> (1847). En dessous, le peu de lumière visible émise est trop faible pour l'œil.</p>
+      <p>Pour les étoiles, c'est la même règle. Bételgeuse (3600 K) est orangée, le Soleil blanc légèrement jaune, Rigel (12 000 K) blanc-bleu. En astronomie, le bleu est donc la couleur du chaud, l'inverse de ce qu'indiquent les robinets.</p>
+
+      <figure class="sim" id="sim-quiz">
+        <div class="sim__head"><h4>Devine la température</h4><span class="label">Simulation 3</span></div>
+        <div class="stage"><canvas id="cv-quiz" style="--ar: 2 / 1; --ar-m: 4 / 3" aria-label="Deux étoiles : à gauche une étoile mystère, à droite ton estimation de température, colorée comme un corps noir."></canvas></div>
+        <div class="controls">
+          <div class="ctrl ctrl--wide"><label for="quiz-t"><span>Ta proposition</span><output for="quiz-t"></output></label><input type="range" id="quiz-t" min="0" max="1000" step="1" value="400"></div>
+          <div class="ctrl ctrl--wide"><div class="btns"><button class="btn btn--main" type="button" id="quiz-check">Vérifier</button><button class="btn" type="button" id="quiz-next">Étoile suivante</button></div></div>
+        </div>
+        <div class="note-line" id="quiz-msg" aria-live="polite">Règle la couleur de ton étoile pour qu'elle ressemble à l'étoile mystère, puis vérifie.</div>
+        <div class="readouts" id="quiz-read"></div>
+        <figcaption><b>À observer</b> Entre 3000 et 7000 K, la couleur change vite et on vise juste. Au-delà de 10 000 K, toutes les étoiles se ressemblent : la couleur ne change presque plus, et l'œil devient un mauvais thermomètre. Les astronomes mesurent alors le spectre complet.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 5 -->
+    <section class="section" id="stefan">
+      <div class="section-head"><span class="label">5</span><h2>La loi de Stefan-Boltzmann : le terrible <i>T</i>⁴</h2></div>
+      <p>L'aire sous la courbe de Planck donne la puissance totale émise par mètre carré, toutes longueurs d'onde confondues. Josef Stefan l'a trouvée en 1879 à partir de mesures, et son ancien élève Ludwig Boltzmann l'a démontrée en 1884 par la thermodynamique.</p>
+      <div class="box box--law">
+        <span class="label">Loi de Stefan-Boltzmann</span>
+        <div class="formula"><span class="eq"><i>M</i> = σ <i>T</i>⁴&nbsp;&nbsp;&nbsp;avec&nbsp;&nbsp;σ = 5,670·10⁻⁸ W·m⁻²·K⁻⁴</span></div>
+        <p>Pour un objet réel de surface <i>A</i> et d'émissivité ε, la puissance rayonnée vaut <i>P</i> = ε σ <i>A T</i>⁴. S'il est entouré d'un milieu à la température <i>T</i><sub>0</sub>, il en reçoit aussi, et le bilan net vaut <i>P</i><sub>net</sub> = ε σ <i>A</i> (<i>T</i>⁴ − <i>T</i><sub>0</sub>⁴).</p>
+      </div>
+      <p>La puissance quatrième est brutale. Doubler la température absolue multiplie la puissance rayonnée par 2⁴ = 16. Un filament de lampe à 3000 K rayonne 10 000 fois plus, par mètre carré, que toi à 300 K. Et inversement : pour gagner un peu de température, il faut énormément de puissance.</p>
+      <div class="box box--ex">
+        <span class="label">Exemple : la puissance du Soleil</span>
+        <p>Rayon <i>R</i> = 6,96·10⁸ m, température <i>T</i> = 5772 K. Surface : 4π<i>R</i>² = 6,09·10¹⁸ m². Puissance : <i>L</i> = 4π<i>R</i>² σ <i>T</i>⁴ = 6,09·10¹⁸ × 5,67·10⁻⁸ × 5772⁴ ≈ <strong>3,83·10²⁶ W</strong>. Environ dix mille milliards de fois la consommation électrique mondiale, en continu, depuis 4,6 milliards d'années.</p>
+      </div>
+
+      <figure class="sim" id="sim-forge">
+        <div class="sim__head"><h4>Chauffe la barre</h4><span class="label">Simulation 4</span></div>
+        <div class="stage"><canvas id="cv-forge" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="Barre de fer chauffée par induction, qui rougeoie selon sa température, avec la courbe de sa température en fonction du temps."></canvas></div>
+        <div class="controls">
+          <div class="ctrl ctrl--wide"><label for="forge-p"><span>Puissance de chauffage</span><output for="forge-p"></output></label><input type="range" id="forge-p" min="0" max="16" step="0.1" value="2"></div>
+          <div class="ctrl ctrl--wide"><div class="btns"><button class="btn" type="button" id="forge-off">Couper le chauffage</button><button class="btn" type="button" id="forge-reset">Nouvelle barre froide</button><button class="btn btn--play" type="button" id="forge-play"></button></div></div>
+        </div>
+        <div class="readouts" id="forge-read"></div>
+        <figcaption><b>À essayer</b> La barre démarre à l'équilibre pour 2 kW. À 1 kW, elle se stabilise vers 920 K, rouge sombre. Pour atteindre le blanc vers 1630 K, il faut 10 kW : dix fois plus de puissance pour même pas deux fois la température. Coupe ensuite le chauffage : elle refroidit très vite au début, puis de plus en plus lentement. Et si tu pousses au maximum, tant pis pour la barre.<br>Modèle : barre de fer de 30 × 2 × 2 cm (0,94 kg, surface 248 cm²) traitée comme un corps noir, sans convection. Le temps est accéléré vingt fois.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 6 -->
+    <section class="section" id="planetes">
+      <div class="section-head"><span class="label">6</span><h2>Application : la température des planètes</h2></div>
+      <p>Une planète reçoit la lumière du Soleil, en renvoie une partie directement (nuages, glace, sable clair), absorbe le reste et le réémet sous forme d'infrarouge. Sa température s'ajuste jusqu'à ce que la puissance absorbée et la puissance émise s'équilibrent. C'est l'<strong>équilibre radiatif</strong>.</p>
+      <ul>
+        <li>Au niveau de la Terre, le Soleil apporte <i>S</i> = 1361 W/m² : c'est la <strong>constante solaire</strong>. À une distance <i>d</i> (en unités astronomiques), <i>S</i> = 1361 / <i>d</i>² W/m².</li>
+        <li>La planète intercepte la lumière sur un disque de surface π<i>R</i>² et en renvoie la fraction <i>a</i>, l'<strong>albédo</strong>. Puissance absorbée : (1 − <i>a</i>) <i>S</i> π<i>R</i>².</li>
+        <li>Elle émet par toute sa surface 4π<i>R</i>², comme un corps noir : σ<i>T</i>⁴ · 4π<i>R</i>².</li>
+      </ul>
+      <div class="box box--law">
+        <span class="label">Température d'équilibre</span>
+        <div class="formula"><span class="eq">(1 − <i>a</i>) <i>S</i> π<i>R</i>² = 4π<i>R</i>² σ <i>T</i>⁴&nbsp;&nbsp;⟹&nbsp;&nbsp;<i>T</i><sub>éq</sub> = <span class="frac"><span>(1 − <i>a</i>) <i>S</i></span><span>4σ</span></span><sup>1/4</sup></span></div>
+      </div>
+      <p>Pour la Terre (<i>a</i> = 0,31), on trouve <i>T</i><sub>éq</sub> ≈ 254 K, soit −19 °C. La température moyenne mesurée est de 15 °C. Les 34 degrés manquants, c'est l'<strong>effet de serre</strong> : la vapeur d'eau et le CO₂ de l'atmosphère absorbent une partie de l'infrarouge émis par le sol et en renvoient la moitié vers le bas. Dans un modèle simple à une couche qui absorbe une fraction <i>f</i> de l'infrarouge, la température du sol devient <i>T</i><sub>sol</sub> = <i>T</i><sub>éq</sub> · (2 / (2 − <i>f</i>))<sup>1/4</sup>.</p>
+
+      <figure class="sim" id="sim-planetes">
+        <div class="sim__head"><h4>Équilibre radiatif</h4><span class="label">Simulation 5</span></div>
+        <div class="stage"><canvas id="cv-pla" style="--ar: 2 / 1; --ar-m: 4 / 3" aria-label="Le Soleil à gauche envoie de la lumière vers une planète. Une partie est réfléchie, le reste est absorbé puis réémis en infrarouge, parfois retenu par l'atmosphère."></canvas></div>
+        <div class="controls">
+          <div class="ctrl ctrl--wide">
+            <span class="ctrl__name">Planète</span>
+            <div class="btns" id="pla-presets">
+              <button class="btn" type="button" data-value="mercure" aria-pressed="false">Mercure</button>
+              <button class="btn" type="button" data-value="venus" aria-pressed="false">Vénus</button>
+              <button class="btn" type="button" data-value="terre" aria-pressed="true">Terre</button>
+              <button class="btn" type="button" data-value="mars" aria-pressed="false">Mars</button>
+              <button class="btn" type="button" data-value="jupiter" aria-pressed="false">Jupiter</button>
+            </div>
+          </div>
+          <div class="ctrl"><label for="pla-d"><span>Distance au Soleil <i>d</i></span><output for="pla-d"></output></label><input type="range" id="pla-d" min="0" max="1000" step="1" value="500"></div>
+          <div class="ctrl"><label for="pla-a"><span>Albédo <i>a</i></span><output for="pla-a"></output></label><input type="range" id="pla-a" min="0" max="0.95" step="0.01" value="0.31"></div>
+          <div class="ctrl"><label for="pla-f"><span>Absorption IR de l'atmosphère <i>f</i></span><output for="pla-f"></output></label><input type="range" id="pla-f" min="0" max="1" step="0.01" value="0.79"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn btn--play" type="button" id="pla-play"></button></div></div>
+        </div>
+        <div class="readouts" id="pla-read"></div>
+        <div class="note-line" id="pla-note"></div>
+        <figcaption><b>À essayer</b> Compare Vénus et la Terre : Vénus est plus proche du Soleil, mais ses nuages renvoient 76 % de la lumière. Sans effet de serre, elle serait plus froide que la Terre. Sur la Terre, mets <i>f</i> à 0 : bienvenue sur une boule de glace à −19 °C. Les points jaunes sont la lumière du Soleil, les blancs la lumière réfléchie, les rouges l'infrarouge.</figcaption>
+      </figure>
+    </section>
+
+    <!-- 7 -->
+    <section class="section" id="quanta">
+      <div class="section-head"><span class="label">7</span><h2>La catastrophe ultraviolette et la naissance des quanta</h2></div>
+      <p>En avril 1900, Lord Kelvin donne une conférence restée célèbre : la physique est presque terminée, il ne reste que « deux petits nuages » à l'horizon. L'un des deux concerne justement le rayonnement thermique. Ces deux nuages donneront la relativité et la physique quantique. Belle prévision météo.</p>
+      <h3>Ce que prédisait la physique classique</h3>
+      <p>Dans un four, le rayonnement forme des ondes stationnaires, un peu comme les modes de vibration d'une corde de guitare, mais en trois dimensions. La physique classique dit que chaque mode reçoit en moyenne la même énergie, <i>kT</i> : c'est le <strong>théorème d'équipartition</strong>. Or plus la longueur d'onde est courte, plus il y a de modes possibles. Lord Rayleigh (1900) et James Jeans (1905) en tirent la formule :</p>
+      <div class="box box--law">
+        <span class="label">Loi de Rayleigh-Jeans (classique)</span>
+        <div class="formula"><span class="eq"><i>M</i><sub>λ</sub> = <span class="frac"><span>2π<i>ckT</i></span><span>λ⁴</span></span></span></div>
+      </div>
+      <p>Elle marche très bien pour les grandes longueurs d'onde. Mais quand λ diminue, elle part vers l'infini, et l'énergie totale rayonnée par un four devient infinie. Paul Ehrenfest appellera ça en 1911 la <strong>catastrophe ultraviolette</strong>. D'après cette théorie, ouvrir la porte d'un four à pain devrait te bombarder d'ultraviolets et de rayons X. Les boulangers vont bien, merci.</p>
+
+      <figure class="sim" id="sim-cata">
+        <div class="sim__head"><h4>Planck contre la physique classique</h4><span class="label">Simulation 6</span></div>
+        <div class="plot"><canvas id="cv-cata" style="--ar: 16 / 9; --ar-m: 4 / 5" aria-label="La courbe de Planck comparée à la loi de Rayleigh-Jeans, qui part vers l'infini aux courtes longueurs d'onde, et à l'approximation de Wien."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="cata-t"><span>Température <i>T</i></span><output for="cata-t"></output></label><input type="range" id="cata-t" min="1500" max="8000" step="50" value="5000"></div>
+          <div class="ctrl">
+            <span class="ctrl__name">Afficher</span>
+            <div class="btns"><button class="btn" type="button" id="cata-rj" aria-pressed="true">Rayleigh-Jeans</button><button class="btn" type="button" id="cata-w" aria-pressed="false">Approximation de Wien</button></div>
+          </div>
+        </div>
+        <div class="readouts" id="cata-read"></div>
+        <figcaption><b>À observer</b> À droite, aux grandes longueurs d'onde, Rayleigh-Jeans et Planck se rejoignent : la physique classique n'avait pas complètement tort. À gauche, elle s'envole. L'approximation de Wien (1896) fait l'inverse : juste à gauche, fausse à droite. Planck a cherché une formule qui raccorde les deux. Survole le graphique pour comparer les valeurs.</figcaption>
+      </figure>
+
+      <h3>L'acte de désespoir de Planck</h3>
+      <p>Le 14 décembre 1900, Max Planck présente une justification de sa formule. Pour l'obtenir, il a dû faire une hypothèse qu'il trouve lui-même absurde : les oscillateurs de la matière ne peuvent échanger de l'énergie que par paquets, des <strong>quanta</strong>, proportionnels à leur fréquence <i>f</i> :</p>
+      <div class="box box--law">
+        <span class="label">Le quantum d'énergie</span>
+        <div class="formula"><span class="eq"><i>E</i> = <i>h f</i> = <span class="frac"><span><i>hc</i></span><span>λ</span></span></span></div>
+      </div>
+      <p>L'idée tue la catastrophe. Un oscillateur de basse fréquence demande de petits paquets, faciles à obtenir avec l'agitation thermique, qui fournit de l'ordre de <i>kT</i>. Un oscillateur de haute fréquence n'accepte que de gros paquets, bien plus grands que <i>kT</i> : il n'est presque jamais excité. C'est comme un distributeur qui ne rend que des billets : si tu n'as que de la monnaie en poche, impossible de retirer un billet de 1000. Les ultraviolets restent donc presque vides, et l'énergie totale reste finie.</p>
+      <p>Planck parlera plus tard d'un « acte de désespoir ». Il pensait que ce découpage était une astuce de calcul. En 1905, Einstein va plus loin : la lumière elle-même est faite de paquets, les <strong>photons</strong>. La physique quantique était lancée, et Planck a passé des années à essayer de s'en débarrasser.</p>
+
+      <figure class="sim" id="sim-quanta">
+        <div class="sim__head"><h4>Le distributeur de quanta</h4><span class="label">Simulation 7</span></div>
+        <div class="plot"><canvas id="cv-qu" style="--ar: 2 / 1; --ar-m: 4 / 5" aria-label="Des oscillateurs de fréquences croissantes. À gauche, en physique classique, chacun reçoit en moyenne kT. À droite, avec des quanta hf, les oscillateurs de haute fréquence restent vides."></canvas></div>
+        <div class="controls">
+          <div class="ctrl"><label for="qu-t"><span>Agitation thermique <i>kT</i></span><output for="qu-t"></output></label><input type="range" id="qu-t" min="0.5" max="6" step="0.1" value="2"></div>
+          <div class="ctrl"><label for="qu-n"><span>Nombre d'oscillateurs</span><output for="qu-n"></output></label><input type="range" id="qu-n" min="4" max="40" step="1" value="12"></div>
+          <div class="ctrl"><span class="ctrl__name">&nbsp;</span><div class="btns"><button class="btn btn--play" type="button" id="qu-play"></button></div></div>
+        </div>
+        <div class="readouts" id="qu-read"></div>
+        <figcaption><b>À observer</b> Chaque colonne est un oscillateur de fréquence <i>f</i>, 2<i>f</i>, 3<i>f</i>… Son énergie fluctue au hasard de l'agitation thermique ; le trait sombre indique sa moyenne. À droite, l'énergie n'arrive que par blocs de taille <i>hf</i>, de plus en plus gros. Ajoute des oscillateurs : l'énergie totale classique grandit sans fin, celle de Planck plafonne.</figcaption>
+      </figure>
+
+      <div class="box box--fun">
+        <span class="label">Pour briller en société</span>
+        <p>Pourquoi ton bureau ne brille-t-il pas dans le noir ? Un photon de lumière verte transporte 2,5 eV. L'agitation thermique à 20 °C n'offre que <i>kT</i> ≈ 0,025 eV, cent fois moins. La probabilité de réunir assez d'énergie vaut environ e⁻¹⁰⁰, soit 10⁻⁴². Ton bureau émettra un photon visible quand les poules auront des dents, et même là, rien n'est garanti.</p>
+      </div>
+
+      <h3>Épilogue : l'Univers, corps noir parfait</h3>
+      <p>Le corps noir le plus parfait jamais mesuré, c'est l'Univers lui-même. Le <strong>fond diffus cosmologique</strong>, la lumière émise 380 000 ans après le Big Bang, baigne tout l'espace à 2,725 K. Son maximum tombe vers 1 mm, dans les micro-ondes. En 1990, le satellite COBE a mesuré son spectre : les points de mesure tombaient sur la courbe de Planck avec des barres d'erreur plus fines que le trait. Le prix Nobel a suivi en 2006. Environ 1 % de la « neige » des anciennes télévisions venait de ce rayonnement : on regardait le Big Bang sans le savoir.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="section" id="exercices">
+      <div class="section-head"><span class="label">8</span><h2>Exercices</h2></div>
+      <p>Constantes utiles : <i>b</i> = 2,898·10⁻³ m·K, σ = 5,670·10⁻⁸ W·m⁻²·K⁻⁴, <i>h</i> = 6,626·10⁻³⁴ J·s, <i>c</i> = 2,998·10⁸ m/s, <i>k</i> = 1,381·10⁻²³ J/K, 1 eV = 1,602·10⁻¹⁹ J. Pense à convertir les températures en kelvins : <i>T</i> = θ + 273.</p>
+      <ol class="exos">
+        <li>
+          <p><span class="lvl">Niveau 1</span> La peau humaine est à environ 33 °C.</p>
+          <p>a) Calcule la longueur d'onde du maximum d'émission. b) Les caméras thermiques travaillent entre 8 et 14 µm. Pourquoi ce choix ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>T</i> = 33 + 273 = 306 K. λ<sub>max</sub> = <i>b</i> / <i>T</i> = 2,898·10⁻³ / 306 = 9,47·10⁻⁶ m ≈ <strong>9,5 µm</strong>, dans l'infrarouge.</p>
+            <p>b) C'est là que tombe le maximum des objets à température ambiante (300 K donne 9,7 µm). En plus, l'air est presque transparent dans cette bande : la vapeur d'eau et le CO₂ y absorbent peu. On l'appelle la fenêtre atmosphérique.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 1</span> Le spectre du Soleil culmine à 502 nm, celui de Bételgeuse à 805 nm.</p>
+          <p>Calcule leurs températures de surface. De quelle couleur paraît Bételgeuse ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>Soleil : <i>T</i> = 2,898·10⁻³ / 502·10⁻⁹ ≈ <strong>5770 K</strong>. Bételgeuse : <i>T</i> = 2,898·10⁻³ / 805·10⁻⁹ ≈ <strong>3600 K</strong>.</p>
+            <p>Le maximum de Bételgeuse est juste au-delà du rouge, dans l'infrarouge proche. Dans le visible, elle émet surtout du rouge et de l'orange : elle paraît orangée.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 1</span> On chauffe une plaque de 600 K à 1200 K.</p>
+          <p>Que deviennent λ<sub>max</sub> et la puissance rayonnée par m² ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>λ<sub>max</sub> est inversement proportionnelle à <i>T</i> : elle est <strong>divisée par 2</strong>, de 4,83 µm à 2,41 µm.</p>
+            <p><i>M</i> = σ<i>T</i>⁴ : elle est multipliée par 2⁴ = <strong>16</strong>, de 7,3 kW/m² à 118 kW/m².</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 2</span> Le Soleil a un rayon de 6,96·10⁸ m et une température de surface de 5772 K. La Terre est à 1,496·10¹¹ m.</p>
+          <p>a) Calcule la puissance totale rayonnée par le Soleil. b) Quelle puissance par m² arrive au niveau de la Terre ? c) Bonus : avec <i>E</i> = <i>mc</i>², quelle masse le Soleil perd-il chaque seconde ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>L</i> = 4π<i>R</i>² σ <i>T</i>⁴ = 4π (6,96·10⁸)² × 5,67·10⁻⁸ × 5772⁴ ≈ <strong>3,83·10²⁶ W</strong>.</p>
+            <p>b) Cette puissance se répartit sur une sphère de rayon <i>d</i> : <i>S</i> = <i>L</i> / (4π<i>d</i>²) = 3,83·10²⁶ / (4π × (1,496·10¹¹)²) ≈ <strong>1360 W/m²</strong>. C'est la constante solaire.</p>
+            <p>c) <i>m</i> = <i>L</i> / <i>c</i>² = 3,83·10²⁶ / (2,998·10⁸)² ≈ 4,3·10⁹ kg par seconde. Le Soleil maigrit de plus de 4 millions de tonnes par seconde. Il a de la réserve : 2·10³⁰ kg.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 2</span> Une personne nue a une surface de peau de 1,8 m², à 33 °C, d'émissivité 0,98. La pièce est à 20 °C.</p>
+          <p>a) Quelle puissance rayonne-t-elle ? b) Quelle puissance reçoit-elle des murs ? c) Quel est le bilan net ? Compare au métabolisme au repos, environ 100 W.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>P</i> = εσ<i>A T</i>⁴ = 0,98 × 5,67·10⁻⁸ × 1,8 × 306⁴ ≈ <strong>877 W</strong>. Autant qu'un radiateur d'appoint.</p>
+            <p>b) Avec <i>T</i><sub>0</sub> = 293 K : 0,98 × 5,67·10⁻⁸ × 1,8 × 293⁴ ≈ <strong>737 W</strong>.</p>
+            <p>c) Bilan : 877 − 737 ≈ <strong>140 W</strong> perdus. C'est plus que ce que le corps produit au repos : voilà pourquoi on a froid nu à 20 °C, même sans courant d'air. Les vêtements abaissent la température de la surface qui rayonne.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 2</span> Le filament d'une lampe à incandescence est à 2800 K.</p>
+          <p>a) Où tombe le maximum de son spectre ? b) Avec la simulation 2, lis la part de la puissance émise dans le visible. Conclus.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) λ<sub>max</sub> = 2,898·10⁻³ / 2800 ≈ 1,03·10⁻⁶ m = <strong>1,03 µm</strong>, dans l'infrarouge proche.</p>
+            <p>b) Environ <strong>10 %</strong> seulement tombe entre 380 et 780 nm. Le reste chauffe la pièce. Une lampe à incandescence est un radiateur qui éclaire un peu, ce qui explique son retrait progressif de la vente en Europe, Suisse comprise, à partir de 2009.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 2</span> Rigel a une température de surface de 12 100 K, Bételgeuse de 3600 K.</p>
+          <p>a) Calcule leurs λ<sub>max</sub>. b) Combien de fois plus de puissance par m² Rigel émet-elle ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) Rigel : 2,898·10⁻³ / 12 100 ≈ 240 nm (ultraviolet). Bételgeuse : 805 nm (infrarouge proche).</p>
+            <p>b) (12 100 / 3600)⁴ ≈ <strong>128</strong>. Pourtant, Bételgeuse est l'une des étoiles les plus lumineuses du ciel : son rayon vaut plusieurs centaines de fois celui du Soleil, ce qui compense largement.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 3</span> Compare l'énergie d'un photon de 500 nm à l'énergie d'agitation thermique <i>kT</i> à 300 K.</p>
+          <p>a) Calcule les deux énergies en joules et en eV. b) Le facteur de Boltzmann e<sup>−<i>E</i>/<i>kT</i></sup> donne l'ordre de grandeur de la probabilité de réunir cette énergie. Calcule-le et conclus.</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>a) <i>E</i> = <i>hc</i> / λ = 6,626·10⁻³⁴ × 2,998·10⁸ / 500·10⁻⁹ ≈ 3,97·10⁻¹⁹ J = <strong>2,48 eV</strong>. <i>kT</i> = 1,381·10⁻²³ × 300 ≈ 4,14·10⁻²¹ J = <strong>0,026 eV</strong>.</p>
+            <p>b) <i>E</i> / <i>kT</i> ≈ 96, et e⁻⁹⁶ ≈ 2·10⁻⁴². À température ambiante, la matière n'émet pratiquement aucun photon visible. C'est exactement le mécanisme qui supprime la catastrophe ultraviolette.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 3</span> Mars est à 1,52 UA du Soleil et son albédo vaut 0,25.</p>
+          <p>Calcule la puissance solaire reçue par m² et sa température d'équilibre. On mesure en moyenne 210 K : que peux-tu dire de son atmosphère ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p><i>S</i> = 1361 / 1,52² ≈ 589 W/m². <i>T</i><sub>éq</sub> = [(1 − 0,25) × 589 / (4 × 5,67·10⁻⁸)]<sup>1/4</sup> = (1,95·10⁹)<sup>1/4</sup> ≈ <strong>210 K</strong>, soit −63 °C.</p>
+            <p>Le modèle sans atmosphère tombe juste : l'atmosphère de Mars, cent fois plus mince que celle de la Terre, ne produit presque pas d'effet de serre.</p>
+          </div></details>
+        </li>
+        <li>
+          <p><span class="lvl">Niveau 1</span> Le fond diffus cosmologique a une température de 2,725 K.</p>
+          <p>Où tombe son maximum d'émission ? Dans quel domaine du spectre ?</p>
+          <details class="solution"><summary>Solution</summary><div>
+            <p>λ<sub>max</sub> = 2,898·10⁻³ / 2,725 ≈ 1,06·10⁻³ m = <strong>1,06 mm</strong>, dans les micro-ondes. C'est pour ça qu'on l'observe avec des radiotélescopes et non avec des télescopes optiques.</p>
+          </div></details>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 9 -->
+    <section class="section" id="essentiel">
+      <div class="section-head"><span class="label">9</span><h2>L'essentiel</h2></div>
+      <div class="essentiel">
+        <div class="box">
+          <span class="label">Corps noir</span>
+          <p>Absorbe tout ce qu'il reçoit. Son rayonnement ne dépend que de sa température. Réalisation : une cavité percée d'un petit trou. Un corps réel émet ε fois moins (0 ≤ ε ≤ 1) ; bon absorbeur = bon émetteur.</p>
+        </div>
+        <div class="box">
+          <span class="label">Loi de Planck</span>
+          <div class="formula"><i>M</i><sub>λ</sub> = <span class="frac"><span>2π<i>hc</i>²</span><span>λ⁵</span></span> · <span class="frac"><span>1</span><span>e<sup><i>hc</i>/(λ<i>kT</i>)</sup> − 1</span></span></div>
+          <p>Une courbe en cloche dissymétrique, un seul maximum, qui monte et se décale vers la gauche quand <i>T</i> augmente.</p>
+        </div>
+        <div class="box">
+          <span class="label">Loi de Wien</span>
+          <div class="formula">λ<sub>max</sub> · <i>T</i> = 2,898·10⁻³ m·K</div>
+          <p>Plus c'est chaud, plus la lumière est « bleue ». Sert à mesurer une température à distance.</p>
+        </div>
+        <div class="box">
+          <span class="label">Loi de Stefan-Boltzmann</span>
+          <div class="formula"><i>M</i> = σ<i>T</i>⁴ &nbsp; <i>P</i> = εσ<i>AT</i>⁴</div>
+          <p>σ = 5,670·10⁻⁸ W·m⁻²·K⁻⁴. Doubler <i>T</i> multiplie la puissance par 16.</p>
+        </div>
+        <div class="box">
+          <span class="label">Équilibre radiatif</span>
+          <div class="formula"><i>T</i><sub>éq</sub> = [(1 − <i>a</i>) <i>S</i> / (4σ)]<sup>1/4</sup></div>
+          <p>Terre : 254 K sans effet de serre, 288 K mesurés.</p>
+        </div>
+        <div class="box">
+          <span class="label">Quanta</span>
+          <div class="formula"><i>E</i> = <i>hf</i> = <i>hc</i> / λ</div>
+          <p>La physique classique prédit une énergie infinie (catastrophe ultraviolette). Planck (1900) la résout avec des paquets d'énergie : naissance de la physique quantique.</p>
+        </div>
+      </div>
+      <p class="foot">Valeurs des constantes : SI 2019 (<i>h</i>, <i>c</i>, <i>k</i> exactes). Températures d'étoiles arrondies, d'après les catalogues usuels. Couleurs calculées à partir de la loi de Planck et des fonctions colorimétriques CIE 1931, affichées en sRGB : ton écran en donne une idée, pas une mesure.</p>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  const root = document.documentElement;
+  const RM = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ================= Couleurs du thème ================= */
+  const TOK = ["paper", "card", "ink", "ink-2", "ink-3", "rule", "rule-2", "accent", "accent-soft", "hot", "hot-soft", "ir", "cold", "ok",
+    "stage", "stage-2", "stage-ink", "stage-ink-2", "stage-rule", "stage-ir", "stage-sun", "copper"];
+  const P = {};
+  function readP() {
+    const cs = getComputedStyle(root);
+    TOK.forEach((t) => { P[t.replace(/-(\w)/g, (_, c) => c.toUpperCase())] = cs.getPropertyValue("--" + t).trim(); });
+  }
+  readP();
+  const themeCbs = [];
+  function themeChanged() { readP(); themeCbs.forEach((f) => f()); }
+  if (window.matchMedia) {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) mq.addEventListener("change", themeChanged);
+  }
+  new MutationObserver(themeChanged).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
+  function hexArr(c) {
+    c = (c || "").trim();
+    if (c[0] === "#") {
+      if (c.length === 4) c = "#" + c[1] + c[1] + c[2] + c[2] + c[3] + c[3];
+      return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
+    }
+    const m = c.match(/rgba?\(([^)]+)\)/);
+    return m ? m[1].split(",").slice(0, 3).map(Number) : [128, 128, 128];
+  }
+  function alpha(c, a) { return "rgba(" + hexArr(c).join(",") + "," + a + ")"; }
+  const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+
+  /* ================= Physique ================= */
+  const H = 6.62607015e-34, C = 299792458, KB = 1.380649e-23, SIG = 5.670374419e-8, BW = 2.897771955e-3;
+  /* Exitance spectrale (W·m⁻²·m⁻¹), λ en mètres */
+  function planck(l, T) {
+    const x = H * C / (l * KB * T);
+    if (x > 700) return 0;
+    return 2 * Math.PI * H * C * C / Math.pow(l, 5) / Math.expm1(x);
+  }
+  function rayleigh(l, T) { return 2 * Math.PI * C * KB * T / Math.pow(l, 4); }
+  function wienApprox(l, T) { const x = H * C / (l * KB * T); return x > 700 ? 0 : 2 * Math.PI * H * C * C / Math.pow(l, 5) * Math.exp(-x); }
+  function visFraction(T) {
+    const n = 200, a = 380e-9, b = 780e-9, d = (b - a) / n;
+    let s = 0;
+    for (let i = 0; i < n; i++) s += planck(a + (i + 0.5) * d, T);
+    return s * d / (SIG * Math.pow(T, 4));
+  }
+
+  /* ================= Couleur d'un corps noir =================
+     Fonctions colorimétriques CIE 1931 (ajustement de Wyman, Sloan et Shirley, 2013),
+     puis passage XYZ -> sRGB. */
+  function g(x, mu, s1, s2) { const t = (x - mu) / (x < mu ? s1 : s2); return Math.exp(-0.5 * t * t); }
+  const CMF = [];
+  for (let nm = 380; nm <= 780; nm += 5) {
+    CMF.push([nm,
+      1.056 * g(nm, 599.8, 37.9, 31.0) + 0.362 * g(nm, 442.0, 16.0, 26.7) - 0.065 * g(nm, 501.1, 20.4, 26.2),
+      0.821 * g(nm, 568.8, 46.9, 40.5) + 0.286 * g(nm, 530.9, 16.3, 31.1),
+      1.217 * g(nm, 437.0, 11.8, 36.0) + 0.681 * g(nm, 459.0, 26.0, 13.8)]);
+  }
+  function bbXYZ(T) {
+    let X = 0, Y = 0, Z = 0;
+    for (const [nm, x, y, z] of CMF) { const m = planck(nm * 1e-9, T); X += m * x; Y += m * y; Z += m * z; }
+    return [X, Y, Z];
+  }
+  function gam(u) { u = clamp(u, 0, 1); return u <= 0.0031308 ? 12.92 * u : 1.055 * Math.pow(u, 1 / 2.4) - 0.055; }
+  const bbCache = new Map();
+  /* Chromaticité seule : [r, g, b] entre 0 et 255, canal max = 255 */
+  function bbArr(T) {
+    T = clamp(T, 500, 60000);
+    const key = Math.round(Math.log(T) * 300);
+    if (bbCache.has(key)) return bbCache.get(key);
+    const [X, Y, Z] = bbXYZ(Math.exp(key / 300));
+    let r = 3.2406 * X - 1.5372 * Y - 0.4986 * Z;
+    let gg = -0.9689 * X + 1.8758 * Y + 0.0415 * Z;
+    let b = 0.0557 * X - 0.2040 * Y + 1.0570 * Z;
+    r = Math.max(0, r); gg = Math.max(0, gg); b = Math.max(0, b);
+    const m = Math.max(r, gg, b) || 1;
+    const out = [r / m, gg / m, b / m].map((v) => Math.round(gam(v) * 255));
+    bbCache.set(key, out);
+    return out;
+  }
+  const LY750 = Math.log10(bbXYZ(750)[1]), LY1500 = Math.log10(bbXYZ(1500)[1]);
+  /* Luminosité perçue (échelle logarithmique) entre 750 K (presque rien) et 1500 K (plein) */
+  function bright(T) {
+    if (T < 650) return 0;
+    return clamp((Math.log10(bbXYZ(T)[1]) - LY750) / (LY1500 - LY750), 0, 1);
+  }
+  /* Couleur apparente d'un objet incandescent dans le noir, sur un fond "base" */
+  function glowArr(T, base, noWhite) {
+    const c = bbArr(T), b = bright(T), k = Math.min(1, b * 1.1);
+    let col = c.map((v, i) => base[i] + (v - base[i]) * k);
+    if (T > 1250 && !noWhite) { const w = Math.min(1, (T - 1250) / 600) * 0.8; col = col.map((v) => v + (255 - v) * w); }
+    return col.map((v) => Math.round(v));
+  }
+  const rgb = (a, al) => al == null ? "rgb(" + a.join(",") + ")" : "rgba(" + a.join(",") + "," + al + ")";
+  /* Couleur d'une longueur d'onde visible (approximation de Bruton) */
+  function wlArr(nm) {
+    let r = 0, gg = 0, b = 0;
+    if (nm < 440) { r = -(nm - 440) / 60; b = 1; }
+    else if (nm < 490) { gg = (nm - 440) / 50; b = 1; }
+    else if (nm < 510) { gg = 1; b = -(nm - 510) / 20; }
+    else if (nm < 580) { r = (nm - 510) / 70; gg = 1; }
+    else if (nm < 645) { r = 1; gg = -(nm - 645) / 65; }
+    else { r = 1; }
+    let f = 1;
+    if (nm < 420) f = 0.3 + 0.7 * (nm - 380) / 40;
+    else if (nm > 700) f = 0.3 + 0.7 * (780 - nm) / 80;
+    return [r, gg, b].map((v) => Math.round(255 * Math.pow(clamp(v * f, 0, 1), 0.8)));
+  }
+
+  /* ================= Formatage ================= */
+  const NB = "\u00a0";
+  const SUPS = { "-": "⁻", "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+  const supNum = (n) => String(n).split("").map((c) => SUPS[c] || c).join("");
+  function fr(x, d) {
+    if (!isFinite(x)) return "∞";
+    d = d == null ? 2 : d;
+    let s = Math.abs(x).toFixed(d);
+    let [e, f] = s.split(".");
+    if (e.length > 4) e = e.replace(/\B(?=(\d{3})+(?!\d))/g, NB);
+    return (x < 0 && Number(s) !== 0 ? "−" : "") + e + (f ? "," + f : "");
+  }
+  function sig(x, n) {
+    if (x === 0) return "0";
+    const d = Math.max(0, n - 1 - Math.floor(Math.log10(Math.abs(x))));
+    return fr(x, d);
+  }
+  function sci(x, d) {
+    if (x === 0) return "0";
+    if (!isFinite(x)) return "∞";
+    d = d == null ? 2 : d;
+    let e = Math.floor(Math.log10(Math.abs(x)));
+    let m = x / Math.pow(10, e);
+    if (Number(m.toFixed(d)) >= 10) { m /= 10; e += 1; }
+    if (e >= -2 && e <= 4) return sig(x, d + 1);
+    return fr(m, d) + "·10" + supNum(e);
+  }
+  const PREF = [[1e12, "T"], [1e9, "G"], [1e6, "M"], [1e3, "k"], [1, ""], [1e-3, "m"], [1e-6, "µ"], [1e-9, "n"], [1e-12, "p"], [1e-15, "f"], [1e-18, "a"]];
+  function prefFor(v) { for (const p of PREF) if (v >= p[0] * 0.9999) return p; return PREF[PREF.length - 1]; }
+  function siU(x, unit, n) {
+    if (x === 0) return "0" + NB + unit;
+    const [f, p] = prefFor(Math.abs(x));
+    return sig(x / f, n || 3) + NB + p + unit;
+  }
+  function fmtT(T) { return (T < 10 ? fr(T, 3) : T < 100 ? fr(T, 1) : fr(T, 0)) + NB + "K"; }
+  function fmtC(T) { return fr(T - 273.15, 0) + NB + "°C"; }
+  function fmtLam(m) {
+    if (m < 1e-6) return sig(m * 1e9, 3) + NB + "nm";
+    if (m < 1e-3) return sig(m * 1e6, 3) + NB + "µm";
+    if (m < 1e-2) return sig(m * 1e3, 3) + NB + "mm";
+    return sig(m * 100, 3) + NB + "cm";
+  }
+  function domain(m) {
+    const nm = m * 1e9;
+    if (nm < 380) return "ultraviolet";
+    if (nm < 450) return "visible, violet";
+    if (nm < 495) return "visible, bleu";
+    if (nm < 570) return "visible, vert";
+    if (nm < 590) return "visible, jaune";
+    if (nm < 620) return "visible, orange";
+    if (nm < 780) return "visible, rouge";
+    if (nm < 1e6) return "infrarouge";
+    return "micro-ondes";
+  }
+  function teinte(T) {
+    if (T < 750) return "invisible (infrarouge)";
+    if (T < 900) return "rouge très sombre";
+    if (T < 1200) return "rouge";
+    if (T < 1800) return "orange-rouge";
+    if (T < 2600) return "orange";
+    if (T < 4500) return "orange pâle";
+    if (T < 5500) return "blanc-jaune";
+    if (T < 7000) return "blanc";
+    if (T < 10000) return "blanc bleuté";
+    return "bleu-blanc";
+  }
+  function pouillet(T) {
+    const c = T - 273.15;
+    const L = [[1500, "blanc éblouissant"], [1400, "blanc soudant"], [1300, "blanc"], [1200, "orangé clair"], [1100, "orangé foncé"], [1000, "cerise clair"], [900, "cerise"], [800, "cerise naissant"], [700, "rouge sombre"], [525, "rouge naissant"]];
+    for (const [t, n] of L) if (c >= t) return n;
+    return "pas de lumière visible";
+  }
+
+  /* ================= Moteur d'animation =================
+     Coordonnées virtuelles : largeur vw (ou vwm sur petit écran),
+     hauteur déduite du rapport d'aspect réel du canvas. */
+  function anim(cv, o) {
+    o = Object.assign({ vw: 800, vwm: 520, autoplay: true }, o);
+    const ctx = cv.getContext("2d");
+    const A = { cv, ctx, W: o.vw, H: 450, s: 1, t: 0, playing: false, visible: true, want: !!o.autoplay && !RM, btns: [] };
+    let raf = 0, last = 0;
+    function render() {
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.restore();
+      o.draw(ctx, A);
+    }
+    function resize() {
+      const cw = cv.clientWidth, ch = cv.clientHeight;
+      if (!cw || !ch) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      cv.width = Math.round(cw * dpr);
+      cv.height = Math.round(ch * dpr);
+      const W = cw < 560 ? o.vwm : o.vw;
+      const changed = W !== A.W || Math.abs(W * ch / cw - A.H) > 0.5;
+      A.W = W; A.s = cw / W; A.H = W * ch / cw;
+      ctx.setTransform(dpr * A.s, 0, 0, dpr * A.s, 0, 0);
+      if (changed && o.onResize) o.onResize(A);
+      render();
+    }
+    function frame(ts) {
+      raf = 0;
+      if (!A.playing) return;
+      const dt = last ? Math.min(0.05, (ts - last) / 1000) : 0;
+      last = ts;
+      A.t += dt;
+      if (o.update) o.update(A, dt);
+      render();
+      raf = requestAnimationFrame(frame);
+    }
+    function start() { if (A.playing || !o.update) return; A.playing = true; last = 0; raf = requestAnimationFrame(frame); }
+    function stop() { A.playing = false; if (raf) cancelAnimationFrame(raf); raf = 0; }
+    function ub(b) { b.textContent = A.want ? "❚❚ Pause" : "▶ Lecture"; b.setAttribute("aria-pressed", A.want ? "true" : "false"); }
+    function sync() { if (A.want && A.visible && !document.hidden) start(); else stop(); A.btns.forEach(ub); }
+    A.play = () => { A.want = true; sync(); };
+    A.pause = () => { A.want = false; sync(); };
+    A.toggle = () => { A.want = !A.want; sync(); };
+    A.redraw = () => { if (!A.playing) render(); };
+    A.bindPlay = (b) => { if (!b) return; A.btns.push(b); b.classList.add("btn--play"); b.addEventListener("click", A.toggle); ub(b); };
+    A.pos = (e) => { const r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) / A.s, y: (e.clientY - r.top) / A.s }; };
+    if ("ResizeObserver" in window) new ResizeObserver(resize).observe(cv); else window.addEventListener("resize", resize);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((es) => es.forEach((en) => { A.visible = en.isIntersecting; sync(); }), { rootMargin: "80px" }).observe(cv);
+    }
+    document.addEventListener("visibilitychange", sync);
+    themeCbs.push(() => A.redraw());
+    resize();
+    sync();
+    return A;
+  }
+
+  /* ================= Aides de dessin ================= */
+  const FONT_UI = "Archivo, 'Segoe UI', system-ui, sans-serif";
+  const FONT_MONO = "'JetBrains Mono', ui-monospace, Menlo, monospace";
+  function fs(A, px) { return Math.max(px, 11 / A.s); }
+  function font(A, px, w, mono) { return (w || 500) + " " + fs(A, px) + "px " + (mono ? FONT_MONO : FONT_UI); }
+  function txt(ctx, A, s, x, y, o) {
+    o = o || {};
+    ctx.font = font(A, o.size || 13, o.weight, o.mono);
+    ctx.fillStyle = o.color || P.ink;
+    ctx.textAlign = o.align || "left";
+    ctx.textBaseline = o.base || "middle";
+    ctx.fillText(s, x, y);
+  }
+  function tag(ctx, A, s, x, y, o) {
+    /* étiquette sur fond, ancrée à gauche ou à droite */
+    o = o || {};
+    ctx.font = font(A, o.size || 12, o.weight || 600, o.mono);
+    const w = ctx.measureText(s).width + 10, h = fs(A, o.size || 12) + 8;
+    let x0 = o.align === "right" ? x - w : o.align === "center" ? x - w / 2 : x;
+    if (o.min != null) x0 = Math.max(o.min, x0);
+    if (o.max != null) x0 = Math.min(o.max - w, x0);
+    ctx.fillStyle = o.bg || P.card;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x0, y - h / 2, w, h, 4); else ctx.rect(x0, y - h / 2, w, h);
+    ctx.fill();
+    if (o.stroke) { ctx.strokeStyle = o.stroke; ctx.lineWidth = 1; ctx.stroke(); }
+    ctx.fillStyle = o.color || P.ink;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillText(s, x0 + 5, y + 0.5);
+    return { x0, w };
+  }
+  function niceStep(raw) {
+    const p = Math.pow(10, Math.floor(Math.log10(raw)));
+    const f = raw / p;
+    return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p;
+  }
+  function decimalsFor(step) { return step >= 1 ? 0 : Math.ceil(-Math.log10(step) - 1e-9); }
+
+  /* ---------- Curseurs et boutons ---------- */
+  function range(id, fmt, cb) {
+    const el = document.getElementById(id);
+    const out = document.querySelector('output[for="' + id + '"]');
+    const up = () => { const v = parseFloat(el.value); if (out) out.textContent = fmt ? fmt(v) : String(v); if (cb) cb(v); };
+    el.addEventListener("input", up);
+    return { el, up, get v() { return parseFloat(el.value); }, set(v) { el.value = v; up(); } };
+  }
+  function choice(id, cb) {
+    const box = document.getElementById(id);
+    const btns = Array.from(box.querySelectorAll("button[data-value]"));
+    const set = (v, silent) => { btns.forEach((b) => b.setAttribute("aria-pressed", b.dataset.value === v ? "true" : "false")); if (!silent) cb(v); };
+    btns.forEach((b) => b.addEventListener("click", () => set(b.dataset.value)));
+    return { set };
+  }
+  function readouts(id, items) {
+    const box = document.getElementById(id);
+    box.innerHTML = items.map(([k, label]) => '<div class="ro"><b>' + label + '</b><span id="' + id + "-" + k + '">—</span></div>').join("");
+    const els = {};
+    items.forEach(([k]) => { els[k] = document.getElementById(id + "-" + k); });
+    return (k, html) => { if (els[k] && els[k].innerHTML !== html) els[k].innerHTML = html; };
+  }
+  const logMap = (lo, hi) => ({ T: (s) => lo * Math.pow(hi / lo, s / 1000), S: (T) => 1000 * Math.log(T / lo) / Math.log(hi / lo) });
+
+  /* ================= Graphique de spectre ================= */
+  function lamLabel(um) {
+    if (um < 1) return fr(um * 1000, 0) + NB + "nm";
+    if (um < 1000) return fr(um, 0) + NB + "µm";
+    if (um < 1e4) return fr(um / 1000, 0) + NB + "mm";
+    return fr(um / 1e4, 0) + NB + "cm";
+  }
+  function plotSpectrum(ctx, A, o) {
+    const small = A.W < 600;
+    const F = { x0: small ? 52 : 64, x1: A.W - 16, y0: A.H - (small ? 52 : 46), y1: 34 };
+    const W = F.x1 - F.x0, Hh = F.y0 - F.y1, xr = o.xr;
+    const toX = xr.log ? (l) => F.x0 + (Math.log10(l) - xr.a) / (xr.b - xr.a) * W : (l) => F.x0 + (l - xr.a) / (xr.b - xr.a) * W;
+    const lamAt = xr.log ? (X) => Math.pow(10, xr.a + (X - F.x0) / W * (xr.b - xr.a)) : (X) => xr.a + (X - F.x0) / W * (xr.b - xr.a);
+    const STEP = 1.5, N = Math.ceil(W / STEP);
+    const Xi = (i) => Math.min(F.x0 + i * STEP, F.x1);
+    const S = o.curves.map((cu) => {
+      const a = new Float64Array(N + 1);
+      for (let i = 0; i <= N; i++) { const l = lamAt(Xi(i)); a[i] = l > 0 ? cu.f(l * 1e-6) * 1e-6 : 0; }
+      return a;
+    });
+    let ymax = o.ymax || 0;
+    if (!ymax) {
+      o.curves.forEach((cu, k) => { if (cu.scale === false) return; const a = S[k]; for (let i = 0; i <= N; i++) if (a[i] > ymax) ymax = a[i]; });
+      if (!(ymax > 0)) ymax = 1;
+      if (!o.ylog) ymax *= 1.14;
+    }
+    let toY, ticks = [], unit;
+    if (o.ylog) {
+      const dec = o.decades || 12, lt = Math.ceil(Math.log10(ymax) + 0.02);
+      toY = (v) => v > 0 ? Math.min(F.y0, F.y1 + (lt - Math.log10(v)) / dec * Hh) : F.y0;
+      const st = dec > 8 ? 2 : 1;
+      for (let e = 0; e <= dec; e += st) ticks.push([toY(Math.pow(10, lt - e)), "10" + supNum(lt - e)]);
+      unit = "W·m⁻²·µm⁻¹";
+    } else {
+      const [pf, pp] = prefFor(ymax);
+      const top = ymax / pf, st = niceStep(top / (small ? 4 : 5)), d = decimalsFor(st);
+      toY = (v) => F.y0 - v / ymax * Hh;
+      for (let v = 0; v <= top * 1.0001; v += st) ticks.push([toY(v * pf), fr(v, d)]);
+      unit = pp + "W·m⁻²·µm⁻¹";
+    }
+    /* grille */
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = P.rule2;
+    ticks.forEach(([y]) => { ctx.beginPath(); ctx.moveTo(F.x0, y); ctx.lineTo(F.x1, y); ctx.stroke(); });
+    const xt = [];
+    if (xr.log) { for (let e = Math.ceil(xr.a); e <= xr.b; e++) xt.push([toX(Math.pow(10, e)), lamLabel(Math.pow(10, e))]); }
+    else { const st = niceStep((xr.b - xr.a) / (small ? 4 : 6)), d = decimalsFor(st); for (let v = xr.a; v <= xr.b * 1.0001; v += st) xt.push([toX(v), fr(v, d)]); }
+    xt.forEach(([x]) => { ctx.beginPath(); ctx.moveTo(x, F.y1); ctx.lineTo(x, F.y0); ctx.stroke(); });
+    /* bande visible discrète */
+    const xv0 = toX(0.38), xv1 = toX(0.78);
+    ctx.fillStyle = alpha(P.ink3, 0.06);
+    ctx.fillRect(xv0, F.y1, xv1 - xv0, Hh);
+    for (let X = Math.max(F.x0, xv0); X < Math.min(F.x1, xv1); X += 1) {
+      const nm = lamAt(X + 0.5) * 1000;
+      ctx.fillStyle = rgb(wlArr(nm));
+      ctx.fillRect(X, F.y0 - 5, 1.3, 5);
+    }
+    /* remplissages et courbes */
+    ctx.save();
+    ctx.beginPath(); ctx.rect(F.x0, F.y1 - 12, W, Hh + 12); ctx.clip();
+    o.curves.forEach((cu, k) => {
+      if (!cu.fill) return;
+      const a = S[k];
+      ctx.beginPath(); ctx.moveTo(F.x0, F.y0);
+      for (let i = 0; i <= N; i++) ctx.lineTo(Xi(i), toY(a[i]));
+      ctx.lineTo(F.x1, F.y0); ctx.closePath();
+      ctx.fillStyle = alpha(cu.fillColor || P.accent, 0.12);
+      ctx.fill();
+      for (let i = 0; i < N; i++) {
+        const X = Xi(i), nm = lamAt(X + STEP / 2) * 1000;
+        if (nm < 380 || nm > 780) continue;
+        const y = toY(Math.max(a[i], a[i + 1]));
+        ctx.fillStyle = rgb(wlArr(nm), 0.85);
+        ctx.fillRect(X, y, STEP + 0.6, F.y0 - y);
+      }
+    });
+    o.curves.forEach((cu, k) => {
+      const a = S[k];
+      ctx.beginPath();
+      let pen = false;
+      for (let i = 0; i <= N; i++) {
+        const y = toY(a[i]);
+        if (!isFinite(y) || y < F.y1 - 12) { pen = false; continue; }
+        if (pen) ctx.lineTo(Xi(i), y); else { ctx.moveTo(Xi(i), y); pen = true; }
+      }
+      ctx.strokeStyle = cu.color;
+      ctx.lineWidth = cu.width || 2;
+      ctx.setLineDash(cu.dash || []);
+      ctx.lineJoin = "round";
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+    ctx.restore();
+    /* axes */
+    ctx.strokeStyle = P.ink3; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(F.x0, F.y1 - 4); ctx.lineTo(F.x0, F.y0); ctx.lineTo(F.x1, F.y0); ctx.stroke();
+    ticks.forEach(([y, s]) => txt(ctx, A, s, F.x0 - 7, y, { size: 11, mono: true, align: "right", color: P.ink3 }));
+    let lastRight = -1e9;
+    xt.forEach(([x, s]) => {
+      ctx.font = font(A, 11, 500, true);
+      const w = ctx.measureText(s).width;
+      if (x - w / 2 < lastRight + 6) return;
+      txt(ctx, A, s, x, F.y0 + 14, { size: 11, mono: true, align: "center", color: P.ink3 });
+      lastRight = x + w / 2;
+    });
+    txt(ctx, A, xr.log ? "longueur d'onde λ (échelle log)" : "longueur d'onde λ (µm)", F.x1, F.y0 + 34, { size: 12, align: "right", color: P.ink2 });
+    txt(ctx, A, "Mλ en " + unit, F.x0 - (small ? 44 : 56), 13, { size: 12, color: P.ink2 });
+    /* noms des domaines */
+    const regions = [["UV", 0, 0.38], ["visible", 0.38, 0.78], ["infrarouge", 0.78, 1000], ["micro-ondes", 1000, 1e9]];
+    const xa = xr.log ? Math.pow(10, xr.a) : xr.a, xb = xr.log ? Math.pow(10, xr.b) : xr.b;
+    regions.forEach(([n, a, b]) => {
+      const l0 = Math.max(a, xa), l1 = Math.min(b, xb);
+      if (l1 <= l0) return;
+      const x0 = l0 <= 0 ? F.x0 : toX(l0), x1 = toX(l1);
+      ctx.font = font(A, 10.5, 500, true);
+      if (x1 - x0 < ctx.measureText(n).width + 8) return;
+      txt(ctx, A, n.toUpperCase(), (x0 + x1) / 2, F.y1 + 9, { size: 10.5, mono: true, align: "center", color: P.ink3 });
+    });
+    /* étiquettes des courbes */
+    (o.marks || []).forEach((m) => {
+      const x = toX(m.l);
+      if (x < F.x0 || x > F.x1) return;
+      if (m.line) {
+        ctx.strokeStyle = m.color || P.ink2; ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
+        ctx.beginPath(); ctx.moveTo(x, F.y1 + 18); ctx.lineTo(x, F.y0); ctx.stroke(); ctx.setLineDash([]);
+      }
+      const y = m.y != null ? m.y : toY(m.v) - 12;
+      tag(ctx, A, m.text, x + (m.dx || 0), Math.max(F.y1 + 10, y), { align: m.align || "center", min: F.x0 + 2, max: F.x1 - 2, color: m.color || P.ink, bg: alpha(P.card, 0.92), size: 11.5 });
+    });
+    /* survol */
+    if (o.hover != null && o.hoverLines) {
+      const x = toX(o.hover);
+      if (x >= F.x0 && x <= F.x1) {
+        ctx.strokeStyle = P.ink3; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, F.y1); ctx.lineTo(x, F.y0); ctx.stroke();
+        const lines = o.hoverLines(o.hover);
+        const right = x < F.x0 + W * 0.6;
+        lines.forEach((s, i) => tag(ctx, A, s, right ? x + 8 : x - 8, F.y1 + 34 + i * 22, { align: right ? "left" : "right", min: F.x0 + 2, max: F.x1 - 2, size: 11.5, mono: true, bg: P.card, stroke: P.rule, weight: 500 }));
+      }
+    }
+    return { F, toX, toY, lamAt };
+  }
+  function bindHover(A, getMap, set) {
+    const mv = (e) => { const m = getMap(); if (!m) return; const p = A.pos(e); if (p.x < m.F.x0 || p.x > m.F.x1) { set(null); return; } set(m.lamAt(p.x)); };
+    A.cv.addEventListener("pointermove", mv);
+    A.cv.addEventListener("pointerdown", mv);
+    A.cv.addEventListener("pointerleave", () => set(null));
+  }
+
+  /* ================= En-tête : bande de couleurs ================= */
+  (function () {
+    const cv = document.getElementById("cv-hero");
+    if (!cv) return;
+    const T0 = 1000, T1 = 15000;
+    const out = document.getElementById("hero-out");
+    const marks = [[1900, "bougie"], [2800, "lampe"], [3600, "Bételgeuse"], [5772, "Soleil"], [9940, "Sirius"], [12100, "Rigel"]];
+    let hov = null;
+    const geo = (A) => { const small = A.W < 600; return { x0: 6, x1: A.W - 6, yb: small ? 58 : 50, hb: small ? 52 : 54, small }; };
+    const tx = (G, T) => G.x0 + Math.log(T / T0) / Math.log(T1 / T0) * (G.x1 - G.x0);
+    const A = anim(cv, {
+      vw: 900, vwm: 520, autoplay: false,
+      draw(ctx, A) {
+        const G = geo(A);
+        for (let x = G.x0; x < G.x1; x += 1) {
+          const T = T0 * Math.pow(T1 / T0, (x - G.x0) / (G.x1 - G.x0));
+          ctx.fillStyle = rgb(bbArr(T));
+          ctx.fillRect(x, G.yb, 1.5, G.hb);
+        }
+        marks.forEach(([T, n], i) => {
+          const x = tx(G, T), row = i % 2;
+          const y = G.small ? 16 + row * 22 : 14 + row * 18;
+          ctx.strokeStyle = P.stageInk2; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(x, y + 8); ctx.lineTo(x, G.yb - 2); ctx.stroke();
+          txt(ctx, A, n, x, y, { size: 12.5, weight: 600, align: "center", color: P.stageInk });
+        });
+        [1000, 2000, 3000, 5000, 10000, 15000].forEach((T) => {
+          const x = tx(G, T);
+          ctx.strokeStyle = P.stageInk2; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(x, G.yb + G.hb); ctx.lineTo(x, G.yb + G.hb + 6); ctx.stroke();
+          const al = T === T0 ? "left" : T === T1 ? "right" : "center";
+          txt(ctx, A, fr(T, 0) + NB + "K", x, G.yb + G.hb + 18, { size: 11, mono: true, align: al, color: P.stageInk2 });
+        });
+        if (hov) {
+          const x = tx(G, hov);
+          ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 2;
+          ctx.strokeRect(x - 3, G.yb - 3, 6, G.hb + 6);
+        }
+      }
+    });
+    function setFromX(px) {
+      const G = geo(A);
+      const T = T0 * Math.pow(T1 / T0, clamp((px - G.x0) / (G.x1 - G.x0), 0, 1));
+      hov = T;
+      let near = marks.reduce((b, m) => Math.abs(Math.log(m[0] / T)) < Math.abs(Math.log(b[0] / T)) ? m : b, marks[0]);
+      const close = Math.abs(Math.log(near[0] / T)) < 0.05;
+      out.textContent = fr(Math.round(T / 10) * 10, 0) + NB + "K" + (close ? ", proche de : " + near[1] : ", " + teinte(T)) + ".";
+      A.redraw();
+    }
+    cv.addEventListener("pointermove", (e) => setFromX(A.pos(e).x));
+    cv.addEventListener("pointerdown", (e) => setFromX(A.pos(e).x));
+  })();
+
+  /* ================= Tableau de Pouillet : pastilles ================= */
+  document.querySelectorAll("#pouillet .chip").forEach((el) => {
+    el.style.background = rgb(glowArr(parseFloat(el.dataset.t), hexArr(P.stage)));
+  });
+
+  /* ================= Simulation 1 : le four à trou ================= */
+  (function () {
+    const cv = document.getElementById("cv-cav");
+    if (!cv) return;
+    const V = 300, K = 0.28, SHOW = 0.34;
+    const st = { mode: "light", alpha: 0.5, hole: 6 * Math.PI / 180, ph: [], flashes: [], acc: { ext: 0, inn: 0, out: 0 },
+      cnt: { inHole: 0, backHole: 0, inWall: 0, backWall: 0 }, holeRate: 0, mEsc: 0, mTime: 0, needWarm: false };
+    const geo = (A) => ({ cx: A.W < 600 ? A.W * 0.6 : A.W * 0.6, cy: A.H * (A.W < 600 ? 0.47 : 0.5), R: Math.min(A.H * 0.36, A.W * 0.28) });
+    const warm = [255, 150, 70];
+    function angDiff(a, b) { return Math.abs(Math.atan2(Math.sin(a - b), Math.cos(a - b))); }
+    function inHole(phi) { return angDiff(phi, Math.PI) < st.hole; }
+    function diffuse(nx, ny) {
+      const th = Math.asin(2 * Math.random() - 1), c = Math.cos(th), s = Math.sin(th);
+      return [nx * c - ny * s, nx * s + ny * c];
+    }
+    function reset() {
+      st.ph = []; st.flashes = []; st.cnt = { inHole: 0, backHole: 0, inWall: 0, backWall: 0 };
+      st.holeRate = 0; st.mEsc = 0; st.mTime = 0; st.needWarm = st.mode === "heat";
+    }
+    function wallPoint(G, inner) {
+      let phi;
+      do { phi = Math.random() * 2 * Math.PI; } while (inHole(phi));
+      const r = inner ? G.R - 0.5 : G.R + 7;
+      const nx = Math.cos(phi), ny = Math.sin(phi);
+      const [dx, dy] = inner ? diffuse(-nx, -ny) : diffuse(nx, ny);
+      return { x: G.cx + r * nx, y: G.cy + r * ny, dx, dy, vis: Math.random() < SHOW };
+    }
+    /* Un pas de simulation ; renvoie le nombre de photons thermiques sortis par le trou */
+    function step(A, G, dt, live) {
+        if (st.mode === "light") {
+          st.acc.ext += dt * 16;
+          while (st.acc.ext >= 1) {
+            st.acc.ext -= 1;
+            const toHole = Math.random() < 0.6;
+            const phi = toHole ? Math.PI + (Math.random() * 2 - 1) * st.hole * 0.85 : Math.PI + (Math.random() < 0.5 ? 1 : -1) * (st.hole + 0.08 + Math.random() * 0.5);
+            const tx = G.cx + G.R * Math.cos(phi), ty = G.cy + G.R * Math.sin(phi);
+            const sx = 6, sy = ty + (Math.random() - 0.5) * 50;
+            const L = Math.hypot(tx - sx, ty - sy);
+            st.ph.push({ x: sx, y: sy, dx: (tx - sx) / L, dy: (ty - sy) / L, s: "ext", kind: "ext", vis: true });
+          }
+        } else {
+          const Lin = 2 * (Math.PI - st.hole) * G.R;
+          st.acc.inn += dt * K * st.alpha * Lin;
+          st.acc.out += dt * K * st.alpha * 2 * (Math.PI - st.hole) * (G.R + 7);
+          while (st.acc.inn >= 1) { st.acc.inn -= 1; const p = wallPoint(G, true); p.s = "in"; p.kind = "th"; st.ph.push(p); }
+          while (st.acc.out >= 1) { st.acc.out -= 1; const p = wallPoint(G, false); p.s = "fly"; p.kind = "th"; st.ph.push(p); }
+        }
+        if (st.ph.length > 2500) st.ph.splice(0, st.ph.length - 2500);
+        let escaped = 0;
+        const keep = [];
+        for (const p of st.ph) {
+          p.x += p.dx * V * dt; p.y += p.dy * V * dt;
+          const rx = p.x - G.cx, ry = p.y - G.cy, r = Math.hypot(rx, ry), phi = Math.atan2(ry, rx);
+          if (p.s === "ext") {
+            if (r <= G.R + 7) {
+              if (inHole(phi)) { if (r <= G.R) { p.s = "in"; st.cnt.inHole++; } }
+              else {
+                st.cnt.inWall++;
+                if (Math.random() < st.alpha) { if (live) st.flashes.push({ x: p.x, y: p.y, t: 0 }); continue; }
+                const [dx, dy] = diffuse(rx / r, ry / r);
+                p.dx = dx; p.dy = dy; p.s = "fly"; p.x = G.cx + (G.R + 8) * rx / r; p.y = G.cy + (G.R + 8) * ry / r;
+                st.cnt.backWall++;
+              }
+            }
+          } else if (p.s === "in") {
+            if (r >= G.R) {
+              if (inHole(phi)) { p.s = "fly"; if (p.kind === "ext") st.cnt.backHole++; else escaped++; }
+              else if (Math.random() < st.alpha) { if (live) st.flashes.push({ x: p.x, y: p.y, t: 0 }); continue; }
+              else {
+                const [dx, dy] = diffuse(-rx / r, -ry / r);
+                p.dx = dx; p.dy = dy; p.x = G.cx + (G.R - 0.5) * rx / r; p.y = G.cy + (G.R - 0.5) * ry / r;
+              }
+            }
+          } else if (p.x < -20 || p.x > A.W + 20 || p.y < -20 || p.y > A.H + 20) continue;
+          keep.push(p);
+        }
+        st.ph = keep;
+        return escaped;
+    }
+    const A = anim(cv, {
+      onResize: reset,
+      update(A, dt) {
+        const G = geo(A);
+        if (st.needWarm) {
+          /* on laisse la cavité atteindre l'équilibre (30 s simulées) avant de mesurer */
+          for (let i = 0; i < 1200; i++) step(A, G, 0.025, false);
+          st.needWarm = false; st.mEsc = 0; st.mTime = 0;
+        }
+        const esc = step(A, G, dt, true);
+        st.flashes = st.flashes.filter((f) => (f.t += dt) < 0.35);
+        if (st.mode === "heat") {
+          st.mEsc += esc; st.mTime += dt;
+          st.holeRate = st.mTime > 0 ? st.mEsc / st.mTime / (K * 2 * st.hole * G.R) : 0;
+        }
+        readout();
+      },
+      draw(ctx, A) {
+        const G = geo(A);
+        ctx.fillStyle = P.stage; ctx.fillRect(0, 0, A.W, A.H);
+        const heat = st.mode === "heat";
+        /* intérieur */
+        if (heat) {
+          const n = Math.min(1, st.ph.filter((p) => p.s === "in").length / 160);
+          ctx.fillStyle = rgb(warm, 0.06 + 0.16 * n);
+          ctx.beginPath(); ctx.arc(G.cx, G.cy, G.R, 0, 2 * Math.PI); ctx.fill();
+        }
+        /* paroi */
+        const shiny = [200, 205, 214], black = [44, 42, 50];
+        let wall = shiny.map((v, i) => v + (black[i] - v) * st.alpha);
+        if (heat) wall = wall.map((v, i) => v + (warm[i] - v) * st.alpha * 0.85);
+        ctx.lineWidth = 14;
+        ctx.strokeStyle = rgb(wall.map(Math.round));
+        ctx.beginPath(); ctx.arc(G.cx, G.cy, G.R + 7, Math.PI + st.hole, 3 * Math.PI - st.hole); ctx.stroke();
+        ctx.lineWidth = 1; ctx.strokeStyle = P.stageRule;
+        ctx.beginPath(); ctx.arc(G.cx, G.cy, G.R + 14.5, Math.PI + st.hole, 3 * Math.PI - st.hole); ctx.stroke();
+        if (heat) {
+          ctx.lineWidth = 4; ctx.strokeStyle = rgb(warm, Math.min(1, 0.25 + st.holeRate * 0.75));
+          ctx.beginPath(); ctx.arc(G.cx, G.cy, G.R + 7, Math.PI - st.hole, Math.PI + st.hole); ctx.stroke();
+        }
+        /* photons */
+        ctx.lineCap = "round";
+        for (const p of st.ph) {
+          if (!p.vis) continue;
+          const col = p.kind === "th" ? rgb(warm) : P.stageSun;
+          ctx.strokeStyle = col; ctx.lineWidth = 2;
+          ctx.globalAlpha = 0.45;
+          ctx.beginPath(); ctx.moveTo(p.x - p.dx * 12, p.y - p.dy * 12); ctx.lineTo(p.x, p.y); ctx.stroke();
+          ctx.globalAlpha = 1;
+          ctx.fillStyle = col;
+          ctx.beginPath(); ctx.arc(p.x, p.y, 2.3, 0, 2 * Math.PI); ctx.fill();
+        }
+        for (const f of st.flashes) {
+          ctx.fillStyle = "rgba(255,255,255," + (0.5 * (1 - f.t / 0.35)) + ")";
+          ctx.beginPath(); ctx.arc(f.x, f.y, 3 + f.t * 10, 0, 2 * Math.PI); ctx.fill();
+        }
+        /* légendes */
+        const hx = G.cx - G.R - 14;
+        txt(ctx, A, "trou", hx - 8, G.cy - G.R * Math.sin(st.hole) - 16, { size: 12.5, weight: 600, align: "right", color: P.stageInk });
+        txt(ctx, A, "paroi : absorbe " + fr(st.alpha * 100, 0) + NB + "% à chaque rebond", G.cx, G.cy + G.R + 32, { size: 12.5, align: "center", color: P.stageInk2 });
+        txt(ctx, A, heat ? "parois chauffées" : "lumière extérieure", 14, 18, { size: 12.5, weight: 600, color: P.stageInk });
+      }
+    });
+    function readout() {
+      if (!set) return;
+      if (st.mode === "light") {
+        const c = st.cnt;
+        set("a", c.inHole ? fr(100 * c.backHole / c.inHole, 1) + NB + "%" : "—");
+        set("b", c.inWall ? fr(100 * c.backWall / c.inWall, 0) + NB + "%" : "—");
+        set("c", fr(1 / st.alpha, 1));
+      } else {
+        set("a", st.mTime < 3 ? "mesure en cours…" : "≈" + NB + fr(Math.round(st.holeRate * 20) * 5, 0) + NB + "%" + '<br><span class="sub">sur ' + st.mEsc + " photons sortis</span>");
+        set("b", fr(st.alpha * 100, 0) + NB + "%");
+        set("c", fr(1 / st.alpha, 1));
+      }
+    }
+    let set = null;
+    function buildReadouts() {
+      set = readouts("cav-read", st.mode === "light"
+        ? [["a", "Ressort par le trou"], ["b", "Renvoyé par la paroi ext."], ["c", "Rebonds moyens avant absorption"]]
+        : [["a", "Rayonnement du trou (corps noir = 100 %)"], ["b", "Rayonnement de la paroi ext."], ["c", "Rebonds moyens avant absorption"]]);
+      readout();
+    }
+    buildReadouts();
+    choice("cav-mode", (v) => { st.mode = v; reset(); buildReadouts(); A.redraw(); });
+    range("cav-alpha", (v) => fr(v, 2), (v) => { st.alpha = v; reset(); readout(); A.redraw(); }).up();
+    range("cav-hole", (v) => fr(v / 180 * 100, 1) + NB + "% de la paroi", (v) => { st.hole = v * Math.PI / 180; reset(); readout(); A.redraw(); }).up();
+    document.getElementById("cav-reset").addEventListener("click", () => { reset(); readout(); A.redraw(); });
+    A.bindPlay(document.getElementById("cav-play"));
+  })();
+
+  /* ================= Simulation 2 : spectromètre ================= */
+  (function () {
+    const cv = document.getElementById("cv-spec");
+    if (!cv) return;
+    const LM = logMap(2.725, 30000);
+    const st = { T: 5772, pins: [], mode: "vis", hover: null };
+    const XR = { vis: { log: false, a: 0, b: 3 }, ir: { log: false, a: 0, b: 30 }, log: { log: true, a: -1, b: 4 } };
+    let map = null;
+    const A = anim(cv, {
+      autoplay: false,
+      draw(ctx, A) {
+        ctx.fillStyle = P.card; ctx.fillRect(0, 0, A.W, A.H);
+        const curves = st.pins.map((T) => ({ f: (l) => planck(l, T), color: P.ink3, width: 1.5, dash: [5, 4] }));
+        curves.push({ f: (l) => planck(l, st.T), color: P.ink, width: 2.4, fill: true });
+        const lm = BW / st.T * 1e6;
+        const marks = st.pins.map((T) => ({ l: BW / T * 1e6, v: planck(BW / T, T) * 1e-6, text: fmtT(T), color: P.ink2 }));
+        marks.push({ l: lm, v: planck(BW / st.T, st.T) * 1e-6, text: "λmax = " + fmtLam(BW / st.T), line: true, color: P.ink });
+        map = plotSpectrum(ctx, A, {
+          xr: XR[st.mode], ylog: st.mode === "log", decades: 12, curves, marks,
+          hover: st.hover,
+          hoverLines: (l) => ["λ = " + fmtLam(l * 1e-6), "Mλ = " + siU(planck(l * 1e-6, st.T) * 1e-6, "W·m⁻²·µm⁻¹", 3)]
+        });
+      }
+    });
+    bindHover(A, () => map, (l) => { st.hover = l; A.redraw(); });
+    const set = readouts("spec-read", [["t", "Température"], ["l", "Maximum λmax"], ["m", "Puissance totale σT⁴"], ["v", "Part dans le visible"], ["c", "Couleur perçue"]]);
+    function refresh() {
+      const T = st.T, lm = BW / T;
+      set("t", fmtT(T) + '<br><span class="sub">' + fmtC(T) + "</span>");
+      set("l", fmtLam(lm) + '<br><span class="sub">' + domain(lm) + "</span>");
+      set("m", siU(SIG * Math.pow(T, 4), "W/m²", 3));
+      const vf = visFraction(T) * 100;
+      set("v", (vf < 0.01 ? "< 0,01" : vf < 1 ? fr(vf, 2) : fr(vf, 1)) + NB + "%");
+      set("c", '<i class="swatch" style="background:' + rgb(glowArr(T, hexArr(P.stage), true)) + '"></i>' + '<span class="sub">' + teinte(T) + "</span>");
+      if (A) A.redraw();
+    }
+    const sl = range("spec-t", (v) => fmtT(LM.T(v)), (v) => { st.T = LM.T(v); refresh(); });
+    sl.el.value = LM.S(5772); sl.up();
+    document.querySelectorAll("#spec-presets button").forEach((b) => b.addEventListener("click", () => {
+      const T = parseFloat(b.dataset.t);
+      sl.el.value = LM.S(T);
+      st.T = T;
+      const out = document.querySelector('output[for="spec-t"]');
+      out.textContent = fmtT(T);
+      if (T < 500 && st.mode === "vis") xs.set("log");
+      refresh();
+    }));
+    const xs = choice("spec-x", (v) => { st.mode = v; A.redraw(); });
+    document.getElementById("spec-pin").addEventListener("click", () => {
+      if (st.pins.some((T) => Math.abs(T / st.T - 1) < 0.005)) return;
+      st.pins.push(st.T);
+      if (st.pins.length > 3) st.pins.shift();
+      A.redraw();
+    });
+    document.getElementById("spec-clear").addEventListener("click", () => { st.pins = []; A.redraw(); });
+    themeCbs.push(refresh);
+    refresh();
+  })();
+
+  /* ================= Simulation 3 : devine la température ================= */
+  (function () {
+    const cv = document.getElementById("cv-quiz");
+    if (!cv) return;
+    const STARS = [["Antarès", 3400], ["Bételgeuse", 3600], ["Aldébaran", 3900], ["Arcturus", 4300], ["Pollux", 4600], ["le Soleil", 5772],
+      ["Procyon", 6500], ["Altaïr", 7600], ["Deneb", 8500], ["Véga", 9600], ["Sirius", 9940], ["Rigel", 12100], ["Bellatrix", 22000], ["Spica", 25000]];
+    const LM = logMap(2000, 30000);
+    let seed = 7;
+    const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    const field = Array.from({ length: 140 }, () => [rnd(), rnd(), rnd()]);
+    const st = { target: STARS[3], guess: 5000, revealed: false, errs: [], last: -1 };
+    function pick() {
+      let i;
+      do { i = Math.floor(Math.random() * STARS.length); } while (i === st.last);
+      st.last = i; st.target = STARS[i]; st.revealed = false;
+    }
+    pick();
+    function star(ctx, x, y, r, T) {
+      const c = bbArr(T), core = c.map((v) => Math.round(v + (255 - v) * 0.35));
+      const halo = ctx.createRadialGradient(x, y, r * 0.8, x, y, r * 2.4);
+      halo.addColorStop(0, rgb(c, 0.45)); halo.addColorStop(1, rgb(c, 0));
+      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(x, y, r * 2.4, 0, 2 * Math.PI); ctx.fill();
+      const disk = ctx.createRadialGradient(x - r * 0.25, y - r * 0.25, 0, x, y, r);
+      disk.addColorStop(0, rgb(core)); disk.addColorStop(1, rgb(c));
+      ctx.fillStyle = disk; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill();
+    }
+    const A = anim(cv, {
+      autoplay: false,
+      draw(ctx, A) {
+        ctx.fillStyle = P.stage; ctx.fillRect(0, 0, A.W, A.H);
+        for (const [u, v, b] of field) { ctx.fillStyle = "rgba(255,255,255," + (0.15 + 0.5 * b * b) + ")"; ctx.fillRect(u * A.W, v * A.H, 1.2 + b, 1.2 + b); }
+        const r = Math.min(A.H * 0.17, A.W * 0.11), y = A.H * 0.44;
+        const xl = A.W * 0.28, xr = A.W * 0.72;
+        star(ctx, xl, y, r, st.target[1]);
+        star(ctx, xr, y, r, st.guess);
+        const ly = y + r * 2.4 + 6;
+        txt(ctx, A, "Étoile mystère", xl, ly, { size: 13, weight: 600, align: "center", color: P.stageInk });
+        txt(ctx, A, st.revealed ? st.target[0] + " · " + fmtT(st.target[1]) : "? K", xl, ly + 22, { size: 13, mono: true, align: "center", color: st.revealed ? P.stageSun : P.stageInk2 });
+        txt(ctx, A, "Ta proposition", xr, ly, { size: 13, weight: 600, align: "center", color: P.stageInk });
+        txt(ctx, A, fmtT(Math.round(st.guess / 10) * 10), xr, ly + 22, { size: 13, mono: true, align: "center", color: P.stageInk2 });
+      }
+    });
+    const msg = document.getElementById("quiz-msg");
+    const set = readouts("quiz-read", [["n", "Étoiles jouées"], ["e", "Dernier écart"], ["m", "Écart moyen"]]);
+    function verdict(e) {
+      if (e < 0.08) return "Œil de spectroscopiste.";
+      if (e < 0.2) return "Très correct.";
+      if (e < 0.4) return "Approximatif.";
+      return "Ton thermomètre intérieur est à recalibrer.";
+    }
+    function stats() {
+      const n = st.errs.length;
+      set("n", String(n));
+      set("e", n ? fr(st.errs[n - 1] * 100, 0) + NB + "%" : "—");
+      set("m", n ? fr(st.errs.reduce((a, b) => a + b, 0) / n * 100, 0) + NB + "%" : "—");
+    }
+    stats();
+    const sl = range("quiz-t", (v) => fmtT(Math.round(LM.T(v) / 10) * 10), (v) => { st.guess = LM.T(v); A.redraw(); });
+    sl.el.value = LM.S(5000); sl.up();
+    const btnCheck = document.getElementById("quiz-check");
+    btnCheck.addEventListener("click", () => {
+      if (st.revealed) return;
+      st.revealed = true;
+      const T = st.target[1], e = Math.abs(st.guess - T) / T;
+      st.errs.push(e);
+      const hot = T > 10000 ? " Au-delà de 10 000 K, même un expert hésite : la couleur ne bouge presque plus." : "";
+      msg.innerHTML = "C'était <strong>" + st.target[0] + "</strong>, " + fmtT(T) + ". Écart : " + fr(e * 100, 0) + NB + "%. " + verdict(e) + hot;
+      btnCheck.disabled = true;
+      stats();
+      A.redraw();
+    });
+    document.getElementById("quiz-next").addEventListener("click", () => {
+      pick();
+      btnCheck.disabled = false;
+      msg.textContent = "Nouvelle étoile. Règle ta proposition, puis vérifie.";
+      A.redraw();
+    });
+  })();
+
+  /* ================= Simulation 4 : chauffe la barre ================= */
+  (function () {
+    const cv = document.getElementById("cv-forge");
+    if (!cv) return;
+    const AREA = 0.0248, CAP = 470, TA = 293.15, TMELT = 1811, SPEED = 20;
+    const st = { P: 2000, T: TA, t: 0, hist: [], melted: false, next: 0 };
+    const teq = (Pw) => Math.pow(Pw / (SIG * AREA) + Math.pow(TA, 4), 0.25);
+    const prad = (T) => SIG * AREA * (Math.pow(T, 4) - Math.pow(TA, 4));
+    function layout(A) {
+      if (A.W < 600) return { small: true, bar: { x0: 50, x1: A.W - 50, y: 118, h: 34 }, tY: 210, gr: { x0: 62, x1: A.W - 18, y0: A.H - 46, y1: 290 } };
+      return { small: false, bar: { x0: 50, x1: 410, y: 170, h: 36 }, tY: 290, gr: { x0: 500, x1: A.W - 20, y0: A.H - 48, y1: 40 } };
+    }
+    const A = anim(cv, {
+      update(A, dt) {
+        const n = 20, h = dt * SPEED / n;
+        for (let i = 0; i < n; i++) {
+          const Pin = st.melted ? 0 : st.P;
+          st.T += (Pin - prad(st.T)) / CAP * h;
+          if (st.T < TA) st.T = TA;
+        }
+        st.t += dt * SPEED;
+        if (!st.melted && st.T >= TMELT) {
+          st.melted = true; st.T = TMELT;
+          pRange.set(0);
+        }
+        if (st.t >= st.next) { st.hist.push([st.t, st.T]); st.next = st.t + 0.5; }
+        while (st.hist.length && st.hist[0][0] < st.t - 300) st.hist.shift();
+        readout();
+      },
+      draw(ctx, A) {
+        const L = layout(A), B = L.bar;
+        ctx.fillStyle = P.stage; ctx.fillRect(0, 0, A.W, A.H);
+        const col = glowArr(st.T, [74, 72, 80]), b = bright(st.T);
+        const mid = (B.x0 + B.x1) / 2;
+        if (!st.melted) {
+          /* inducteur, derrière */
+          const cw = (B.x1 - B.x0) * 0.36;
+          ctx.strokeStyle = P.copper; ctx.lineWidth = 5; ctx.lineCap = "round";
+          for (let i = 0; i < 6; i++) {
+            const x = mid - cw / 2 + i * cw / 5;
+            ctx.beginPath(); ctx.ellipse(x, B.y, 7, B.h * 0.95, 0, Math.PI * 0.5, Math.PI * 1.5); ctx.stroke();
+          }
+          /* barre */
+          ctx.save();
+          if (b > 0) { ctx.shadowColor = rgb(col, 0.9); ctx.shadowBlur = 50 * b; }
+          ctx.fillStyle = rgb(col);
+          ctx.beginPath();
+          if (ctx.roundRect) ctx.roundRect(B.x0, B.y - B.h / 2, B.x1 - B.x0, B.h, 4); else ctx.rect(B.x0, B.y - B.h / 2, B.x1 - B.x0, B.h);
+          ctx.fill();
+          ctx.restore();
+          ctx.fillStyle = "rgba(255,255,255,0.10)";
+          ctx.fillRect(B.x0 + 4, B.y - B.h / 2 + 4, B.x1 - B.x0 - 8, 5);
+          /* inducteur, devant */
+          ctx.strokeStyle = P.copper; ctx.lineWidth = 5;
+          for (let i = 0; i < 6; i++) {
+            const x = mid - cw / 2 + i * cw / 5;
+            ctx.beginPath(); ctx.ellipse(x, B.y, 7, B.h * 0.95, 0, -Math.PI * 0.5, Math.PI * 0.5); ctx.stroke();
+          }
+          txt(ctx, A, "inducteur", mid, B.y + B.h + 22, { size: 12, align: "center", color: P.stageInk2 });
+        } else {
+          ctx.save();
+          ctx.shadowColor = rgb(col, 0.9); ctx.shadowBlur = 40 * b;
+          ctx.fillStyle = rgb(col);
+          ctx.beginPath(); ctx.ellipse(mid, B.y + B.h, (B.x1 - B.x0) * 0.42, 12, 0, 0, 2 * Math.PI); ctx.fill();
+          ctx.restore();
+          txt(ctx, A, "La barre a fondu (1538 °C). Tu viens d'inventer la fonderie.", mid, B.y - 20, { size: 13, weight: 600, align: "center", color: P.stageSun });
+        }
+        txt(ctx, A, fmtT(st.T), L.small ? mid : mid, L.tY, { size: 34, weight: 700, mono: true, align: "center", color: P.stageInk });
+        txt(ctx, A, fmtC(st.T) + " · " + pouillet(st.T), mid, L.tY + 34, { size: 14, align: "center", color: P.stageInk2 });
+        /* graphique T(t) */
+        const g = L.gr, tmin = Math.max(0, st.t - 300), tmax = tmin + 300;
+        const gx = (t) => g.x0 + (t - tmin) / 300 * (g.x1 - g.x0), gy = (T) => g.y0 - T / 2000 * (g.y0 - g.y1);
+        ctx.strokeStyle = P.stageRule; ctx.lineWidth = 1;
+        for (let T = 0; T <= 2000; T += 500) {
+          ctx.beginPath(); ctx.moveTo(g.x0, gy(T)); ctx.lineTo(g.x1, gy(T)); ctx.stroke();
+          txt(ctx, A, fr(T, 0), g.x0 - 6, gy(T), { size: 11, mono: true, align: "right", color: P.stageInk2 });
+        }
+        for (let t = Math.ceil(tmin / 60) * 60; t <= tmax; t += 60) {
+          txt(ctx, A, fr(t, 0), gx(t), g.y0 + 13, { size: 11, mono: true, align: "center", color: P.stageInk2 });
+        }
+        txt(ctx, A, "T (K)", g.x0 - 6, g.y1 - 18, { size: 11.5, align: "left", color: P.stageInk2 });
+        txt(ctx, A, "temps simulé (s)", g.x1, g.y0 + 32, { size: 11.5, align: "right", color: P.stageInk2 });
+        ctx.setLineDash([5, 4]);
+        ctx.strokeStyle = P.stageIr; ctx.beginPath(); ctx.moveTo(g.x0, gy(TMELT)); ctx.lineTo(g.x1, gy(TMELT)); ctx.stroke();
+        txt(ctx, A, "fusion du fer", g.x1 - 4, gy(TMELT) - 9, { size: 11, align: "right", color: P.stageIr });
+        const te = teq(st.melted ? 0 : st.P);
+        ctx.strokeStyle = P.stageInk2; ctx.beginPath(); ctx.moveTo(g.x0, gy(te)); ctx.lineTo(g.x1, gy(te)); ctx.stroke();
+        ctx.setLineDash([]);
+        if (Math.abs(gy(te) - gy(TMELT)) > 16) txt(ctx, A, "équilibre " + fmtT(te), g.x0 + 4, gy(te) - 9, { size: 11, align: "left", color: P.stageInk2 });
+        if (st.hist.length > 1) {
+          ctx.strokeStyle = P.stageSun; ctx.lineWidth = 2.2; ctx.lineJoin = "round";
+          ctx.beginPath();
+          st.hist.forEach(([t, T], i) => { const x = gx(t), y = gy(T); if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y); });
+          ctx.lineTo(gx(st.t), gy(st.T));
+          ctx.stroke();
+        }
+        ctx.fillStyle = rgb(col); ctx.beginPath(); ctx.arc(gx(st.t), gy(st.T), 4, 0, 2 * Math.PI); ctx.fill();
+      }
+    });
+    const set = readouts("forge-read", [["r", "Puissance rayonnée (nette)"], ["b", "Bilan"], ["l", "Maximum λmax"]]);
+    let lastR = 0;
+    function readout() {
+      const now = performance.now();
+      if (now - lastR < 120) return;
+      lastR = now;
+      const pr = prad(st.T), Pin = st.melted ? 0 : st.P, bil = Pin - pr;
+      set("r", siU(pr, "W", 3));
+      const eq = Math.abs(bil) < 0.02 * Math.max(Pin, 50);
+      set("b", eq ? "équilibre" : (bil > 0 ? "+" : "−") + siU(Math.abs(bil), "W", 2) + '<br><span class="sub">' + (bil > 0 ? "la barre chauffe" : "la barre refroidit") + "</span>");
+      set("l", fmtLam(BW / st.T) + '<br><span class="sub">' + domain(BW / st.T) + "</span>");
+    }
+    const pRange = range("forge-p", (v) => fr(v, 1) + NB + "kW", (v) => { st.P = v * 1000; lastR = 0; readout(); A.redraw(); });
+    pRange.up();
+    document.getElementById("forge-off").addEventListener("click", () => pRange.set(0));
+    document.getElementById("forge-reset").addEventListener("click", () => {
+      st.T = TA; st.t = 0; st.hist = []; st.next = 0; st.melted = false; lastR = 0; readout(); A.redraw();
+    });
+    A.bindPlay(document.getElementById("forge-play"));
+    st.T = teq(st.P); lastR = 0; readout(); A.redraw();
+  })();
+
+  /* ================= Simulation 5 : planètes ================= */
+  (function () {
+    const cv = document.getElementById("cv-pla");
+    if (!cv) return;
+    const PL = {
+      mercure: { n: "Mercure", d: 0.387, a: 0.088, f: 0, obs: 440, col: [155, 149, 144], note: "Pas d'atmosphère, donc pas d'effet de serre : environ 430 °C le jour et −170 °C la nuit. En moyenne, le modèle tombe juste." },
+      venus: { n: "Vénus", d: 0.723, a: 0.76, f: 1, obs: 737, col: [232, 211, 154], note: "Ses nuages renvoient 76 % de la lumière : sans atmosphère, Vénus serait plus froide que la Terre. Pourtant il fait 464 °C au sol. Même avec f = 1, le modèle à une couche reste 465 K trop froid : son atmosphère de CO₂, 90 fois plus dense que la nôtre, se comporte comme des dizaines de couches." },
+      terre: { n: "Terre", d: 1, a: 0.306, f: 0.79, obs: 288, col: [76, 143, 224], note: "Sans effet de serre, −19 °C. Avec, 15 °C. Les 34 degrés de différence, on les doit surtout à la vapeur d'eau et au CO₂." },
+      mars: { n: "Mars", d: 1.524, a: 0.25, f: 0.05, obs: 210, col: [208, 100, 58], note: "Atmosphère cent fois plus mince que celle de la Terre : presque pas d'effet de serre, et le modèle colle à la mesure." },
+      jupiter: { n: "Jupiter", d: 5.203, a: 0.343, f: 0, obs: 125, col: [216, 185, 140], note: "On mesure 125 K, plus que prévu : Jupiter se contracte encore lentement et libère sa propre chaleur interne. Le modèle ne connaît que le Soleil." }
+    };
+    const DL = logMap(0.3, 7);
+    const st = { key: "terre", custom: false, d: 1, a: 0.306, f: 0.79, ph: [], queue: [], acc: 0 };
+    const S = () => 1361 / (st.d * st.d);
+    const Teq = () => Math.pow((1 - st.a) * S() / (4 * SIG), 0.25);
+    const Ts = () => Teq() * Math.pow(2 / (2 - st.f), 0.25);
+    function geo(A) {
+      const sunR = A.H * 0.42, sunX = -sunR * 0.55, edge = sunX + sunR;
+      const x0 = edge + 70, x1 = A.W - 46;
+      const px = x0 + DL.S(st.d) / 1000 * (x1 - x0);
+      return { sunR, sunX, edge, px, py: A.H * 0.5, R: A.W < 600 ? 22 : 24 };
+    }
+    const A = anim(cv, {
+      onResize() { st.ph = []; st.queue = []; },
+      update(A, dt) {
+        const G = geo(A);
+        st.acc += dt * clamp(36 / (st.d * st.d), 2, 140);
+        while (st.acc >= 1) {
+          st.acc -= 1;
+          st.ph.push({ k: "sun", x: G.edge - 4, y: G.py + (Math.random() * 2 - 1) * G.R * 0.98, dx: 1, dy: 0 });
+        }
+        st.queue.forEach((q) => { q.t -= dt; });
+        st.queue = st.queue.filter((q) => {
+          if (q.t > 0) return true;
+          const th = Math.random() * 2 * Math.PI;
+          st.ph.push({ k: "ir", x: G.px + (G.R + 1) * Math.cos(th), y: G.py + (G.R + 1) * Math.sin(th), dx: Math.cos(th), dy: Math.sin(th), tested: false, ph0: Math.random() * 6 });
+          return false;
+        });
+        const Ra = G.R + 16;
+        const keep = [];
+        for (const p of st.ph) {
+          const v = p.k === "ir" ? 120 : 280;
+          p.x += p.dx * v * dt; p.y += p.dy * v * dt;
+          const rx = p.x - G.px, ry = p.y - G.py, r = Math.hypot(rx, ry);
+          if (p.k === "sun" && r <= G.R) {
+            if (Math.random() < st.a) {
+              const th = Math.PI + (Math.random() - 0.5) * 1.6;
+              p.k = "refl"; p.dx = Math.cos(th); p.dy = Math.sin(th);
+            } else { st.queue.push({ t: 0.15 + Math.random() * 0.5 }); continue; }
+          } else if (p.k === "ir") {
+            if (!p.tested && r >= Ra) {
+              p.tested = true;
+              if (Math.random() < st.f) {
+                if (Math.random() < 0.5) { p.dx = -rx / r; p.dy = -ry / r; p.down = true; }
+              }
+            }
+            if (p.down && r <= G.R) { st.queue.push({ t: 0.1 + Math.random() * 0.3 }); continue; }
+          }
+          if (p.x < -20 || p.x > A.W + 20 || p.y < -20 || p.y > A.H + 20) continue;
+          keep.push(p);
+        }
+        st.ph = keep.length > 700 ? keep.slice(-700) : keep;
+        if (st.queue.length > 400) st.queue.splice(0, st.queue.length - 400);
+      },
+      draw(ctx, A) {
+        const G = geo(A);
+        ctx.fillStyle = P.stage; ctx.fillRect(0, 0, A.W, A.H);
+        const sg = ctx.createRadialGradient(G.sunX, G.py, G.sunR * 0.6, G.sunX, G.py, G.sunR * 1.35);
+        sg.addColorStop(0, "rgba(255,214,120,0.35)"); sg.addColorStop(1, "rgba(255,214,120,0)");
+        ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(G.sunX, G.py, G.sunR * 1.35, 0, 2 * Math.PI); ctx.fill();
+        ctx.fillStyle = rgb(glowArr(5772, [0, 0, 0])); ctx.beginPath(); ctx.arc(G.sunX, G.py, G.sunR, 0, 2 * Math.PI); ctx.fill();
+        txt(ctx, A, "Soleil", G.edge - 36, G.py, { size: 12.5, weight: 700, align: "center", color: "#3a2a00" });
+        /* échelle des distances */
+        const x0 = G.edge + 70, x1 = A.W - 46, yA = A.H - 22;
+        ctx.strokeStyle = P.stageRule; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x0, yA); ctx.lineTo(x1, yA); ctx.stroke();
+        [0.5, 1, 2, 5].forEach((d) => {
+          const x = x0 + DL.S(d) / 1000 * (x1 - x0);
+          ctx.beginPath(); ctx.moveTo(x, yA - 4); ctx.lineTo(x, yA + 4); ctx.stroke();
+          txt(ctx, A, fr(d, d < 1 ? 1 : 0) + NB + "UA", x, yA - 12, { size: 10.5, mono: true, align: "center", color: P.stageInk2 });
+        });
+        /* atmosphère */
+        if (st.f > 0) {
+          const ag = ctx.createRadialGradient(G.px, G.py, G.R, G.px, G.py, G.R + 18);
+          ag.addColorStop(0, "rgba(120,200,255," + (0.45 * st.f) + ")"); ag.addColorStop(1, "rgba(120,200,255,0)");
+          ctx.fillStyle = ag; ctx.beginPath(); ctx.arc(G.px, G.py, G.R + 18, 0, 2 * Math.PI); ctx.fill();
+        }
+        /* photons */
+        for (const p of st.ph) {
+          if (p.k === "ir") {
+            ctx.strokeStyle = P.stageIr; ctx.lineWidth = 1.6;
+            ctx.beginPath();
+            const nx = -p.dy, ny = p.dx;
+            for (let i = 0; i <= 8; i++) {
+              const s = -i * 1.6, w = Math.sin(p.ph0 + i * 1.1 + A.t * 10) * 2.2;
+              const x = p.x + p.dx * s + nx * w, y = p.y + p.dy * s + ny * w;
+              if (i) ctx.lineTo(x, y); else ctx.moveTo(x, y);
+            }
+            ctx.stroke();
+          } else {
+            ctx.fillStyle = p.k === "sun" ? P.stageSun : "#ffffff";
+            ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI); ctx.fill();
+          }
+        }
+        /* planète */
+        const pc = PL[st.key].col, Tsurf = Ts();
+        const pg = ctx.createRadialGradient(G.px - G.R * 0.4, G.py - G.R * 0.4, 1, G.px, G.py, G.R);
+        pg.addColorStop(0, rgb(pc.map((v) => Math.min(255, v + 50)))); pg.addColorStop(1, rgb(pc.map((v) => Math.round(v * 0.55))));
+        ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(G.px, G.py, G.R, 0, 2 * Math.PI); ctx.fill();
+        const name = st.custom ? PL[st.key].n + " modifiée" : PL[st.key].n;
+        const right = G.px > A.W - 120;
+        txt(ctx, A, name, G.px, G.py - G.R - 30, { size: 13, weight: 650, align: right ? "right" : "center", color: P.stageInk });
+        txt(ctx, A, fmtT(Tsurf) + " · " + fmtC(Tsurf), G.px, G.py + G.R + 30, { size: 12, mono: true, align: right ? "right" : "center", color: P.stageInk2 });
+      }
+    });
+    const set = readouts("pla-read", [["s", "Éclairement S"], ["e", "Sans effet de serre"], ["t", "Avec l'atmosphère"], ["o", "Mesuré"]]);
+    const note = document.getElementById("pla-note");
+    function refresh() {
+      const te = Teq(), ts = Ts();
+      set("s", fr(S(), S() < 100 ? 1 : 0) + NB + "W/m²");
+      set("e", fmtT(te) + '<br><span class="sub">' + fmtC(te) + "</span>");
+      set("t", fmtT(ts) + '<br><span class="sub">' + fmtC(ts) + "</span>");
+      const p = PL[st.key];
+      set("o", st.custom ? "—" : fmtT(p.obs) + '<br><span class="sub">' + fmtC(p.obs) + "</span>");
+      note.innerHTML = st.custom ? "<strong>Planète modifiée.</strong> Défi : rends la Terre tempérée (15 °C) sans effet de serre, en jouant seulement sur l'albédo." : "<strong>" + p.n + ".</strong> " + p.note;
+      A.redraw();
+    }
+    const dR = range("pla-d", (v) => fr(DL.T(v), 2) + NB + "UA", (v) => { st.d = DL.T(v); st.custom = true; pre.set(null, true); refresh(); });
+    const aR = range("pla-a", (v) => fr(v, 2), (v) => { st.a = v; st.custom = true; pre.set(null, true); refresh(); });
+    const fR = range("pla-f", (v) => fr(v, 2), (v) => { st.f = v; st.custom = true; pre.set(null, true); refresh(); });
+    function load(key) {
+      const p = PL[key];
+      st.key = key; st.d = p.d; st.a = p.a; st.f = p.f; st.custom = false; st.ph = []; st.queue = [];
+      dR.el.value = DL.S(p.d); aR.el.value = p.a; fR.el.value = p.f;
+      [dR, aR, fR].forEach((r) => { const out = document.querySelector('output[for="' + r.el.id + '"]'); out.textContent = r === dR ? fr(p.d, 2) + NB + "UA" : fr(r === aR ? p.a : p.f, 2); });
+      refresh();
+    }
+    const pre = choice("pla-presets", load);
+    pre.set("terre");
+    A.bindPlay(document.getElementById("pla-play"));
+  })();
+
+  /* ================= Simulation 6 : catastrophe ultraviolette ================= */
+  (function () {
+    const cv = document.getElementById("cv-cata");
+    if (!cv) return;
+    const st = { T: 5000, rj: true, w: false, hover: null };
+    let map = null;
+    const A = anim(cv, {
+      autoplay: false,
+      draw(ctx, A) {
+        ctx.fillStyle = P.card; ctx.fillRect(0, 0, A.W, A.H);
+        const T = st.T, peak = planck(BW / T, T) * 1e-6, ymax = peak * 1.6;
+        const curves = [{ f: (l) => planck(l, T), color: P.ink, width: 2.4, fill: true }];
+        if (st.w) curves.push({ f: (l) => wienApprox(l, T), color: P.cold, width: 2, dash: [6, 4], scale: false });
+        if (st.rj) curves.push({ f: (l) => rayleigh(l, T), color: P.ir, width: 2.4, scale: false });
+        const marks = [{ l: BW / T * 1e6, v: peak, text: "Planck", color: P.ink }];
+        map = plotSpectrum(ctx, A, {
+          xr: { log: false, a: 0, b: 5 }, ymax, curves, marks, hover: st.hover,
+          hoverLines: (l) => {
+            const m = l * 1e-6, p = planck(m, T);
+            const out = ["λ = " + fmtLam(m)];
+            if (st.rj) out.push("Rayleigh-Jeans ÷ Planck = " + (p > 0 ? sig(rayleigh(m, T) / p, 3) : "∞"));
+            if (st.w) out.push("Wien ÷ Planck = " + (p > 0 ? sig(wienApprox(m, T) / p, 3) : "—"));
+            return out;
+          }
+        });
+        if (st.rj) {
+          /* là où Rayleigh-Jeans sort du cadre */
+          const lTop = Math.pow(2 * Math.PI * C * KB * T / (ymax * 1e6), 0.25) * 1e6;
+          const x = map.toX(lTop);
+          tag(ctx, A, "Rayleigh-Jeans → ∞", x + 6, map.F.y1 + 32, { align: "left", min: map.F.x0 + 2, max: map.F.x1 - 2, color: P.ir, bg: alpha(P.card, 0.92), size: 12 });
+        }
+      }
+    });
+    bindHover(A, () => map, (l) => { st.hover = l; A.redraw(); });
+    const set = readouts("cata-read", [["p", "Énergie totale, Planck"], ["r", "Énergie totale, classique"], ["m", "Erreur classique à λmax"]]);
+    function refresh() {
+      set("p", siU(SIG * Math.pow(st.T, 4), "W/m²", 3));
+      set("r", "infinie");
+      const m = BW / st.T;
+      set("m", "× " + fr(rayleigh(m, st.T) / planck(m, st.T), 1));
+      A.redraw();
+    }
+    range("cata-t", (v) => fmtT(v), (v) => { st.T = v; refresh(); }).up();
+    const brj = document.getElementById("cata-rj"), bw = document.getElementById("cata-w");
+    brj.addEventListener("click", () => { st.rj = !st.rj; brj.setAttribute("aria-pressed", String(st.rj)); A.redraw(); });
+    bw.addEventListener("click", () => { st.w = !st.w; bw.setAttribute("aria-pressed", String(st.w)); A.redraw(); });
+    refresh();
+  })();
+
+  /* ================= Simulation 7 : distributeur de quanta ================= */
+  (function () {
+    const cv = document.getElementById("cv-qu");
+    if (!cv) return;
+    const st = { tau: 2, N: 12, cl: [], qu: [], clD: [], quD: [], timer: 1 };
+    function sample() {
+      for (let n = 1; n <= 40; n++) {
+        st.cl[n] = -st.tau * Math.log(1 - Math.random());
+        const q = Math.exp(-n / st.tau);
+        const m = q > 0 ? Math.floor(Math.log(1 - Math.random()) / Math.log(q)) : 0;
+        st.qu[n] = (isFinite(m) ? m : 0) * n;
+        if (st.clD[n] == null) { st.clD[n] = st.cl[n]; st.quD[n] = st.qu[n]; }
+      }
+    }
+    sample();
+    const meanQ = (n) => n / Math.expm1(n / st.tau);
+    function panels(A) {
+      if (A.W < 600) {
+        const h = (A.H - 40 - 72 - 44) / 2;
+        return [{ x0: 40, x1: A.W - 14, y1: 40, y0: 40 + h }, { x0: 40, x1: A.W - 14, y1: 40 + h + 72, y0: 40 + 2 * h + 72 }];
+      }
+      const w = (A.W - 50 - 14 - 40) / 2;
+      return [{ x0: 50, x1: 50 + w, y1: 44, y0: A.H - 40 }, { x0: 50 + w + 40, x1: A.W - 14, y1: 44, y0: A.H - 40 }];
+    }
+    const A = anim(cv, {
+      update(A, dt) {
+        st.timer += dt;
+        if (st.timer > 0.9) { st.timer = 0; sample(); }
+        const k = Math.min(1, dt * 7);
+        for (let n = 1; n <= st.N; n++) { st.clD[n] += (st.cl[n] - st.clD[n]) * k; st.quD[n] += (st.qu[n] - st.quD[n]) * k; }
+      },
+      draw(ctx, A) {
+        ctx.fillStyle = P.card; ctx.fillRect(0, 0, A.W, A.H);
+        const ymax = Math.max(3, 4.2 * st.tau);
+        const [pc, pq] = panels(A);
+        [[pc, "Physique classique (1899)", P.ir, false], [pq, "Avec les quanta de Planck (1900)", P.accent, true]].forEach(([p, title, col, quant]) => {
+          const ph = p.y0 - p.y1, pw = p.x1 - p.x0;
+          const yv = (E) => p.y0 - Math.min(E, ymax) / ymax * ph;
+          txt(ctx, A, title, p.x0, p.y1 - 22, { size: 13, weight: 650, color: P.ink });
+          /* repère kT */
+          ctx.strokeStyle = P.rule; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+          ctx.beginPath(); ctx.moveTo(p.x0, yv(st.tau)); ctx.lineTo(p.x1, yv(st.tau)); ctx.stroke(); ctx.setLineDash([]);
+          txt(ctx, A, "kT", p.x0 - 6, yv(st.tau), { size: 11, mono: true, align: "right", color: P.ink3 });
+          ctx.strokeStyle = P.ink3; ctx.beginPath(); ctx.moveTo(p.x0, p.y1); ctx.lineTo(p.x0, p.y0); ctx.lineTo(p.x1, p.y0); ctx.stroke();
+          const cw = pw / st.N, bw = Math.max(2, cw * 0.66);
+          for (let n = 1; n <= st.N; n++) {
+            const cx = p.x0 + (n - 0.5) * cw, x = cx - bw / 2;
+            ctx.fillStyle = P.rule2; ctx.fillRect(x, p.y1, bw, ph);
+            if (!quant) {
+              const E = st.clD[n];
+              ctx.fillStyle = alpha(col, 0.8);
+              ctx.fillRect(x, yv(E), bw, p.y0 - yv(E));
+              if (E > ymax) txt(ctx, A, "↑", cx, p.y1 - 6, { size: 11, align: "center", color: col });
+            } else {
+              const m = Math.round(st.qu[n] / n);
+              const bh = n / ymax * ph;
+              ctx.fillStyle = alpha(col, 0.85);
+              for (let j = 0; j < m; j++) {
+                const top = p.y0 - (j + 1) * bh;
+                if (top + bh < p.y1) break;
+                const y = Math.max(p.y1, top + (bh > 4 ? 1 : 0));
+                ctx.fillRect(x, y, bw, p.y0 - j * bh - y);
+              }
+              if (m * bh > ph) txt(ctx, A, "↑", cx, p.y1 - 6, { size: 11, align: "center", color: col });
+            }
+            const mean = quant ? meanQ(n) : st.tau;
+            ctx.strokeStyle = P.ink; ctx.lineWidth = 2.5;
+            ctx.beginPath(); ctx.moveTo(x - 1, yv(mean)); ctx.lineTo(x + bw + 1, yv(mean)); ctx.stroke();
+            if (st.N <= 12 || n === 1 || n % 5 === 0) txt(ctx, A, n === 1 ? "f" : n + "f", cx, p.y0 + 13, { size: 10.5, mono: true, align: "center", color: P.ink3 });
+          }
+          txt(ctx, A, "fréquence →", p.x1, p.y0 + 30, { size: 11.5, align: "right", color: P.ink2 });
+        });
+      },
+      onResize() {}
+    });
+    const set = readouts("qu-read", [["c", "Énergie totale, classique"], ["q", "Énergie totale, quanta"], ["e", "Oscillateurs presque vides"]]);
+    function refresh() {
+      let q = 0, empty = 0;
+      for (let n = 1; n <= st.N; n++) { const m = meanQ(n); q += m; if (m < 0.05 * st.tau) empty++; }
+      set("c", fr(st.N, 0) + NB + "kT" + '<br><span class="sub">et sans limite si on en ajoute</span>');
+      let lim = 0;
+      for (let n = 1; n <= 4000; n++) { const v = meanQ(n); lim += v; if (v < 1e-9 * st.tau) break; }
+      set("q", fr(q / st.tau, 1) + NB + "kT" + '<br><span class="sub">plafonne à ' + fr(lim / st.tau, 1) + NB + "kT</span>");
+      set("e", fr(empty, 0) + " sur " + st.N + '<br><span class="sub">moyenne &lt; 5 % de kT</span>');
+      A.redraw();
+    }
+    range("qu-t", (v) => fr(v, 1) + " × hf", (v) => { st.tau = v; sample(); refresh(); }).up();
+    range("qu-n", (v) => String(v), (v) => { st.N = v; refresh(); }).up();
+    A.bindPlay(document.getElementById("qu-play"));
+  })();
+
+  /* Les canvas sont redessinés une fois les polices chargées */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(themeChanged);
+
+  /* ================= Sommaire ================= */
+  (function () {
+    const det = document.getElementById("toc");
+    const mq = window.matchMedia("(min-width: 1040px)");
+    const setOpen = () => { if (mq.matches) det.open = true; };
+    setOpen();
+    if (mq.addEventListener) mq.addEventListener("change", setOpen);
+    det.querySelector("summary").addEventListener("click", (e) => { if (mq.matches) e.preventDefault(); });
+    const links = Array.from(det.querySelectorAll("a[href^='#']"));
+    links.forEach((a) => a.addEventListener("click", () => { if (!mq.matches) det.open = false; }));
+    if (!("IntersectionObserver" in window)) return;
+    const map = new Map();
+    links.forEach((a) => { const s = document.getElementById(a.getAttribute("href").slice(1)); if (s) map.set(s, a); });
+    let cur = null;
+    const io = new IntersectionObserver((es) => es.forEach((en) => {
+      if (en.isIntersecting) { if (cur) cur.classList.remove("is-active"); cur = map.get(en.target); if (cur) cur.classList.add("is-active"); }
+    }), { rootMargin: "-20% 0px -70% 0px" });
+    map.forEach((_, s) => io.observe(s));
+  })();
+})();
+</script>
+</body>
+</html>

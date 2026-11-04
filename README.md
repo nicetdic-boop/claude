@@ -35,3 +35,21 @@ cours-electricite/
 ```
 
 Les chiffres suisses (production 2025, centrales, lois) proviennent de l'OFEN, de Swissolar et des exploitants ; ils sont arrondis et datent de l'automne 2026.
+
+# Rayonnement du corps noir
+
+[`cours-corps-noir/index.html`](cours-corps-noir/index.html) : cours interactif sur le rayonnement thermique (secondaire II), en une seule page autonome (HTML, CSS et JavaScript dans le même fichier, sans dépendance).
+
+| Section | Contenu | Simulation |
+|---|---|---|
+| 1. Tout ce qui est chaud brille | rayonnement thermique, observations | |
+| 2. Le corps noir | définition, cavité de Kirchhoff, émissivité | le four à trou (photons, absorption, émission) |
+| 3. Le spectre de Planck | loi de Planck, lecture de la courbe | spectromètre : température, exemples, comparaison, échelle log, couleur perçue |
+| 4. La loi de Wien | λmax·T = b, échelle de Pouillet, point de Draper | devine la température d'une étoile |
+| 5. La loi de Stefan-Boltzmann | M = σT⁴, puissance du Soleil | chauffe la barre (équilibre radiatif, T⁴, fusion) |
+| 6. La température des planètes | équilibre radiatif, albédo, effet de serre à une couche | Mercure, Vénus, Terre, Mars, Jupiter |
+| 7. La catastrophe ultraviolette | Rayleigh-Jeans, quanta E = hf, fond cosmologique | Planck contre la physique classique ; le distributeur de quanta |
+| 8. Exercices | 10 exercices (niveaux 1 à 3) avec solutions | |
+| 9. L'essentiel | résumé et formulaire | |
+
+Les couleurs des corps noirs sont calculées à partir de la loi de Planck et des fonctions colorimétriques CIE 1931 (ajustement analytique de Wyman, Sloan et Shirley), puis converties en sRGB.
