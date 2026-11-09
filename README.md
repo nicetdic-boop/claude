@@ -11,6 +11,10 @@ Cours d'électricité interactif pour le gymnase (secondaire II), en français, 
 
 Chaque chapitre contient des schémas SVG, des exemples pratiques, des exercices avec solutions détaillées et un résumé.
 
+## Cours à distribuer (Word)
+
+[`cours-electricite/cours-electricite.docx`](cours-electricite/cours-electricite.docx) reprend les quatre chapitres sous forme imprimable (43 pages A4) : sommaire paginé, 25 schémas en noir et gris, formules en équations Word modifiables dans des cadres gris, exemples concrets et exemples résolus, « L'essentiel » à la fin de chaque chapitre et un aide-mémoire (constantes, unités, formulaire). Texte en Arial 12, interligne 1,5.
+
 ## Fiche d'exercices (Word)
 
 [`cours-electricite/fiche-exercices-electricite.docx`](cours-electricite/fiche-exercices-electricite.docx) accompagne le cours : pour chaque chapitre, des questions théoriques avec lignes de réponse et des exercices progressifs (niveaux 1 à 3), dont deux sur schéma. Le corrigé détaillé commence à la page 13, dans une section séparée qu'on peut retirer avant de distribuer. Mise en page pour la photocopie : noir et blanc, Arial 12, interligne 1,5, format A4.
